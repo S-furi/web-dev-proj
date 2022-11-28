@@ -1,0 +1,100 @@
+h1 {
+    background-color:cadetblue;
+    font-family: sans-serif;
+    text-align: center;
+    height: 50px;
+}
+
+h2 {
+    font-family: sans-serif;
+    text-align: center;
+}
+
+ul li {
+    list-style: none;
+}
+
+nav, main, aside {
+    display: inline-block;
+}
+
+nav {
+    width: 15%;
+    position: relative;
+    float: left;
+}
+
+nav>ul>li {
+    background-color: cadetblue;
+    text-align: center;
+    line-height: 240%;
+    margin: 10px 0;
+}
+
+main {
+    width: 65%;
+}
+
+main form {
+    width: 85%;
+    position: relative;
+    float: right;
+    border: 1px solid black;
+}
+
+main form ul li input[type="text"], main form ul li input[type="password"], main form ul li input[type="file"] {
+    margin: 5px 10px;
+}
+
+main form ul li input[type="submit"] {
+    padding: 5px 10px;
+    background-color: cadetblue;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #000;
+    font-family: sans-serif;
+}
+
+aside {
+    background-color: cadetblue;
+    position: relative;
+    float: right;
+    width: 15%;
+}
+
+div {
+    display: inline-block;
+    width: 100%;
+}
+
+div ul li {
+    display: inline-block;
+    width: 20%;
+    margin: 10px 0 0;
+    text-align: center;
+    background-color: cadetblue;
+    height: 50px;
+}
+
+div ul li a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 15px 0;
+    font-family: sans-serif;
+}
+
+@media screen and (min-width:768px) {
+
+    header {
+        width: 50%;
+    }
+    
+    div {
+        width: 50%;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}
