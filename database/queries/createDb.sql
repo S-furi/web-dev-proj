@@ -5,9 +5,6 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
--- -----------------------------------------------------
 -- Schema brogram
 -- -----------------------------------------------------
 
@@ -22,26 +19,74 @@ USE `brogram` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `brogram`.`users` (
   `usrId` INT NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(60) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `username` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`usrId`))
+  `firstName` VARCHAR(45) NOT NULL,
+  `lastName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`usrId`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC))
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `brogram`.`followers`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `brogram`.`followers` (
+  `usrId` INT NOT NULL,
+  `friendId` INT NOT NULL,
+  PRIMARY KEY (`usrId`, `friendId`),
+  INDEX `fk_followers_users1_idx` (`friendId` ASC),
+  CONSTRAINT `fk_followers_users`
+    FOREIGN KEY (`usrId`)
+    REFERENCES `brogram`.`users` (`usrId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_followers_users1`
+    FOREIGN KEY (`friendId`)
+    REFERENCES `brogram`.`users` (`usrId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `brogram`.`login_attempts`
+-- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `brogram`.`login_attempts` (
-  `usrId` INT(11) NOT NULL,
-  `time` VARCHAR(30) NOT NULL
-) ENGINE InnoDB;
+  `usrId` INT NOT NULL,
+  `time` VARCHAR(30) NOT NULL,
+  PRIMARY KEY (`usrId`),
+  CONSTRAINT `fk_login_attempts_users2`
+    FOREIGN KEY (`usrId`)
+    REFERENCES `brogram`.`users` (`usrId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `brogram`.`login_attempts`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `brogram`.`login_attempts` (
+  `usrId` INT NOT NULL,
+  `time` VARCHAR(30) NOT NULL,
+  PRIMARY KEY (`usrId`),
+  CONSTRAINT `fk_login_attempts_users2`
+    FOREIGN KEY (`usrId`)
+    REFERENCES `brogram`.`users` (`usrId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 
 -- Creating a user that is capable of making only SELECT, INSERT and UPDATE
 -- operations, so that no one is able to delete the DB except the administrator.
-
 CREATE USER IF NOT EXISTS 'sec_user'@'localhost' IDENTIFIED BY 'eKcGZr59zAa2BEWU';
 GRANT SELECT, INSERT, UPDATE ON `brogram`.* TO 'sec_user'@'localhost';
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
-
-
