@@ -10,7 +10,7 @@ if (isset($_POST['mail'], $_POST['password'], $_POST['username'])) {
   $password = $_POST['password'];
   $username = $_POST['username'];
 
-  if (insertNewUser($email, $password, $username, $mysqli)) {
+  if (insertNewUser($email,$username, $password, $mysqli)) {
     echo "utente inserito";
     // REDIRECT SULLA HOME
   } else {
