@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../styles/style.css" />
-    <title>Document</title>
+    <title>Brogram</title>
 </head>
 <body>
    <header>
@@ -29,13 +29,8 @@
    </aside>
    <div>
         <ul>
-            <li><a href="#">Home</a></li><li><a href="#">Radar</a></li><li><a href="#">Profilo</a></li><li><a href="login.php">Login</a></li><li><a href="signup.php">Sign Up</a></li>
+            <li><a href="index.php">Home</a></li><li><a href="#">Radar</a></li><li><a href="#">Profilo</a></li><li><a href="login.php">Login</a></li><li><a href="signup.php">Sign Up</a></li>
         </ul>
     </div>
-   <!-- <footer>
-        <ul>
-            <li><a href="#">Home</a></li><li><a href="#">Radar</a></li><li><a href="#">Profilo</a></li>
-        </ul>
-   </footer> -->
 </body>
 </html>

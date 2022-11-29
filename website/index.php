@@ -3,6 +3,6 @@
 $templateParams["Titolo"] = "Brogram - Home";
 $templateParams["nome"] = "home-template.php";
 
-require("template/base.php");
+require("template/newBase.php");
 
 ?>
