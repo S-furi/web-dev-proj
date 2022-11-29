@@ -33,8 +33,13 @@ function login($email, $password, $mysqli) {
     $user_id = $data['usrId'];
     $db_password = $data['password'];
 
-    if (checkBrute($user_id, $mysqli) || password_verify($password, $db_password) ) {
+    if (checkBrute($user_id, $mysqli)) {
       return false;
+    }
+
+    if (!password_verify($password, $db_password)) {
+      $now = time();
+      $mysqli->query("INSERT INTO login_attempts (user_id, time) VALUES ('$user_id', '$now')");
     }
     // correct password inserted
 
