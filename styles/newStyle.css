@@ -62,6 +62,17 @@ body{
     text-transform: capitalize;
 }
 
+.search-btn {
+    position: relative;
+    width: 50px;
+    height: 25px;
+    background: #fafafa;
+    border: 1px solid #dfdfdf;
+    border-radius: 2px;
+    color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
 .search-box::placeholder{
     color: rgba(0, 0, 0, 0.5);
 }
@@ -91,6 +102,7 @@ body{
     display: flex;
     justify-content: center;
     margin-top: 10px;
+    margin-bottom: 50px;
 }
 
 .wrapper{
@@ -270,8 +282,6 @@ body{
 
 .right-col{
     padding: 20px;
-    /* position: absolute;
-    right: 0; */
 }
 
 .profile-card{
@@ -352,3 +362,4 @@ body{
         display: block;
     }
 }
+

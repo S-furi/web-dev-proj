@@ -84,8 +84,8 @@
             <div>
                 <p class="username">username</p>
                 <p class="sub-text">username</p>
+                <button class="action-btn">switch</button>
             </div>
-            <button class="action-btn">switch</button>
         </div>
         <p class="suggestion-text">Suggestions for you</p>
         <div class="profile-card">
@@ -95,8 +95,8 @@
             <div>
                 <p class="username">username</p>
                 <p class="sub-text">followed by user</p>
+                <button class="action-btn">follow</button>
             </div>
-            <button class="action-btn">follow</button>
         </div>
         <div class="profile-card">
             <div class="profile-pic">
@@ -105,8 +105,8 @@
             <div>
                 <p class="username">username</p>
                 <p class="sub-text">followed by user</p>
+                <button class="action-btn">follow</button>
             </div>
-            <button class="action-btn">follow</button>
         </div>
         <div class="profile-card">
             <div class="profile-pic">
@@ -115,8 +115,8 @@
             <div>
                 <p class="username">username</p>
                 <p class="sub-text">followed by user</p>
+                <button class="action-btn">follow</button>
             </div>
-            <button class="action-btn">follow</button>
         </div>
         <div class="profile-card">
             <div class="profile-pic">
@@ -125,8 +125,8 @@
             <div>
                 <p class="username">username</p>
                 <p class="sub-text">followed by user</p>
+                <button class="action-btn">follow</button>
             </div>
-            <button class="action-btn">follow</button>
         </div>
         <div class="profile-card">
             <div class="profile-pic">
@@ -135,8 +135,8 @@
             <div>
                 <p class="username">username</p>
                 <p class="sub-text">followed by user</p>
+                <button class="action-btn">follow</button>
             </div>
-            <button class="action-btn">follow</button>
         </div>
     </div>
     

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../styles/newStyle.css" />
+    <script type="text/javascript" src="ws_functions.js"></script>
     <title>Brogram</title>
 </head>
 <body>
@@ -11,7 +12,8 @@
         <div class="nav-wrapper">
             <!-- <img src="../img/logo.PNG" class="brand-img" alt=""> -->
             <h1 class="brand-img">Brogram</h1>
-            <input type="text" class="search-box" placeholder="search">
+            <input type="text" class="search-box" placeholder="search" id="search-field">
+            <button type="button" onclick="trialButtonClick()" class="search-btn" id="search-btn">Search</button>
         </div>
     </nav>
     <section class="main">
