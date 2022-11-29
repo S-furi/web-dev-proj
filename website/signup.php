@@ -2,6 +2,8 @@
 require_once('../database/db_connect.php');
 require_once('../database/db_functions.php');
 
+sec_session_start();
+
 $templateParams["Titolo"] = "Brogram - Sign Up";
 $templateParams["nome"] = "signup-form.php";
 
