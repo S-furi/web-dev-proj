@@ -1,5 +1,10 @@
 <?php
 // http://paololatella.blogspot.com/2017/10/lezione-nov-2017-script-sicuro-per-il.html
+
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
 function sec_session_start() {
   $session_name = "sec_session_id";
   $secure = false; // not https
@@ -17,15 +22,10 @@ function sec_session_start() {
  * the database. 
  */
 function login($email, $password, $mysqli) {
-  $query = "SELECT usrId, password, username FROM users WHERE email=? LIMIT 1";
+  $query = "SELECT usrId, password, username FROM users WHERE email=? LIMIT 1;";
   if ($stmt = $mysqli->prepare($query)) {
     $stmt->bind_param('s', $email);
     $stmt->execute();
-    $stmt->store_result();
-
-    if ($stmt->num_rows != 1) {
-      return false;
-    }
 
     $data = $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
     
@@ -66,16 +66,15 @@ function login($email, $password, $mysqli) {
 function checkBrute($usr_id, $mysqli) : bool {
   $now = time();
   $valid_attempts = $now - (2 * 60 * 60);
-  if ($stmt = $mysqli->prepare("SELECT time FROM login_attempts WHERE usrId=? ABD tune > '$valid_attempts'")) {
+  if ($stmt = $mysqli->prepare("SELECT time FROM login_attempts WHERE usrId=? AND time > '$valid_attempts'")) {
     $stmt->bind_param("i", $usr_id);
     $stmt->execute();
     $stmt->store_result();
     if ($stmt->num_rows > 5) {
       return true;
-    } else {
-      return false;
     }
   }
+  return false;
 }
 
 function insertNewUser($email, $username,  $password, $mysqli) : bool {
@@ -86,9 +85,6 @@ function insertNewUser($email, $username,  $password, $mysqli) : bool {
   // the current version of PHP.
   $password = password_hash($password, PASSWORD_DEFAULT);
     
-  $email = htmlentities($email);
-  $username = htmlentities($username);
-
   $stmt = $mysqli->prepare("INSERT INTO users (email, password, username) VALUES (?, ?, ?)");
   $stmt->bind_param("sss", $email, $password, $username);
   return $stmt->execute();
