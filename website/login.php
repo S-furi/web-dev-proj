@@ -9,7 +9,7 @@ $templateParams["nome"] = "login-form.php";
 
 if (isset($_POST['email'], $_POST['password'])) {
   if (login($_POST['email'], $_POST['password'], $mysqli)) {
-    echo "login avvennuto con successo";
+    header("Location: index.php");
   } else {
     echo "login fallito!";
   }
