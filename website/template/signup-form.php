@@ -5,6 +5,12 @@
                     <!-- <label for="profilepic">Profile Picture:</label><input type="file" id="profilepic"  me="profilepic" /> -->
                 <!-- </li> -->
                 <li>
+                    <label for="first_name">Nome:</label><input type="text" name="first_name" id="first_name">
+                </li>
+                <li>
+                    <label for="last_name">Cognome:</label><input type="text" name="last_name" id="last_name">
+                </li>
+                <li>
                     <label for="mail">Email:</label><input type="text" id="mail" name="mail"/>
                 </li>
                 <li>
