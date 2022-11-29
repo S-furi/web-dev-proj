@@ -77,4 +77,21 @@ function checkBrute($usr_id, $mysqli) : bool {
     }
   }
 }
+
+function insertNewUser($email, $username,  $password, $mysqli) {
+  // We are using password_hash() because it's safe and simple to use.
+  // It uses a secure salt for hashing the password, and the 
+  // algorithm used changes overtime using PASSWORD_DEFAULT,
+  // reulting in the most secure algorithm available at 
+  // the current version of PHP.
+  $password = password_hash($password, PASSWORD_DEFAULT);
+    
+  $email = htmlentities($email);
+  $username = htmlentities($username);
+
+  $stmt = $mysqli->prepare("INSERT INTO users (email, password, username) VALUES (?, ?, ?)");
+  $stmt->bind_param("sss", $email, $password, $username);
+  return $stmt->execute();
+}
+
 ?>
