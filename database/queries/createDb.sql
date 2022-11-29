@@ -33,8 +33,15 @@ CREATE TABLE IF NOT EXISTS `brogram`.`login_attempts` (
   `time` VARCHAR(30) NOT NULL
 ) ENGINE InnoDB;
 
+-- Creating a user that is capable of making only SELECT, INSERT and UPDATE
+-- operations, so that no one is able to delete the DB except the administrator.
+
+CREATE USER IF NOT EXISTS 'sec_user'@'localhost' IDENTIFIED BY 'eKcGZr59zAa2BEWU';
+GRANT SELECT, INSERT, UPDATE ON `secure_login`.* TO 'sec_user'@'localhost';
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
 
