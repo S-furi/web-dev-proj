@@ -347,11 +347,11 @@ body{
     height: auto;
     background: #fff;
     border: 1px solid #dfdfdf;
-    margin-top: 40%;
+    margin-top: 0%;
 }
 
 .comment-body {
-    margin: 30px;
+    margin: 0 30px 10px;
 }
 
 /* @media (max-width: 768px){

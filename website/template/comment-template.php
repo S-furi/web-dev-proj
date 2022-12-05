@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <div class="post">
+        <div class="comment">
             <div class="info">
                 <div class="user">
                     <div class="profile-pic"><img src="img/profile-pic.png" alt=""></div>
@@ -45,7 +45,24 @@
                 molestiae quas vel sint commodi</span>
             </div>
         </div>
-        
+        <div class="comment">
+            <div class="info">
+                <div class="user">
+                    <div class="profile-pic"><img src="img/profile-pic.png" alt=""></div>
+                    <span class="username">username</span>
+                </div>
+            </div>
+            <div class="comment-body">
+                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                molestiae quas vel sint commodi</span>
+            </div>
+        </div>
+
+        <div class="comment-wrapper">
+            <img src="img/smile.PNG" class="icon" alt="">
+            <input type="text" class="comment-box" placeholder="Add a comment">
+            <button class="comment-btn">post</button>
+        </div> 
         <!-- <div class="post">
             <div class="info">
                 <div class="user">
