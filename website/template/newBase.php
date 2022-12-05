@@ -111,7 +111,7 @@
     <nav class="options-bar">
         <nav class="nav-wrapper">
              <div class="nav-items">
-                <img src="img/home.PNG" class="icon" alt="">
+                <a href="index.php"><img src="img/home.PNG" class="icon" alt=""></a>
                 <img src="img/messenger.PNG" class="icon" alt="">
                 <img src="img/add.PNG" class="icon" alt="">
                 <img src="img/explore.PNG" class="icon" alt="">
