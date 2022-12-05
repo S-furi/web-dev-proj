@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../styles/newStyle.css" />
     <script type="text/javascript" src="ws_functions.js"></script>
-    <title>Brogram</title>
+    <title><?php echo $templateParams["Titolo"]; ?></title>
 </head>
 <body>
     <nav class="navbar">

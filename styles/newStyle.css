@@ -31,16 +31,20 @@ body{
 }
 
 .options-bar {
-    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: #fff;
+    border-top: 1px solid #dfdfdf;
+    display: flex;
+    justify-content: center;
+    padding: 5px 0;
 }
 
-.nav-wrapper{
-    width: 70%;
-    max-width: 1000px;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.nav-wrapper, .wrapper{
+    width: 90%;
 }
 
 .brand-img{
@@ -52,6 +56,7 @@ body{
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    top: 12px;
     width: 200px;
     height: 25px;
     background: #fafafa;
@@ -63,9 +68,11 @@ body{
 }
 
 .search-btn {
-    position: relative;
+    position: absolute;
     width: 50px;
     height: 25px;
+    top: 12px;
+    right: 25%;
     background: #fafafa;
     border: 1px solid #dfdfdf;
     border-radius: 2px;
@@ -79,7 +86,9 @@ body{
 
 .nav-items{
     height: 22px;
-    margin: auto;
+    position: fixed;
+    bottom: 25px;
+    left: 30%;
 }
 
 .icon{
@@ -90,7 +99,7 @@ body{
 }
 
 .user-profile{
-    width: 30px;
+    width: 22px;
     border-radius: 50%;
     background-image: url(../website/img/profile-pic.png);
     background-size: cover;
@@ -105,19 +114,8 @@ body{
     margin-bottom: 50px;
 }
 
-.wrapper{
-    width: 100%;
-    max-width: 1000px;
-    display: grid;
-    grid-template-columns: 15% 60% 15%;
-    grid-gap: 2%;
-}
-
-.left-col{
-    display: flex;
-    flex-direction: column;
-    margin-top: 50px;
-    margin-left: 10%;
+.right-col, .left-col{
+    display: none;
 }
 
 .col-items {
@@ -149,6 +147,14 @@ body{
     font-size: 12px;
     margin-top:5px;
     color: rgba(0, 0, 0, 0.5)
+}
+
+.postName {
+    text-align: center;
+    margin-top: 5px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 500;
 }
 
 .post{
@@ -241,6 +247,10 @@ body{
     height: 30px;
 }
 
+.wrapper{
+    display: block;
+}
+    
 .comment-box{
     width: 80%;
     height: 100%;
@@ -278,10 +288,6 @@ body{
 
 .reaction-wrapper .icon.save{
     margin-left: auto;
-}
-
-.right-col{
-    padding: 20px;
 }
 
 .profile-card{
@@ -336,7 +342,19 @@ body{
     margin: 20px 0;
 }
 
-@media (max-width: 768px){
+.comment{
+    width: 100%;
+    height: auto;
+    background: #fff;
+    border: 1px solid #dfdfdf;
+    margin-top: 40%;
+}
+
+.comment-body {
+    margin: 30px;
+}
+
+/* @media (max-width: 768px){
     .right-col, .left-col {
         display: none;
     }
@@ -361,5 +379,43 @@ body{
     .wrapper{
         display: block;
     }
-}
+} */
 
+@media screen and (min-width: 768px) {
+    .right-col {
+        display: inline;
+        padding: 20px;
+    }
+
+    .left-col {
+        display: flex;
+        flex-direction: column;
+        margin-top: 50px;
+        margin-left: 10%;
+    }
+
+    .options-bar {
+        display: none;
+    }
+
+    .nav-wrapper {
+        width: 70%;
+        max-width: 1000px;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .wrapper {
+        width: 100%;
+        max-width: 1000px;
+        display: grid;
+        grid-template-columns: 15% 60% 15%;
+        grid-gap: 2%;
+    }
+
+    .user-profile {
+        width: 30px;
+    }
+}
