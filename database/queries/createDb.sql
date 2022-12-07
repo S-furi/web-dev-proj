@@ -81,6 +81,26 @@ CREATE TABLE IF NOT EXISTS `brogram`.`login_attempts` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `brogram`.`posts`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `brogram`.`posts` (
+  `postId` INT NOT NULL AUTO_INCREMENT,
+  `usrId` INT(11) NOT NULL,
+  `title` VARCHAR(50) NOT NULL,
+  `caption` VARCHAR(255) NOT NULL,
+  `image` VARCHAR(45) NOT NULL,
+  `location` VARCHAR(45) NULL,
+  PRIMARY KEY (`postId`, `usrId`),
+  INDEX `fk_posts_users1_idx` (`usrId` ASC) VISIBLE,
+  CONSTRAINT `fk_posts_users1`
+    FOREIGN KEY (`usrId`)
+    REFERENCES `brogram`.`users` (`usrId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
 -- Creating a user that is capable of making only SELECT, INSERT and UPDATE
 -- operations, so that no one is able to delete the DB except the administrator.
 CREATE USER IF NOT EXISTS 'sec_user'@'localhost' IDENTIFIED BY 'eKcGZr59zAa2BEWU';
