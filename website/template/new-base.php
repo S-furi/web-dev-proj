@@ -25,7 +25,7 @@
                 <img src="img/messenger.PNG" class="icon" alt="">
             </div> 
             <div class="col-items">
-                <img src="img/add.PNG" class="icon" alt="">
+                <a href="post-creation.php"><img src="img/add.PNG" class="icon" alt=""></a>
             </div> 
             <div class="col-items">
                 <img src="img/explore.PNG" class="icon" alt="">
