@@ -93,9 +93,19 @@ function insertNewUser($email, $username,  $password, $first_name, $last_name, $
 function createPost($usr_id, $title, $caption, $image, $location, $mysqli) : array {
   $query = "INSERT INTO posts (usrId, title, caption, image, location) VALUES (?, ?, ?, ?, ?)";
   $stmt = $mysqli->preapre($query);
-  $stmt->bind_params("sssss", $usr_id, $title, $caption, $image, $location);
+  $stmt->bind_params("issss", $usr_id, $title, $caption, $image, $location);
 
   $stmt->execute();
   return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
+
+function getPost($usrId, $postId, $mysqli) {
+  $query = "SELECT * FROM posts WHERE postId=? AND usrId=?";
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_params("is", $usrId, $postId);
+  
+  $stmt->execute();
+  return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
 ?>
