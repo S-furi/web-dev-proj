@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `brogram`.`posts` (
   `image` VARCHAR(45) NOT NULL,
   `location` VARCHAR(45) NULL,
   PRIMARY KEY (`postId`, `usrId`),
-  INDEX `fk_posts_users1_idx` (`usrId` ASC) VISIBLE,
+  INDEX `fk_posts_users1_idx` (`usrId` ASC),
   CONSTRAINT `fk_posts_users1`
     FOREIGN KEY (`usrId`)
     REFERENCES `brogram`.`users` (`usrId`)
