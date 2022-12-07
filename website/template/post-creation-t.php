@@ -11,7 +11,7 @@
                     <label for="photo">Photo:</label><input type="file" name="photo" id="photo">
                 </li>
                 <li>
-                    <label for="description">Email:</label><input type="text" id="description" name="description"/>
+                    <label for="description">Description:</label><input type="text" id="description" name="description"/>
                 </li>
                 <li>
                     <label for="location">Location:</label><input type="text" id="location" name="location" />
