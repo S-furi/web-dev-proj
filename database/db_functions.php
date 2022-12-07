@@ -108,7 +108,7 @@ function getPost($usrId, $mysqli) {
 }
 
 function getUsername($usrId, $mysqli) {
-  $query = "SELECT username FROM users WHERE usrId=?";
+  $query = "SELECT username, email FROM users WHERE usrId=?";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("i", $usrId);
   

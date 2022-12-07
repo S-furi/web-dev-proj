@@ -48,8 +48,8 @@
                     <img src="img/profile-pic.png" alt="">
                 </div>
                 <div>
-                    <p class="username">username</p>
-                    <p class="sub-text">username</p>
+                    <p class="username"><?php echo $templateParams["user"][0]["username"] ?></p>
+                    <p class="sub-text"><?php echo $templateParams["user"][0]["email"] ?></p>
                     <button class="action-btn">switch</button>
                 </div>
             </div>
