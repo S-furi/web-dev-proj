@@ -10,7 +10,7 @@ $templateParams["Titolo"] = "Brogram - Home";
 $templateParams["nome"] = "home-template.php";
 
 $templateParams["posts"] = getPost(intval($_SESSION['user_id']), $mysqli);
-
+$templateParams["user"] = getUsername(intval($_SESSION['user_id']), $mysqli);
 
 require("template/new-base.php");
 

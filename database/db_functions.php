@@ -107,4 +107,13 @@ function getPost($usrId, $mysqli) {
   return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
+function getUsername($usrId, $mysqli) {
+  $query = "SELECT username FROM users WHERE usrId=?";
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("i", $usrId);
+  
+  $stmt->execute();
+  return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
 ?>
