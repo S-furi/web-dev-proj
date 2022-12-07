@@ -1,5 +1,5 @@
         <form action="#" method="post" name="signup_form">
-            <h2>Sign up</h2>
+            <h2>Post Creation</h2>
             <ul>
                 <!-- <li> -->
                     <!-- <label for="profilepic">Profile Picture:</label><input type="file" id="profilepic"  me="profilepic" /> -->
