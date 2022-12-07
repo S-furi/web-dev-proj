@@ -100,7 +100,7 @@ function createPost($usr_id, $title, $caption, $image, $location, $mysqli) : arr
 }
 
 function getPost($usrId, $postId, $mysqli) {
-  $query = "SELECT * FROM posts WHERE postId=? AND usrId=?";
+  $query = "SELECT caption, image, location, title FROM posts WHERE postId=? AND usrId=?";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_params("is", $usrId, $postId);
   
