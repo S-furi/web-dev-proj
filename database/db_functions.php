@@ -98,10 +98,10 @@ function createPost($usr_id, $title, $caption, $image, $location, $mysqli) : boo
   return $stmt->execute();
 }
 
-function getPost($usrId, $postId, $mysqli) {
-  $query = "SELECT caption, image, location, title FROM posts WHERE postId=? AND usrId=?";
+function getPost($usrId, $mysqli) {
+  $query = "SELECT caption, image, location, title FROM posts WHERE usrId=?";
   $stmt = $mysqli->prepare($query);
-  $stmt->bind_params("is", $usrId, $postId);
+  $stmt->bind_param("i", $usrId);
   
   $stmt->execute();
   return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
