@@ -54,6 +54,8 @@ function login($email, $password, $mysqli) {
     // to inject malicious code inside forms.
     $_SESSION['user_id'] = htmlentities($user_id); 
     $_SESSION['username'] = htmlentities($username); 
+    $_SESSION['login_string'] = $_SERVER["REMOTE_ADDR"].$_SERVER["HTTP_USER_AGENT"].$db_password;
+
     return true;
   }
 }
@@ -116,4 +118,27 @@ function getUsername($usrId, $mysqli) {
   return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
+function isStillLoggedIn($mysqli) : bool {
+  if (isset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['login_string'])) {
+    $user_id = $_SESSION['user_id'];
+    $login_string = $_SESSION['login_string'];
+    $username = $_SESSION['username'];
+
+    if ($stmt = $mysqli->prepare("SELECT username, password FROM users WHERE usrId=?")) {
+      $stmt->bind_param("i", $user_id);
+      $stmt->execute();
+      $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+
+      $password = $result["password"];
+      $db_username = $result["username"];
+
+      $login_check_string = $_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'].$password;
+
+      if ($login_string == $login_check_string && $username == $db_username) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
 ?>
