@@ -16,5 +16,8 @@
                 <li>
                     <label for="location">Location:</label><input type="text" id="location" name="location" />
                 </li>
+                <li>
+                    <input type="button" name="creation-button" value="Create" onclick="form.submit()" />
+                </li>
             </ul>
         </form>
