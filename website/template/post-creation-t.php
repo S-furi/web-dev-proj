@@ -17,8 +17,7 @@
                     <label for="location">Location:</label><input type="text" id="location" name="location" />
                 </li>
                 <li>
-                    <label>Event date: </label>
-                    <input type="date" name="event-date" id="event-date">
+                    <label for="event-date">Event date: </label><input type="date" name="event-date" id="event-date">
                 </li>
                 <li>
                     <input type="button" name="creation-button" value="Create" onclick="form.submit()" />
