@@ -90,13 +90,12 @@ function insertNewUser($email, $username,  $password, $first_name, $last_name, $
   return $stmt->execute();
 }
 
-function createPost($usr_id, $title, $caption, $image, $location, $mysqli) : array {
+function createPost($usr_id, $title, $caption, $image, $location, $mysqli) : bool {
   $query = "INSERT INTO posts (usrId, title, caption, image, location) VALUES (?, ?, ?, ?, ?)";
   $stmt = $mysqli->preapre($query);
   $stmt->bind_params("issss", $usr_id, $title, $caption, $image, $location);
 
-  $stmt->execute();
-  return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+  return $stmt->execute();
 }
 
 function getPost($usrId, $postId, $mysqli) {
