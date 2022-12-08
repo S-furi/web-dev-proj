@@ -93,10 +93,10 @@ function insertNewUser($email, $username,  $password, $first_name, $last_name, $
 }
 
 function createPost($usr_id, $title, $caption, $image, $location, $event_date, $mysqli) : bool {
-  $query = "INSERT INTO posts (usrId, title, caption, image, location, creationDate, eventDate) VALUES (?, ?, ?, NOW(), ?)";
+  $query = "insert into posts (usrId, title, caption, image, location, creationDate, eventDate) VALUES (?, ?, ?, ?, ?, NOW(), ?)";
   $event_date = date("Y-m-d H:i:s", strtotime($event_date));
-  $stmt = $mysqli->preapre($query);
-  $stmt->bind_params("isssss", $usr_id, $title, $caption, $image, $location, $event_date);
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("isssss", $usr_id, $title, $caption, $image, $location, $event_date);
 
   return $stmt->execute();
 }
