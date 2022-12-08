@@ -67,21 +67,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `brogram`.`login_attempts`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `brogram`.`login_attempts` (
-  `usrId` INT NOT NULL,
-  `time` VARCHAR(30) NOT NULL,
-  PRIMARY KEY (`usrId`),
-  CONSTRAINT `fk_login_attempts_users2`
-    FOREIGN KEY (`usrId`)
-    REFERENCES `brogram`.`users` (`usrId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `brogram`.`posts`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `brogram`.`posts` (
@@ -91,6 +76,8 @@ CREATE TABLE IF NOT EXISTS `brogram`.`posts` (
   `caption` VARCHAR(255) NOT NULL,
   `image` VARCHAR(45) NOT NULL,
   `location` VARCHAR(45) NULL,
+  `creationDate` DATETIME NOT NULL,
+  `eventDate` DATETIME NOT NULL,
   PRIMARY KEY (`postId`, `usrId`),
   INDEX `fk_posts_users1_idx` (`usrId` ASC),
   CONSTRAINT `fk_posts_users1`
