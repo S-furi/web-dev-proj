@@ -32,5 +32,14 @@
             <li><a href="index.php">Home</a></li><li><a href="#">Radar</a></li><li><a href="#">Profilo</a></li><li><a href="login.php">Login</a></li><li><a href="signup.php">Sign Up</a></li>
         </ul>
     </div>
+<?php
+if(isset($templateParams["js"])):
+    foreach($templateParams["js"] as $script):
+?>
+    <script src="<?php echo $script; ?>"></script>
+<?php
+    endforeach;
+endif;
+?>
 </body>
 </html>
