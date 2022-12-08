@@ -29,7 +29,7 @@
    </aside>
    <div>
         <ul>
-            <li><a href="index.php">Home</a></li><li><a href="#">Radar</a></li><li><a href="#">Profilo</a></li><li><a href="login.php">Login</a></li><li><a href="signup.php">Sign Up</a></li>
+            <li><a href="index.php">Home</a></li><li><a href="logout.php">Logout</a></li><li><a href="#">Profilo</a></li><li><a href="login.php">Login</a></li><li><a href="signup.php">Sign Up</a></li>
         </ul>
     </div>
 <?php
