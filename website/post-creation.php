@@ -11,6 +11,7 @@ if (!isStillLoggedIn($mysqli)) {
 
 $templateParams["Titolo"] = "Brogram - Post Creation";
 $templateParams["nome"] = "post-creation-t.php";
+$templateParams["js"] = array("https://unpkg.com/axios/dist/axios.min.js", "js/post_submit.js");
 
 require("template/base.php");
 
