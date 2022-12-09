@@ -1,0 +1,27 @@
+main article {
+    width: 85%;
+    position: relative;
+    float: right;
+    border: 1px solid black;
+}
+
+main article section {
+    border: 1px solid black;
+    margin: 5px
+}
+
+main article section section img {
+    height: 30px;
+}
+
+main article>img:first-child {
+    height: 30px;
+}
+
+main article>img:first-child, main article>p:nth-child(2) {
+    display: inline-block;
+}
+
+main article section section img, main>article>section>section>p:nth-child(2) {
+    display: inline-block;
+}
