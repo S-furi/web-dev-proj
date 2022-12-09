@@ -78,6 +78,7 @@ CREATE TABLE IF NOT EXISTS `brogram`.`posts` (
   `location` VARCHAR(45) NULL,
   `creationDate` DATETIME NOT NULL,
   `eventDate` DATETIME NOT NULL,
+  `likes` INT NOT NULL,
   PRIMARY KEY (`postId`, `usrId`),
   INDEX `fk_posts_users1_idx` (`usrId` ASC),
   CONSTRAINT `fk_posts_users1`

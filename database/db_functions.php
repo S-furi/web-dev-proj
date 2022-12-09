@@ -27,11 +27,14 @@ function login($email, $password, $mysqli) {
     $stmt->bind_param('s', $email);
     $stmt->execute();
 
-    $data = $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+    $data = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    if (count($data) == 0) {
+      return false;
+    }    
     
-    $username = $data['username'];
-    $user_id = $data['usrId'];
-    $db_password = $data['password'];
+    $username = $data[0]['username'];
+    $user_id = $data[0]['usrId'];
+    $db_password = $data[0]['password'];
 
     if (checkBrute($user_id, $mysqli)) {
       return false;
@@ -93,7 +96,7 @@ function insertNewUser($email, $username,  $password, $first_name, $last_name, $
 }
 
 function createPost($usr_id, $title, $caption, $image, $location, $event_date, $mysqli) : bool {
-  $query = "insert into posts (usrId, title, caption, image, location, creationDate, eventDate) VALUES (?, ?, ?, ?, ?, NOW(), ?)";
+  $query = "insert into posts (usrId, title, caption, image, location, creationDate, eventDate, likes) VALUES (?, ?, ?, ?, ?, NOW(), ?, 0)";
   $event_date = date("Y-m-d H:i:s", strtotime($event_date));
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("isssss", $usr_id, $title, $caption, $image, $location, $event_date);
