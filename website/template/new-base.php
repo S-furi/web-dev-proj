@@ -56,7 +56,7 @@
             <p class="suggestion-text">Suggestions for you</p>
             <div class="profile-card">
                 <div class="profile-pic">
-                    <img src="img/cover 9.png" alt="">
+                    <img src="img/cover9.png" alt="">
                 </div>
                 <div>
                     <p class="username">username</p>
@@ -66,7 +66,7 @@
             </div>
             <div class="profile-card">
                 <div class="profile-pic">
-                    <img src="img/cover 10.png" alt="">
+                    <img src="img/cover10.png" alt="">
                 </div>
                 <div>
                     <p class="username">username</p>
@@ -76,7 +76,7 @@
             </div>
             <div class="profile-card">
                 <div class="profile-pic">
-                    <img src="img/cover 11.png" alt="">
+                    <img src="img/cover11.png" alt="">
                 </div>
                 <div>
                     <p class="username">username</p>
@@ -86,7 +86,7 @@
             </div>
             <div class="profile-card">
                 <div class="profile-pic">
-                    <img src="img/cover 12.png" alt="">
+                    <img src="img/cover12.png" alt="">
                 </div>
                 <div>
                     <p class="username">username</p>
@@ -96,7 +96,7 @@
             </div>
             <div class="profile-card">
                 <div class="profile-pic">
-                    <img src="img/cover 13.png" alt="">
+                    <img src="img/cover13.png" alt="">
                 </div>
                 <div>
                     <p class="username">username</p>

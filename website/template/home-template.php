@@ -5,7 +5,7 @@
         <div class="post">
             <div class="info">
                 <div class="user">
-                    <div class="profile-pic"><img src="img/cover 1.png" alt=""></div>
+                    <div class="profile-pic"><img src="img/cover1.png" alt=""></div>
                     <p class="username"><?php echo $user[0]["username"]; ?></p>
                 </div>
                 <div>
