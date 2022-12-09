@@ -1,29 +1,33 @@
+<!-- https://codepen.io/mamislimen/pen/jOwwLvy -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<title>Welcome</title>
+	<link rel="stylesheet" type="text/css" href="../../styles/login.css">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-   <header>
-        <h1>Brogram</h1>
-   </header> 
-   <main>
-        <form action="#" method="POST">
-            <h2>Login</h2>
-            <ul>
-                <li>
-                    <label for="username">Username:</label><input type="text" id="username"  me="username" />
-                </li>
-                <li>
-                    <label for="password">Password:</label><input type="password" id="passwo " name="password" />
-                </li>
-                <li>
-                    <input type="submit" name="submit" value="Invia" />
-                </li>
-            </ul>
-        </form>
-   </main>
+	<div class="main">  	
+		<input type="checkbox" id="chk" aria-hidden="true">
+
+			<div class="signup">
+				<form>
+					<label for="chk" aria-hidden="true">Registrati</label>
+					<input type="text" name="txt" placeholder="Username" required="">
+					<input type="email" name="email" placeholder="Email" required="">
+					<input type="password" name="pswd" placeholder="Password" required="">
+					<button>Registrati</button>
+				</form>
+			</div>
+
+			<div class="login">
+				<form>
+					<label for="chk" aria-hidden="true">Accedi</label>
+					<input type="email" name="email" placeholder="Email" required="">
+					<input type="password" name="pswd" placeholder="Password" required="">
+					<button>Accedi</button>
+				</form>
+			</div>
+	</div>
 </body>
 </html>
