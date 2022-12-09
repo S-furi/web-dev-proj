@@ -35,7 +35,7 @@ function sendPostData(post_params) {
     .then(res => {
         console.log(res.data);
         if (res.data["loginok"]) {
-            console.log("TUTTO OK FRATE");
+            alert("TUTTO OK FRATE");
         } else {
             console.log("QULCOSA storto");
             console.log(res.data["errormsg"]);
