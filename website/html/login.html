@@ -36,7 +36,13 @@
                         required="" /></label>
                 <label for="password"><input type="password" name="password" id="password" placeholder="Password"
                         required="" /></label>
-                <label for="Login-btn"><input type="button" value="Accedi" id="login-btn"></label>
+                <label for="Login-btn"><input type="button" value="Accedi" id="login-btn" onclick="goToHome()" /></label>
+                <!-- Super dummy function just to navigate the site -->
+                <script>
+                    function goToHome() {
+                        window.location.href = "index.html";
+                    }
+                </script>
             </form>
         </section>
     </main>
