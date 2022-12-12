@@ -1,78 +1,374 @@
-html, body {
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+
+:root {
+    --text-color-dark: cadetBlue;
+    --bg-color: hsl(252, 5%, 85%);
+    --color-primary: cadetBlue;
+    --color-gray: hsl(252, 15%,65%);
+    --color-white: white;
+    --color-light: lightgrey;
+    
+    --btn-padding: 0.6rem 2rem;
+    --search-padding: 0.6rem 1rem;
+    --border-radius: 2rem;
+    --card-padding: 1rem;
+    --card-border-radius: 1rem;
+    
+    --sticky-top-left: 5.4rem;
+    --sticky-top-right: -18rem;
+}
+
+*,
+*::before,
+*::after {
     margin: 0;
-    height: 100%;
-    font-family: sans-serif;
-}
-
-#container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-main {
-    flex: 1;
-    overflow: auto;
-}
-
-main article {
-    overflow: auto;
-    margin: 10px 0 20px 0;
-    padding-bottom: 20px;
-}
-
-main article:last-child {
-    margin-bottom: none;
-}
-
-header {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    margin: 10px 10px 0px 10px;
-    background-color: cadetblue;
-    padding: 10px;
-    border-radius: 25px;
-}
-
-header img {
-    width: 200px;
-    margin-right: 10%;
-}
-
-header input {
-    margin-left: 10%;
-    text-align: center;
-    padding: 5px;
-    border: 2px solid black;
-    border-radius: 25px;
-    box-shadow: 10px 5px;
-}
-
-header input:focus {
-    outline: none;
-}
-
-nav {
-    order: 2;
-}
-
-nav ul {
-    display: flex;
-    flex-flow: row wrap;
-    list-style: none;
-    justify-content:space-around;
-    background-color: cadetblue;
-    padding: 20px;
-    margin: 0 40px 5px 40px;
-    border-radius: 25px;
-}
-
-nav ul li a {
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
     text-decoration: none;
-    color: black;
+    list-style: none;
+    border: none;
 }
 
-nav ul li a:hover {
-    color: coral;
+body {
+    font-family: 'Montserrat';
+    color: var(--text-color-dark);
+    background-color: var(--bg-color);
+    overflow-x: hidden;
+}
+
+.container {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.profile-picture {
+    width: 2.7rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+.btn {
+    display: inline-block;
+    padding: var(--btn-padding);
+    font-weight: 500;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 300ms ease;
+    font-size: 0.9rem;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.text-bold {
+    font-weight: 500;
+}
+
+.usertag {
+    color: var(--color-gray);
+}
+
+/* NAVBAR */
+nav {
+    width: 100%;
+    background-color: var(--color-white);
+    padding: 0.7rem 0;
+    position: fixed;
+    z-index: 10;
+}
+
+/* LOGO */
+nav .logo {
+    font-size: 2.5em;
+    text-decoration: none;
+    color: cadetblue;
+}
+
+nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav .search-bar {
+    background: var(--color-light);
+    border-radius: var(--border-radius);
+    padding: var(--search-padding);
+}
+
+nav .search-bar input[type="search"] {
+    background: transparent;
+    width: 30vw;
+    margin-left: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-color-dark);
+}
+
+nav .search-bar input[type="search"]::placeholder { 
+    color: var(--color-gray);
+}
+
+nav .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+nav .dropdown-content {
+    display: none;
+    position:absolute;
+    right: 0;
+    min-width: 1rem;
+    font-size: 0.8rem;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    background: var(--color-white);
+    border-radius: var(--border-radius);
+    padding: var(--search-padding);
+}
+
+nav .dropdown-content a {
+    color: black;
+    padding: 1rem 1.1rem;
+    text-decoration: none;
+    display: block;
+}
+
+nav .dropdown-content a:hover {
+    background-color: #ddd;
+    border-radius: var(--card-border-radius);
+}
+
+nav .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* MAIN */
+main {
+    position: relative;
+    top: 5.4rem;
+}
+
+main .container {
+    display: grid;
+    grid-template-columns: 6vh auto;
+    column-gap: 2rem;
+    position: relative;
+}
+
+main .container .left {
+    height: max-content;
+    position: sticky;
+    top: var(--sticky-top-left);
+}
+
+main .container .left .profile {
+    display: none;
+}
+
+/* SIDEBAR */
+.left .sidebar {
+    margin-top: 1rem;
+    background-color: var(--color-white);
+    border-radius: var(--card-border-radius);
+}
+
+.left .sidebar .menu-item {
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    cursor: pointer;
+    transition: all 300ms ease;
+    position: relative;
+}
+
+.left .sidebar .menu-item:hover {
+    background-color: var(--color-light);
+}
+
+.left .sidebar span {
+    font-size: 2rem;
+    color: var(--color-gray);
+    margin-left: 1.4rem;
+    position: relative;
+}
+
+.left .sidebar h2 {
+    display: none;
+}
+    
+/* TODO: new btn for new posat creation */
+.left .medium-btn {
+    display: none;
+}
+
+.left .small-btn {
+    margin-top: 1rem;
+    padding: 0.8rem 1rem;
+    width: 100%;
+}
+
+/* MIDDLE */
+.middle .timeline .post {
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+
+.middle .timeline .post .post-head {
+    display: flex;
+    justify-content: space-between;
+}
+
+.middle .timeline .post h3 {
+    font-size: large;
+    font-size: 1.5rem;
+}
+
+.middle .timeline .post-head .usr-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.middle .timeline .post-head .profile-picture {
+    width: 2rem;
+}
+
+.middle .timeline .post-body {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+}
+
+.middle .timeline .post-body img {
+    border-radius: var(--card-border-radius);
+    max-width: 100%;
+    max-height: 20rem;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    margin: 0.7rem 0;
+    object-fit: contain;
+}
+
+.middle .timeline .post-body .interaction-buttons {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 2rem;
+    margin: 0.6rem;
+}
+
+
+/* RIGHT: displayed only on big screens */
+
+main .container .right {
+    display: none;
+}
+
+
+@media screen and (min-width:1200px) {
+    .container {
+        width: 90%;
+    }
+    
+    main .container {
+        grid-template-columns: 18vh auto 20vh;
+    }
+
+    main .container .left .profile {
+        padding: var(--card-padding);
+        background-color: var(--color-white);
+        border-radius: var(--card-border-radius);
+        display: flex;
+        align-items: center;
+        column-gap: 1rem;
+        width: 100%;
+    }
+
+    /* show right panel */
+    main .container .right {
+        display: flex;
+        justify-content: center;
+        flex-flow: column;
+        position: sticky;
+        height: max-content;
+        top: var(--sticky-top-left);
+        bottom: 0;
+        background-color: var(--color-white);
+        border-radius: var(--card-border-radius);
+        padding: var(--card-padding);
+    }
+    
+    main .container .right h2 {
+        font-size: 1.4rem;
+    }
+
+    .right ul {
+        display: flex;
+        flex-flow: column;
+    }
+    
+    .right ul li {
+        font-size: 0.8rem;
+        display: flex;
+        flex-flow: column;
+        margin-bottom: 1rem;
+    }
+    
+    .right ul li .userinfo {
+        margin: 1rem 0;
+        gap: 1rem;
+        display: flex;
+        flex-flow: row;
+    }
+    
+    .right ul li .btn {
+        width: 100%;
+    }
+    
+
+    .left .sidebar span {
+        font-size: 1.5rem;
+    }
+
+    .left .sidebar h2 {
+        display: flex;
+        margin-left: 1.5rem;
+        font-size: 1.5rem;
+    }
+
+    .left .btn {
+        display: flex;
+        margin-top: 1rem;
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+    }
+    
+    .left .medium-btn {
+        display: block;
+    }
+
+    .left .small-btn {
+        display: none;
+    }
+    
 }

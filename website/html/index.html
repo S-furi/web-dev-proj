@@ -1,175 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../../styles/newStyle.css" />
-    <title>Brogram</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css" />
+  <link rel="stylesheet" href="../../styles/base-style.css" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <title>Brogram</title>
 </head>
+
 <body>
-    <nav class="navbar">
-        <div class="nav-wrapper">
-            <!-- <img src="../img/logo.PNG" class="brand-img" alt=""> -->
-            <h1 class="brand-img">Brogram</h1>
-            <input type="text" class="search-box" placeholder="search">
-        </div>
-    </nav>
-    <section class="main">
-        <div class="wrapper">
+  <nav>
+    <div class="container">
+    <a href="index.html" class="logo">Brogram</a>
+      <div class="search-bar">
+        <label for="main-search-bar" class="uil uil-search"><input type="search" name="search" id="main-search-bar"
+            placeholder="Cerca"></label>
+      </div>
+      <div class="dropdown">
+      <img src="../img/no-profile-pic.png" alt="user profile picture" class="profile-picture dropbtn" />
+        <ul class="dropdown-content">
+          <li><a href="login.html">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Main section -->
+  <main>
+    <div class="container">
+      <!-- Left Panel -->
+      <div class="left">
+        <section class="profile">
+          <img src="../img/no-profile-pic.png" alt="user profile picture" class="profile-picture" />
+          <div class="handle">
+            <p class="user-name">Aldo Baglio</p>
+            <p class="usertag">@peperonataalle6</p>
+          </div>
+        </section>
+        <ul class="sidebar">
+          <li class="menu-item">
+            <span class="material-symbols-outlined">Home</span>
+            <h2>Home</h2>
+          </li>
+          <li class="menu-item">
+            <span class="material-symbols-outlined">Explore</span>
+            <h2>Explore</h2>
+          </li>
+          <li class="menu-item">
+            <span class="material-symbols-outlined">radar</span>
+            <h2>Radar</h2>
+          </li>
+          <li class="menu-item">
+            <span class="material-symbols-outlined">mail</span>
+            <h2>Messaggi</h2>
+          </li>
+        </ul>
+        <!-- End of Sidebar -->
+        <label for="create-post"><input type="button" value="Crea Post" id="create-post"
+            class="btn btn-primary medium-btn" onclick="goToPostCreation()"></label>
+        <label for="create-post"><input type="button" value="+" id="create-post" class="btn btn-primary small-btn" onclick="goToPostCreation()"></label>
+      </div>
+      <script>
+        function goToPostCreation() {
+          window.location.href="post-creation.html"
+        }
+      </script>
 
-            <div class="left-col">
-                <div class="col-items">
-                    <img src="../img/home.PNG" class="icon" alt="">
-                </div> 
-                <div class="col-items">
-                    <img src="../img/messenger.PNG" class="icon" alt="">
-                </div> 
-                <div class="col-items">
-                    <img src="../img/add.PNG" class="icon" alt="">
-                </div> 
-                <div class="col-items">
-                    <img src="../img/explore.PNG" class="icon" alt="">
-                </div> 
-                <div class="col-items">
-                    <img src="../img/like.PNG" class="icon" alt="">
-                </div> 
-                <div class="col-items">
-                    <div class="icon user-profile"></div>
-                </div> 
-            </div>
+      <!-- Center Panel -->
+      <div class="middle">
+        <section class="timeline">
 
-            <div class="center-col">
-                <div class="post">
-                    <div class="info">
-                        <div class="user">
-                            <div class="profile-pic"><img src="../img/cover 1.png" alt=""></div>
-                            <p class="username">username</p>
-                        </div>
-                        <img src="../img/option.PNG" class="options" alt="">
-                    </div>
-                    <img src="../img/cover 1.png" class="post-image" alt="">
-                    <div class="post-content">
-                        <div class="reaction-wrapper">
-                            <img src="../img/like.PNG" class="icon" alt="">
-                            <img src="../img/comment.PNG" class="icon" alt="">
-                            <img src="../img/send.PNG" class="icon" alt="">
-                            <img src="../img/save.PNG" class="save icon" alt="">
-                        </div>
-                        <p class="likes">1,012 likes</p>
-                        <p class="description"><span>username </span> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur tenetur veritatis placeat, molestiae impedit aut provident eum quo natus molestias?</p>
-                        <p class="post-time">2 minutes ago</p>
-                    </div>
-                    <div class="comment-wrapper">
-                        <img src="../img/smile.PNG" class="icon" alt="">
-                        <input type="text" class="comment-box" placeholder="Add a comment">
-                        <button class="comment-btn">post</button>
-                    </div>
-                </div>
-                <div class="post">
-                    <div class="info">
-                        <div class="user">
-                            <div class="profile-pic"><img src="../img/cover 2.png" alt=""></div>
-                            <p class="username">username</p>
-                        </div>
-                        <img src="../img/option.PNG" class="options" alt="">
-                    </div>
-                    <img src="../img/cover 2.png" class="post-image" alt="">
-                    <div class="post-content">
-                        <div class="reaction-wrapper">
-                            <img src="../img/like.PNG" class="icon" alt="">
-                            <img src="../img/comment.PNG" class="icon" alt="">
-                            <img src="../img/send.PNG" class="icon" alt="">
-                            <img src="../img/save.PNG" class="save icon" alt="">
-                        </div>
-                        <p class="likes">1,012 likes</p>
-                        <p class="description"><span>username </span> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur tenetur veritatis placeat, molestiae impedit aut provident eum quo natus molestias?</p>
-                        <p class="post-time">2 minutes ago</p>
-                    </div>
-                    <div class="comment-wrapper">
-                        <img src="../img/smile.PNG" class="icon" alt="">
-                        <input type="text" class="comment-box" placeholder="Add a comment">
-                        <button class="comment-btn">post</button>
-                    </div>
-                </div>
+          <article class="post">
+            <div class="post-head">
+              <h3>Torneo di FIFA</h3>
+              <div class="usr-info">
+                <img src="img/no-profile-pic.png" alt="post author profile picture" class="profile-picture">
+                <p class="usertag">@mirkone</p>
+              </div>
             </div>
-
-            <div class="right-col">
-                <div class="profile-card">
-                    <div class="profile-pic">
-                        <img src="../img/profile-pic.png" alt="">
-                    </div>
-                    <div>
-                        <p class="username">username</p>
-                        <p class="sub-text">username</p>
-                    </div>
-                    <button class="action-btn">switch</button>
-                </div>
-                <p class="suggestion-text">Suggestions for you</p>
-                <div class="profile-card">
-                    <div class="profile-pic">
-                        <img src="../img/cover 9.png" alt="">
-                    </div>
-                    <div>
-                        <p class="username">username</p>
-                        <p class="sub-text">followed by user</p>
-                    </div>
-                    <button class="action-btn">follow</button>
-                </div>
-                <div class="profile-card">
-                    <div class="profile-pic">
-                        <img src="../img/cover 10.png" alt="">
-                    </div>
-                    <div>
-                        <p class="username">username</p>
-                        <p class="sub-text">followed by user</p>
-                    </div>
-                    <button class="action-btn">follow</button>
-                </div>
-                <div class="profile-card">
-                    <div class="profile-pic">
-                        <img src="../img/cover 11.png" alt="">
-                    </div>
-                    <div>
-                        <p class="username">username</p>
-                        <p class="sub-text">followed by user</p>
-                    </div>
-                    <button class="action-btn">follow</button>
-                </div>
-                <div class="profile-card">
-                    <div class="profile-pic">
-                        <img src="../img/cover 12.png" alt="">
-                    </div>
-                    <div>
-                        <p class="username">username</p>
-                        <p class="sub-text">followed by user</p>
-                    </div>
-                    <button class="action-btn">follow</button>
-                </div>
-                <div class="profile-card">
-                    <div class="profile-pic">
-                        <img src="../img/cover 13.png" alt="">
-                    </div>
-                    <div>
-                        <p class="username">username</p>
-                        <p class="sub-text">followed by user</p>
-                    </div>
-                    <button class="action-btn">follow</button>
-                </div>
+            <div class="post-body">
+              <img src="img/DSC03388_60.jpg" alt="to do dynamic in php" />
+              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam atque iusto laboriosam nulla
+                veritatis, laborum dolorem, culpa dignissimos officia quibusdam repellat natus repellendus vitae rem
+                aspernatur ratione non sapiente minima.</p>
+              <div class="interaction-buttons">
+                <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
+                    class="material-symbols-outlined">favorite</span></label>
+                <label for="comment-btn"><input type="button" name="comment button" id="comment-btn" /><span
+                    class="material-symbols-outlined">comment</span></label>
+                <label for="join-btn"><input type="button" name="join event button" id="join-btn"
+                    class="btn btn-primary" value="Partecipa" /></label>
+              </div>
             </div>
-
-        </div>
-    </section>
-    <nav class="options-bar">
-        <nav class="nav-wrapper">
-             <div class="nav-items">
-                <img src="../img/home.PNG" class="icon" alt="">
-                <img src="../img/messenger.PNG" class="icon" alt="">
-                <img src="../img/add.PNG" class="icon" alt="">
-                <img src="../img/explore.PNG" class="icon" alt="">
-                <img src="../img/like.PNG" class="icon" alt="">
-                <div class="icon user-profile"></div>
+          </article>
+          <article class="post">
+            <div class="post-head">
+              <h3>Gara di accarezzamento di Puppies</h3>
+              <div class="usr-info">
+                <img src="img/no-profile-pic.png" alt="post author profile picture" class="profile-picture">
+                <p class="usertag">@mirkone</p>
+              </div>
             </div>
-        </nav>
-    </nav>
+            <div class="post-body">
+              <img src="img/puppies.jpg" alt="to do dynamic in php" />
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto neque similique accusantium non
+                unde ipsam ipsa numquam, eos sed laborum amet ullam cupiditate. Quis ex asperiores saepe minima
+                consequuntur! Qui!</p>
+              <div class="interaction-buttons">
+                <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
+                    class="material-symbols-outlined">favorite</span></label>
+                <label for="comment-btn"><input type="button" name="comment button" id="comment-btn" /><span
+                    class="material-symbols-outlined">comment</span></label>
+                <label for="join-btn"><input type="button" name="join event button" id="join-btn"
+                    class="btn btn-primary" value="Partecipa" /></label>
+              </div>
+            </div>
+          </article>
+          <article class="post">
+            <div class="post-head">
+              <h3>Torneo di FIFA</h3>
+              <div class="usr-info">
+                <img src="img/no-profile-pic.png" alt="post author profile picture" class="profile-picture">
+                <p class="usertag">@mirkone</p>
+              </div>
+            </div>
+            <div class="post-body">
+              <img src="img/DSC03388_60.jpg" alt="to do dynamic in php" />
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea placeat et animi vel accusamus deserunt
+                facilis excepturi, natus necessitatibus. Doloribus corporis nam ratione, sed eligendi excepturi ipsa
+                beatae blanditiis iure!</p>
+              <div class="interaction-buttons">
+                <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
+                    class="material-symbols-outlined">favorite</span></label>
+                <label for="comment-btn"><input type="button" name="comment button" id="comment-btn" /><span
+                    class="material-symbols-outlined">comment</span></label>
+                <label for="join-btn"><input type="button" name="join event button" id="join-btn"
+                    class="btn btn-primary" value="Partecipa" /></label>
+              </div>
+            </div>
+          </article>
+        </section>
+      </div>
+      <!-- Right Panel -->
+      <div class="right">
+        <h2>Account Consigliati</h2>
+        <ul>
+          <li class="user-suggestion">
+            <div class="userinfo">
+              <img src="img/no-profile-pic.png" alt="suggested account profile picture" class="profile-picture">
+              <!-- temp -->
+              <div class="user-name">
+                <h3>Massimo Venier</h3>
+                <p class="usertag">@permettaunacosa</p>
+              </div>
+            </div>
+            <label for="follow-btn"><input type="button" value="Segui" class="btn btn-primary" /></label>
+          </li>
+          <li class="user-suggestion">
+            <div class="userinfo">
+              <img src="img/no-profile-pic.png" alt="suggested account profile picture" class="profile-picture">
+              <!-- temp -->
+              <div class="user-name">
+                <h3>Ajeje Brazorf</h3>
+                <p class="usertag">@icomelunga</p>
+              </div>
+            </div>
+            <label for="follow-btn"><input type="button" value="Segui" class="btn btn-primary" /></label>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </main>
 </body>
+
 </html>
