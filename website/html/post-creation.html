@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css" />
+  <link rel="stylesheet" href="../../styles/base-style.css" />
+  <link rel="stylesheet" href="../../styles/post-creation.css">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <title>Brogram</title>
+</head>
+
+<body>
+  <nav>
+    <div class="container">
+    <a href="index.html" class="logo">Brogram</a>
+      <div class="search-bar">
+        <label for="main-search-bar" class="uil uil-search"><input type="search" name="search" id="main-search-bar"
+            placeholder="Cerca"></label>
+      </div>
+      <div class="dropdown">
+      <img src="../img/no-profile-pic.png" alt="user profile picture" class="profile-picture dropbtn" />
+        <ul class="dropdown-content">
+          <li><a href="#">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Main section -->
+  <main>
+    <div class="container">
+      <!-- Left Panel -->
+      <div class="left">
+        <section class="profile">
+          <img src="../img/no-profile-pic.png" alt="user profile picture" class="profile-picture" />
+          <div class="handle">
+            <p class="user-name">Barabba Ammazza Ebrei</p>
+            <p class="usertag">@sonopirla</p>
+          </div>
+        </section>
+      </div>
+
+      <!-- Center Panel -->
+      <div class="middle">
+          <h1>Creazione Post</h1>
+          <form action="POST">
+              <ul>
+                <li>
+                    <label for="title">Titolo Post</label><input type="text" name="title" id="title" />
+                </li>
+                <li>
+                    <label for="photo">Foto</label><input type="file" name="photo" id="photo">
+                </li>
+                <li>
+                    <label for="description">Descrizione</label><input type="text" id="description" name="description"/>
+                </li>
+                <li>
+                    <label for="location">Luogo</label><input type="text" id="location" name="location" />
+                </li>
+                <li>
+                    <label for="event-datetime">Data e Ora dell'Evento</label><input type="datetime-local" name="event-datetime" id="event-datetime" />
+                </li> 
+                <!-- Non so se tenerli fuori dall'elenco puntato -->
+                <input type="button" name="cancel-button" value="Annulla" class="btn" onclick="goToHome()"/>
+                <script>
+                    function goToHome() {
+                        window.location.href="index.html";
+                    }
+                </script>
+                <input type="button" name="creation-button" value="Crea" class="btn btn-primary"/>
+              </ul>
+          </form>
+      </div>
+      <!-- Right Panel -->
+      <div class="right">
+        <h2>Account Consigliati</h2>
+        <ul>
+          <li class="user-suggestion">
+            <div class="userinfo">
+              <img src="img/no-profile-pic.png" alt="suggested account profile picture" class="profile-picture">
+              <!-- temp -->
+              <div class="user-name">
+                <h3>Massimo Venier</h3>
+                <p class="usertag">@permettaunacosa</p>
+              </div>
+            </div>
+            <label for="follow-btn"><input type="button" value="Segui" class="btn btn-primary" /></label>
+          </li>
+          <li class="user-suggestion">
+            <div class="userinfo">
+              <img src="img/no-profile-pic.png" alt="suggested account profile picture" class="profile-picture">
+              <!-- temp -->
+              <div class="user-name">
+                <h3>Ajeje Brazorf</h3>
+                <p class="usertag">@icomelunga</p>
+              </div>
+            </div>
+            <label for="follow-btn"><input type="button" value="Segui" class="btn btn-primary" /></label>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

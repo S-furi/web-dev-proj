@@ -1,0 +1,40 @@
+:root {
+    --light-grey: #e6e6e6;
+}
+
+.middle {
+    display: flex;
+    justify-content: space space-evenly;
+    flex-flow: column;
+    background-color: white;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.middle ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 1rem 1rem;
+}
+
+.middle ul li label {
+    padding-right: 1rem;
+}
+
+.middle ul li input {
+    background-color: var(--light-grey);
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+.middle ul li input[type="file"] {
+    background-color: white;
+    margin-right: -2rem;
+}
+
+@media screen and (min-width:1200px) {
+    .middle ul li {
+        justify-content: space-around;
+    }
+}
