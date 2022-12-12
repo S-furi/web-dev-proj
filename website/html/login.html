@@ -1,33 +1,45 @@
-<!-- https://codepen.io/mamislimen/pen/jOwwLvy -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<title>Welcome</title>
-	<link rel="stylesheet" type="text/css" href="../../styles/login.css">
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../styles/login.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet" />
+    <title>Brogram - Login</title>
 </head>
+
 <body>
-	<div class="main">  	
-		<input type="checkbox" id="chk" aria-hidden="true">
-
-			<div class="signup">
-				<form>
-					<label for="chk" aria-hidden="true">Registrati</label>
-					<input type="text" name="txt" placeholder="Username" required="">
-					<input type="email" name="email" placeholder="Email" required="">
-					<input type="password" name="pswd" placeholder="Password" required="">
-					<button>Registrati</button>
-				</form>
-			</div>
-
-			<div class="login">
-				<form>
-					<label for="chk" aria-hidden="true">Accedi</label>
-					<input type="email" name="email" placeholder="Email" required="">
-					<input type="password" name="pswd" placeholder="Password" required="">
-					<button>Accedi</button>
-				</form>
-			</div>
-	</div>
+    <main>
+        <input type="checkbox" id="checkbox" aria-hidden="true" />
+        <section class="signup">
+            <form action="POST">
+                <label for="checkbox" aria-hidden="true">Registrati</label>
+                <label for="first-name"><input type="text" name="first-name" id="first-name" placeholder="Nome"
+                        required="" /></label>
+                <label for="last-name"><input type="text" name="last-name" id="last-name" placeholder="Cognome"
+                        required="" /></label>
+                <label for="username"><input type="text" name="username" id="username" placeholder="Username"
+                        required="" /></label>
+                <label for="email"><input type="email" name="email" id="email" placeholder="Email"
+                        required="" /></label>
+                <label for="password"><input type="password" name="password" id="password" placeholder="Password"
+                        required="" /></label>
+                <label for="signup-btn"><input type="button" value="Registrati" id="signup-btn"></label>
+            </form>
+        </section>
+        <section class="login">
+            <form action="POST">
+                <label for="checkbox" aria-hidden="true">Login</label>
+                <label for="email"><input type="email" name="email" id="email" placeholder="Email"
+                        required="" /></label>
+                <label for="password"><input type="password" name="password" id="password" placeholder="Password"
+                        required="" /></label>
+                <label for="Login-btn"><input type="button" value="Accedi" id="login-btn"></label>
+            </form>
+        </section>
+    </main>
 </body>
+
 </html>
