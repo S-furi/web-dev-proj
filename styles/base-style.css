@@ -31,7 +31,7 @@
 }
 
 body {
-    font-family: 'Montserrat';
+    font-family: 'Montserrat', sans-serif;
     color: var(--text-color-dark);
     background-color: var(--bg-color);
     overflow-x: hidden;
@@ -156,25 +156,25 @@ header .dropdown:hover .dropdown-content {
 }
 
 /* MAIN */
-main {
+.main {
     position: relative;
     top: 5.4rem;
 }
 
-main .container {
+.main .container {
     display: grid;
     grid-template-columns: 6vh auto;
     column-gap: 2rem;
     position: relative;
 }
 
-main .container .left {
+.main .container .left {
     height: max-content;
     position: sticky;
     top: var(--sticky-top-left);
 }
 
-main .container .left .profile {
+.main .container .left .profile {
     display: none;
 }
 
@@ -201,7 +201,8 @@ main .container .left .profile {
 .left .sidebar span {
     font-size: 2rem;
     color: var(--color-gray);
-    margin-left: 1.4rem;
+    margin-left: 0.7rem;
+    margin-right: 0.7rem;
     position: relative;
 }
 
@@ -279,7 +280,7 @@ main .container .left .profile {
 
 /* RIGHT: displayed only on big screens */
 
-main .container .right {
+.main .container .right {
     display: none;
 }
 
@@ -289,11 +290,11 @@ main .container .right {
         width: 90%;
     }
     
-    main .container {
+    .main .container {
         grid-template-columns: 18vh auto 20vh;
     }
 
-    main .container .left .profile {
+    .main .container .left .profile {
         padding: var(--card-padding);
         background-color: var(--color-white);
         border-radius: var(--card-border-radius);
@@ -304,7 +305,7 @@ main .container .right {
     }
 
     /* show right panel */
-    main .container .right {
+    .main .container .right {
         display: flex;
         justify-content: center;
         flex-flow: column;
@@ -317,7 +318,7 @@ main .container .right {
         padding: var(--card-padding);
     }
     
-    main .container .right h2 {
+    .main .container .right h2 {
         font-size: 1.4rem;
     }
 

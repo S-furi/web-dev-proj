@@ -15,13 +15,13 @@
 <body>
   <header>
     <div class="container">
-      <a href="index.html" class="logo">Brogram</a>
+    <a href="index.html" class="logo">Brogram</a>
       <div class="search-bar">
         <label for="main-search-bar" class="uil uil-search"><input type="search" name="search" id="main-search-bar"
             placeholder="Cerca"></label>
       </div>
       <div class="dropdown">
-        <img src="../img/no-profile-pic.png" alt="user profile picture" class="profile-picture dropbtn" />
+      <img src="../img/no-profile-pic.png" alt="user profile picture" class="profile-picture dropbtn" />
         <ul class="dropdown-content">
           <li><a href="login.html">Logout</a></li>
         </ul>
@@ -29,150 +29,151 @@
     </div>
   </header>
   <!-- Main section -->
-  <div class="container">
-    <!-- Left Panel -->
-    <div class="left">
-      <section class="profile">
-        <img src="../img/no-profile-pic.png" alt="user profile picture" class="profile-picture" />
-        <div class="handle">
-          <p class="user-name">Aldo Baglio</p>
-          <p class="usertag">@peperonataalle6</p>
-        </div>
-      </section>
-      <ul class="sidebar">
-        <li class="menu-item">
-          <span class="material-symbols-outlined">Home</span>
-          <h2>Home</h2>
-        </li>
-        <li class="menu-item">
-          <span class="material-symbols-outlined">Explore</span>
-          <h2>Explore</h2>
-        </li>
-        <li class="menu-item">
-          <span class="material-symbols-outlined">radar</span>
-          <h2>Radar</h2>
-        </li>
-        <li class="menu-item">
-          <span class="material-symbols-outlined">mail</span>
-          <h2>Messaggi</h2>
-        </li>
-      </ul>
-      <!-- End of Sidebar -->
-      <label for="create-post"><input type="button" value="Crea Post" id="create-post"
-          class="btn btn-primary medium-btn" onclick="goToPostCreation()"></label>
-      <label for="create-post"><input type="button" value="+" id="create-post" class="btn btn-primary small-btn"
-          onclick="goToPostCreation()"></label>
-      <script>
-        function goToPostCreation() {
-          window.location.href = "post-creation.html";
-        }
-      </script>
-    </div>
-
-    <!-- Center Panel -->
-    <main>
-      <div class="middle">
-        <section class="timeline">
-
-          <article class="post">
-            <div class="post-head">
-              <h3>Torneo di FIFA</h3>
-              <div class="usr-info">
-                <img src="img/no-profile-pic.png" alt="post author profile picture" class="profile-picture">
-                <p class="usertag">@mirkone</p>
-              </div>
-            </div>
-            <div class="post-body">
-              <img src="img/DSC03388_60.jpg" alt="to do dynamic in php" />
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam atque iusto laboriosam nulla
-              veritatis, laborum dolorem, culpa dignissimos officia quibusdam repellat natus repellendus vitae rem
-              aspernatur ratione non sapiente minima.</p>
-              <div class="interaction-buttons">
-                <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
-                    class="material-symbols-outlined">favorite</span></label>
-                <label for="comment-btn"><input type="button" name="comment button" id="comment-btn" /><span
-                    class="material-symbols-outlined">comment</span></label>
-                <label for="join-btn"><input type="button" name="join event button" id="join-btn" class="btn btn-primary"
-                  value="Partecipa" /></label>
-              </div>
-            </div>
-          </article>
-          <article class="post">
-            <div class="post-head">
-              <h3>Gara di accarezzamento di Puppies</h3>
-              <div class="usr-info">
-                <img src="img/no-profile-pic.png" alt="post author profile picture" class="profile-picture">
-                <p class="usertag">@mirkone</p>
-              </div>
-            </div>
-            <div class="post-body">
-              <img src="img/puppies.jpg" alt="to do dynamic in php" />
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto neque similique accusantium non
-              unde ipsam ipsa numquam, eos sed laborum amet ullam cupiditate. Quis ex asperiores saepe minima
-              consequuntur! Qui!</p>
-              <div class="interaction-buttons">
-                <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
-                    class="material-symbols-outlined">favorite</span></label>
-                <label for="comment-btn"><input type="button" name="comment button" id="comment-btn" /><span
-                    class="material-symbols-outlined">comment</span></label>
-                <label for="join-btn"><input type="button" name="join event button" id="join-btn" class="btn btn-primary"
-                  value="Partecipa" /></label>
-              </div>
-            </div>
-          </article>
-          <article class="post">
-            <div class="post-head">
-              <h3>Torneo di FIFA</h3>
-              <div class="usr-info">
-                <img src="img/no-profile-pic.png" alt="post author profile picture" class="profile-picture">
-                <p class="usertag">@mirkone</p>
-              </div>
-            </div>
-            <div class="post-body">
-              <img src="img/DSC03388_60.jpg" alt="to do dynamic in php" />
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea placeat et animi vel accusamus deserunt
-              facilis excepturi, natus necessitatibus. Doloribus corporis nam ratione, sed eligendi excepturi ipsa
-              beatae blanditiis iure!</p>
-              <div class="interaction-buttons">
-                <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
-                    class="material-symbols-outlined">favorite</span></label>
-                <label for="comment-btn"><input type="button" name="comment button" id="comment-btn" /><span
-                    class="material-symbols-outlined">comment</span></label>
-                <label for="join-btn"><input type="button" name="join event button" id="join-btn" class="btn btn-primary"
-                  value="Partecipa" /></label>
-              </div>
-            </div>
-          </article>
+  <div class="main">
+    <div class="container">
+      <!-- Left Panel -->
+      <div class="left">
+        <section class="profile">
+          <img src="../img/no-profile-pic.png" alt="user profile picture" class="profile-picture" />
+          <div class="handle">
+            <p class="user-name">Aldo Baglio</p>
+            <p class="usertag">@peperonataalle6</p>
+          </div>
         </section>
+        <ul class="sidebar">
+          <li class="menu-item">
+            <span class="material-symbols-outlined">Home</span>
+            <h2>Home</h2>
+          </li>
+          <li class="menu-item">
+            <span class="material-symbols-outlined">Explore</span>
+            <h2>Explore</h2>
+          </li>
+          <li class="menu-item">
+            <span class="material-symbols-outlined">radar</span>
+            <h2>Radar</h2>
+          </li>
+          <li class="menu-item">
+            <span class="material-symbols-outlined">mail</span>
+            <h2>Messaggi</h2>
+          </li>
+        </ul>
+        <!-- End of Sidebar -->
+        <label for="create-post"><input type="button" value="Crea Post" id="create-post"
+            class="btn btn-primary medium-btn" onclick="goToPostCreation()"></label>
+        <label for="create-post"><input type="button" value="+" id="create-post" class="btn btn-primary small-btn" onclick="goToPostCreation()"></label>
+        <script>
+          function goToPostCreation() {
+            window.location.href = "post-creation.html";
+          }
+        </script>
       </div>
-    </main>
-    <!-- Right Panel -->
-    <div class="right">
-      <h2>Account Consigliati</h2>
-      <ul>
-        <li class="user-suggestion">
-          <div class="userinfo">
-            <img src="img/no-profile-pic.png" alt="suggested account profile picture" class="profile-picture">
-            <!-- temp -->
-            <div class="user-name">
-              <h3>Massimo Venier</h3>
-              <p class="usertag">@permettaunacosa</p>
+
+      <!-- Center Panel -->
+      <main>
+        <div class="middle">
+          <section class="timeline">
+
+            <article class="post">
+              <div class="post-head">
+                <h3>Torneo di FIFA</h3>
+                <div class="usr-info">
+                  <img src="img/no-profile-pic.png" alt="post author profile picture" class="profile-picture">
+                  <p class="usertag">@mirkone</p>
+                </div>
+              </div>
+              <div class="post-body">
+                <img src="img/DSC03388_60.jpg" alt="to do dynamic in php" />
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam atque iusto laboriosam nulla
+                veritatis, laborum dolorem, culpa dignissimos officia quibusdam repellat natus repellendus vitae rem
+                aspernatur ratione non sapiente minima.</p>
+                <div class="interaction-buttons">
+                  <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
+                      class="material-symbols-outlined">favorite</span></label>
+                  <label for="comment-btn"><input type="button" name="comment button" id="comment-btn" /><span
+                      class="material-symbols-outlined">comment</span></label>
+                  <label for="join-btn"><input type="button" name="join event button" id="join-btn"
+                    class="btn btn-primary" value="Partecipa" /></label>
+                </div>
+              </div>
+            </article>
+            <article class="post">
+              <div class="post-head">
+                <h3>Gara di accarezzamento di Puppies</h3>
+                <div class="usr-info">
+                  <img src="img/no-profile-pic.png" alt="post author profile picture" class="profile-picture">
+                  <p class="usertag">@mirkone</p>
+                </div>
+              </div>
+              <div class="post-body">
+                <img src="img/puppies.jpg" alt="to do dynamic in php" />
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto neque similique accusantium non
+                unde ipsam ipsa numquam, eos sed laborum amet ullam cupiditate. Quis ex asperiores saepe minima
+                consequuntur! Qui!</p>
+                <div class="interaction-buttons">
+                  <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
+                      class="material-symbols-outlined">favorite</span></label>
+                  <label for="comment-btn"><input type="button" name="comment button" id="comment-btn" /><span
+                      class="material-symbols-outlined">comment</span></label>
+                  <label for="join-btn"><input type="button" name="join event button" id="join-btn"
+                    class="btn btn-primary" value="Partecipa" /></label>
+                </div>
+              </div>
+            </article>
+            <article class="post">
+              <div class="post-head">
+                <h3>Torneo di FIFA</h3>
+                <div class="usr-info">
+                  <img src="img/no-profile-pic.png" alt="post author profile picture" class="profile-picture">
+                  <p class="usertag">@mirkone</p>
+                </div>
+              </div>
+              <div class="post-body">
+                <img src="img/DSC03388_60.jpg" alt="to do dynamic in php" />
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea placeat et animi vel accusamus deserunt
+                facilis excepturi, natus necessitatibus. Doloribus corporis nam ratione, sed eligendi excepturi ipsa
+                beatae blanditiis iure!</p>
+                <div class="interaction-buttons">
+                  <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
+                      class="material-symbols-outlined">favorite</span></label>
+                  <label for="comment-btn"><input type="button" name="comment button" id="comment-btn" /><span
+                      class="material-symbols-outlined">comment</span></label>
+                  <label for="join-btn"><input type="button" name="join event button" id="join-btn"
+                    class="btn btn-primary" value="Partecipa" /></label>
+                </div>
+              </div>
+            </article>
+          </section>
+        </div>
+      </main>
+      <!-- Right Panel -->
+      <div class="right">
+        <h2>Account Consigliati</h2>
+        <ul>
+          <li class="user-suggestion">
+            <div class="userinfo">
+              <img src="img/no-profile-pic.png" alt="suggested account profile picture" class="profile-picture">
+              <!-- temp -->
+              <div class="user-name">
+                <h3>Massimo Venier</h3>
+                <p class="usertag">@permettaunacosa</p>
+              </div>
             </div>
-          </div>
-          <label for="follow-btn"><input type="button" value="Segui" class="btn btn-primary" id="follow-btn" /></label>
-        </li>
-        <li class="user-suggestion">
-          <div class="userinfo">
-            <img src="img/no-profile-pic.png" alt="suggested account profile picture" class="profile-picture">
-            <!-- temp -->
-            <div class="user-name">
-              <h3>Ajeje Brazorf</h3>
-              <p class="usertag">@icomelunga</p>
+            <label for="follow-btn"><input type="button" value="Segui" class="btn btn-primary" id="follow-btn" /></label>
+          </li>
+          <li class="user-suggestion">
+            <div class="userinfo">
+              <img src="img/no-profile-pic.png" alt="suggested account profile picture" class="profile-picture">
+              <!-- temp -->
+              <div class="user-name">
+                <h3>Ajeje Brazorf</h3>
+                <p class="usertag">@icomelunga</p>
+              </div>
             </div>
-          </div>
-          <label for="follow-btn"><input type="button" value="Segui" class="btn btn-primary" id="follow-btn" /></label>
-        </li>
-      </ul>
+            <label for="follow-btn"><input type="button" value="Segui" class="btn btn-primary" id="follow-btn" /></label>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </body>
