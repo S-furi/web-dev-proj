@@ -113,13 +113,13 @@ function getPost($usrId, $mysqli) {
   return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
-function getUsername($usrId, $mysqli) {
-  $query = "SELECT username, email FROM users WHERE usrId=?";
+function getUser($usrId, $mysqli) {
+  $query = "SELECT email, username, firstName, lastName FROM users WHERE usrId=?";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("i", $usrId);
   
   $stmt->execute();
-  return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+  return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
 }
 
 function isStillLoggedIn($mysqli) : bool {
