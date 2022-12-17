@@ -13,7 +13,7 @@
 <body>
   <header>
     <div class="container">
-      <a href="base-copy.php" class="logo">Brogram</a>
+      <a href="index.php" class="logo">Brogram</a>
       <div class="search-bar">
         <label for="main-search-bar"><span class="material-symbols-outlined">search</span><input type="search" name="search" id="main-search-bar" placeholder="Cerca"></label>
       </div>
