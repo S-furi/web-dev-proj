@@ -1,9 +1,6 @@
 const signupBtn = document.querySelector("section.signup input#signup-btn ");
 const loginBtn =  document.querySelector("section.login input#login-btn");
 
-console.log(signupBtn);
-console.log(loginBtn);
-
 signupBtn.addEventListener('click', function() {
     const signup_parameters = {
         "first-name": document.querySelector("section.signup input#first-name").value,
@@ -20,10 +17,11 @@ signupBtn.addEventListener('click', function() {
             console.log("{"+key+","+value+"}");
             formData.append(key, value);
         }
-        axios.post("../api-signup.php", formData)
+        axios.post("api-signup.php", formData)
         .then(res => {
             if (res.data['ok']) {
-                document.location.href = "login-form.php";
+              // better doing this server side
+                document.location.href = "login.php";
             }
             alert(res.data['msg']);
         });
@@ -38,17 +36,16 @@ loginBtn.addEventListener('click', function() {
         "password": document.querySelector("section.login input#password").value,
     }
     
-    console.log(login_params);
-    
     if (checkParamIntegrity(login_params)) {
         const formData = new FormData();
         for (const [key, value] of Object.entries(login_params)) {
             formData.append(key, value);
         }
-        axios.post("../api-login.php", formData)
+        axios.post("api-login.php", formData)
         .then(res => {
             if (res.data['ok']) {
-                document.location.href = "../index.php";
+              // better doing this server side
+                document.location.href = "index.php";
             }
         });
     } else {
