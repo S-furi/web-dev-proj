@@ -74,6 +74,7 @@ function sendPostData(post_params) {
       console.log(res.data);
       if (res.data["loginok"]) {
         alert("TUTTO OK FRATE");
+        window.location.href = "index.php"
       } else {
         console.log("QULCOSA storto");
         console.log(res.data["errormsg"]);
