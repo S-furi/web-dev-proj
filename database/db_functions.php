@@ -122,6 +122,18 @@ function getUser($usrId, $mysqli) {
   return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
 }
 
+/**
+ * Returns friends of friends.
+ *
+ * THIS IS A TEMPORARY VERSION, returns first 5 users in db
+ */
+function getSuggestedUser($usrId, $mysqli) {
+  $stmt = $mysqli->prepare("SELECT usrId, username, firstName, lastName FROM users WHERE usrId <> ?");
+  $stmt->bind_param("i", $usrId);
+  $stmt->execute();
+  return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
 function isStillLoggedIn($mysqli) : bool {
   if (isset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['login_string'])) {
     $user_id = $_SESSION['user_id'];
