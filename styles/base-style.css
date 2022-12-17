@@ -284,6 +284,21 @@ header .dropdown:hover .dropdown-content {
     display: none;
 }
 
+/* animation for suggestion disappear once clicked follow btn*/
+.disappearing-card {
+  animation: hideCard .5s forwards;
+}
+
+@keyframes hideCard {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
 
 @media screen and (min-width:1200px) {
     .container {
