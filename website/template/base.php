@@ -73,28 +73,26 @@
       <div class="right">
         <h2>Account Consigliati</h2>
         <ul>
-          <li class="user-suggestion">
-            <div class="userinfo">
-              <img src="img/no-profile-pic.png" alt="suggested account profile picture" class="profile-picture">
-              <!-- temp -->
-              <div class="user-name">
-                <h3>Massimo Venier</h3>
-                <p class="usertag">@permettaunacosa</p>
-              </div>
-            </div>
-            <label for="follow-btn"><input type="button" value="Segui" class="btn btn-primary" id="follow-btn" /></label>
-          </li>
-          <li class="user-suggestion">
-            <div class="userinfo">
-              <img src="img/no-profile-pic.png" alt="suggested account profile picture" class="profile-picture">
-              <!-- temp -->
-              <div class="user-name">
-                <h3>Ajeje Brazorf</h3>
-                <p class="usertag">@icomelunga</p>
-              </div>
-            </div>
-            <label for="follow-btn"><input type="button" value="Segui" class="btn btn-primary" id="follow-btn" /></label>
-          </li>
+          <?php
+          if (isset($templateParams["suggested_users"])) :
+            foreach ($templateParams["suggested_users"] as $sugg_user) :
+          ?>
+              <li class="user-suggestion">
+                <div class="userinfo">
+                  <!-- to add in DB an image reference -->
+                  <img src="img/no-profile-pic.png" alt="suggested account profile picture" class="profile-picture">
+                  <div class="user-name">
+                    <h3><?php echo $sugg_user["firstName"] . " " . $sugg_user["lastName"]; ?></h3>
+                    <p class="usertag">@<?php echo $sugg_user["username"]; ?></p>
+                  </div>
+                </div>
+                <!-- add a reference to the user for not having same id's in final HTML -->
+                <label for="follow-btn"><input type="button" value="Segui" class="btn btn-primary" id="follow-btn" /></label>
+              </li>
+          <?php
+            endforeach;
+          endif;
+          ?>
         </ul>
       </div>
     </div>

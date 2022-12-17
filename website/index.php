@@ -17,6 +17,7 @@ $templateParams["Titolo"] = "Brogram - Home";
 /* $templateParams["posts"] = getPost(intval($_SESSION['user_id']), $mysqli); */
 $templateParams["user"] = getUser(intval($_SESSION['user_id']), $mysqli);
 $templateParams["js"] = array("https://unpkg.com/axios/dist/axios.min.js", "js/home.js");
+$templateParams["suggested_users"] = getSuggestedUser(intval($_SESSION['user_id']), $mysqli);
 
 require("template/base.php");
 
