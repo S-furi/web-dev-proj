@@ -19,7 +19,7 @@
       </div>
       <div class="dropdown">
         <!-- When ready in DB, put this in php statement -->
-        <img src="../img/no-profile-pic.png" alt="user profile picture" class="profile-picture dropbtn" />
+        <img src="img/no-profile-pic.png" alt="user profile picture" class="profile-picture dropbtn" />
         <ul class="dropdown-content">
           <li><a href="logout.php">Logout</a></li>
         </ul>
@@ -31,7 +31,7 @@
       <!-- Left Panel -->
       <div class="left">
         <section class="profile">
-          <img src="../img/no-profile-pic.png" alt="user profile picture" class="profile-picture" />
+          <img src="img/no-profile-pic.png" alt="user profile picture" class="profile-picture" />
           <div class="handle">
             <p class="user-name"><?php echo $templateParams['user']['firstName'] . " " . $templateParams['user']['lastName']; ?></p>
             <p class="usertag">@<?php echo $templateParams['user']['username']; ?></p>
