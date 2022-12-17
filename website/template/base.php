@@ -77,7 +77,7 @@
           if (isset($templateParams["suggested_users"])) :
             foreach ($templateParams["suggested_users"] as $sugg_user) :
           ?>
-              <li class="user-suggestion">
+          <li class="user-suggestion <?php echo "usr-".$sugg_user['usrId'] ?>">
                 <div class="userinfo">
                   <!-- to add in DB an image reference -->
                   <img src="img/no-profile-pic.png" alt="suggested account profile picture" class="profile-picture">
@@ -87,7 +87,7 @@
                   </div>
                 </div>
                 <!-- add a reference to the user for not having same id's in final HTML -->
-                <label for="follow-btn"><input type="button" value="Segui" class="btn btn-primary" id="follow-btn" /></label>
+                <label for="follow-btn-usr-<?php echo $sugg_user['usrId']; ?>"><input type="button" value="Segui" class="btn btn-primary" id="follow-btn-<?php echo $sugg_user['usrId']; ?>" onclick="followUser(<?php echo $templateParams['user']['usrId']; ?>, <?php echo $sugg_user['usrId']; ?>)"/></label>
               </li>
           <?php
             endforeach;
@@ -101,7 +101,7 @@
   if (isset($templateParams["js"])) :
     foreach ($templateParams["js"] as $script) :
   ?>
-      <script src="<?php echo $script; ?>"></script>
+      <script type="text/javascript" src="<?php echo $script; ?>"></script>
   <?php
     endforeach;
   endif;
