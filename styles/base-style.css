@@ -49,6 +49,13 @@ body {
     overflow: hidden;
 }
 
+.big-profile-picture {
+    width: 6rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
 img {
     display: block;
     width: 100%;
@@ -277,7 +284,55 @@ header .dropdown:hover .dropdown-content {
     margin: 0.6rem;
 }
 
+.middle .timeline .profile-infobox {
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
 
+.middle .timeline .profile-infobox .profile-infobox-head {
+    display: flex;
+    justify-content: space-between;
+}
+
+.middle .timeline .profile-infobox .profile-infobox-head .profile-usr-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.middle .timeline .profile-infobox .profile-infobox-head .profile-usr-info .nametags h3 {
+    font-size: large;
+    font-size: 1.5rem;
+}
+
+.middle .timeline .profile-infobox .profile-infobox-body {
+    margin: 1rem;
+}
+
+.middle .timeline .profile-infobox .profile-infobox-body .profile-descr {
+    font-size: 1rem;
+    margin: 1rem 0;
+}
+
+.middle .timeline .profile-infobox .profile-infobox-body .follow-info {
+    display: flex;
+    align-items: flex-start; 
+}
+
+.middle .timeline .profile-infobox .profile-infobox-body .follow-info .followers-data { 
+    margin-right: 1rem;
+}
+
+
+.middle .timeline .profile-infobox .profile-infobox-body .follow-info .followers-tag, 
+.middle .timeline .profile-infobox .profile-infobox-body .follow-info .following-tag { 
+    font-weight: bold;
+    margin-right: 0.2rem;
+}
 /* RIGHT: displayed only on big screens */
 
 .main .container .right {
