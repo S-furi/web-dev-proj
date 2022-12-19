@@ -30,6 +30,7 @@
     <div class="container">
       <!-- Left Panel -->
       <div class="left">
+        <!-- Section should need a heading -->
         <section class="profile">
           <img src="img/no-profile-pic.png" alt="user profile picture" class="profile-picture" />
           <div class="handle">
