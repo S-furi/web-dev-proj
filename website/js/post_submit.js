@@ -60,21 +60,3 @@ function checkForm(post_params) {
   }
   return err;
 }
-
-// function sendPostData(post_params) {
-//   const formData = new FormData();
-//   for (const [key, value] of Object.entries(post_params)) {
-//     formData.append(key, value);
-//   }
-//   axios.post('api-post.php', formData)
-//     .then(res => {
-//       console.log(res.data);
-//       if (res.data["loginok"]) {
-//         alert("TUTTO OK FRATE");
-//         window.location.href = "index.php"
-//       } else {
-//         console.log("QULCOSA storto");
-//         console.log(res.data["errormsg"]);
-//       }
-//     })
-// }
