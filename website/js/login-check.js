@@ -13,20 +13,22 @@ signupBtn.addEventListener('click', function() {
     if (checkParamIntegrity(signup_parameters)) {
         const formData = new FormData();
         for (const [key, value] of Object.entries(signup_parameters)) {
-
-            console.log("{"+key+","+value+"}");
             formData.append(key, value);
         }
+
         axios.post("api-signup.php", formData)
         .then(res => {
             if (res.data['ok']) {
-              // better doing this server side
-                document.location.href = "login.php";
+                // clear all fields and display success
+                clearAllFields();
+                document.querySelector("section.signup p").innerText = "Utente inserito correttamente!";
+            } else {
+                document.querySelector("section.signup p").innerText = "Nome utente o email già in uso!";
+                console.log(res)
             }
-            alert(res.data['msg']);
         });
     } else {
-        alert("Filla tutti i campi");
+        document.querySelector("section.signup p").innerText = "Riempi tutti i campi";
     }
 });
 
@@ -46,10 +48,12 @@ loginBtn.addEventListener('click', function() {
             if (res.data['ok']) {
               // better doing this server side
                 document.location.href = "index.php";
+            } else {
+                document.querySelector("section.login p").innerText = res.data["msg"];
             }
         });
     } else {
-        alert("Filla tutti i campi");
+        document.querySelector("section.login p").innerText = "Riempi tutti i campi";
     }
 });
 
@@ -63,4 +67,10 @@ function checkParamIntegrity(params) {
         }
     }
     return check;
+}
+
+function clearAllFields() {
+    document.querySelectorAll(`section.signup input[type="text"]`).forEach( t => t.value = "");
+    document.querySelector(`section.signup input[type="email"]`).value = "";
+    document.querySelector(`section.signup input[type="password"]`).value = "";
 }
