@@ -83,8 +83,23 @@ input[type="button"]:hover {
     background: var(--color-hover);
 }
 
+p {
+    display: flex;
+    justify-content: center;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+}
+
+section.signup p {
+    color: var(--color-dark);
+    font-weight: bold;
+}
+section.login p {
+    color: var(--color-light);
+}
+
 section.login {
-    height: 15rem;
+    height: 20rem;
     padding: 0.5rem;
     background-color: var(--color-dark);
     border-radius: 60%/10%;
