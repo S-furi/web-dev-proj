@@ -16,5 +16,18 @@ document.getElementById("create-post-xl")
 document.getElementById("create-post-sm")
   .addEventListener('click', () => showForm());
 
+const menuItems = document.querySelectorAll(".menu-item");
 
+const changeAcriveItem = () => {
+    menuItems.forEach(item => {
+        item.classList.remove('active');
+    })
+}
+
+menuItems.forEach(item => {
+    item.addEventListener('click', () => {
+        changeAcriveItem();
+        item.classList.add('active');
+    })
+})
 
