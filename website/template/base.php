@@ -39,7 +39,7 @@
           </div>
         </section>
         <ul class="sidebar">
-          <li class="menu-item active">
+          <li class="menu-item">
             <span class="material-symbols-outlined">Home</span>
             <h2>Home</h2>
           </li>
