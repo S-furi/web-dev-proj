@@ -1,7 +1,5 @@
-// todo: inject main code for displaying post form
 function fillMain() {
-
-  const form = `
+    const form = `
             <h1>Creazione Post</h1>
             <p></p>
             <form action="post-creation.php" method="post" enctype="multipart/form-data">
@@ -21,13 +19,12 @@ function fillMain() {
                   <li>
                       <label for="event-datetime">Data e Ora dell'Evento</label><input type="datetime-local" name="event-datetime" id="event-datetime" />
                   </li> 
-                  <!-- Non so se tenerli fuori dall'elenco puntato -->
-                  <input type="button" name="cancel-button" value="Annulla" class="btn" />
-                  <input type="button" name="creation-button" value="Crea" class="btn btn-primary"/>
                 </ul>
-    </form> `;
+              <input type="button" name="cancel-button" value="Annulla" class="btn" />
+              <input type="button" name="creation-button" value="Crea" class="btn btn-primary"/>
+            </form> `;
 
-  document.querySelector("main .middle").innerHTML = form;
+    document.querySelector("main .middle").innerHTML = form;
 }
 
 fillMain();
