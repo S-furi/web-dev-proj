@@ -8,7 +8,7 @@ function followUser(user, followed) {
   document.querySelector(".right li.user-suggestion.usr-"+followed + " input").value = "✔️";
   document.querySelector(".right li.user-suggestion.usr-"+followed).classList.add("disappearing-card");
   // asynchronous :)
-  setTimeout(() => document.querySelector(".right li.user-suggestion.usr-"+followed).remove(), 1000);
+  setTimeout(() => document.querySelector(".right li.user-suggestion.usr-"+followed).remove(), 500);
 }
 
 function menuItemSelectedEffect() {
