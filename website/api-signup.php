@@ -13,6 +13,7 @@ if (isset($_POST['email'], $_POST['password'], $_POST['username'], $_POST['first
 
     if (insertNewUser($email,$username, $password, $first_name, $last_name, $mysqli)) {
         $response["msg"] = "Utente inserito correttamente!";
+        $response["ok"] = true;
         // REDIRECT SULLA HOM
       } else {
           $response["msg"] = "errore durante l'inserimento";
