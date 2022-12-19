@@ -24,7 +24,6 @@ signupBtn.addEventListener('click', function() {
                 document.querySelector("section.signup p").innerText = "Utente inserito correttamente!";
             } else {
                 document.querySelector("section.signup p").innerText = "Nome utente o email già in uso!";
-                console.log(res)
             }
         });
     } else {
