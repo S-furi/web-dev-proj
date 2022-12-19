@@ -216,8 +216,35 @@ header .dropdown:hover .dropdown-content {
 .left .sidebar h2 {
     display: none;
 }
+
+.left .sidebar .active {
+    background: var(--color-light);
+}
+
+.left .sidebar .active span,
+.left .sidebar .active h2 {
+    color: var(--color-primary);
+}
+
+.left .sidebar .active::before {
+    content: "";
+    display: block;
+    width: 0.4rem;
+    height: 100%;
+    position: absolute;
+    background: var(--color-primary);
+}
+
+.left .sidebar .menu-item:first-child.active {
+    border-top-left-radius: var(--card-border-radius);
+    overflow: hidden;
+}
     
-/* TODO: new btn for new posat creation */
+.left .sidebar .menu-item:last-child.active {
+    border-bottom-left-radius: var(--card-border-radius);
+    overflow: hidden;
+}
+
 .left .medium-btn {
     display: none;
 }
