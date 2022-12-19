@@ -128,7 +128,7 @@ function getUser($usrId, $mysqli) {
  * THIS IS A TEMPORARY VERSION, returns first 5 users in db
  */
 function getSuggestedUser($usrId, $mysqli) {
-  $stmt = $mysqli->prepare("SELECT usrId, username, firstName, lastName FROM users WHERE usrId <> ?");
+  $stmt = $mysqli->prepare("SELECT usrId, username, firstName, lastName FROM users WHERE usrId <> ? LIMIT 5");
   $stmt->bind_param("i", $usrId);
   $stmt->execute();
   return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
