@@ -15,6 +15,8 @@
         <section class="signup">
             <form action="POST">
                 <label for="checkbox" aria-hidden="true">Registrati</label>
+                <!-- Paragraph for info msgs or errors-->
+                <p></p>
                 <label for="first-name"><input type="text" name="first-name" id="first-name" placeholder="Nome"
                         required="" /></label>
                 <label for="last-name"><input type="text" name="last-name" id="last-name" placeholder="Cognome"
@@ -31,6 +33,8 @@
         <section class="login">
             <form action="POST">
                 <label for="checkbox" aria-hidden="true">Login</label>
+                <!-- Paragraph for error msgs -->
+                <p></p>
                 <label for="email"><input type="email" name="email" id="email" placeholder="Email"
                         required="" /></label>
                 <label for="password"><input type="password" name="password" id="password" placeholder="Password"
