@@ -11,23 +11,24 @@ function followUser(user, followed) {
   setTimeout(() => document.querySelector(".right li.user-suggestion.usr-"+followed).remove(), 1000);
 }
 
-document.getElementById("create-post-xl")
-  .addEventListener('click', () => showForm());
-document.getElementById("create-post-sm")
-  .addEventListener('click', () => showForm());
+function menuItemSelectedEffect() {
+    const menuItems = document.querySelectorAll(".menu-item");
 
-const menuItems = document.querySelectorAll(".menu-item");
+    const changeAcriveItem = () => {
+        menuItems.forEach(item => {
+            item.classList.remove('active');
+        })
+    }
 
-const changeAcriveItem = () => {
     menuItems.forEach(item => {
-        item.classList.remove('active');
+        item.addEventListener('click', () => {
+            changeAcriveItem();
+            item.classList.add('active');
+        })
     })
 }
 
-menuItems.forEach(item => {
-    item.addEventListener('click', () => {
-        changeAcriveItem();
-        item.classList.add('active');
-    })
-})
+// selected effect on left menu item
+menuItemSelectedEffect();
+
 

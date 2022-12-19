@@ -57,8 +57,8 @@
           </li>
         </ul>
         <!-- End of Sidebar -->
-        <label for="create-post-xl"><input type="button" value="Crea Post" id="create-post-xl" class="btn btn-primary medium-btn" /></label>
-        <label for="create-post-sm"><input type="button" value="+" id="create-post-sm" class="btn btn-primary small-btn" /></label>
+        <label for="create-post-xl"><input type="button" value="Crea Post" id="create-post-xl" class="btn btn-primary medium-btn" onclick="showForm()" /></label>
+        <label for="create-post-sm"><input type="button" value="+" id="create-post-sm" class="btn btn-primary small-btn" onclick="showForm()" /></label>
       </div>
 
       <!-- Center Panel -->
