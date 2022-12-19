@@ -170,7 +170,7 @@ header .dropdown:hover .dropdown-content {
 
 .main .container {
     display: grid;
-    grid-template-columns: 6vh auto;
+    grid-template-columns: 3.4rem auto;
     column-gap: 2rem;
     position: relative;
 }
@@ -361,7 +361,7 @@ header .dropdown:hover .dropdown-content {
     }
     
     .main .container {
-        grid-template-columns: 18vh auto 20vh;
+        grid-template-columns: 13rem auto 17rem;
     }
 
     .main .container .left .profile {
@@ -414,7 +414,6 @@ header .dropdown:hover .dropdown-content {
     .right ul li .btn {
         width: 100%;
     }
-    
 
     .left .sidebar span {
         font-size: 1.5rem;
@@ -422,7 +421,7 @@ header .dropdown:hover .dropdown-content {
 
     .left .sidebar h2 {
         display: flex;
-        margin-left: 1.5rem;
+        margin-left: 1rem;
         font-size: 1.5rem;
     }
 
