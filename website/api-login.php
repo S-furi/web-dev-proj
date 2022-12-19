@@ -10,7 +10,7 @@ if (isset($_POST['email'], $_POST['password'])) {
   if (login($_POST['email'], $_POST['password'], $mysqli)) {
     $response['ok'] = true;
   } else {
-    $response['msg'] = "login fallito!";
+    $response['msg'] = "Nome Utente o Password errati";
   }
 }
 
