@@ -18,15 +18,15 @@
                 <!-- Paragraph for info msgs or errors-->
                 <p></p>
                 <label for="first-name"><input type="text" name="first-name" id="first-name" placeholder="Nome"
-                        required="" /></label>
+                        required /></label>
                 <label for="last-name"><input type="text" name="last-name" id="last-name" placeholder="Cognome"
-                        required="" /></label>
+                        required /></label>
                 <label for="username"><input type="text" name="username" id="username" placeholder="Username"
-                        required="" /></label>
+                        required /></label>
                 <label for="email"><input type="email" name="email" id="email" placeholder="Email"
-                        required="" /></label>
+                        required /></label>
                 <label for="password"><input type="password" name="password" id="password" placeholder="Password"
-                        required="" /></label>
+                        required /></label>
                 <input type="button" value="Registrati" id="signup-btn">
             </form>
         </section>
@@ -36,9 +36,9 @@
                 <!-- Paragraph for error msgs -->
                 <p></p>
                 <label for="email"><input type="email" name="email" id="email" placeholder="Email"
-                        required="" /></label>
+                        required /></label>
                 <label for="password"><input type="password" name="password" id="password" placeholder="Password"
-                        required="" /></label>
+                        required /></label>
                <input type="button" value="Accedi" id="login-btn" />
             </form>
         </section>
