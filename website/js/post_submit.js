@@ -36,13 +36,8 @@ document.querySelector("input[name=cancel-button]")
 // before submitting the form, check fields
 document.querySelector("input[name=creation-button]")
     .addEventListener('click', function () {
-        const post_params = {
-            "title": document.querySelector("input#title").value,
-            "photo": document.querySelector("input#image").value,
-            "description": document.querySelector("input#description").value,
-            "location": document.querySelector("input#location").value,
-            "event-datetime": document.querySelector("input#event-datetime").value,
-        }
+        const data = new FormData(document.querySelector(".main form"));
+        const post_params = Object.fromEntries(data.entries());
 
         if (checkForm(post_params)) {
             document.querySelector(".middle form").submit();
@@ -54,7 +49,7 @@ document.querySelector("input[name=creation-button]")
 function checkForm(post_params) {
   let err = true;
   for (const [key, value] of Object.entries(post_params)) {
-    if (value == "") {
+    if (value === null || value === "") {
       err = false;
     }
   }
