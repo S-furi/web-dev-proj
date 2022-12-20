@@ -43,6 +43,6 @@
             </form>
         </section>
     </main>
-<script src="js/login-check.js"></script>
+<script src="js/login_check.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </body>
