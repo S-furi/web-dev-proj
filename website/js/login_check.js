@@ -2,21 +2,11 @@ const signupBtn = document.querySelector("section.signup input#signup-btn ");
 const loginBtn =  document.querySelector("section.login input#login-btn");
 
 signupBtn.addEventListener('click', function() {
-    const signup_parameters = {
-        "first-name": document.querySelector("section.signup input#first-name").value,
-        "last-name": document.querySelector("section.signup input#last-name").value,
-        "username": document.querySelector("section.signup input#username").value,
-        "email": document.querySelector("section.signup input#email").value,
-        "password":  document.querySelector("section.signup input#password").value,
-    };
-    
-    if (checkParamIntegrity(signup_parameters)) {
-        const formData = new FormData();
-        for (const [key, value] of Object.entries(signup_parameters)) {
-            formData.append(key, value);
-        }
+    const data = new FormData(document.querySelector("section.signup form"));
+    const signup_parameters = Object.fromEntries(data.entries());
 
-        axios.post("api-signup.php", formData)
+    if (checkParamIntegrity(signup_parameters)) {
+        axios.post("api-signup.php", data)
         .then(res => {
             if (res.data['ok']) {
                 // clear all fields and display success
@@ -32,17 +22,11 @@ signupBtn.addEventListener('click', function() {
 });
 
 loginBtn.addEventListener('click', function() {
-    const login_params = {
-        "email": document.querySelector("section.login input#email").value,
-        "password": document.querySelector("section.login input#password").value,
-    }
+    const data = new FormData(document.querySelector("section.signup form"));
+    const login_params = Object.fromEntries(data.entries());
     
     if (checkParamIntegrity(login_params)) {
-        const formData = new FormData();
-        for (const [key, value] of Object.entries(login_params)) {
-            formData.append(key, value);
-        }
-        axios.post("api-login.php", formData)
+        axios.post("api-login.php", data)
         .then(res => {
             if (res.data['ok']) {
               // better doing this server side
@@ -60,7 +44,7 @@ loginBtn.addEventListener('click', function() {
 function checkParamIntegrity(params) {
     let check = true;
     for (const [key, value] of Object.entries(params)) {
-        if (value == "") {
+        if (value === null || value === "") {
             console.log(key + "Not found");
             check = false;
         }
