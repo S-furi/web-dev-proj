@@ -10,15 +10,13 @@ function handleSignupAttempt() {
         axios.post("api-signup.php", data)
             .then(res => {
                 if (res.data['ok']) {
-                    // clear all fields and display success
                     clearAllFields();
-                    document.querySelector("section.signup p").innerText = "Utente inserito correttamente!";
-                } else {
-                    document.querySelector("section.signup p").innerText = "Nome utente o email già in uso!";
                 }
+                console.log(res);
+                displayMessage("signup", res.data['msg']);
             });
     } else {
-        document.querySelector("section.signup p").innerText = "Riempi tutti i campi";
+        displayMessage("signup", "Riempi tutti i campi");
     }
 }
 
@@ -34,11 +32,11 @@ function handleLoginAttempt() {
                     // better doing this server side
                     document.location.href = "index.php";
                 } else {
-                    document.querySelector("section.login p").innerText = res.data["msg"];
+                    displayMessage("login", res.data['msg']);
                 }
             });
     } else {
-        document.querySelector("section.login p").innerText = "Riempi tutti i campi";
+        displayMessage("login", "Riempi tutti i campi");
     }
 }
 
@@ -47,6 +45,10 @@ function clearAllFields() {
     document.querySelectorAll(`section.signup input[type="text"]`).forEach(t => t.value = "");
     document.querySelector(`section.signup input[type="email"]`).value = "";
     document.querySelector(`section.signup input[type="password"]`).value = "";
+}
+
+function displayMessage(section, message) {
+    document.querySelector(`section.${section} p`).innerText= message;
 }
 
 signupBtn.addEventListener('click', handleSignupAttempt);
