@@ -92,7 +92,15 @@ function insertNewUser($email, $username,  $password, $first_name, $last_name, $
     
   $stmt = $mysqli->prepare("INSERT INTO users (email, password, username, firstName, lastName) VALUES (?, ?, ?, ?, ?)");
   $stmt->bind_param("sssss", $email, $password, $username, $first_name, $last_name);
-  return $stmt->execute();
+
+  // An exeption is thrown in the case where email or username are already in DB
+  // (and of course all the cases where db queries fails for other internal reasons)
+  try {
+    $stmt->execute();
+  } catch (\Throwable $th) {
+    return false;
+  }
+  return true;
 }
 
 function createPost($usr_id, $title, $caption, $image, $location, $event_date, $mysqli) : bool {
