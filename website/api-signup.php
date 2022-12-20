@@ -16,10 +16,10 @@ if (isset($_POST['email'], $_POST['password'], $_POST['username'], $_POST['first
         $response["ok"] = true;
         // REDIRECT SULLA HOM
       } else {
-          $response["msg"] = "errore durante l'inserimento";
+          $response["msg"] = "Nome utente o email già in uso!";
   }
 } else {
-    $response['msg'] = "POST non settata";
+    $response['msg'] = "Riprovare più tardi";
 }
 header("Content-Type: application/json");
 echo json_encode($response);
