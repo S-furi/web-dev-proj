@@ -22,7 +22,7 @@ signupBtn.addEventListener('click', function() {
 });
 
 loginBtn.addEventListener('click', function() {
-    const data = new FormData(document.querySelector("section.signup form"));
+    const data = new FormData(document.querySelector("section.login form"));
     const login_params = Object.fromEntries(data.entries());
     
     if (checkParamIntegrity(login_params)) {
