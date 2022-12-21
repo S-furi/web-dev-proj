@@ -143,6 +143,27 @@ function getSuggestedUser($usrId, $mysqli) {
   return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
+function getUserFromFragments($queryFragment, $mysqli) {
+    $condition = preg_replace('/[^A-Za-z0-9\- ]/', '', $queryFragment);
+    // % sign are SQL wildcards
+    $condition = '%'.$condition.'%';
+
+    $query = "
+        SELECT email, username, usrId, firstName, lastName 
+        FROM users 
+        WHERE username LIKE ?
+        OR firstName LIKE ?
+        OR lastName LIKE ?
+        ORDER BY usrId DESC
+        LIMIT 10;";
+
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param('sss', $condition, $condition, $condition);
+    $stmt->execute();
+
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
 function isStillLoggedIn($mysqli) : bool {
   if (isset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['login_string'])) {
     $user_id = $_SESSION['user_id'];
