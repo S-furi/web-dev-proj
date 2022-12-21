@@ -14,9 +14,17 @@
   <header>
     <div class="container">
       <a href="index.php" class="logo">Brogram</a>
-      <div class="search-bar">
-        <label for="main-search-bar"><span class="material-symbols-outlined">search</span><input type="search" name="search" id="main-search-bar" placeholder="Cerca"></label>
-      </div>
+        <div class="dropdown search-result">
+            <div class="search-bar">
+                <label for="main-search-bar">
+                    <span class="material-symbols-outlined">search</span>
+                    <!-- by now it's queries only users -->
+                    <input type="search" name="search" id="main-search-bar" placeholder="Cerca" onkeyup="searchUser(this.value)"/>
+                </label>
+            </div>
+            <ul class="dropdown-content inactive">
+            </ul>
+        </div>
       <div class="dropdown">
         <!-- When ready in DB, put this in php statement -->
         <img src="img/no-profile-pic.png" alt="user profile picture" class="profile-picture dropbtn" />
