@@ -31,7 +31,8 @@ function createInfoBox(user) {
 function generatePosts(posts) {
     let result = "";
 
-    for(let i=0; i<posts.length; i++) {
+    if(posts.length > 0) {
+        for(let i=0; i<posts.length; i++) {
         let form = `
             <article class="post">
               <div class="post-head">
@@ -51,7 +52,18 @@ function generatePosts(posts) {
             </article>
         `;
         result += form;
+       } 
+    } else {
+      let form = `
+            <article class="post">
+              <div class="post-not-present">
+                <p>Nessun post caricato!</p>
+              </div>
+            </article>
+      `;
+      result += form;
     }
+
     return result;
 }
 
