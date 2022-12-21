@@ -29,6 +29,7 @@
         <!-- When ready in DB, put this in php statement -->
         <img src="img/no-profile-pic.png" alt="user profile picture" class="profile-picture dropbtn" />
         <ul class="dropdown-content">
+          <li><a href="profile.php">Profilo</a></li>
           <li><a href="logout.php">Logout</a></li>
         </ul>
       </div>
