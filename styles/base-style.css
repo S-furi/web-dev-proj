@@ -176,6 +176,7 @@ header .dropdown.search-result .dropdown-content {
 }
 
 header .dropdown.search-result .dropdown-content li {
+    overflow: hidden;
     margin: 0.2rem;
     font-size: 1rem;
     border-radius: 1rem;
