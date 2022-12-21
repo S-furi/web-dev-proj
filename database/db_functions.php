@@ -136,10 +136,32 @@ function getUser($usrId, $mysqli) {
  * THIS IS A TEMPORARY VERSION, returns first 5 users in db
  */
 function getSuggestedUser($usrId, $mysqli) {
-  $stmt = $mysqli->prepare("SELECT usrId, username, firstName, lastName FROM users WHERE usrId <> ? LIMIT 5");
+  // Note: if DB is big `ORDER BY RAND()` will have bad performances
+  $stmt = $mysqli->prepare("SELECT usrId, username, firstName, lastName FROM users WHERE usrId <> ? ORDER BY RAND() LIMIT 5");
   $stmt->bind_param("i", $usrId);
   $stmt->execute();
   return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
+function getUserFromFragments($queryFragment, $mysqli) {
+    $condition = preg_replace('/[^A-Za-z0-9\- ]/', '', $queryFragment);
+    // % sign are SQL wildcards
+    $condition = '%'.$condition.'%';
+
+    $query = "
+        SELECT email, username, usrId, firstName, lastName 
+        FROM users 
+        WHERE username LIKE ?
+        OR firstName LIKE ?
+        OR lastName LIKE ?
+        ORDER BY usrId DESC
+        LIMIT 10;";
+
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param('sss', $condition, $condition, $condition);
+    $stmt->execute();
+
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
 function isStillLoggedIn($mysqli) : bool {
