@@ -360,6 +360,17 @@ header .dropdown:hover .dropdown-content {
     font-weight: bold;
     margin-right: 0.2rem;
 }
+
+.middle .timeline .post-not-present {
+    height: 15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.middle .timeline .post-not-present p {
+    font-size: 1rem;
+}
 /* RIGHT: displayed only on big screens */
 
 .main .container .right {
