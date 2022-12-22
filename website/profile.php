@@ -1,18 +1,8 @@
 <?php
-require_once('../database/db_connect.php');
-require_once('../database/db_functions.php');
-
-sec_session_start();
-
-if (!isStillLoggedIn($mysqli)) {
-    header("Location: login.php");
-    echo "Sessione scaduta";
-}
+require_once("bootstrap.php");
 
 $templateParams["Titolo"] = "Brogram - Profilo";
-$templateParams["user"] = getUser(intval($_SESSION['user_id']), $mysqli);
-$templateParams["suggested_users"] = getSuggestedUser($_SESSION["user_id"], $mysqli);
-$templateParams["js"] = array("https://unpkg.com/axios/dist/axios.min.js", "js/home.js", "js/profile.js");
+array_push($templateParams["js"], "js/profile.js");
 
 require("template/base.php");
 
