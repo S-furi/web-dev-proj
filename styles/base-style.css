@@ -448,11 +448,21 @@ header .dropdown.search-result .dropdown-content li:hover {
         height: max-content;
         top: var(--sticky-top-left);
         bottom: 0;
+    }
+
+    .main .container .right .users-suggestions-wrapper {
         background-color: var(--color-white);
         border-radius: var(--card-border-radius);
         padding: var(--card-padding);
     }
     
+    .main .container .right .calendar-wrapper {
+        margin-top: 1rem;
+        background-color: var(--color-white);
+        border-radius: var(--card-border-radius);
+        padding: var(--card-padding);
+    }
+
     .main .container .right h2 {
         font-size: 1.4rem;
     }
