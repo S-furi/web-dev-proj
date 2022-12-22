@@ -34,7 +34,7 @@
   font-weight: 500;
 }
 
-.calendar-body ul{
+.calendar-body ul {
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;
@@ -42,8 +42,8 @@
   text-align: center;
 }
 
-.calendar-body .days{
-  margin-bottom: 1.5rem;
+.calendar-body .days {
+  margin-bottom: -0.5rem;
 }
 
 .calendar-body li{
@@ -59,13 +59,15 @@
 .calendar-body .weeks li{
   font-weight: 500;
   cursor: default;
+  margin-bottom: 0;
+  margin-top: 1rem;
 }
 
 .calendar-body .days li{
   z-index: 1;
   cursor: pointer;
   position: relative;
-  margin-top: 2rem;
+  margin-top: 0.5rem;
 }
 
 .days li.inactive{

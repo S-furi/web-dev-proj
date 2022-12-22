@@ -59,6 +59,13 @@ function insertCalendar() {
             </div>
             <div class="calendar-body">
                 <ul class="weeks">
+                    <li>Dom</li>
+                    <li>Lun</li>
+                    <li>Mar</li>
+                    <li>Mer</li>
+                    <li>Gio</li>
+                    <li>Ven</li>
+                    <li>Sab</li>
                 </ul>
                 <ul class="days">
                 </ul>
