@@ -91,7 +91,7 @@
 }
 
 .days li.active::before{
-  background: #9B59B6;
+  background: #9b363b;
 }
 
 .days li:not(.active):hover::before{
