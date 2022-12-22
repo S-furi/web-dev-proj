@@ -6,6 +6,11 @@
     display: flex;
     justify-content: space space-evenly;
     flex-flow: column;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.middle .wrapper {
     background-color: white;
     border-radius: 1rem;
     padding: 1rem;
