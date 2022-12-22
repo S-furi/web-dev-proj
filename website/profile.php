@@ -10,6 +10,8 @@ if (!isStillLoggedIn($mysqli)) {
 }
 
 $templateParams["Titolo"] = "Brogram - Profilo";
+$templateParams["user"] = getUser(intval($_SESSION['user_id']), $mysqli);
+$templateParams["suggested_users"] = getSuggestedUser($_SESSION["user_id"], $mysqli);
 $templateParams["js"] = array("https://unpkg.com/axios/dist/axios.min.js", "js/home.js", "js/profile.js");
 
 require("template/base.php");
