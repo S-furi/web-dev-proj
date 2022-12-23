@@ -40,13 +40,11 @@ function generatePosts(posts) {
               </div>
               <div class="post-body">
                 <p>${posts[i]['caption']}</p>
-                <div class="interaction-buttons">
+                <div class="profile-interaction-buttons">
                   <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
                       class="material-symbols-outlined">favorite</span></label>
                   <label for="comment-btn"><input type="button" name="comment button" id="comment-btn" /><span
                       class="material-symbols-outlined">comment</span></label>
-                  <label for="join-btn"><input type="button" name="join event button" id="join-btn"
-                    class="btn btn-primary" value="Partecipa" /></label>
                 </div>
               </div>
             </article>
