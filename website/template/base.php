@@ -17,8 +17,8 @@
       <a href="index.php" class="logo">Brogram</a>
       <div class="dropdown search-result">
         <div class="search-bar">
+          <span class="material-symbols-outlined">search</span>
           <label for="main-search-bar">
-            <span class="material-symbols-outlined">search</span>
             <!-- by now it's queries only users -->
             <input type="search" name="search" id="main-search-bar" placeholder="Cerca" onkeyup="searchUser(this.value)" />
           </label>

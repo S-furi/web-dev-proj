@@ -114,6 +114,10 @@ header .search-bar {
     background: var(--color-light);
     border-radius: var(--border-radius);
     padding: var(--search-padding);
+    display: flex;
+    flex-flow: row;
+    justify-content: baseline;
+    align-items: center;
 }
 
 header .search-bar input[type="search"] {
@@ -121,7 +125,7 @@ header .search-bar input[type="search"] {
     width: 30vw;
     margin-left: 1rem;
     font-size: 0.9rem;
-    color: var(--text-color-dark);
+    color: var(black);
 }
 
 header .search-bar input[type="search"]::placeholder { 
