@@ -98,7 +98,6 @@
                       <p class="usertag">@<?php echo $sugg_user["username"]; ?></p>
                     </div>
                   </div>
-                  <!-- add a reference to the user for not having same id's in final HTML -->
                   <label for="follow-btn-usr-<?php echo $sugg_user['usrId']; ?>"><input type="button" value="Segui" class="btn btn-primary" id="follow-btn-usr-<?php echo $sugg_user['usrId']; ?>" onclick="followUser(<?php echo $templateParams['user']['usrId']; ?>, <?php echo $sugg_user['usrId']; ?>)" /></label>
                 </li>
             <?php
