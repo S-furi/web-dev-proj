@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles/base-style.css" />
-  <link rel="stylesheet" href="../styles/post-creation.css">
+  <link rel="stylesheet" href="../styles/post-creation.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="../styles/calendar.css" />
   <title>Brogram - Home</title>
 </head>
 
@@ -14,17 +15,17 @@
   <header>
     <div class="container">
       <a href="index.php" class="logo">Brogram</a>
-        <div class="dropdown search-result">
-            <div class="search-bar">
-                <label for="main-search-bar">
-                    <span class="material-symbols-outlined">search</span>
-                    <!-- by now it's queries only users -->
-                    <input type="search" name="search" id="main-search-bar" placeholder="Cerca" onkeyup="searchUser(this.value)"/>
-                </label>
-            </div>
-            <ul class="dropdown-content inactive">
-            </ul>
+      <div class="dropdown search-result">
+        <div class="search-bar">
+          <span class="material-symbols-outlined">search</span>
+          <label for="main-search-bar">
+            <!-- by now it's queries only users -->
+            <input type="search" name="search" id="main-search-bar" placeholder="Cerca" onkeyup="searchUser(this.value)" />
+          </label>
         </div>
+        <ul class="dropdown-content inactive">
+        </ul>
+      </div>
       <div class="dropdown">
         <!-- When ready in DB, put this in php statement -->
         <img src="img/no-profile-pic.png" alt="user profile picture" class="profile-picture dropbtn" />
@@ -81,29 +82,31 @@
       </main>
       <!-- Right Panel -->
       <div class="right">
-        <h2>Account Consigliati</h2>
-        <ul>
-          <?php
-          if (isset($templateParams["suggested_users"])) :
-            foreach ($templateParams["suggested_users"] as $sugg_user) :
-          ?>
-          <li class="user-suggestion <?php echo "usr-".$sugg_user['usrId'] ?>">
-                <div class="userinfo">
-                  <!-- to add in DB an image reference -->
-                  <img src="img/no-profile-pic.png" alt="suggested account profile picture" class="profile-picture">
-                  <div class="user-name">
-                    <h3><?php echo $sugg_user["firstName"] . " " . $sugg_user["lastName"]; ?></h3>
-                    <p class="usertag">@<?php echo $sugg_user["username"]; ?></p>
+        <div class="users-suggestions-wrapper">
+          <h2>Account Consigliati</h2>
+          <ul>
+            <?php
+            if (isset($templateParams["suggested_users"])) :
+              foreach ($templateParams["suggested_users"] as $sugg_user) :
+            ?>
+                <li class="user-suggestion <?php echo "usr-" . $sugg_user['usrId'] ?>">
+                  <div class="userinfo">
+                    <!-- to add in DB an image reference -->
+                    <img src="img/no-profile-pic.png" alt="suggested account profile picture" class="profile-picture">
+                    <div class="user-name">
+                      <h3><?php echo $sugg_user["firstName"] . " " . $sugg_user["lastName"]; ?></h3>
+                      <p class="usertag">@<?php echo $sugg_user["username"]; ?></p>
+                    </div>
                   </div>
-                </div>
-                <!-- add a reference to the user for not having same id's in final HTML -->
-                <label for="follow-btn-usr-<?php echo $sugg_user['usrId']; ?>"><input type="button" value="Segui" class="btn btn-primary" id="follow-btn-usr-<?php echo $sugg_user['usrId']; ?>" onclick="followUser(<?php echo $templateParams['user']['usrId']; ?>, <?php echo $sugg_user['usrId']; ?>)"/></label>
-              </li>
-          <?php
-            endforeach;
-          endif;
-          ?>
-        </ul>
+                  <label for="follow-btn-usr-<?php echo $sugg_user['usrId']; ?>"><input type="button" value="Segui" class="btn btn-primary" id="follow-btn-usr-<?php echo $sugg_user['usrId']; ?>" onclick="followUser(<?php echo $templateParams['user']['usrId']; ?>, <?php echo $sugg_user['usrId']; ?>)" /></label>
+                </li>
+            <?php
+              endforeach;
+            endif;
+            ?>
+          </ul>
+        </div>
+        <div class="calendar-wrapper"></div>
       </div>
     </div>
   </div>

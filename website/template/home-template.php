@@ -13,7 +13,7 @@
                 </div>
                 <img src="img/option.PNG" class="options" alt="">
             </div>
-            <img src="<?php echo UPLOAD_DIR.$post["image"]; ?>" class="post-image" alt="">
+            <img src="<?php echo UPLOAD_POST_DIR.$post["image"]; ?>" class="post-image" alt="">
             <div class="post-content">
                 <div class="reaction-wrapper">
                     <img src="img/like.PNG" class="icon" alt="">

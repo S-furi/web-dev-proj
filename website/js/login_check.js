@@ -7,7 +7,7 @@ function handleSignupAttempt() {
     if (form.checkValidity()) {
         const data = new FormData(form);
 
-        axios.post("api-signup.php", data)
+        axios.post("api/api-signup.php", data)
             .then(res => {
                 if (res.data['ok']) {
                     clearAllFields();
@@ -26,7 +26,7 @@ function handleLoginAttempt() {
     if (form.checkValidity()) {
         const data = new FormData(form);
 
-        axios.post("api-login.php", data)
+        axios.post("api/api-login.php", data)
             .then(res => {
                 if (res.data['ok']) {
                     // better doing this server side
