@@ -67,12 +67,12 @@ function generatePosts(posts) {
     return result;
 }
 
-axios.get('api-profile-user.php').then(response => {
+axios.get('api/api-profile-user.php').then(response => {
     const infoBox = createInfoBox(response.data);
     const timeline = document.querySelector("main .middle");
     timeline.innerHTML = infoBox;
 }).then( () => {
-  axios.get('api-profile-posts.php').then(response => {
+  axios.get('api/api-profile-posts.php').then(response => {
       const posts = generatePosts(response.data);
       const timeline = document.querySelector("main .middle .timeline");
       timeline.innerHTML += posts;
