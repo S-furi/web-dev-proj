@@ -15,7 +15,7 @@ function uploadImage($path, $image) {
     }
 
     if ($image["size"] > $maxKb * 1024) {
-        $msg .= "Superato limite dimensione massima immagine. Dimensione massima è di $maxKb";
+        $msg .= "Superato limite dimensione massima immagine. Dimensione massima: $maxKb Kb";
     }
 
     $imageFileType = strtolower(pathinfo($fullPath, PATHINFO_EXTENSION));
