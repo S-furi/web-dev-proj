@@ -21,7 +21,7 @@ if(isset($_POST["title"], $_POST["description"], $_POST['location'], $_POST['eve
     $title = $_POST["title"];
     $photo = $_FILES["photo"];
     
-    list($err, $errMsg) = uploadImage(UPLOAD_POST_DIR, $photo);
+    list($err, $imgPath) = uploadImage(UPLOAD_POST_DIR, $photo);
 
     if ($err != 0) {
         $caption= $_POST["description"];
@@ -34,7 +34,7 @@ if(isset($_POST["title"], $_POST["description"], $_POST['location'], $_POST['eve
             $msg = "Impossibile creare post...";
         }
     } else {
-        $msg = $errMsg;
+        $msg = $imgPath;
     }
 } else {
     $msg = "Riempi tutti i campi";
