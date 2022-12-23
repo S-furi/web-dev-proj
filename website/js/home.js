@@ -36,7 +36,7 @@ function searchUser(searchFragment) {
         const formData = new FormData();
         formData.append("queryFragment", searchFragment);
 
-        axios.post("api-users.php", formData)
+        axios.post("api/api-users.php", formData)
             .then(res => {
                 let htmlResults = "";
                 // query went ok
