@@ -1,6 +1,9 @@
 <?php
 require_once('../../database/db_connect.php');
 require_once('../../database/db_functions.php');
+require_once('../../utils/utils_functions.php');
+
+define("UPLOAD_POST_DIR", "../img/posts/");
 
 sec_session_start();
 
@@ -9,30 +12,36 @@ error_reporting(E_ALL);
 
 if (!isStillLoggedIn($mysqli)) {
     header("Location: login.php");
-    echo "Sessione scaduta";
 }
 
-$response["loginok"] = false;
-$response["errormsg"] = "No errors";
+$msg = "Internal server error";
 
-if(isset($_POST["title"], $_POST["photo"], $_POST["description"], $_POST['location'], $_POST['event-datetime'])) {
+if(isset($_POST["title"], $_POST["description"], $_POST['location'], $_POST['event-datetime']) && $_FILES["photo"]["error"] == 0) {
     $user_id = $_SESSION["user_id"];
     $title = $_POST["title"];
-    $photo = $_POST["photo"];
-    $description = $_POST["description"];
-    $location = $_POST['location'];
-    $date = $_POST['event-datetime'];
+    $photo = $_FILES["photo"];
     
-    if (createPost($user_id, $title, $description, $photo, $location, $date, $mysqli)) {
-        $response["loginok"] = true;
+    list($err, $errMsg) = uploadImage(UPLOAD_POST_DIR, $photo);
+
+    if ($err != 0) {
+        $caption= $_POST["description"];
+        $location = $_POST["location"];
+        $event_datetime = $_POST["event-datetime"];
+
+        if (createPost($user_id, $title, $caption, $imgPath, $location, $event_datetime, $mysqli)) {
+            $msg = "Post creato con successo!";
+        } else {
+            $msg = "Impossibile creare post...";
+        }
     } else {
-        $response["errormsg"] = "Query fallita";
+        $msg = $errMsg;
     }
 } else {
-    $response["errormsg"] = "Variaible POST non settata";
-    $response["post"] = $_POST;
+    $msg = "Riempi tutti i campi";
 }
 
-header("Content-Type: application/json");
-echo json_encode($response);
+$msg = htmlentities($msg);
+
+header("Location: ../post-creation.php?err=".$msg);
+
 ?>
