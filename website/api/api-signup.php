@@ -1,6 +1,6 @@
 <?php
-require_once("../database/db_connect.php");
-require_once("../database/db_functions.php");
+require_once("../../database/db_connect.php");
+require_once("../../database/db_functions.php");
 
 $response["ok"] = false;
 
