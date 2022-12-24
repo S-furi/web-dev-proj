@@ -152,13 +152,21 @@ function getComments($postId, $mysqli) {
  * Returns friends of friends.
  *
  * THIS IS A TEMPORARY VERSION, returns first 5 users in db
+ * not followed by provided usrId
  */
 function getSuggestedUser($usrId, $mysqli) {
-  // Note: if DB is big `ORDER BY RAND()` will have bad performances
-  $stmt = $mysqli->prepare("SELECT usrId, username, firstName, lastName FROM users WHERE usrId <> ? ORDER BY RAND() LIMIT 5");
-  $stmt->bind_param("i", $usrId);
-  $stmt->execute();
-  return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    // Note: if DB is big `ORDER BY RAND()` will have bad performances
+    $query =
+        "SELECT usrId, username, firstName, lastName 
+        FROM users 
+        WHERE usrId <> ? 
+        AND usrId NOT IN (SELECT friendId FROM followers where usrId = ?)
+        ORDER BY RAND() LIMIT 5";
+
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("ii", $usrId, $usrId);
+    $stmt->execute();
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
 function getUserFromFragments($queryFragment, $mysqli) {
@@ -180,6 +188,19 @@ function getUserFromFragments($queryFragment, $mysqli) {
     $stmt->execute();
 
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
+function insertNewFollower($user, $followed, $mysqli) {
+    $stmt = $mysqli->prepare("INSERT INTO followers (usrId, friendId) VALUES (?, ?)");
+    // friendships aren't bidirectional
+    $stmt->bind_param("ii", $user, $followed);
+
+    try {
+        $stmt->execute();
+    } catch (mysqli_sql_exception $e) {
+        return false;
+    }
+    return true;
 }
 
 function checkUserSession($mysqli) : bool {
