@@ -1,31 +1,25 @@
-    <div class="center-col">
-        <?php $user = $templateParams["user"]; ?>
-        <?php foreach($templateParams["posts"] as $post): ?>
-
-        <div class="post">
-            <div class="info">
-                <div class="user">
-                    <div class="profile-pic"><img src="img/cover1.png" alt=""></div>
-                    <p class="username"><?php echo $user[0]["username"]; ?></p>
+          <section class="timeline">
+            <article class="post">
+              <div class="post-head">
+                <h3>Torneo di FIFA</h3>
+                <div class="usr-info">
+                  <img src="img/no-profile-pic.png" alt="post author profile picture" class="profile-picture">
+                  <p class="usertag">@mirkone</p>
                 </div>
-                <div>
-                    <p class="postName"><?php echo $post["title"]; ?></p>
+              </div>
+              <div class="post-body">
+                <img src="img/DSC03388_60.jpg" alt="to do dynamic in php" />
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam atque iusto laboriosam nulla
+                veritatis, laborum dolorem, culpa dignissimos officia quibusdam repellat natus repellendus vitae rem
+                aspernatur ratione non sapiente minima.</p>
+                <div class="interaction-buttons">
+                  <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
+                      class="material-symbols-outlined">favorite</span></label>
+                  <label for="comment-btn"><input type="button" name="comment button" id="comment-btn" /><span
+                      class="material-symbols-outlined">comment</span></label>
+                  <label for="join-btn"><input type="button" name="join event button" id="join-btn"
+                    class="btn btn-primary" value="Partecipa" /></label>
                 </div>
-                <img src="img/option.PNG" class="options" alt="">
-            </div>
-            <img src="<?php echo UPLOAD_POST_DIR.$post["image"]; ?>" class="post-image" alt="">
-            <div class="post-content">
-                <div class="reaction-wrapper">
-                    <img src="img/like.PNG" class="icon" alt="">
-                    <a href="comment.php"><img src="img/comment.PNG" class="icon" alt=""></a>
-                    <img src="img/send.PNG" class="icon" alt="">
-                    <img src="img/save.PNG" class="save icon" alt="">
-                </div>
-                <p class="likes">1,012 likes</p>
-                <p class="description"><span><?php echo $user[0]["username"]; ?> </span> <?php echo $post["caption"]; ?></p>
-                <p class="post-time">2 minutes ago</p>
-            </div>
-        </div>
-
-        <?php endforeach; ?>
-    </div>
+              </div>
+            </article>
+          </section>
