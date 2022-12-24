@@ -185,6 +185,32 @@ function insertNewFollower($user, $followed, $mysqli) {
     return true;
 }
 
+function getFollowedUsers($user, $mysqli) {
+    $stmt = $mysqli->prepare("SELECT friendId FROM followers WHERE usrId = ?");
+    $stmt->bind_param("i", $user);
+    $stmt->execute();
+
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
+/**
+ * Function that returns all user's friends' posts 
+ * Need to add the control over the event date.
+ * (this function should be used only for future events)
+ */
+function getFriendsPosts($usrId, $mysqli) {
+    $query = "SELECT posts.*, username as author
+        FROM posts JOIN users ON (posts.usrId = users.usrId)
+        WHERE users.usrId in (SELECT friendId 
+                                FROM followers 
+                                WHERE followers.usrId = ?);";
+
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("i", $usrId);
+    $stmt->execute();
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
 function checkUserSession($mysqli) : bool {
   if (isset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['login_string'])) {
     $user_id = $_SESSION['user_id'];

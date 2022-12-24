@@ -70,19 +70,19 @@
         <div id="create-post-xl" class="btn btn-primary medium-btn">Crea Post</div>
         <div id="create-post-sm" class="btn btn-primary small-btn"><span class="material-symbols-outlined">add</span></div>
         <div class="popup-calendar-wrapper">
-            <div class="calendar-btn btn btn-primary small-btn toggle-on" onclick="showPopupCalendar()"><span class="material-symbols-outlined">calendar_month</span></div>
-            <div class="popup-content" id="popup-cal"></div>
+          <div class="calendar-btn btn btn-primary small-btn toggle-on" onclick="showPopupCalendar()"><span class="material-symbols-outlined">calendar_month</span></div>
+          <div class="popup-content" id="popup-cal"></div>
         </div>
       </div>
 
       <!-- Center Panel -->
       <main>
         <div class="middle">
-            <?php
-                if (isset($templateParams["template_name"])):
-                    require($templateParams["template_name"]);
-            ?>
-            <?php endif; ?>
+          <?php
+          if (isset($templateParams["template_name"])) :
+            require($templateParams["template_name"]);
+          ?>
+          <?php endif; ?>
         </div>
       </main>
       <!-- Right Panel -->
