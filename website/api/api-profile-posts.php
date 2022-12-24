@@ -4,7 +4,7 @@ require_once('../../database/db_functions.php');
 
 sec_session_start();
 
-if (!isStillLoggedIn($mysqli)) {
+if (!checkUserSession($mysqli)) {
     header("Location: login.php");
     echo "Sessione scaduta";
 }
