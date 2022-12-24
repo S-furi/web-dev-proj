@@ -164,7 +164,7 @@ function getUserFromFragments($queryFragment, $mysqli) {
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
-function isStillLoggedIn($mysqli) : bool {
+function checkUserSession($mysqli) : bool {
   if (isset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['login_string'])) {
     $user_id = $_SESSION['user_id'];
     $login_string = $_SESSION['login_string'];

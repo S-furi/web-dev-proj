@@ -10,7 +10,7 @@ sec_session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-if (!isStillLoggedIn($mysqli)) {
+if (!checkUserSession($mysqli)) {
     header("Location: login.php");
 }
 
