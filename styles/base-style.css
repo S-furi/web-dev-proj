@@ -282,8 +282,8 @@ header .dropdown.search-result .dropdown-content li:hover {
 
 .left .small-btn {
     margin-top: 1rem;
-    padding: 1rem 1rem;
-    width: 100%;
+    padding: 0.9rem 1rem;
+    border-radius: 50%;
 }
 
 /* MIDDLE */
