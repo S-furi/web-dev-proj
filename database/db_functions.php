@@ -221,7 +221,9 @@ function getFriendsPosts($usrId, $mysqli) {
         FROM posts JOIN users ON (posts.usrId = users.usrId)
         WHERE users.usrId in (SELECT friendId 
                                 FROM followers 
-                                WHERE followers.usrId = ?);";
+                                WHERE followers.usrId = ?)
+        ORDER BY eventDate DESC;";
+        
 
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("i", $usrId);
