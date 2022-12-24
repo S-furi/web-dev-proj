@@ -78,4 +78,6 @@ function clearResultList() {
 // selected effect on left menu item
 menuItemSelectedEffect();
 
+document.querySelectorAll(".left>.btn").forEach(btn => btn.addEventListener('click', showForm));
+
 

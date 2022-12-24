@@ -67,8 +67,12 @@
           </li>
         </ul>
         <!-- End of Sidebar -->
-        <label for="create-post-xl"><input type="button" value="Crea Post" id="create-post-xl" class="btn btn-primary medium-btn" onclick="showForm()" /></label>
-        <label for="create-post-sm"><input type="button" value="+" id="create-post-sm" class="btn btn-primary small-btn" onclick="showForm()" /></label>
+        <div id="create-post-xl" class="btn btn-primary medium-btn">Crea Post</div>
+        <div id="create-post-sm" class="btn btn-primary small-btn"><span class="material-symbols-outlined">add</span></div>
+        <div class="popup-calendar-wrapper">
+            <div class="calendar-btn btn btn-primary small-btn toggle-on" onclick="showPopupCalendar()"><span class="material-symbols-outlined">calendar_month</span></div>
+            <div class="popup-content" id="popup-cal"></div>
+        </div>
       </div>
 
       <!-- Center Panel -->
