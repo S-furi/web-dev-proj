@@ -3,12 +3,24 @@ function showForm() {
 }
 
 function followUser(user, followed) {
-  // ADD new Friendship into DB!
-  // follow went ok
-  document.querySelector(".right li.user-suggestion.usr-"+followed + " input").value = "✔️";
-  document.querySelector(".right li.user-suggestion.usr-"+followed).classList.add("disappearing-card");
-  // asynchronous :)
-  setTimeout(() => document.querySelector(".right li.user-suggestion.usr-"+followed).remove(), 500);
+    const formData = new FormData();
+    formData.append("user", user);
+    formData.append("followed", followed);
+
+    // action 2 registers a new following
+    axios.post("api/api-users.php?action=2", formData)
+        .then(res => {
+            if (res.data["ok"]) {
+                // follow went ok
+                document.querySelector(".right li.user-suggestion.usr-"+followed + " input").value = "✔️";
+                document.querySelector(".right li.user-suggestion.usr-"+followed).classList.add("disappearing-card");
+                // asynchronous :)
+                setTimeout(() => document.querySelector(".right li.user-suggestion.usr-"+followed).remove(), 500);
+            } else {
+                // temporary
+                alert("Qualcosa è andato storto");
+            }
+        });
 }
 
 function menuItemSelectedEffect() {
@@ -36,7 +48,7 @@ function searchUser(searchFragment) {
         const formData = new FormData();
         formData.append("queryFragment", searchFragment);
 
-        axios.post("api/api-users.php", formData)
+        axios.post("api/api-users.php?action=1", formData)
             .then(res => {
                 let htmlResults = "";
                 // query went ok
