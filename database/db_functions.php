@@ -113,7 +113,7 @@ function createPost($usr_id, $title, $caption, $image, $location, $event_date, $
 }
 
 function getPosts($usrId, $mysqli) {
-  $query = "SELECT caption, image, location, title, eventDate FROM posts WHERE usrId=? ORDER BY creationDate DESC";
+  $query = "SELECT caption, image, location, title, eventDate, likes FROM posts WHERE usrId=? ORDER BY creationDate DESC";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("i", $usrId);
   
