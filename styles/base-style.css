@@ -385,8 +385,7 @@ header .dropdown.search-result .dropdown-content li:hover {
 }
 
 
-.middle .timeline .profile-infobox .profile-infobox-body .follow-info .followers-tag, 
-.middle .timeline .profile-infobox .profile-infobox-body .follow-info .following-tag { 
+.middle .timeline .info-tag { 
     font-weight: bold;
     margin-right: 0.2rem;
 }
@@ -414,6 +413,48 @@ header .dropdown.search-result .dropdown-content li:hover {
 .middle .timeline .post-not-present p {
     font-size: 1rem;
 }
+
+.middle .timeline .post-body .likes-n {
+    margin-top: 1rem;
+    color: var(--color-gray);
+}
+
+.middle .timeline .post-body .date-location {
+    /* margin: -0.5rem 0 0; */
+    opacity: 70%;
+    color: var(--color-gray);
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.middle .timeline .post-body .date-location-item {
+    /* margin: 0.5rem 1rem 0.5rem 0; */
+    display: flex;
+    justify-content: start;
+    flex-direction: row;
+    font-size: 0.8rem;
+}
+
+.middle .timeline .profile-infobox-head #modify-btn {
+    display: none;
+}
+
+.middle .timeline .profile-infobox-head span {
+    display: flex;
+    font-size: 2rem;
+    background-color: var(--color-light);
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    align-items: center;
+    justify-content: center;
+    min-width: 3rem;
+    min-height: 3rem;
+    color: black;
+}
+
 /* RIGHT: displayed only on big screens */
 
 .main .container .right {
@@ -534,5 +575,13 @@ header .dropdown.search-result .dropdown-content li:hover {
     
     .middle .timeline .profile-infobox {
         margin-top: -1rem;
+    }
+
+    .middle .timeline .profile-infobox-head span {
+        display: none;
+    }
+    
+    .middle .timeline .profile-infobox-head #modify-btn {
+        display: flex;
     }
 }

@@ -12,14 +12,15 @@ function createInfoBox(user) {
                 </div>
                 <label for="modify-btn"><input type="button" name="modify button" id="modify-btn"
                   class="btn btn-secondary" value="Modifica Profilo" /></label>
+                <span class="material-symbols-outlined">manage_accounts</span>
               </div>
               <div class="profile-infobox-body">
                 <p class="profile-descr">Descrizione</p>
                 <div class="follow-info">
-                  <p class="followers-tag">Followers: </p>
+                  <p class="info-tag">Followers: </p>
                   <p class="followers-data">116</p>
-                  <p class="following-tag">Following: </p>
-                  <p class="following-data">219</p>
+                  <p class="info-tag">Following: </p>
+                  <p>219</p>
                 </div>
               </div>
             </div>
@@ -33,13 +34,32 @@ function generatePosts(posts) {
 
     if(posts.length > 0) {
         for(let i=0; i<posts.length; i++) {
+          let eventDate = new Date(posts[i]['eventDate']).toLocaleDateString('it-IT', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'numeric',
+            year: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+          });
         let form = `
             <article class="post">
               <div class="post-head">
                 <h3>${posts[i]['title']}</h3>
               </div>
               <div class="post-body">
+                <div class="date-location">
+                  <div class="date-location-item">
+                    <p class="info-tag">Data:</p>
+                    <p>${eventDate}</p>
+                  </div>
+                  <div class="date-location-item">
+                    <p class="info-tag">Luogo:</p>
+                    <p>${posts[i]['location']}</p>
+                  </div>
+                </div>
                 <p>${posts[i]['caption']}</p>
+                <p class="likes-n">Mi Piace: ${posts[i]['likes']}</p>
                 <div class="profile-interaction-buttons">
                   <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
                       class="material-symbols-outlined">favorite</span></label>
