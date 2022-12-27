@@ -161,7 +161,7 @@ function getSuggestedUser($usrId, $mysqli) {
         FROM users 
         WHERE usrId <> ? 
         AND usrId NOT IN (SELECT friendId FROM followers where usrId = ?)
-        ORDER BY RAND() LIMIT 5";
+        ORDER BY RAND() LIMIT 3";
 
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("ii", $usrId, $usrId);
