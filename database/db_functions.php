@@ -121,6 +121,15 @@ function getPosts($usrId, $mysqli) {
   return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
+function getPostFromId($usrId, $postId, $mysqli) {
+  $query = "SELECT caption, image, location, title, eventDate, likes FROM posts WHERE usrId=? AND postId=?";
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("ii", $usrId, $postId);
+  
+  $stmt->execute();
+  return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+}
+
 function getUser($usrId, $mysqli) {
   $query = "SELECT usrId, email, username, firstName, lastName FROM users WHERE usrId=?";
   $stmt = $mysqli->prepare($query);
@@ -130,7 +139,7 @@ function getUser($usrId, $mysqli) {
   return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
 }
 
-function getComment($postId, $mysqli) {
+function getComments($postId, $mysqli) {
   $query = "SELECT caption FROM comment WHERE postID=?";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("i", $postId);
