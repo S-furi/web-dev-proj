@@ -130,6 +130,15 @@ function getUser($usrId, $mysqli) {
   return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
 }
 
+function getComment($postId, $mysqli) {
+  $query = "SELECT caption FROM comment WHERE postID=?";
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("i", $postId);
+
+  $stmt->execute();
+  return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
 /**
  * Returns friends of friends.
  *
