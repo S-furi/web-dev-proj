@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css" />
+  <link rel="stylesheet" href="../../styles/base-style.css" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <title>Brogram</title>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+    <a href="index.html" class="logo">Brogram</a>
+      <div class="search-bar">
+        <label for="main-search-bar" class="uil uil-search"><input type="search" name="search" id="main-search-bar"
+            placeholder="Cerca"></label>
+      </div>
+      <div class="dropdown">
+      <img src="../img/no-profile-pic.png" alt="user profile picture" class="profile-picture dropbtn" />
+        <ul class="dropdown-content">
+          <li><a href="login.html">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <!-- Main section -->
+  <div class="main">
+    <div class="container">
+      <!-- Left Panel -->
+      <div class="left">
+        <section class="profile">
+          <img src="../img/no-profile-pic.png" alt="user profile picture" class="profile-picture" />
+          <div class="handle">
+            <p class="user-name">Aldo Baglio</p>
+            <p class="usertag">@peperonataalle6</p>
+          </div>
+        </section>
+        <ul class="sidebar">
+          <li class="menu-item">
+            <span class="material-symbols-outlined">Home</span>
+            <h2>Home</h2>
+          </li>
+          <li class="menu-item">
+            <span class="material-symbols-outlined">Explore</span>
+            <h2>Explore</h2>
+          </li>
+          <li class="menu-item">
+            <span class="material-symbols-outlined">radar</span>
+            <h2>Radar</h2>
+          </li>
+          <li class="menu-item">
+            <span class="material-symbols-outlined">mail</span>
+            <h2>Messaggi</h2>
+          </li>
+        </ul>
+        <!-- End of Sidebar -->
+        <label for="create-post"><input type="button" value="Crea Post" id="create-post"
+            class="btn btn-primary medium-btn" onclick="goToPostCreation()"></label>
+        <label for="create-post"><input type="button" value="+" id="create-post" class="btn btn-primary small-btn" onclick="goToPostCreation()"></label>
+        <script>
+          function goToPostCreation() {
+            window.location.href = "post-creation.html";
+          }
+        </script>
+      </div>
+
+      <!-- Center Panel -->
+      <main>
+        <div class="middle">
+          <section class="timeline">
+
+            <article class="post">
+              <div class="post-head">
+                <h3>Torneo di FIFA</h3>
+                <div class="usr-info">
+                  <img src="../img/no-profile-pic.png" alt="post author profile picture" class="profile-picture">
+                  <p class="usertag">@mirkone</p>
+                </div>
+              </div>
+              <div class="post-body">
+                
+                <div class="date-location">
+                  <div class="date-location-item">
+                    <p class="info-tag">Data:</p>
+                    <p>16/07/2022</p>
+                  </div>
+                  <div class="date-location-item">
+                    <p class="info-tag">Luogo: </p>
+                    <p>Un luogo a caso</p>
+                  </div>
+                </div>
+                
+                <img src="../img/immagine.jpg" alt="to do dynamic in php" />
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam atque iusto laboriosam nulla
+                veritatis, laborum dolorem, culpa dignissimos officia quibusdam repellat natus repellendus vitae rem
+                aspernatur ratione non sapiente minima.</p>
+                <p class="likes-n">Mi Piace: 69</p>
+                <div class="interaction-buttons">
+                  <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
+                      class="material-symbols-outlined">favorite</span></label>
+                  <label for="comment-btn"><input type="button" name="comment button" id="comment-btn" /><span
+                      class="material-symbols-outlined">comment</span></label>
+                  <label for="join-btn"><input type="button" name="join event button" id="join-btn"
+                    class="btn btn-primary" value="Partecipa" /></label>
+                </div>
+              </div>
+            </article>
+            <article class="comment">
+                <div class="comment-head">
+                    <img src="../img/no-profile-pic.png" alt="to do dynamic in php" />
+                    <div class="comment-head-info">
+                        <h3 class="comment-author">Nome Autore</h3>
+                        <p>@username</p>
+                    </div>
+                </div>
+                <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer molestie congue justo nec ultricies. Maecenas ligula tellus, gravida mollis venenatis ut, porta vitae justo. Suspendisse sodales efficitur quam, ac elementum mauris commodo id. Fusce ultricies libero ante, at convallis leo laoreet a. Etiam dignissim scelerisque bibendum. Aenean nec ornare nisl. Ut commodo risus velit, eu sollicitudin nibh facilisis ut. Maecenas ac ultricies felis. </p>
+            </article>
+            <article class="comment">
+                <div class="comment-head">
+                    <img src="../img/no-profile-pic.png" alt="to do dynamic in php" />
+                    <div class="comment-head-info">
+                        <h3 class="comment-author">Nome Autore</h3>
+                        <p>@username</p>
+                    </div>
+                </div>
+                <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer molestie congue justo nec ultricies. Maecenas ligula tellus, gravida mollis venenatis ut, porta vitae justo. Suspendisse sodales efficitur quam, ac elementum mauris commodo id. Fusce ultricies libero ante, at convallis leo laoreet a. Etiam dignissim scelerisque bibendum. Aenean nec ornare nisl. Ut commodo risus velit, eu sollicitudin nibh facilisis ut. Maecenas ac ultricies felis. </p>
+            </article>
+            <article class="comment">
+                <div class="comment-head">
+                    <img src="../img/no-profile-pic.png" alt="to do dynamic in php" />
+                    <div class="comment-head-info">
+                        <h3 class="comment-author">Nome Autore</h3>
+                        <p>@username</p>
+                    </div>
+                </div>
+                <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer molestie congue justo nec ultricies. Maecenas ligula tellus, gravida mollis venenatis ut, porta vitae justo. Suspendisse sodales efficitur quam, ac elementum mauris commodo id. Fusce ultricies libero ante, at convallis leo laoreet a. Etiam dignissim scelerisque bibendum. Aenean nec ornare nisl. Ut commodo risus velit, eu sollicitudin nibh facilisis ut. Maecenas ac ultricies felis. </p>
+            </article>
+            
+            <form class="comment-form">
+                    <textarea name="comment-text-area" id="comment-text-area" placeholder="Scrivi un commento"></textarea>
+                    <button type="submit" class="btn btn-primary">Commenta</button>
+            </form>
+
+          </section>
+        </div>
+      </main>
+      <!-- Right Panel -->
+      <div class="right">
+        <h2>Account Consigliati</h2>
+        <ul>
+          <li class="user-suggestion">
+            <div class="userinfo">
+              <img src="../img/no-profile-pic.png" alt="suggested account profile picture" class="profile-picture">
+              <!-- temp -->
+              <div class="user-name">
+                <h3>Massimo Venier</h3>
+                <p class="usertag">@permettaunacosa</p>
+              </div>
+            </div>
+            <label for="follow-btn"><input type="button" value="Segui" class="btn btn-primary" id="follow-btn" /></label>
+          </li>
+          <li class="user-suggestion">
+            <div class="userinfo">
+              <img src="../img/no-profile-pic.png" alt="suggested account profile picture" class="profile-picture">
+              <!-- temp -->
+              <div class="user-name">
+                <h3>Ajeje Brazorf</h3>
+                <p class="usertag">@icomelunga</p>
+              </div>
+            </div>
+            <label for="follow-btn"><input type="button" value="Segui" class="btn btn-primary" id="follow-btn" /></label>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
