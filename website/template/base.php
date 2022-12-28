@@ -76,7 +76,7 @@
         <div class="middle">
 
           <?php
-          // require($templateParams["nome"]);
+          require($templateParams["nome"]);
           ?>
         </div>
       </main>
