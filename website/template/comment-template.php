@@ -20,7 +20,7 @@
                 </div>   
                 <img src="img/posts/<?php echo $post['image']; ?>" alt="to do dynamic in php" />
                 <p><?php echo $post['caption']; ?></p>
-                <p class="likes-n">Mi Piace: 69</p>
+                <p class="likes-n">Mi Piace: <?php echo $post['likes'] ?></p>
                 <div class="interaction-buttons">
                   <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
                       class="material-symbols-outlined">favorite</span></label>
