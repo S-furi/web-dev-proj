@@ -213,6 +213,15 @@ function getFriendsPosts($usrId, $mysqli) {
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
+function getCommentsOfPost($postId, $mysqli) {
+    $query = "SELECT content, date, author FROM comments WHERE postId = ?;";
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("i", $postId);
+
+    $stmt->execute();
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
 function checkUserSession($mysqli) : bool {
   if (isset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['login_string'])) {
     $user_id = $_SESSION['user_id'];
