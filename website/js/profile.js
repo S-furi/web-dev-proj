@@ -45,7 +45,7 @@ function generatePosts(posts) {
         let form = `
             <article class="post">
               <div class="post-head">
-                <h3>${posts[i]['title']}</h3>
+                <a href="comment.php?usrId=${posts[i]['usrId']}&postId=${posts[i]['postId']}"><h3>${posts[i]['title']}</h3></a>
               </div>
               <div class="post-body">
                 <div class="date-location">
@@ -61,10 +61,14 @@ function generatePosts(posts) {
                 <p>${posts[i]['caption']}</p>
                 <p class="likes-n">Mi Piace: ${posts[i]['likes']}</p>
                 <div class="profile-interaction-buttons">
-                  <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
-                      class="material-symbols-outlined">favorite</span></label>
-                  <label for="comment-btn"><input type="button" name="comment button" id="comment-btn" /><span
-                      class="material-symbols-outlined">comment</span></label>
+                    <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
+                        class="material-symbols-outlined">favorite</span></label>
+                    <a href="comment.php?usrId=${posts[i]['usrId']}&postId=${posts[i]['postId']}#comment-text-area" target="_self">
+                      <input type="button" name="comment button" id="comment-btn" />
+                      <span class="material-symbols-outlined">comment</span>
+                    </a>
+                    
+                    </a>
                 </div>
               </div>
             </article>
