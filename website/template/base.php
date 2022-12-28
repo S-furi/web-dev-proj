@@ -76,8 +76,10 @@
         <div class="middle">
 
           <?php
-          require($templateParams["nome"]);
+          if (isset($templateParams["template_name"])):
+            require($templateParams["template_name"]);
           ?>
+          <?php endif ?>
         </div>
       </main>
       <!-- Right Panel -->
