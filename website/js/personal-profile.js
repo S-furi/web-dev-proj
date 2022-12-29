@@ -67,8 +67,6 @@ function generatePosts(posts) {
                       <input type="button" name="comment button" id="comment-btn" />
                       <span class="material-symbols-outlined">comment</span>
                     </a>
-                    
-                    </a>
                 </div>
               </div>
             </article>
@@ -89,14 +87,14 @@ function generatePosts(posts) {
     return result;
 }
 
-axios.get('api/api-profile-user.php')
+axios.get('api/api-personal-profile-user.php')
   .then(response => {
     const infoBox = createInfoBox(response.data);
     const timeline = document.querySelector("main .middle");
     timeline.innerHTML = infoBox;
   })
   .then( () => {
-    axios.get('api/api-profile-posts.php')
+    axios.get('api/api-personal-profile-posts.php')
       .then(response => {
           const posts = generatePosts(response.data);
           const timeline = document.querySelector("main .middle .timeline");
