@@ -18,7 +18,7 @@
                     <p><?php echo $post['location']; ?></p>
                   </div>
                 </div>   
-                <img src="img/posts/<?php echo $post['image']; ?>" alt="to do dynamic in php" />
+                <img src="img/posts/<?php echo $post['image']; ?>" alt="" />
                 <p><?php echo $post['caption']; ?></p>
                 <p class="likes-n">Mi Piace: <?php echo $post['likes'] ?></p>
                 <div class="interaction-buttons">
