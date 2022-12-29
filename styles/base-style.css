@@ -120,6 +120,11 @@ header .search-bar {
     align-items: center;
 }
 
+header .search-bar label {
+    display: flex;
+    flex-flow: baseline;
+}
+
 header .search-bar input[type="search"] {
     background: transparent;
     width: 30vw;
