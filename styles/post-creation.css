@@ -19,7 +19,7 @@
 .middle ul li {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
     margin: 1rem 1rem;
 }
 
@@ -27,10 +27,16 @@
     padding-right: 1rem;
 }
 
-.middle ul li input {
+.middle ul li input,
+.middle ul li textarea {
     background-color: var(--light-grey);
     border-radius: 1rem;
     padding: 0.5rem 1rem;
+}
+
+.middle ul li textarea {
+    height: 8rem;
+    resize: none;
 }
 
 .middle ul li input[type="file"] {
@@ -39,9 +45,6 @@
 }
 
 @media screen and (min-width:1200px) {
-    .middle ul li {
-        justify-content: space-around;
-    }
 
     .wrapper {
         margin-top: -1rem;

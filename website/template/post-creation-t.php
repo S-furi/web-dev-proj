@@ -10,7 +10,7 @@
                   <label for="image">Foto</label><input type="file" name="photo" id="image" required />
               </li>
               <li>
-                  <label for="description">Descrizione</label><input type="text" id="description" name="description" required/>
+                  <label for="description">Descrizione</label><textarea id="description" name="description" required></textarea>
               </li>
               <li>
                   <label for="location">Luogo</label><input type="text" id="location" name="location" required />
