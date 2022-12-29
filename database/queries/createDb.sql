@@ -110,6 +110,26 @@ CREATE TABLE IF NOT EXISTS `brogram`.`comments` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `brogram`.`likes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `brogram`.`likes` (
+  `usrId` INT(11) NOT NULL,
+  `postId` INT(11) NOT NULL,
+  PRIMARY KEY (`usrId`, `postId`),
+  INDEX `fk_likes_posts1_idx` (`postId` ASC),
+  CONSTRAINT `fk_likes_users1`
+    FOREIGN KEY (`usrId`)
+    REFERENCES `brogram`.`users` (`usrId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_likes_posts1`
+    FOREIGN KEY (`postId`)
+    REFERENCES `brogram`.`posts` (`postId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 
 -- Creating a user that is capable of making only SELECT, INSERT and UPDATE
 -- operations, so that no one is able to delete the DB except the administrator.
