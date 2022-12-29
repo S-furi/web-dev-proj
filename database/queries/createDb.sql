@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `brogram`.`comments` (
   `date` DATETIME NULL,
   `content` VARCHAR(255) NULL,
   PRIMARY KEY (`postId`, `author`),
-  INDEX `fk_comments_users1_idx` (`author` ASC) VISIBLE,
+  INDEX `fk_comments_users1_idx` (`author` ASC),
   CONSTRAINT `fk_comments_posts1`
     FOREIGN KEY (`postId`)
     REFERENCES `brogram`.`posts` (`postId`)
