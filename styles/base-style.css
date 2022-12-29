@@ -574,6 +574,15 @@ header .dropdown>.notification-badge {
   }
 }
 
+.btn:disabled {
+    background-color: var(--color-gray);
+    cursor: auto;
+}
+
+.btn:disabled:hover {
+    opacity: 1;
+}
+
 
 @media screen and (min-width:1200px) {
     .container {

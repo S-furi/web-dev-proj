@@ -2,8 +2,13 @@ function showForm() {
   window.location.href = "post-creation.php"
 }
 
-function followUser(user, followed) {
+function followUser(user, followed, target=null) {
     const formData = new FormData();
+
+    if (target) {
+        target.disabled = true;
+    }
+
     formData.append("user", user);
     formData.append("followed", followed);
 
