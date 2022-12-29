@@ -140,7 +140,7 @@ function getUser($usrId, $mysqli) {
 }
 
 function getComments($postId, $mysqli) {
-  $query = "SELECT caption FROM comment WHERE postID=?";
+  $query = "SELECT caption FROM comments WHERE postID=?";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("i", $postId);
 
@@ -268,6 +268,86 @@ function updateLikes($postId, $usrId, $mysqli) {
         return $stmt->execute();
     }
     return false;
+}
+
+function notify(string $type, int $forUser, int $entityId, mysqli $mysqli) {
+    $query = "SELECT notificationId FROM notifications WHERE forUser = ? AND entityId = ? AND type = ?";
+    $stmt = $mysqli->prepare($query);
+
+    $stmt->bind_param("iis", $forUser, $entityId, $type);
+    $stmt->execute();
+    $stmt->store_result();
+
+    if ($stmt->num_rows() > 0) {
+        $query = "UPDATE notifications SET read = 0, time = NOW() WHERE forUser = ? AND entityId = ? AND type = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("iis", $forUser, $entityId, $type);
+        return $stmt->execute();
+    } else {
+        $query = "INSERT INTO notifications (type, forUser, entityId) VALUES (?, ?, ?)";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("sii", $type, $forUser, $entityId);
+        return $stmt->execute();
+    }
+}
+
+function fetchNotifications(int $num, $forUser, $mysqli) {
+    $query = "SELECT type, forUser, entityId, read, time FROM notifications WHERE forUser = ? ORDER BY time DESC LIMIT ?";
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_params("ii", $forUser, $num);
+
+    $stmt->execute();
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
+/* method used in the notification center for retrieving 
+ * post information when querying notifications table.
+ * using the commentID as EntityId.
+ */
+function fetchPostInfoFromCommentId($commentId, mysqli $mysqli) {
+    $query = "SELECT p.* 
+                FROM comments c JOIN posts p ON (c.postId = p.postId)
+                WHERE commentId = ?;";
+
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("i", $commentId);
+    $stmt->execute();
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
+/* method used in the notification center for retrieving 
+ * post information when querying notifications table,
+ * using the likeId as EntityId.
+ */
+function fetchPostInfoFromLike($likeId, $mysqli) {
+    $query = "SELECT * 
+                FROM likes l JOIN posts p ON (l.postId = p.postId)
+                WHERE likeId = ?;";
+
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("i", $likeId);
+    $stmt->execute();
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
+function getLikeDetails($likeId, mysqli $mysqli) {
+    $stmt  = $mysqli->prepare("SELECT * FROM likes WHERE likeId = ?");
+    $stmt->bind_param("i", $likeId);
+    $stmt->execute();
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
+// TODO funzione come sopra ma per arrivare alla pagina dell'utente
+// che ti ha seguito. Si implementa la funzione quando è pronto il 
+// file php per visualizzare il profilo di un utente.
+
+function getCommentFromCommentId($commentId, mysqli $mysqli) {
+    $query = "SELECT postId, author, date, content FROM comments where commentId = ?;";
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("i", $commentId);
+
+    $stmt->execute();
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
 function checkUserSession($mysqli) : bool {
