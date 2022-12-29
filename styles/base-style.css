@@ -4,6 +4,7 @@
     --text-color-dark: cadetBlue;
     --bg-color: hsl(252, 5%, 85%);
     --color-primary: cadetBlue;
+    --color-secondary: #9b363b;
     --color-gray: hsl(252, 15%,65%);
     --color-white: white;
     --color-light: lightgrey;
@@ -196,6 +197,27 @@ header .dropdown.search-result .dropdown-content li {
 header .dropdown.search-result .dropdown-content li:hover {
     background-color: var(--color-light);
     transition: all 300ms ease;
+}
+
+header .dropdown-content li {
+    position: relative;
+    display: inline-block;
+}
+
+header .dropdown .notification-badge,
+header .dropdown-content .notification-badge {
+    background-color: var(--color-secondary);
+    color: white;
+    border-radius: 50%;
+    padding: 0.2rem 0.6rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+header .dropdown>.notification-badge {
+    top: -0.5rem;
+    right: -1rem;
 }
 
 /* MAIN */
