@@ -92,11 +92,12 @@ ENGINE = InnoDB;
 -- Table `brogram`.`comments`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `brogram`.`comments` (
+  `commentId` INT NOT NULL AUTO_INCREMENT,
   `postId` INT(11) NOT NULL,
   `author` INT(11) NOT NULL,
   `date` DATETIME NULL,
   `content` VARCHAR(255) NULL,
-  PRIMARY KEY (`postId`, `author`),
+  PRIMARY KEY (`commentId`),
   INDEX `fk_comments_users1_idx` (`author` ASC),
   CONSTRAINT `fk_comments_posts1`
     FOREIGN KEY (`postId`)
@@ -110,14 +111,16 @@ CREATE TABLE IF NOT EXISTS `brogram`.`comments` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
 -- -----------------------------------------------------
 -- Table `brogram`.`likes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `brogram`.`likes` (
+  `likeId` INT NOT NULL AUTO_INCREMENT,
   `usrId` INT(11) NOT NULL,
   `postId` INT(11) NOT NULL,
-  PRIMARY KEY (`usrId`, `postId`),
   INDEX `fk_likes_posts1_idx` (`postId` ASC),
+  PRIMARY KEY (`likeId`),
   CONSTRAINT `fk_likes_users1`
     FOREIGN KEY (`usrId`)
     REFERENCES `brogram`.`users` (`usrId`)
@@ -130,6 +133,25 @@ CREATE TABLE IF NOT EXISTS `brogram`.`likes` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `brogram`.`notifications`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `brogram`.`notifications` (
+  `notificationId` INT NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(45) NOT NULL,
+  `forUser` INT(11) NOT NULL,
+  `entityId` VARCHAR(45) NOT NULL,
+  `read` TINYINT(1) NOT NULL DEFAULT 0,
+  `time` DATETIME NULL DEFAULT NOW(),
+  PRIMARY KEY (`notificationId`),
+  INDEX `fk_notifications_users1_idx` (`forUser` ASC),
+  CONSTRAINT `fk_notifications_users1`
+    FOREIGN KEY (`forUser`)
+    REFERENCES `brogram`.`users` (`usrId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 -- Creating a user that is capable of making only SELECT, INSERT and UPDATE
 -- operations, so that no one is able to delete the DB except the administrator.
