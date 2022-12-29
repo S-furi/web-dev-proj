@@ -7,8 +7,12 @@
                         <h3><?php echo $post["title"]; ?></h3>
                     </a>
                     <div class="usr-info">
+                      <a href="user-profile.php?usrId=<?php echo $post['usrId']; ?>">
                       <img src="img/no-profile-pic.png" alt="post author profile picture" class="profile-picture">
+                      </a>
+                      <a href="user-profile.php?usrId=<?php echo $post['usrId']; ?>">
                       <p class="usertag">@<?php echo $post["author"] ?></p>
+                      </a> 
                     </div>
                   </div>
                   <div class="post-body">
