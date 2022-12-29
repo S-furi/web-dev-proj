@@ -12,7 +12,7 @@ function createInfoBox(user) {
                 </div>
                 <label for="modify-btn"><input type="button" name="modify button" id="modify-btn"
                   class="btn btn-secondary" value="Modifica Profilo" /></label>
-                <span class="material-symbols-outlined">manage_accounts</span>
+                <span class="material-symbols-outlined" id="manage_accounts">manage_accounts</span>
               </div>
               <div class="profile-infobox-body">
                 <p class="profile-descr">Descrizione</p>
@@ -35,7 +35,6 @@ function generatePosts(posts) {
     if(posts.length > 0) {
         for(let i=0; i<posts.length; i++) {
           let eventDate = new Date(posts[i]['eventDate']).toLocaleDateString('it-IT', {
-            weekday: 'long',
             day: 'numeric',
             month: 'numeric',
             year: 'numeric',

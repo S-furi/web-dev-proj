@@ -479,7 +479,7 @@ header .dropdown>.notification-badge {
     display: none;
 }
 
-.middle .timeline .profile-infobox-head span {
+.middle .timeline .profile-infobox-head #manage_accounts {
     display: flex;
     font-size: 2rem;
     background-color: var(--color-light);
@@ -491,6 +491,20 @@ header .dropdown>.notification-badge {
     min-width: 3rem;
     min-height: 3rem;
     color: black;
+}
+
+.middle .timeline .profile-infobox-head #person_add {
+    display: flex;
+    font-size: 2rem;
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    align-items: center;
+    justify-content: center;
+    min-width: 3rem;
+    min-height: 3rem;
+    color: white;
 }
 
 .middle .timeline .comment {
@@ -661,7 +675,11 @@ header .dropdown>.notification-badge {
         margin-top: -1rem;
     }
 
-    .middle .timeline .profile-infobox-head span {
+    .middle .timeline .profile-infobox-head #manage_accounts {
+        display: none;
+    }
+
+    .middle .timeline .profile-infobox-head #person_add {
         display: none;
     }
     

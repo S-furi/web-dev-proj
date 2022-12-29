@@ -211,6 +211,23 @@ function getFollowedUsers($user, $mysqli) {
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
+function getFollowingNum($userId, $mysqli) {
+    $stmt = $mysqli->prepare("SELECT COUNT(*) as follow_num FROM followers WHERE usrId = ?");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]['follow_num'];
+}
+
+
+function getFollowersNum($userId, $mysqli) {
+    $stmt = $mysqli->prepare("SELECT COUNT(*) as follow_num FROM followers WHERE friendId = ?");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]['follow_num'];
+}
+
 /**
  * Function that returns all user's friends' posts 
  * Need to add the control over the event date.
