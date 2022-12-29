@@ -240,6 +240,19 @@ function getCommentsOfPost($postId, $mysqli) {
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
+function updateLikes($postId, $usrId, $mysqli) {
+    $insert_like_query = "INSERT INTO likes (usrId, postId) VALUES (?, ?)";
+    $stmt = $mysqli->prepare($insert_like_query);
+    $stmt->bind_param("ii", $usrId, $postId);
+    if ($stmt->execute()) {
+        $update_likes_query = "UPDATE posts SET likes = likes + 1 WHERE postId = ?";
+        $stmt = $mysqli->prepare($update_likes_query);
+        $stmt->bind_param("i", $postId);
+        return $stmt->execute();
+    }
+    return false;
+}
+
 function checkUserSession($mysqli) : bool {
   if (isset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['login_string'])) {
     $user_id = $_SESSION['user_id'];
