@@ -329,7 +329,7 @@ header .dropdown>.notification-badge {
     justify-content: space-between;
 }
 
-.middle .timeline .post .post-head a {
+.middle .timeline .post a {
     text-decoration: none;
     color: var(--color-primary);
 }
