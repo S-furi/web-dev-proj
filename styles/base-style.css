@@ -302,6 +302,11 @@ header .dropdown.search-result .dropdown-content li:hover {
     justify-content: space-between;
 }
 
+.middle .timeline .post .post-head a {
+    text-decoration: none;
+    color: var(--color-primary);
+}
+
 .middle .timeline .post h3 {
     font-size: large;
     font-size: 1.5rem;
@@ -402,6 +407,12 @@ header .dropdown.search-result .dropdown-content li:hover {
 .middle .timeline .post-body .profile-interaction-buttons label {
     margin-right: 1rem;
 }
+
+
+.middle .timeline .post-body .profile-interaction-buttons a {
+    text-decoration: none;
+    color: var(--color-primary);
+}    
 
 .middle .timeline .post-not-present {
     height: 15rem;
