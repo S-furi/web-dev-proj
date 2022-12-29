@@ -1,7 +1,7 @@
     <div class="wrapper">
         <h1>Creazione Post</h1>
         <p><?php if (isset($_GET["err"])) echo $_GET["err"]; ?></p>
-        <form action="api/api-post.php" method="post" enctype="multipart/form-data">
+        <form action="api/api-post.php?action=0" method="post" enctype="multipart/form-data">
             <ul>
               <li>
                   <label for="title">Titolo Post</label><input type="text" name="title" id="title" required />
