@@ -31,7 +31,10 @@
                     <p class="likes-n">Mi Piace: <?php echo $post["likes"] ?></p>
                     <div class="interaction-buttons">
                       <label for="post-<?php echo $post["postId"]?>-like-btn"><button type="button" value="piscio" name="like button" id="post-<?php echo $post["postId"]?>-like-btn"></button><span class="material-symbols-outlined">favorite</span></label>
-                      <label for="post-<?php echo $post["postId"]?>-comment-btn"><button type="button" name="comment button" id="post-<?php echo $post["postId"]?>-comment-btn"></button><span class="material-symbols-outlined">comment</span></label>
+                      <a href="comment.php?usrId=<?php echo $post['usrId']; ?>&postId=<?php echo $post['postId']; ?>#comment-text-area" target="_self">
+                        <input type="button" name="comment button" id="comment-btn" />
+                        <span class="material-symbols-outlined">comment</span>
+                      </a>
                       <label for="post-<?php echo $post["postId"]?>-join-btn"><button type="button" name="join event button" id="post-<?php echo $post["postId"]?>-join-btn" class="btn btn-primary">Partecipa</button></label>
                     </div>
                   </div>
