@@ -1,8 +1,5 @@
 <?php
-require_once('../../database/db_connect.php');
-require_once('../../database/db_functions.php');
-
-sec_session_start();
+require_once("api-bootstrap.php");
 
 $response['ok'] = false;
 
