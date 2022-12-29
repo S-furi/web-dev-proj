@@ -39,6 +39,23 @@
     resize: none;
 }
 
+.middle form button {
+    font-size: 0.8rem;
+}
+
+.middle form .location-search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.middle form .location-search button {
+    margin-left: 0.2rem;
+}
+
+.middle form .location-search button:disabled {
+    background-color: gray;
+}
 .middle ul li input[type="file"] {
     background-color: white;
     margin-right: -2rem;

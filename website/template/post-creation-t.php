@@ -13,7 +13,11 @@
                   <label for="description">Descrizione</label><textarea id="description" name="description" required></textarea>
               </li>
               <li>
-                  <label for="location">Luogo</label><input type="text" id="location" name="location" required />
+                    <label for="location">Luogo</label>
+                    <div class="location-search">
+                        <span class="material-symbols-outlined"></span><input type="text" id="location" name="location" required />
+                        <button type="button" class="btn btn-primary" onclick="osmSearch()">Check</button>
+                    </div>
               </li>
               <li>
                   <label for="event-datetime">Data e Ora dell'Evento</label><input type="datetime-local" name="event-datetime" id="event-datetime" required />
@@ -22,4 +26,5 @@
           <input type="button" name="cancel-button" value="Annulla" class="btn" onclick="window.location.href='index.php'" />
           <input type="button" name="creation-button" value="Crea" class="btn btn-primary" onclick="form.submit()"/>
         </form> 
+        <script src="js/post-creation.js"></script>
     </div>
