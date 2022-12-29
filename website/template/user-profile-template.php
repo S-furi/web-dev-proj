@@ -44,7 +44,7 @@
                 <div class="profile-interaction-buttons">
                     <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
                         class="material-symbols-outlined">favorite</span></label>
-                    <a href="comment.php?usrId=${posts[i]['usrId']}&postId=${posts[i]['postId']}#comment-text-area" target="_self">
+                    <a href="comment.php?usrId=<?php echo $post['usrId']; ?>&postId=<?php echo $post['postId']; ?>#comment-text-area" target="_self">
                       <input type="button" name="comment button" id="comment-btn" />
                       <span class="material-symbols-outlined">comment</span>
                     </a>
