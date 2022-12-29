@@ -1,4 +1,4 @@
-function createInfoBox(user) {
+function createInfoBox(user, followers, following) {
     let form = ` 
         <section class="timeline">
             <div class="profile-infobox">
@@ -18,9 +18,9 @@ function createInfoBox(user) {
                 <p class="profile-descr">Descrizione</p>
                 <div class="follow-info">
                   <p class="info-tag">Followers: </p>
-                  <p class="followers-data">116</p>
+                  <p class="followers-data">${followers}</p>
                   <p class="info-tag">Following: </p>
-                  <p>219</p>
+                  <p>${following}</p>
                 </div>
               </div>
             </div>
@@ -86,14 +86,14 @@ function generatePosts(posts) {
     return result;
 }
 
-axios.get('api/api-personal-profile-user.php')
+axios.get('api/api-personal-profile.php?azione=1')
   .then(response => {
-    const infoBox = createInfoBox(response.data);
+    const infoBox = createInfoBox(response.data[0], response.data[1], response.data[2]);
     const timeline = document.querySelector("main .middle");
     timeline.innerHTML = infoBox;
   })
   .then( () => {
-    axios.get('api/api-personal-profile-posts.php')
+    axios.get('api/api-personal-profile.php?azione=0')
       .then(response => {
           const posts = generatePosts(response.data);
           const timeline = document.querySelector("main .middle .timeline");
