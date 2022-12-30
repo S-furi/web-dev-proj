@@ -49,6 +49,7 @@ if (isset($_GET["action"]) && $_GET["action"] == 0){
 
     header("Content-Type: application/json");
     echo json_encode($events);
+    return;
 
 // action = 2 means that a user liked the post
 } else if (isset($_GET["action"]) && $_GET["action"] == 2) {
