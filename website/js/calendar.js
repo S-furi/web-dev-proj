@@ -1,10 +1,25 @@
-function isToday(day) {
-    const todayDate = new Date();
-    return (day == todayDate.getDate() && currentMonth == todayDate.getMonth() && currentYear == todayDate.getFullYear())
-        ? ` class="active"` : "";
+function fetchEvents() {
+    return axios.get("api/api-post.php?action=1")
+        .then(res => {
+            if ( res.data.length > 0 ) {
+                res.data
+                    .forEach(event => {
+                        event.eventDate = new Date(event.eventDate);
+                        events.push(event);
+                    });
+            }
+        }).catch(err => console.log(err));
+}
+
+function getCurrentMonthEvents() {
+    return events
+        .filter(t => t.eventDate.getMonth() == currentMonth && t.eventDate.getFullYear() == currentYear);
 }
 
 function renderCalendar() {
+    const currentMonthEvents = getCurrentMonthEvents();
+    console.log(currentMonthEvents);
+
     // first day index of current month
     const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
 
@@ -23,7 +38,9 @@ function renderCalendar() {
 
     // fill the rest of current month's days
     for (let i = 1; i <= lastDayCurMonth; i++) {
-        htmlDayTag += `<li${isToday(i)}>${i}</li>`;
+        const classList = isSpecialDay(i, currentMonthEvents.map(t => t.eventDate));
+        let itemClasses = classList.length === 0 ? "" : (classList.length == 1 ? ` class="${classList[0]}"` : ` class="${classList[0]} ${classList[1]}"`);
+        htmlDayTag += `<li${itemClasses}>${i}</li>`;
     }
 
     // filling next months first days
@@ -50,6 +67,21 @@ function handleMonthChange(event) {
     renderCalendar();
 }
 
+function isSpecialDay(day, busyDays) {
+    const classList = [];
+    if (compareDays(day, new Date())) { 
+        classList.push("active");
+    } else if (busyDays.filter(t => compareDays(day, t)).length !== 0) {
+        classList.push("busy");
+    }
+    return classList;
+}
+
+function compareDays(day, comparisonDate) {
+    return (day == comparisonDate.getDate() 
+            && currentMonth == comparisonDate.getMonth() 
+            && currentYear == comparisonDate.getFullYear());
+}
 
 function insertCalendar() {
     const wrapperContent = `
@@ -122,5 +154,8 @@ document.querySelectorAll(".left .popup-calendar-wrapper .icons span").forEach(i
     icon.addEventListener('click', event => handleMonthChange(event));
 });
 
-// finally, render the calendar
-renderCalendar();
+// finally, render the calendar and fill all the events
+const events = [];
+
+fetchEvents().then(() => renderCalendar());
+
