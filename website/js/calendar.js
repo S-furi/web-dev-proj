@@ -16,9 +16,26 @@ function getCurrentMonthEvents() {
         .filter(t => t.eventDate.getMonth() == currentMonth && t.eventDate.getFullYear() == currentYear);
 }
 
+
+function showEventsBrief(value) {
+    const selectedDate = new Date(currentYear, currentMonth, value);
+    const selecteedEvents = getCurrentMonthEvents()
+            .filter(t => t.eventDate.getDate() == selectedDate.getDate()
+                    && t.eventDate.getMonth() == selectedDate.getMonth()
+                    && t.eventDate.getFullYear() == selectedDate.getFullYear());
+
+
+    modal.style.display = "block";
+    selecteedEvents.forEach(t => insertEventInView(t));
+}
+
+function insertEventInView(event) {
+    const container = document.querySelector(".modal .events-of-day");
+    container.innerHTML += `<li>"${event.title}", il ${event.eventDate}</li>`
+}
+
 function renderCalendar() {
     const currentMonthEvents = getCurrentMonthEvents();
-    console.log(currentMonthEvents);
 
     // first day index of current month
     const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
@@ -40,6 +57,10 @@ function renderCalendar() {
     for (let i = 1; i <= lastDayCurMonth; i++) {
         const classList = isSpecialDay(i, currentMonthEvents.map(t => t.eventDate));
         let itemClasses = classList.length === 0 ? "" : (classList.length == 1 ? ` class="${classList[0]}"` : ` class="${classList[0]} ${classList[1]}"`);
+        if (classList.includes("busy")) {
+            htmlDayTag += `<li${itemClasses}><button id="events-btn" onclick="showEventsBrief(this.innerHTML)" >${i}</button></li>`;
+            continue;
+        }
         htmlDayTag += `<li${itemClasses}>${i}</li>`;
     }
 
@@ -129,6 +150,22 @@ function switchPopupIcon() {
     }
 }
 
+function setModalListeners() {
+    modal.addEventListener("keydown", function(event) {
+        if (event.keyCode === 27) {
+            modal.style.display = "none";
+        }
+    });
+
+    span.onclick = () => modal.style.display = "none";
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+}
+
 // Google icons for calendar toggle btn
 const closeIcon = `<span class="material-symbols-outlined">close</span>`;
 const calIcon = `<span class="material-symbols-outlined">calendar_month</span>`;
@@ -154,8 +191,16 @@ document.querySelectorAll(".left .popup-calendar-wrapper .icons span").forEach(i
     icon.addEventListener('click', event => handleMonthChange(event));
 });
 
+// find the modal and set the listeners for exit it
+const modal = document.querySelector(".modal");
+const span = document.querySelector(".modal span");
+setModalListeners();
+
 // finally, render the calendar and fill all the events
 const events = [];
 
 fetchEvents().then(() => renderCalendar());
+
+
+
 
