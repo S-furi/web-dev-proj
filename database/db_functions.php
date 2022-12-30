@@ -150,10 +150,11 @@ function getAllEventsDetails($usrId, mysqli $mysqli) {
             FROM events JOIN posts ON (events.postId = posts.postId)
             WHERE posts.usrId IN (SELECT followers.friendId
                                  FROM followers
-                                 WHERE followers.usrId = ?);";
+                                 WHERE followers.usrId = ?)
+            OR posts.usrId = ?;";
 
     $stmt = $mysqli->prepare($query);
-    $stmt->bind_param("i", $usrId);
+    $stmt->bind_param("ii", $usrId, $usrId);
     $stmt->execute();
 
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
