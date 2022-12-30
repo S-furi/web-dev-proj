@@ -559,6 +559,44 @@ header .dropdown>.notification-badge {
     display: none;
 }
 
+/* The modal container */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 999; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 2rem;
+  border: 1px solid #888;
+  width: 80%;
+  border-radius: var(--card-border-radius);
+}
+
+/* The close button */
+.modal #closeBtn {
+  color: #aaa;
+  float: right;
+  font-size: 2.8rem;
+  font-weight: bold;
+}
+
+.modal #closeBtn:hover,
+.modal #closeBtn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 /* animation for suggestion disappear once clicked follow btn*/
 .disappearing-card {
   animation: hideCard .5s forwards;
