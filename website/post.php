@@ -2,7 +2,7 @@
 require_once("bootstrap.php");
 
 $templateParams["Titolo"] = "Brogram - Comment";
-$templateParams["template_name"] = "comment-template.php";
+$templateParams["template_name"] = "post-template.php";
 
 $postId = $_GET['postId'];
 $usrId = $_GET['usrId'];
