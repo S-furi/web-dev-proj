@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `brogram`.`events` (
   `postId` INT(11) NOT NULL,
   `participants` INT NULL DEFAULT 0,
   PRIMARY KEY (`eventId`),
-  INDEX `fk_events_posts2_idx` (`postId` ASC) VISIBLE,
+  INDEX `fk_events_posts2_idx` (`postId` ASC),
   CONSTRAINT `fk_events_posts2`
     FOREIGN KEY (`postId`)
     REFERENCES `brogram`.`posts` (`postId`)
