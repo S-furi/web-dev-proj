@@ -1,5 +1,3 @@
-import "./notification.js";
-
 function showForm() {
   window.location.href = "post-creation.php"
 }
@@ -82,6 +80,15 @@ function searchUser(searchFragment) {
 
 function getSelectedText(event) {
     document.querySelector(`header .search-bar input[type="search"]`).value = event.textContent;
+    const formData = new FormData();
+    formData.append("queryFragment", event.textContent);
+    axios.post("api/api-users.php?action=1", formData)
+        .then(res => {
+            if (res.data['ok']) {
+                console.log(res.data["users"][0]["usrId"]);
+                window.location.href = "user-profile.php?usrId=" + res.data["users"][0]["usrId"];
+            }
+        });
     clearResultList();
 }
 
