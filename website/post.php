@@ -8,7 +8,7 @@ $postId = $_GET['postId'];
 $usrId = $_GET['usrId'];
 $post = getPostFromId($usrId, $postId, $mysqli);
 $user = getUser($usrId, $mysqli);
-// $comments = getCommentsOfPost($postId, $mysqli);
+$comments = getComments($postId, $mysqli);
 
 $date = date("d-m-Y H:i", strtotime($post['eventDate']));
 

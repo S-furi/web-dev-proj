@@ -34,18 +34,18 @@
               </div>
             </article>
 
-            <!-- <?php foreach ($comments as $comment): ?> -->
+            <?php foreach ($comments as $comment): ?>
             <article class="comment">
                 <div class="comment-head">
-                    <img src="../img/no-profile-pic.png" alt="to do dynamic in php" />
+                    <img src="img/no-profile-pic.png" alt="to do dynamic in php" />
                     <div class="comment-head-info">
-                        <h3 class="comment-author">Nome Autore</h3>
-                        <p>@username</p>
+                        <h3 class="comment-author"><?php echo $comment['firstName']; ?> <?php echo $comment['lastName']; ?></h3>
+                        <p>@<?php echo $comment['username']; ?></p>
                     </div>
                 </div>
-                <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer molestie congue justo nec ultricies. Maecenas ligula tellus, gravida mollis venenatis ut, porta vitae justo. Suspendisse sodales efficitur quam, ac elementum mauris commodo id. Fusce ultricies libero ante, at convallis leo laoreet a. Etiam dignissim scelerisque bibendum. Aenean nec ornare nisl. Ut commodo risus velit, eu sollicitudin nibh facilisis ut. Maecenas ac ultricies felis. </p>
+                <p class="comment-body"><?php echo $comment['content']; ?></p>
             </article>
-            <!-- <?php endforeach ?> -->
+            <?php endforeach ?>
             
             <form class="comment-form">
                     <textarea name="comment-text-area" id="comment-text-area" placeholder="Scrivi un commento"></textarea>
