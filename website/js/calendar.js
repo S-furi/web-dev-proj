@@ -153,17 +153,22 @@ function switchPopupIcon() {
 function setModalListeners() {
     modal.addEventListener("keydown", function(event) {
         if (event.keyCode === 27) {
+            document.querySelector(".modal .events-of-day").innerHTML = "";
             modal.style.display = "none";
         }
     });
 
-    span.onclick = () => modal.style.display = "none";
+    span.onclick = () => {
+        modal.style.display = "none";
+        document.querySelector(".modal .events-of-day").innerHTML = "";
+    };
 
     window.onclick = function(event) {
         if (event.target == modal) {
+            document.querySelector(".modal .events-of-day").innerHTML = "";
             modal.style.display = "none";
         }
-    }
+    };
 }
 
 // Google icons for calendar toggle btn
