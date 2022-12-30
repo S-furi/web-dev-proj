@@ -18,6 +18,7 @@ if (isset($_GET["action"])){
         $followed = $_POST["followed"];
 
         if (insertNewFollower($user, $followed, $mysqli)) {
+            notify("follow", $followed, $user, $mysqli);
             $result["ok"] = true;
         }
     }
