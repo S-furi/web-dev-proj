@@ -1,6 +1,6 @@
 function isToday(day) {
     const todayDate = new Date();
-    return (day == date.getDate() && currentMonth == todayDate.getMonth() && currentYear == todayDate.getFullYear())
+    return (day == todayDate.getDate() && currentMonth == todayDate.getMonth() && currentYear == todayDate.getFullYear())
         ? ` class="active"` : "";
 }
 
