@@ -16,7 +16,7 @@
                     <label for="location">Luogo</label>
                     <div class="location-search">
                         <span class="material-symbols-outlined"></span><input type="text" id="location" name="location" required />
-                        <button type="button" class="btn btn-primary" onclick="osmSearch()">Check</button>
+                        <button type="button" class="btn btn-primary" onclick="locationValidation()">Check</button>
                     </div>
               </li>
               <li>

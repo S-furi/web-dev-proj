@@ -1,8 +1,8 @@
 const resultField = document.querySelector(".main form .location-search>span");
 
-function osmSearch() {
+function locationValidation() {
     const value = document.querySelector(".main form input#location").value;
-    if (value.length> 3 ){
+    if (value.length > 3 ){
         const url = new URL("https://nominatim.openstreetmap.org/search?");
 
         const osm_params = {
@@ -32,6 +32,5 @@ function osmSearch() {
 
 function restoreResearch() {
     document.querySelector(".main form .location-search button").disabled = false;
-    console.log("ENABLED");
 }
 
