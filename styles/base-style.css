@@ -475,7 +475,7 @@ header .dropdown>.notification-badge {
     font-size: 0.8rem;
 }
 
-.middle .timeline .profile-infobox-head #modify-btn {
+.middle .timeline .profile-infobox-head #modify-btn, .middle .timeline .profile-infobox-head #follow-btn {
     display: none;
 }
 
@@ -692,7 +692,7 @@ header .dropdown>.notification-badge {
         display: none;
     }
     
-    .middle .timeline .profile-infobox-head #modify-btn {
+    .middle .timeline .profile-infobox-head #modify-btn, .middle .timeline .profile-infobox-head #follow-btn {
         display: flex;
     }
 }
