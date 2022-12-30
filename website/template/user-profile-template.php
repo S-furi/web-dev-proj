@@ -15,9 +15,9 @@
               <div class="profile-infobox-body">
                 <p class="profile-descr">Descrizione</p>
                 <div class="follow-info">
-                  <p class="info-tag">Followers: </p>
+                  <p class="info-tag">Seguaci: </p>
                   <p class="followers-data"><?php echo $followers_n; ?></p>
-                  <p class="info-tag">Following: </p>
+                  <p class="info-tag">Seguiti: </p>
                   <p><?php echo $following_n; ?></p>
                 </div>
               </div>
