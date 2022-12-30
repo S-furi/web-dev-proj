@@ -109,7 +109,21 @@ function createPost($usr_id, $title, $caption, $image, $location, $event_date, $
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("isssss", $usr_id, $title, $caption, $image, $location, $event_date);
 
-  return $stmt->execute();
+    if ($stmt->execute()) {
+        $query = "SELECT postId FROM posts WHERE usrId=? AND title=? AND caption=? AND image=? AND location=? AND eventDate=?;";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("isssss", $usr_id, $title, $caption, $image, $location, $event_date);
+
+        $stmt->execute();
+        $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return createEvent($res[0]["postId"], $mysqli);
+    }
+}
+
+function createEvent($postId, mysqli $mysqli) {
+    $stmt = $mysqli->prepare("INSERT INTO events (postId) VALUES (?)");
+    $stmt->bind_param("i", $postId);
+    return $stmt->execute();
 }
 
 function getPosts($usrId, $mysqli) {
