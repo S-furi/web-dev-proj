@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `brogram`.`posts` (
   `title` VARCHAR(50) NOT NULL,
   `caption` VARCHAR(255) NOT NULL,
   `image` VARCHAR(45) NOT NULL,
-  `location` VARCHAR(45) NOT NULL DEFAULT NULL,
+  `location` VARCHAR(45) NOT NULL,
   `creationDate` DATETIME NOT NULL DEFAULT NOW(),
   `eventDate` DATETIME NOT NULL,
   `likes` INT NOT NULL,
@@ -160,28 +160,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `brogram`.`participations`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `brogram`.`participations` (
-  `usrId` INT(11) NOT NULL,
-  `eventId` INT NOT NULL,
-  INDEX `fk_participations_users1_idx` (`usrId` ASC),
-  INDEX `fk_participations_events2_idx` (`eventId` ASC),
-  PRIMARY KEY (`usrId`, `eventId`),
-  CONSTRAINT `fk_participations_users1`
-    FOREIGN KEY (`usrId`)
-    REFERENCES `brogram`.`users` (`usrId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_participations_events2`
-    FOREIGN KEY (`eventId`)
-    REFERENCES `brogram`.`events` (`eventId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `brogram`.`events`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `brogram`.`events` (
@@ -204,42 +182,20 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `brogram`.`participations` (
   `usrId` INT(11) NOT NULL,
   `eventId` INT NOT NULL,
-  INDEX `fk_participations_users1_idx` (`usrId` ASC),
-  INDEX `fk_participations_events2_idx` (`eventId` ASC),
   PRIMARY KEY (`usrId`, `eventId`),
+  INDEX `fk_participations_events1_idx` (`eventId` ASC),
   CONSTRAINT `fk_participations_users1`
     FOREIGN KEY (`usrId`)
     REFERENCES `brogram`.`users` (`usrId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_participations_events2`
+  CONSTRAINT `fk_participations_events1`
     FOREIGN KEY (`eventId`)
     REFERENCES `brogram`.`events` (`eventId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
--- -----------------------------------------------------
--- Table `brogram`.`participations`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `brogram`.`participations` (
-  `usrId` INT(11) NOT NULL,
-  `eventId` INT NOT NULL,
-  INDEX `fk_participations_users1_idx` (`usrId` ASC),
-  INDEX `fk_participations_events2_idx` (`eventId` ASC),
-  PRIMARY KEY (`usrId`, `eventId`),
-  CONSTRAINT `fk_participations_users1`
-    FOREIGN KEY (`usrId`)
-    REFERENCES `brogram`.`users` (`usrId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_participations_events2`
-    FOREIGN KEY (`eventId`)
-    REFERENCES `brogram`.`events` (`eventId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
 
 -- Creating a user that is capable of making only SELECT, INSERT and UPDATE
 -- operations, so that no one is able to delete the DB except the administrator.
