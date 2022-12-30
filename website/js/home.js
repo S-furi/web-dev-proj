@@ -5,10 +5,6 @@ function showForm() {
 function followUser(user, followed, target=null) {
     const formData = new FormData();
 
-    if (target) {
-        target.disabled = true;
-    }
-
     formData.append("user", user);
     formData.append("followed", followed);
 
@@ -17,10 +13,16 @@ function followUser(user, followed, target=null) {
         .then(res => {
             if (res.data["ok"]) {
                 // follow went ok
-                document.querySelector(".right li.user-suggestion.usr-"+followed + " input").value = "✔️";
-                document.querySelector(".right li.user-suggestion.usr-"+followed).classList.add("disappearing-card");
-                // asynchronous :)
-                setTimeout(() => document.querySelector(".right li.user-suggestion.usr-"+followed).remove(), 500);
+
+                // if target isn't specified, it means we are in the sidebar
+                // otherwise we the button is the one conained in the user profile
+                if (target == null) {
+                    document.querySelector(".right li.user-suggestion.usr-"+followed).classList.add("disappearing-card");
+                    document.querySelector(".right li.user-suggestion.usr-"+followed + " input").value = "✔️";
+                    setTimeout(() => document.querySelector(".right li.user-suggestion.usr-"+followed).remove(), 500);
+                } else {
+                    target.disabled = true;
+                }
             } else {
                 // temporary
                 alert("Qualcosa è andato storto");
