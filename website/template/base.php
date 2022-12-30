@@ -91,6 +91,13 @@
         </div>
       </main>
       <!-- Right Panel -->
+        <div id="calendar-events-modal" class="modal" tabindex="-1">
+            <div class="modal-content">
+                <span id="closeBtn" class="material-symbols-outlined" tabindex="0" title="Chiudi">close</span>
+                <ul class="events-of-day">
+                </ul>
+            </div>
+        </div>
       <div class="right">
         <div class="users-suggestions-wrapper">
           <h2>Account Consigliati</h2>
