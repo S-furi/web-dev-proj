@@ -1,3 +1,5 @@
+import "./notification.js";
+
 function showForm() {
   window.location.href = "post-creation.php"
 }

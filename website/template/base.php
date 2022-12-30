@@ -28,14 +28,14 @@
       </div>
       <div class="dropdown">
         <!-- When ready in DB, put this in php statement -->
-        <span class="notification-badge">1</span>
+        <span class="notification-badge"></span>
         <img src="img/no-profile-pic.png" alt="user profile picture" class="profile-picture dropbtn" />
         <ul class="dropdown-content">
           <li><a href="personal-profile.php">Profilo</a></li>
           <li><a href="logout.php">Logout</a></li>
             <li>
-                <span class="notification-badge">1</span>
-                <a href="notification-center.php">Notifiche</a>
+                <span class="notification-badge"></span>
+                <a onclick="showNotificationCenter()">Notifiche</a>
             </li>
         </ul>
       </div>
@@ -124,7 +124,7 @@
   if (isset($templateParams["js"])) :
     foreach ($templateParams["js"] as $script) :
   ?>
-      <script src="<?php echo $script; ?>"></script>
+      <script type="module" src="<?php echo $script; ?>"></script>
   <?php
     endforeach;
   endif;

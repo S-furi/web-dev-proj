@@ -300,6 +300,27 @@ function fetchNotifications(int $num, $forUser, $mysqli) {
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
+/* Check if there are any new notifications for the user
+ *
+ */
+function getNotificationsForUser($userId, $lastNotificationId, mysqli $mysqli) {
+    $query = "SELECT * FROM notifications WHERE forUser = ? AND notificationId > ?";
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param('ii', $userId, $lastNotificationId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        // If there are new notifications, return them as an associative array
+        $notifications = [];
+        while ($row = $result->fetch_assoc()) {
+            $notifications[] = $row;
+        }
+        return $notifications;
+    } else {
+        return null;
+    }
+}
+
 /* method used in the notification center for retrieving 
  * post information when querying notifications table.
  * using the commentID as EntityId.
