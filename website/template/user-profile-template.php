@@ -26,7 +26,7 @@
             <?php $eventDate = date("d-m-Y H:i", strtotime($post['eventDate'])); ?>
             <article class="post">
               <div class="post-head">
-                <a href="comment.php?usrId=<?php echo $post['usrId']; ?>&postId=<?php echo $post['postId']; ?>"><h3><?php echo $post['title']; ?></h3></a>
+                <a href="post.php?usrId=<?php echo $post['usrId']; ?>&postId=<?php echo $post['postId']; ?>"><h3><?php echo $post['title']; ?></h3></a>
               </div>
               <div class="post-body">
                 <div class="date-location">
@@ -44,7 +44,7 @@
                 <div class="profile-interaction-buttons">
                     <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
                         class="material-symbols-outlined">favorite</span></label>
-                    <a href="comment.php?usrId=<?php echo $post['usrId']; ?>&postId=<?php echo $post['postId']; ?>#comment-text-area" target="_self">
+                    <a href="post.php?usrId=<?php echo $post['usrId']; ?>&postId=<?php echo $post['postId']; ?>#comment-text-area" target="_self">
                       <input type="button" name="comment button" id="comment-btn" />
                       <span class="material-symbols-outlined">comment</span>
                     </a>

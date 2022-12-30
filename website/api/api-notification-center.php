@@ -5,8 +5,7 @@ function getNotificationsInfoForComments(array $notification, $mysqli) {
     $commentInfo = getCommentFromCommentId($notification["entityId"], $mysqli);
     $postInfo = fetchPostInfoFromCommentId($notification["entityId"], $mysqli);
 
-    // soon this filename will change
-    $reference = "comment.php?usrId=" . $postInfo["usrId"] . "&postId" . $postInfo["postId"];
+    $reference = "post.php?usrId=" . $postInfo["usrId"] . "&postId" . $postInfo["postId"];
     $fromUser = $commentInfo["author"];
     $msg = "ha commentato il tuo post";
 
@@ -24,8 +23,7 @@ function getNotificationInfoForLike(array $notification, $mysqli) {
     $likeInfo = getLikeDetails($notification["entityId"], $mysqli);
     $postInfo = fetchPostInfoFromLike($notification["entityId"], $mysqli);
 
-    // soon this filename will change
-    $reference = "comment.php?usrId=" . $postInfo["usrId"] . "&postId" . $postInfo["postId"];
+    $reference = "post.php?usrId=" . $postInfo["usrId"] . "&postId" . $postInfo["postId"];
     $fromUser = $likeInfo["usrId"];
     $msg = "ha messo mi piace al tuo post";
 
