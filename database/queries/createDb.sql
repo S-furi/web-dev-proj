@@ -18,7 +18,7 @@ USE `brogram` ;
 -- Table `brogram`.`users`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `brogram`.`users` (
-  `usrId` INT NOT NULL AUTO_INCREMENT,
+  `usrId` INT(11) NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(60) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `username` VARCHAR(45) NOT NULL,
@@ -27,15 +27,16 @@ CREATE TABLE IF NOT EXISTS `brogram`.`users` (
   PRIMARY KEY (`usrId`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
 -- Table `brogram`.`followers`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `brogram`.`followers` (
-  `usrId` INT NOT NULL,
-  `friendId` INT NOT NULL,
+  `usrId` INT(11) NOT NULL,
+  `friendId` INT(11) NOT NULL,
   PRIMARY KEY (`usrId`, `friendId`),
   INDEX `fk_followers_users1_idx` (`friendId` ASC),
   CONSTRAINT `fk_followers_users`
@@ -48,14 +49,15 @@ CREATE TABLE IF NOT EXISTS `brogram`.`followers` (
     REFERENCES `brogram`.`users` (`usrId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
 -- Table `brogram`.`login_attempts`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `brogram`.`login_attempts` (
-  `usrId` INT NOT NULL,
+  `usrId` INT(11) NOT NULL,
   `time` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`usrId`),
   CONSTRAINT `fk_login_attempts_users2`
@@ -63,30 +65,33 @@ CREATE TABLE IF NOT EXISTS `brogram`.`login_attempts` (
     REFERENCES `brogram`.`users` (`usrId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
 -- Table `brogram`.`posts`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `brogram`.`posts` (
-  `postId` INT NOT NULL AUTO_INCREMENT,
+  `postId` INT(11) NOT NULL AUTO_INCREMENT,
   `usrId` INT(11) NOT NULL,
   `title` VARCHAR(50) NOT NULL,
   `caption` VARCHAR(255) NOT NULL,
   `image` VARCHAR(45) NOT NULL,
-  `location` VARCHAR(45) NULL,
-  `creationDate` DATETIME NOT NULL,
+  `location` VARCHAR(45) NOT NULL DEFAULT NULL,
+  `creationDate` DATETIME NOT NULL DEFAULT NOW(),
   `eventDate` DATETIME NOT NULL,
   `likes` INT NOT NULL,
-  PRIMARY KEY (`postId`, `usrId`),
+  PRIMARY KEY (`postId`),
   INDEX `fk_posts_users1_idx` (`usrId` ASC),
   CONSTRAINT `fk_posts_users1`
     FOREIGN KEY (`usrId`)
     REFERENCES `brogram`.`users` (`usrId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
 
 -- -----------------------------------------------------
 -- Table `brogram`.`comments`
@@ -149,6 +154,89 @@ CREATE TABLE IF NOT EXISTS `brogram`.`notifications` (
   CONSTRAINT `fk_notifications_users1`
     FOREIGN KEY (`forUser`)
     REFERENCES `brogram`.`users` (`usrId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `brogram`.`participations`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `brogram`.`participations` (
+  `usrId` INT(11) NOT NULL,
+  `eventId` INT NOT NULL,
+  INDEX `fk_participations_users1_idx` (`usrId` ASC),
+  INDEX `fk_participations_events2_idx` (`eventId` ASC),
+  PRIMARY KEY (`usrId`, `eventId`),
+  CONSTRAINT `fk_participations_users1`
+    FOREIGN KEY (`usrId`)
+    REFERENCES `brogram`.`users` (`usrId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_participations_events2`
+    FOREIGN KEY (`eventId`)
+    REFERENCES `brogram`.`events` (`eventId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `brogram`.`events`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `brogram`.`events` (
+  `eventId` INT NOT NULL AUTO_INCREMENT,
+  `postId` INT(11) NOT NULL,
+  `participants` INT NULL DEFAULT 0,
+  PRIMARY KEY (`eventId`),
+  INDEX `fk_events_posts2_idx` (`postId` ASC),
+  CONSTRAINT `fk_events_posts2`
+    FOREIGN KEY (`postId`)
+    REFERENCES `brogram`.`posts` (`postId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `brogram`.`participations`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `brogram`.`participations` (
+  `usrId` INT(11) NOT NULL,
+  `eventId` INT NOT NULL,
+  INDEX `fk_participations_users1_idx` (`usrId` ASC),
+  INDEX `fk_participations_events2_idx` (`eventId` ASC),
+  PRIMARY KEY (`usrId`, `eventId`),
+  CONSTRAINT `fk_participations_users1`
+    FOREIGN KEY (`usrId`)
+    REFERENCES `brogram`.`users` (`usrId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_participations_events2`
+    FOREIGN KEY (`eventId`)
+    REFERENCES `brogram`.`events` (`eventId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `brogram`.`participations`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `brogram`.`participations` (
+  `usrId` INT(11) NOT NULL,
+  `eventId` INT NOT NULL,
+  INDEX `fk_participations_users1_idx` (`usrId` ASC),
+  INDEX `fk_participations_events2_idx` (`eventId` ASC),
+  PRIMARY KEY (`usrId`, `eventId`),
+  CONSTRAINT `fk_participations_users1`
+    FOREIGN KEY (`usrId`)
+    REFERENCES `brogram`.`users` (`usrId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_participations_events2`
+    FOREIGN KEY (`eventId`)
+    REFERENCES `brogram`.`events` (`eventId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
