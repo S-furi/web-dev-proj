@@ -110,20 +110,24 @@ function createPost($usr_id, $title, $caption, $image, $location, $event_date, $
   $stmt->bind_param("isssss", $usr_id, $title, $caption, $image, $location, $event_date);
 
     if ($stmt->execute()) {
-        $query = "SELECT postId FROM posts WHERE usrId=? AND title=? AND caption=? AND image=? AND location=? AND eventDate=?;";
-        $stmt = $mysqli->prepare($query);
-        $stmt->bind_param("isssss", $usr_id, $title, $caption, $image, $location, $event_date);
-
-        $stmt->execute();
-        $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        return createEvent($res[0]["postId"], $mysqli);
+        return createEvent($usr_id, mysqli_insert_id($mysqli), $mysqli);
     }
 }
 
-function createEvent($postId, mysqli $mysqli) {
+function createEvent($usrId, $postId, mysqli $mysqli) {
     $stmt = $mysqli->prepare("INSERT INTO events (postId) VALUES (?)");
     $stmt->bind_param("i", $postId);
-    return $stmt->execute();
+    return $stmt->execute() && insertParticipant($usrId, mysqli_insert_id($mysqli), $mysqli);
+}
+
+function insertParticipant($usrId, $eventId, mysqli $mysqli) {
+    $stmt = $mysqli->prepare("INSERT INTO participations (usrId, eventId) VALUES (?, ?);");
+    $stmt->bind_param("ii", $usrId, $eventId);
+    if ($stmt->execute()) {
+        $stmt = $mysqli->prepare("UPDATE events SET events.participants = events.participants + 1 WHERE events.eventId = ?;");
+        $stmt->bind_param("i", $eventId);
+        return $stmt->execute();
+    }
 }
 
 function getPosts($usrId, $mysqli) {
