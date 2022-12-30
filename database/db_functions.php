@@ -144,6 +144,21 @@ function getPostFromId($usrId, $postId, $mysqli) {
   return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
 }
 
+function getAllEventsDetails($usrId, mysqli $mysqli) {
+    $query = "
+            SELECT * 
+            FROM events JOIN posts ON (events.postId = posts.postId)
+            WHERE posts.usrId IN (SELECT followers.friendId
+                                 FROM followers
+                                 WHERE followers.usrId = ?);";
+
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("i", $usrId);
+    $stmt->execute();
+
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
 function getUser($usrId, $mysqli) {
   $query = "SELECT usrId, email, username, firstName, lastName FROM users WHERE usrId=?";
   $stmt = $mysqli->prepare($query);

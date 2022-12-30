@@ -42,8 +42,16 @@ if (isset($_GET["action"]) && $_GET["action"] == 0){
         $msg = "Riempi tutti i campi";
     }
 
-// action = 1 means that a user liked the post
+// action = 1 means that clients need all followed users events information
 } else if (isset($_GET["action"]) && $_GET["action"] == 1) {
+    $usrId = $_SESSION["user_id"];
+    $events = getAllEventsDetails($usrId, $mysqli);
+
+    header("Content-Type: application/json");
+    echo json_encode($events);
+
+// action = 2 means that a user liked the post
+} else if (isset($_GET["action"]) && $_GET["action"] == 2) {
     //TODO
 }
 
