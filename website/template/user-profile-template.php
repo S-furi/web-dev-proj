@@ -9,7 +9,7 @@
                   </div>
                 </div>
                 <label for="follow-btn"><button type="button" name="follow button" id="follow-btn"
-                    class="btn btn-primary" onclick="followUser(<?php echo $_SESSION["user_id"] ?>, <?php echo $user["usrId"] ?>, this)">Segui</button></label>
+                    class="btn btn-primary" onclick="followUser(<?php echo $_SESSION['user_id']; ?>, <?php echo $user['usrId'] ?>, this)">Segui</button></label>
                 <span class="material-symbols-outlined" id="person_add">person_add</span>
               </div>
               <div class="profile-infobox-body">
