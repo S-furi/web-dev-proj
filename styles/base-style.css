@@ -435,6 +435,9 @@ header .dropdown>.notification-badge {
     margin-right: 1rem;
 }
 
+.middle .timeline .post-body .like-comment-div label {
+  margin-right: 0.4rem;
+}
 
 .middle .timeline .post-body .profile-interaction-buttons a {
     text-decoration: none;
