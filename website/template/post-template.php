@@ -55,7 +55,7 @@
             
             <form class="comment-form">
                     <textarea name="comment-text-area" id="comment-text-area" placeholder="Scrivi un commento"></textarea>
-                    <button type="button" onclick="postComment(<?php echo $usrId; ?>, <?php echo $postId; ?>)" class="btn btn-primary">Commenta</button>
+                    <button type="button" onclick="postComment(<?php echo $_SESSION['user_id']; ?>, <?php echo $postId; ?>)" class="btn btn-primary">Commenta</button>
             </form>
 
           </section>
