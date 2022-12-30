@@ -47,9 +47,15 @@
             </article>
             <?php endforeach ?>
             
+            <div id="modal" class="modal">
+              <div class="modal-content">
+                <p class="comment-error">Il campo dei commenti è vuoto o è più lungo di 255 caratteri. Inserisci un commento adeguato prima di inviarlo.</p>
+              </div>
+            </div>
+            
             <form class="comment-form">
                     <textarea name="comment-text-area" id="comment-text-area" placeholder="Scrivi un commento"></textarea>
-                    <button type="submit" class="btn btn-primary">Commenta</button>
+                    <button type="button" onclick="postComment(<?php echo $usrId; ?>, <?php echo $postId; ?>)" class="btn btn-primary">Commenta</button>
             </form>
 
           </section>

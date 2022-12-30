@@ -178,6 +178,16 @@ function getComments($postId, $mysqli) {
   return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
+function addComment($postId, $usrId, $content, $mysqli) {
+  $query = "INSERT INTO comments (postId, author, date, content) VALUES (?, ?, ?, ?)";
+  $date = date("Y-m-d H:i:s");
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("iiss", $postId, $usrId, $date, $content);
+
+  $stmt->execute();
+  return $stmt->affected_rows>0;
+}
+
 /**
  * Returns friends of friends.
  *

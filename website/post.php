@@ -12,6 +12,8 @@ $comments = getComments($postId, $mysqli);
 
 $date = date("d-m-Y H:i", strtotime($post['eventDate']));
 
+array_push($templateParams["js"], "js/post.js");
+
 require("template/base.php");
 
 ?>
