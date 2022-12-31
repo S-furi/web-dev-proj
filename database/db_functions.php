@@ -62,6 +62,7 @@ function login($email, $password, $mysqli)
 
         return true;
     }
+    return false;
 }
 
 /**
@@ -186,6 +187,15 @@ function getPostFromId($usrId, $postId, $mysqli)
     $query = "SELECT caption, image, location, title, eventDate, likes FROM posts WHERE usrId=? AND postId=?";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("ii", $usrId, $postId);
+
+    $stmt->execute();
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+}
+
+function getPostFromPostId($postId, mysqli $mysqli)
+{
+    $stmt = $mysqli->prepare("SELECT * FROM posts WHERE postId = ?");
+    $stmt->bind_param("i", $postId);
 
     $stmt->execute();
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
@@ -392,6 +402,12 @@ function notify(string $type, int $forUser, int $entityId, mysqli $mysqli)
     }
 }
 
+function notifyLike($postId, $likeId, mysqli $mysqli)
+{
+    $forUser = getPostFromPostId($postId, $mysqli)["usrId"];
+    return notify("like", $forUser, $likeId, $mysqli);
+}
+
 function fetchNotifications(int $num, $forUser, $mysqli)
 {
     $query = "SELECT type, forUser, entityId, read, time FROM notifications WHERE forUser = ? ORDER BY time DESC LIMIT ?";
@@ -440,7 +456,7 @@ function fetchPostInfoFromCommentId($commentId, mysqli $mysqli)
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
-/* method used in the notification center for retrieving 
+/** Method used in the notification center for retrieving 
  * post information when querying notifications table,
  * using the likeId as EntityId.
  */
@@ -477,6 +493,56 @@ function getCommentFromCommentId($commentId, mysqli $mysqli)
     $stmt->execute();
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
+
+function registerLikeAction($usrId, $postId, mysqli $mysqli)
+{
+    if (hasAlreadyLikedPost($usrId, $postId, $mysqli)) {
+        return removeLike($usrId, $postId, $mysqli);
+    } else {
+        return addLike($usrId, $postId, $mysqli);
+    }
+}
+
+function addLike($usrId, $postId, mysqli $mysqli)
+{
+    $insertLikeQuery = "INSERT INTO likes (usrId, postId) VALUES (?, ?)";
+    $incrementPostLikesQuery = "UPDATE posts SET posts.likes = posts.likes + 1 WHERE postId = ?;";
+
+    $stmt = $mysqli->prepare($insertLikeQuery);
+    $stmt->bind_param("ii", $usrId, $postId);
+    if ($stmt->execute()) {
+        $likeId = mysqli_insert_id($mysqli);
+        $stmt = $mysqli->prepare($incrementPostLikesQuery);
+        $stmt->bind_param("i", $postId);
+        return $stmt->execute() && notifyLike($postId, $likeId, $mysqli);
+    }
+    return false;
+}
+
+function removeLike($usrId, $postId, mysqli $mysqli)
+{
+    $deleteLikeQuery = "DELETE FROM likes WHERE usrId = ? AND postId = ?";
+    $decrementPostLikesQuery = "UPDATE posts SET posts.likes = posts.likes - 1 WHERE postId = ?;";
+
+    $stmt = $mysqli->prepare($deleteLikeQuery);
+    $stmt->bind_param("ii", $usrId, $postId);
+    if ($stmt->execute()) {
+        $stmt = $mysqli->prepare($decrementPostLikesQuery);
+        $stmt->bind_param("i", $postId);
+        return $stmt->execute();
+    }
+    return false;
+}
+
+function hasAlreadyLikedPost($usrId, $postId, mysqli $mysqli)
+{
+    $stmt = $mysqli->prepare("SELECT * FROM likes WHERE usrId = ? and postId = ?");
+    $stmt->bind_param("ii", $usrId, $postId);
+    $stmt->execute();
+    $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    return count($res) > 0;
+}
+
 
 function checkUserSession($mysqli): bool
 {
