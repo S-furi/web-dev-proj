@@ -1,18 +1,8 @@
 <?php
-require_once('../../database/db_connect.php');
-require_once('../../database/db_functions.php');
-require_once('../../utils/utils_functions.php');
-
-define("UPLOAD_POST_DIR", "../img/posts/");
-
-sec_session_start();
+require_once('api-bootstrap.php');
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-
-if (!checkUserSession($mysqli)) {
-    header("Location: login.php");
-}
 
 $msg = "Internal server error";
 
