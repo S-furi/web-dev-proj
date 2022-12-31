@@ -34,7 +34,7 @@ function handleLoginAttempt() {
                 } else {
                     displayMessage("login", res.data['msg']);
                 }
-            });
+            }).catch(err => console.log(err));
     } else {
         displayMessage("login", "Riempi tutti i campi");
     }
