@@ -578,11 +578,12 @@ header .dropdown>.notification-badge {
 
 /* Modal content */
 .modal-content {
+    text-align: center;
     background-color: #fefefe;
     margin: 15% auto;
     padding: 2rem;
     border: 1px solid #888;
-    width: 80%;
+    width: 50%;
     border-radius: var(--card-border-radius);
 }
 
