@@ -90,7 +90,8 @@ function isSpecialDay(day, busyDays) {
     const classList = [];
     if (compareDays(day, new Date())) {
         classList.push("active");
-    } else if (busyDays.filter(t => compareDays(day, t)).length !== 0) {
+    }
+    if (busyDays.filter(t => compareDays(day, t)).length !== 0) {
         classList.push("busy");
     }
     return classList;
