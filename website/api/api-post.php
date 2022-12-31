@@ -4,7 +4,6 @@ require_once('api-bootstrap.php');
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-$msg = "Internal server error";
 
 // action = 0 means that a new post has to be inserted
 if (isset($_GET["action"]) && $_GET["action"] == 0){
@@ -32,6 +31,11 @@ if (isset($_GET["action"]) && $_GET["action"] == 0){
         $msg = "Riempi tutti i campi";
     }
 
+    $msg = htmlentities($msg);
+
+    header("Location: ../post-creation.php?err=".$msg);
+
+
 // action = 1 means that clients need all followed users events information
 } else if (isset($_GET["action"]) && $_GET["action"] == 1) {
     $usrId = $_SESSION["user_id"];
@@ -41,13 +45,42 @@ if (isset($_GET["action"]) && $_GET["action"] == 0){
     echo json_encode($events);
     return;
 
-// action = 2 means that a user liked the post
+// action = 2: like has been toggled, checks whether to delete the like or add
 } else if (isset($_GET["action"]) && $_GET["action"] == 2) {
-    //TODO
+    if (isset($_POST["userId"], $_POST["postId"])){
+        $usrId = $_POST["userId"];
+        $postId = $_POST["postId"];
+
+        $response["ok"] = false;
+
+        if (registerLikeAction($usrId, $postId, $mysqli)) {
+            $response["ok"] = true;
+        }
+
+        header("Content-Type: application/json");
+        echo json_encode($response);
+        return;
+
+    } else {
+        header("HTTP/1.1 204 No Content");
+    }
+
+// action = 3: return true if user has liked the provided post
+} else if (isset($_GET["action"]) && $_GET["action"] == 3) {
+    if (isset($_POST["postId"])){
+        $usrId = $_SESSION["user_id"];
+        $postId = $_POST["postId"];
+
+        $response["hasAlreadyLikedPost"] = false;
+
+        if (hasAlreadyLikedPost($usrId, $postId, $mysqli)) {
+            $response["hasAlreadyLikedPost"] = true;
+        }
+
+        header("Content-Type: application/json");
+        echo json_encode($response);
+        return;
+    } else {
+        header("HTTP/1.1 204 No Content");
+    }
 }
-
-$msg = htmlentities($msg);
-
-header("Location: ../post-creation.php?err=".$msg);
-
-?>
