@@ -5,16 +5,16 @@
     --bg-color: hsl(252, 5%, 85%);
     --color-primary: cadetBlue;
     --color-secondary: #9b363b;
-    --color-gray: hsl(252, 15%,65%);
+    --color-gray: hsl(252, 15%, 65%);
     --color-white: white;
     --color-light: lightgrey;
-    
+
     --btn-padding: 0.6rem 2rem;
     --search-padding: 0.6rem 1rem;
     --border-radius: 2rem;
     --card-padding: 1rem;
     --card-border-radius: 1rem;
-    
+
     --sticky-top-left: 5.4rem;
     --sticky-top-right: -18rem;
 }
@@ -134,7 +134,7 @@ header .search-bar input[type="search"] {
     color: var(black);
 }
 
-header .search-bar input[type="search"]::placeholder { 
+header .search-bar input[type="search"]::placeholder {
     color: var(--color-gray);
 }
 
@@ -145,7 +145,7 @@ header .dropdown {
 
 header .dropdown-content {
     display: none;
-    position:absolute;
+    position: absolute;
     right: 0;
     min-width: 1rem;
     font-size: 0.8rem;
@@ -297,7 +297,7 @@ header .dropdown>.notification-badge {
     border-top-left-radius: var(--card-border-radius);
     overflow: hidden;
 }
-    
+
 .left .sidebar .menu-item:last-child.active {
     border-bottom-left-radius: var(--card-border-radius);
     overflow: hidden;
@@ -409,15 +409,15 @@ header .dropdown>.notification-badge {
 
 .middle .timeline .profile-infobox .profile-infobox-body .follow-info {
     display: flex;
-    align-items: flex-start; 
+    align-items: flex-start;
 }
 
-.middle .timeline .profile-infobox .profile-infobox-body .follow-info .followers-data { 
+.middle .timeline .profile-infobox .profile-infobox-body .follow-info .followers-data {
     margin-right: 1rem;
 }
 
 
-.middle .timeline .info-tag { 
+.middle .timeline .info-tag {
     font-weight: bold;
     margin-right: 0.2rem;
 }
@@ -436,13 +436,13 @@ header .dropdown>.notification-badge {
 }
 
 .middle .timeline .post-body .like-comment-div label {
-  margin-right: 0.4rem;
+    margin-right: 0.4rem;
 }
 
 .middle .timeline .post-body .profile-interaction-buttons a {
     text-decoration: none;
     color: var(--color-primary);
-}    
+}
 
 .middle .timeline .post-not-present {
     height: 15rem;
@@ -478,7 +478,8 @@ header .dropdown>.notification-badge {
     font-size: 0.8rem;
 }
 
-.middle .timeline .profile-infobox-head #modify-btn, .middle .timeline .profile-infobox-head #follow-btn {
+.middle .timeline .profile-infobox-head #modify-btn,
+.middle .timeline .profile-infobox-head #follow-btn {
     display: none;
 }
 
@@ -547,7 +548,7 @@ header .dropdown>.notification-badge {
     width: 100%;
     position: sticky;
     bottom: 1rem;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
 }
 
 .middle .timeline .comment-form textarea {
@@ -564,55 +565,56 @@ header .dropdown>.notification-badge {
 
 /* The modal container */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 999; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 /* Modal content */
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 2rem;
-  border: 1px solid #888;
-  width: 80%;
-  border-radius: var(--card-border-radius);
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 2rem;
+    border: 1px solid #888;
+    width: 80%;
+    border-radius: var(--card-border-radius);
 }
 
 /* The close button */
 .modal #closeBtn {
-  color: #aaa;
-  float: right;
-  font-size: 2.8rem;
-  font-weight: bold;
+    color: #aaa;
+    float: right;
+    font-size: 2.8rem;
+    font-weight: bold;
 }
 
 .modal #closeBtn:hover,
 .modal #closeBtn:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 /* animation for suggestion disappear once clicked follow btn*/
 .disappearing-card {
-  animation: hideCard .5s forwards;
+    animation: hideCard .5s forwards;
 }
 
 @keyframes hideCard {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    visibility: hidden;
-  }
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
 }
 
 .btn:disabled {
@@ -629,7 +631,7 @@ header .dropdown>.notification-badge {
     .container {
         width: 90%;
     }
-    
+
     .main .container {
         grid-template-columns: 13rem auto 17rem;
     }
@@ -660,7 +662,7 @@ header .dropdown>.notification-badge {
         border-radius: var(--card-border-radius);
         padding: var(--card-padding);
     }
-    
+
     .main .container .right .calendar-wrapper {
         margin-top: 1rem;
         background-color: var(--color-white);
@@ -676,21 +678,21 @@ header .dropdown>.notification-badge {
         display: flex;
         flex-flow: column;
     }
-    
+
     .right ul li {
         font-size: 0.8rem;
         display: flex;
         flex-flow: column;
         margin-bottom: 1rem;
     }
-    
+
     .right ul li .userinfo {
         margin: 1rem 0;
         gap: 1rem;
         display: flex;
         flex-flow: row;
     }
-    
+
     .right ul li .btn {
         width: 100%;
     }
@@ -712,7 +714,7 @@ header .dropdown>.notification-badge {
         text-align: center;
         padding: 1rem 0;
     }
-    
+
     .left .medium-btn {
         display: block;
     }
@@ -720,7 +722,7 @@ header .dropdown>.notification-badge {
     .left .small-btn {
         display: none;
     }
-    
+
     .middle .timeline .profile-infobox {
         margin-top: -1rem;
     }
@@ -732,8 +734,9 @@ header .dropdown>.notification-badge {
     .middle .timeline .profile-infobox-head #person_add {
         display: none;
     }
-    
-    .middle .timeline .profile-infobox-head #modify-btn, .middle .timeline .profile-infobox-head #follow-btn {
+
+    .middle .timeline .profile-infobox-head #modify-btn,
+    .middle .timeline .profile-infobox-head #follow-btn {
         display: flex;
     }
 }
