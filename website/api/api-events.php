@@ -1,7 +1,6 @@
 <?php
 require_once("api-bootstrap.php");
 
-
 if (isset($_GET["action"]) && $_GET["action"] == 0) {
     $result["ok"] = false;
     if (isset($_POST["postId"])) {
@@ -17,6 +16,8 @@ if (isset($_GET["action"]) && $_GET["action"] == 0) {
         $usrId = $_SESSION["user_id"];
         $result["isParticipating"] = isUserParticipating($usrId, $postId, $mysqli);
     }
+} else {
+    header("HTTP/1.1 204 No Content");
 }
 
 header("Content-Type: application/json");
