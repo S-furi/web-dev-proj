@@ -12,8 +12,6 @@ function followUser(user, followed, target=null) {
     axios.post("api/api-users.php?action=2", formData)
         .then(res => {
             if (res.data["ok"]) {
-                // follow went ok
-
                 // if target isn't specified, it means we are in the sidebar
                 // otherwise we the button is the one conained in the user profile
                 if (target == null) {
@@ -102,6 +100,43 @@ function clearResultList() {
     }
     searchResultsList.innerHTML = "";
 }
+
+function participateToEvent(target) {
+    const postId = target.id.split("-")[1];
+    const formData = new FormData();
+    formData.append("postId", postId);
+
+    axios.post("api/api-events.php?action=0", formData)
+        .then(res => {
+            if (res.data["ok"]) {
+                target.classList.add("disappearing-card");
+                setTimeout(() => { 
+                    target.parentNode.remove()
+                    target.remove();
+                }, 500);
+            }
+        }).catch(err => console.log(err));
+}
+
+function disableAlreadyParticipating(target, postId=null) {
+    if (postId === null) {
+        postId = target.id.split("-")[1];
+    }
+    const formData = new FormData();
+    formData.append("postId", postId);
+
+    axios.post("api/api-events.php?action=1", formData)
+        .then(res => {
+            console.log(res);
+            if (res.data["isParticipating"]) {
+                target.parentNode.remove()
+                target.remove();
+            }
+        }).catch(err => console.log(err));
+}
+
+document.querySelectorAll(`.post .interaction-buttons button[name="join event button"]`)
+    .forEach(btn => disableAlreadyParticipating(btn));
 
 // selected effect on left menu item
 menuItemSelectedEffect();

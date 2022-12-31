@@ -37,7 +37,7 @@
                           <span class="material-symbols-outlined">comment</span>
                         </a>
                       </div>
-                      <label for="post-<?php echo $post["postId"]?>-join-btn"><button type="button" name="join event button" id="post-<?php echo $post["postId"]?>-join-btn" class="btn btn-primary">Partecipa</button></label>
+                      <label for="post-<?php echo $post["postId"]?>-join-btn"><button type="button" name="join event button" id="post-<?php echo $post["postId"]?>-join-btn" class="btn btn-primary" onclick="participateToEvent(this)">Partecipa</button></label>
                     </div>
                   </div>
                 </article>
