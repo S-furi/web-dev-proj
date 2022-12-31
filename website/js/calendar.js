@@ -16,14 +16,12 @@ function getCurrentMonthEvents() {
         .filter(t => t.eventDate.getMonth() == currentMonth && t.eventDate.getFullYear() == currentYear);
 }
 
-
 function showEventsBrief(value) {
     const selectedDate = new Date(currentYear, currentMonth, value);
     const selecteedEvents = getCurrentMonthEvents()
         .filter(t => t.eventDate.getDate() == selectedDate.getDate()
             && t.eventDate.getMonth() == selectedDate.getMonth()
             && t.eventDate.getFullYear() == selectedDate.getFullYear());
-
 
     modal.style.display = "block";
     selecteedEvents.forEach(t => insertEventInView(t));
