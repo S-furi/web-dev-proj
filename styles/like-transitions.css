@@ -1,0 +1,10 @@
+.like-btn {
+    transition: all 0.5s ease-in-out;
+    color: var(--color-primary);
+}
+
+.like-btn.is-expanded {
+    color: var(--color-secondary);
+    font-size: 2.2rem;
+}
+
