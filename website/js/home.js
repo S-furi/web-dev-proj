@@ -127,7 +127,6 @@ function disableAlreadyParticipating(target, postId=null) {
 
     axios.post("api/api-events.php?action=1", formData)
         .then(res => {
-            console.log(res);
             if (res.data["isParticipating"]) {
                 target.parentNode.remove()
                 target.remove();
