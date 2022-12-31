@@ -1,8 +1,4 @@
-function showForm() {
-  window.location.href = "post-creation.php"
-}
-
-function followUser(user, followed, target=null) {
+function followUser(user, followed, target = null) {
     const formData = new FormData();
 
     formData.append("user", user);
@@ -15,9 +11,9 @@ function followUser(user, followed, target=null) {
                 // if target isn't specified, it means we are in the sidebar
                 // otherwise we the button is the one conained in the user profile
                 if (target == null) {
-                    document.querySelector(".right li.user-suggestion.usr-"+followed).classList.add("disappearing-card");
-                    document.querySelector(".right li.user-suggestion.usr-"+followed + " input").value = "✔️";
-                    setTimeout(() => document.querySelector(".right li.user-suggestion.usr-"+followed).remove(), 500);
+                    document.querySelector(".right li.user-suggestion.usr-" + followed).classList.add("disappearing-card");
+                    document.querySelector(".right li.user-suggestion.usr-" + followed + " input").value = "✔️";
+                    setTimeout(() => document.querySelector(".right li.user-suggestion.usr-" + followed).remove(), 500);
                 } else {
                     target.disabled = true;
                 }
@@ -28,21 +24,30 @@ function followUser(user, followed, target=null) {
         });
 }
 
-function menuItemSelectedEffect() {
-    const menuItems = document.querySelectorAll(".menu-item");
+function likePost(postId, userId, target) {
+    const formData = new FormData();
+    formData.append("postId", postId);
+    formData.append("userId", userId);
 
-    const changeActiveItems = () => {
-        menuItems.forEach(item => {
-            item.classList.remove('active');
-        })
-    }
+    axios.post("api/api-post.php?action=2", formData)
+        .then(res => {
+            if (res.data["ok"]) {
+                renderLikeAnimation(target);
+            }
+        }).catch(err => console.log(err));
+}
 
-    menuItems.forEach(item => {
-        item.addEventListener('click', () => {
-            changeActiveItems();
-            item.classList.add('active');
-        })
-    })
+function checkLikedPosts(target) {
+    const postId = target.id.split("-")[1];
+    const formData = new FormData();
+    formData.append("postId", postId);
+
+    axios.post("api/api-post.php?action=3", formData)
+        .then(res => {
+            if (res.data["hasAlreadyLikedPost"]) {
+                target.firstElementChild.classList.add("is-expanded");
+            }
+        }).catch(err => console.log(err));
 }
 
 function searchUser(searchFragment) {
@@ -92,15 +97,6 @@ function getSelectedText(event) {
     clearResultList();
 }
 
-function clearResultList() {
-    const searchResultsList = document.querySelector("header .dropdown.search-result .dropdown-content");
-    if (!searchResultsList.classList.contains("inactive")) {
-        searchResultsList.classList.add("inactive");
-        searchResultsList.classList.remove("active");
-    }
-    searchResultsList.innerHTML = "";
-}
-
 function participateToEvent(target) {
     const postId = target.id.split("-")[1];
     const formData = new FormData();
@@ -110,7 +106,7 @@ function participateToEvent(target) {
         .then(res => {
             if (res.data["ok"]) {
                 target.classList.add("disappearing-card");
-                setTimeout(() => { 
+                setTimeout(() => {
                     target.parentNode.remove()
                     target.remove();
                 }, 500);
@@ -118,7 +114,7 @@ function participateToEvent(target) {
         }).catch(err => console.log(err));
 }
 
-function disableAlreadyParticipating(target, postId=null) {
+function disableAlreadyParticipating(target, postId = null) {
     if (postId === null) {
         postId = target.id.split("-")[1];
     }
@@ -134,8 +130,48 @@ function disableAlreadyParticipating(target, postId=null) {
         }).catch(err => console.log(err));
 }
 
+
+// from now on, there are mainly visual functions 
+
+function menuItemSelectedEffect() {
+    const menuItems = document.querySelectorAll(".menu-item");
+
+    const changeActiveItems = () => {
+        menuItems.forEach(item => {
+            item.classList.remove('active');
+        })
+    }
+
+    menuItems.forEach(item => {
+        item.addEventListener('click', () => {
+            changeActiveItems();
+            item.classList.add('active');
+        })
+    })
+}
+
+function showForm() {
+    window.location.href = "post-creation.php"
+}
+
+function clearResultList() {
+    const searchResultsList = document.querySelector("header .dropdown.search-result .dropdown-content");
+    if (!searchResultsList.classList.contains("inactive")) {
+        searchResultsList.classList.add("inactive");
+        searchResultsList.classList.remove("active");
+    }
+    searchResultsList.innerHTML = "";
+}
+
+function renderLikeAnimation(target) {
+    target.firstElementChild.classList.toggle("is-expanded");
+}
+
 document.querySelectorAll(`.post .interaction-buttons button[name="join event button"]`)
     .forEach(btn => disableAlreadyParticipating(btn));
+
+document.querySelectorAll(`.post .interaction-buttons button[name="like button"]`)
+    .forEach(btn => checkLikedPosts(btn));
 
 // selected effect on left menu item
 menuItemSelectedEffect();
