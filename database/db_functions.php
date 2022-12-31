@@ -1,66 +1,67 @@
 <?php
-// http://paololatella.blogspot.com/2017/10/lezione-nov-2017-script-sicuro-per-il.html
 
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
-function sec_session_start() {
-  $session_name = "sec_session_id";
-  $secure = false; // not https
-  $httponly = true; // js can't access to sess-id
-  ini_set("session.use_only_cookies", 1); // force session to use cookies only
-  $cookie_params = session_get_cookie_params();
-  session_set_cookie_params($cookie_params['lifetime'], $cookie_params['path'], $cookie_params['domain'], $secure, $httponly);
-  session_name($session_name);
-  session_start();
-  session_regenerate_id(); // regenerate the session and delete the one created before
+function sec_session_start()
+{
+    $session_name = "sec_session_id";
+    $secure = false; // not https
+    $httponly = true; // js can't access to sess-id
+    ini_set("session.use_only_cookies", 1); // force session to use cookies only
+    $cookie_params = session_get_cookie_params();
+    session_set_cookie_params($cookie_params['lifetime'], $cookie_params['path'], $cookie_params['domain'], $secure, $httponly);
+    session_name($session_name);
+    session_start();
+    session_regenerate_id(); // regenerate the session and delete the one created before
 }
 
 /**
  * Checks wether a provided email and password are inside
  * the database. 
  */
-function login($email, $password, $mysqli) {
-  $query = "SELECT usrId, password, username FROM users WHERE email=? LIMIT 1;";
-  if ($stmt = $mysqli->prepare($query)) {
-    $stmt->bind_param('s', $email);
-    $stmt->execute();
+function login($email, $password, $mysqli)
+{
+    $query = "SELECT usrId, password, username FROM users WHERE email=? LIMIT 1;";
+    if ($stmt = $mysqli->prepare($query)) {
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
 
-    $data = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    if (count($data) == 0) {
-      return false;
-    }    
-    
-    $username = $data[0]['username'];
-    $user_id = $data[0]['usrId'];
-    $db_password = $data[0]['password'];
+        $data = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        if (count($data) == 0) {
+            return false;
+        }
 
-    if (checkBrute($user_id, $mysqli)) {
-      return false;
+        $username = $data[0]['username'];
+        $user_id = $data[0]['usrId'];
+        $db_password = $data[0]['password'];
+
+        if (checkBrute($user_id, $mysqli)) {
+            return false;
+        }
+
+        if (!password_verify($password, $db_password)) {
+            $now = time();
+            $mysqli->query("INSERT INTO login_attempts (user_id, time) VALUES ('$user_id', '$now')");
+        }
+        // correct password inserted
+
+        // user broser should be inserted crypted in 
+        // $_SESSION['login_string'] with psw;
+
+        // $user_browser = $_SERVER['HTTP_USER_AGENT'];
+
+        // trying to avoid XSS attacks using htmlentities()
+        // used for replacing with HTML escape sequences
+        // insed of symbols like <, >, / or others simple ways
+        // to inject malicious code inside forms.
+        $_SESSION['user_id'] = htmlentities($user_id);
+        $_SESSION['username'] = htmlentities($username);
+        $_SESSION['login_string'] = $_SERVER["REMOTE_ADDR"] . $_SERVER["HTTP_USER_AGENT"] . $db_password;
+
+        return true;
     }
-
-    if (!password_verify($password, $db_password)) {
-      $now = time();
-      $mysqli->query("INSERT INTO login_attempts (user_id, time) VALUES ('$user_id', '$now')");
-    }
-    // correct password inserted
-
-    // user broser should be inserted crypted in 
-    // $_SESSION['login_string'] with psw;
-
-    // $user_browser = $_SERVER['HTTP_USER_AGENT'];
-
-    // trying to avoid XSS attacks using htmlentities()
-    // used for replacing with HTML escape sequences
-    // insed of symbols like <, >, / or others simple ways
-    // to inject malicious code inside forms.
-    $_SESSION['user_id'] = htmlentities($user_id); 
-    $_SESSION['username'] = htmlentities($username); 
-    $_SESSION['login_string'] = $_SERVER["REMOTE_ADDR"].$_SERVER["HTTP_USER_AGENT"].$db_password;
-
-    return true;
-  }
 }
 
 /**
@@ -68,59 +69,64 @@ function login($email, $password, $mysqli) {
  * by checking if there are more than 5 failed
  * login attempts in the last two hours.
  */
-function checkBrute($usr_id, $mysqli) : bool {
-  $now = time();
-  $valid_attempts = $now - (2 * 60 * 60);
-  if ($stmt = $mysqli->prepare("SELECT time FROM login_attempts WHERE usrId=? AND time > '$valid_attempts'")) {
-    $stmt->bind_param("i", $usr_id);
-    $stmt->execute();
-    $stmt->store_result();
-    if ($stmt->num_rows > 5) {
-      return true;
+function checkBrute($usr_id, $mysqli): bool
+{
+    $now = time();
+    $valid_attempts = $now - (2 * 60 * 60);
+    if ($stmt = $mysqli->prepare("SELECT time FROM login_attempts WHERE usrId=? AND time > '$valid_attempts'")) {
+        $stmt->bind_param("i", $usr_id);
+        $stmt->execute();
+        $stmt->store_result();
+        if ($stmt->num_rows > 5) {
+            return true;
+        }
     }
-  }
-  return false;
-}
-
-function insertNewUser($email, $username,  $password, $first_name, $last_name, $mysqli) : bool {
-  // We are using password_hash() because it's safe and simple to use.
-  // It uses a secure salt for hashing the password, and the 
-  // algorithm used changes overtime using PASSWORD_DEFAULT,
-  // reulting in the most secure algorithm available at 
-  // the current version of PHP.
-  $password = password_hash($password, PASSWORD_DEFAULT);
-    
-  $stmt = $mysqli->prepare("INSERT INTO users (email, password, username, firstName, lastName) VALUES (?, ?, ?, ?, ?)");
-  $stmt->bind_param("sssss", $email, $password, $username, $first_name, $last_name);
-
-  // An exeption is thrown in the case where email or username are already in DB
-  // (and of course all the cases where db queries fails for other internal reasons)
-  try {
-    $stmt->execute();
-  } catch (\Throwable $th) {
     return false;
-  }
-  return true;
 }
 
-function createPost($usr_id, $title, $caption, $image, $location, $event_date, $mysqli) : bool {
-  $query = "insert into posts (usrId, title, caption, image, location, creationDate, eventDate, likes) VALUES (?, ?, ?, ?, ?, NOW(), ?, 0)";
-  $event_date = date("Y-m-d H:i:s", strtotime($event_date));
-  $stmt = $mysqli->prepare($query);
-  $stmt->bind_param("isssss", $usr_id, $title, $caption, $image, $location, $event_date);
+function insertNewUser($email, $username,  $password, $first_name, $last_name, $mysqli): bool
+{
+    // We are using password_hash() because it's safe and simple to use.
+    // It uses a secure salt for hashing the password, and the 
+    // algorithm used changes overtime using PASSWORD_DEFAULT,
+    // reulting in the most secure algorithm available at 
+    // the current version of PHP.
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
+    $stmt = $mysqli->prepare("INSERT INTO users (email, password, username, firstName, lastName) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $email, $password, $username, $first_name, $last_name);
+
+    // An exeption is thrown in the case where email or username are already in DB
+    // (and of course all the cases where db queries fails for other internal reasons)
+    try {
+        $stmt->execute();
+    } catch (\Throwable $th) {
+        return false;
+    }
+    return true;
+}
+
+function createPost($usr_id, $title, $caption, $image, $location, $event_date, $mysqli): bool
+{
+    $query = "insert into posts (usrId, title, caption, image, location, creationDate, eventDate, likes) VALUES (?, ?, ?, ?, ?, NOW(), ?, 0)";
+    $event_date = date("Y-m-d H:i:s", strtotime($event_date));
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("isssss", $usr_id, $title, $caption, $image, $location, $event_date);
 
     if ($stmt->execute()) {
         return createEvent($usr_id, mysqli_insert_id($mysqli), $mysqli);
     }
 }
 
-function createEvent($usrId, $postId, mysqli $mysqli) {
+function createEvent($usrId, $postId, mysqli $mysqli)
+{
     $stmt = $mysqli->prepare("INSERT INTO events (postId) VALUES (?)");
     $stmt->bind_param("i", $postId);
     return $stmt->execute() && insertParticipant($usrId, mysqli_insert_id($mysqli), $mysqli);
 }
 
-function insertParticipant($usrId, $eventId, mysqli $mysqli) {
+function insertParticipant($usrId, $eventId, mysqli $mysqli)
+{
     $stmt = $mysqli->prepare("INSERT INTO participations (usrId, eventId) VALUES (?, ?);");
     $stmt->bind_param("ii", $usrId, $eventId);
     if ($stmt->execute()) {
@@ -128,13 +134,15 @@ function insertParticipant($usrId, $eventId, mysqli $mysqli) {
     }
 }
 
-function incrementParticipants($eventId, $mysqli) {
+function incrementParticipants($eventId, $mysqli)
+{
     $stmt = $mysqli->prepare("UPDATE events SET events.participants = events.participants + 1 WHERE events.eventId = ?;");
     $stmt->bind_param("i", $eventId);
     return $stmt->execute();
 }
 
-function insertParticipantFromPostId($usrId, $postId, mysqli $mysqli) {
+function insertParticipantFromPostId($usrId, $postId, mysqli $mysqli)
+{
     $query = "INSERT INTO participations VALUES (?, ?);";
     $stmt = $mysqli->prepare($query);
     $eventId = getEventFromPost($postId, $mysqli)["eventId"];
@@ -142,7 +150,8 @@ function insertParticipantFromPostId($usrId, $postId, mysqli $mysqli) {
     return $stmt->execute() && incrementParticipants($eventId, $mysqli);
 }
 
-function isUserParticipating($usrId, $postId, mysqli $mysqli) {
+function isUserParticipating($usrId, $postId, mysqli $mysqli)
+{
     $query = "SELECT * FROM participations WHERE usrId = ? AND eventId = ?;";
     $stmt = $mysqli->prepare($query);
     $eventId = getEventFromPost($postId, $mysqli)["eventId"];
@@ -153,7 +162,8 @@ function isUserParticipating($usrId, $postId, mysqli $mysqli) {
     return count($res) > 0;
 }
 
-function getEventFromPost($postId, mysqli $mysqli) {
+function getEventFromPost($postId, mysqli $mysqli)
+{
     $query = "SELECT eventId FROM events JOIN posts ON (events.postId = posts.postId) WHERE posts.postId = ?";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("i", $postId);
@@ -161,25 +171,28 @@ function getEventFromPost($postId, mysqli $mysqli) {
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
 }
 
-function getPosts($usrId, $mysqli) {
-  $query = "SELECT usrId, postId, caption, image, location, title, eventDate, likes FROM posts WHERE usrId=? ORDER BY creationDate DESC";
-  $stmt = $mysqli->prepare($query);
-  $stmt->bind_param("i", $usrId);
-  
-  $stmt->execute();
-  return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+function getPosts($usrId, $mysqli)
+{
+    $query = "SELECT usrId, postId, caption, image, location, title, eventDate, likes FROM posts WHERE usrId=? ORDER BY creationDate DESC";
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("i", $usrId);
+
+    $stmt->execute();
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
-function getPostFromId($usrId, $postId, $mysqli) {
-  $query = "SELECT caption, image, location, title, eventDate, likes FROM posts WHERE usrId=? AND postId=?";
-  $stmt = $mysqli->prepare($query);
-  $stmt->bind_param("ii", $usrId, $postId);
-  
-  $stmt->execute();
-  return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+function getPostFromId($usrId, $postId, $mysqli)
+{
+    $query = "SELECT caption, image, location, title, eventDate, likes FROM posts WHERE usrId=? AND postId=?";
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("ii", $usrId, $postId);
+
+    $stmt->execute();
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
 }
 
-function getAllEventsDetails($usrId, mysqli $mysqli) {
+function getAllEventsDetails($usrId, mysqli $mysqli)
+{
     $query = "
             SELECT * 
             FROM events JOIN posts ON (events.postId = posts.postId)
@@ -195,32 +208,35 @@ function getAllEventsDetails($usrId, mysqli $mysqli) {
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
-function getUser($usrId, $mysqli) {
-  $query = "SELECT usrId, email, username, firstName, lastName FROM users WHERE usrId=?";
-  $stmt = $mysqli->prepare($query);
-  $stmt->bind_param("i", $usrId);
-  
-  $stmt->execute();
-  return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+function getUser($usrId, $mysqli)
+{
+    $query = "SELECT usrId, email, username, firstName, lastName FROM users WHERE usrId=?";
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("i", $usrId);
+
+    $stmt->execute();
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
 }
 
-function getComments($postId, $mysqli) {
-  $query = "SELECT c.content, u.username, u.firstName, u.lastName FROM comments c INNER JOIN users u ON c.author = u.usrId WHERE c.postID=? ORDER BY date DESC";
-  $stmt = $mysqli->prepare($query);
-  $stmt->bind_param("i", $postId);
+function getComments($postId, $mysqli)
+{
+    $query = "SELECT c.content, u.username, u.firstName, u.lastName FROM comments c INNER JOIN users u ON c.author = u.usrId WHERE c.postID=? ORDER BY date DESC";
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("i", $postId);
 
-  $stmt->execute();
-  return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $stmt->execute();
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
-function addComment($postId, $usrId, $content, $mysqli) {
-  $query = "INSERT INTO comments (postId, author, date, content) VALUES (?, ?, ?, ?)";
-  $date = date("Y-m-d H:i:s");
-  $stmt = $mysqli->prepare($query);
-  $stmt->bind_param("iiss", $postId, $usrId, $date, $content);
+function addComment($postId, $usrId, $content, $mysqli)
+{
+    $query = "INSERT INTO comments (postId, author, date, content) VALUES (?, ?, ?, ?)";
+    $date = date("Y-m-d H:i:s");
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("iiss", $postId, $usrId, $date, $content);
 
-  $stmt->execute();
-  return $stmt->affected_rows>0;
+    $stmt->execute();
+    return $stmt->affected_rows > 0;
 }
 
 /**
@@ -229,7 +245,8 @@ function addComment($postId, $usrId, $content, $mysqli) {
  * THIS IS A TEMPORARY VERSION, returns first 5 users in db
  * not followed by provided usrId
  */
-function getSuggestedUser($usrId, $mysqli) {
+function getSuggestedUser($usrId, $mysqli)
+{
     // Note: if DB is big `ORDER BY RAND()` will have bad performances
     $query =
         "SELECT usrId, username, firstName, lastName 
@@ -244,10 +261,11 @@ function getSuggestedUser($usrId, $mysqli) {
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
-function getUserFromFragments($queryFragment, $mysqli) {
+function getUserFromFragments($queryFragment, $mysqli)
+{
     $condition = preg_replace('/[^A-Za-z0-9\- ]/', '', $queryFragment);
     // % sign are SQL wildcards
-    $condition = '%'.$condition.'%';
+    $condition = '%' . $condition . '%';
 
     $query = "
         SELECT email, username, usrId, firstName, lastName 
@@ -265,7 +283,8 @@ function getUserFromFragments($queryFragment, $mysqli) {
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
-function insertNewFollower($user, $followed, $mysqli) {
+function insertNewFollower($user, $followed, $mysqli)
+{
     $stmt = $mysqli->prepare("INSERT INTO followers (usrId, friendId) VALUES (?, ?)");
     // friendships aren't bidirectional
     $stmt->bind_param("ii", $user, $followed);
@@ -278,7 +297,8 @@ function insertNewFollower($user, $followed, $mysqli) {
     return true;
 }
 
-function getFollowedUsers($user, $mysqli) {
+function getFollowedUsers($user, $mysqli)
+{
     $stmt = $mysqli->prepare("SELECT friendId FROM followers WHERE usrId = ?");
     $stmt->bind_param("i", $user);
     $stmt->execute();
@@ -286,7 +306,8 @@ function getFollowedUsers($user, $mysqli) {
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
-function getFollowingNum($userId, $mysqli) {
+function getFollowingNum($userId, $mysqli)
+{
     $stmt = $mysqli->prepare("SELECT COUNT(*) as follow_num FROM followers WHERE usrId = ?");
     $stmt->bind_param("i", $userId);
     $stmt->execute();
@@ -295,7 +316,8 @@ function getFollowingNum($userId, $mysqli) {
 }
 
 
-function getFollowersNum($userId, $mysqli) {
+function getFollowersNum($userId, $mysqli)
+{
     $stmt = $mysqli->prepare("SELECT COUNT(*) as follow_num FROM followers WHERE friendId = ?");
     $stmt->bind_param("i", $userId);
     $stmt->execute();
@@ -308,14 +330,15 @@ function getFollowersNum($userId, $mysqli) {
  * Need to add the control over the event date.
  * (this function should be used only for future events)
  */
-function getFriendsPosts($usrId, $mysqli) {
+function getFriendsPosts($usrId, $mysqli)
+{
     $query = "SELECT posts.*, username as author
         FROM posts JOIN users ON (posts.usrId = users.usrId)
         WHERE users.usrId in (SELECT friendId 
                                 FROM followers 
                                 WHERE followers.usrId = ?)
         ORDER BY eventDate DESC;";
-        
+
 
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("i", $usrId);
@@ -323,7 +346,8 @@ function getFriendsPosts($usrId, $mysqli) {
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
-function getCommentsOfPost($postId, $mysqli) {
+function getCommentsOfPost($postId, $mysqli)
+{
     $query = "SELECT content, date, author FROM comments WHERE postId = ?;";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("i", $postId);
@@ -332,7 +356,8 @@ function getCommentsOfPost($postId, $mysqli) {
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
-function updateLikes($postId, $usrId, $mysqli) {
+function updateLikes($postId, $usrId, $mysqli)
+{
     $insert_like_query = "INSERT INTO likes (usrId, postId) VALUES (?, ?)";
     $stmt = $mysqli->prepare($insert_like_query);
     $stmt->bind_param("ii", $usrId, $postId);
@@ -345,7 +370,8 @@ function updateLikes($postId, $usrId, $mysqli) {
     return false;
 }
 
-function notify(string $type, int $forUser, int $entityId, mysqli $mysqli) {
+function notify(string $type, int $forUser, int $entityId, mysqli $mysqli)
+{
     $query = "SELECT notificationId FROM notifications WHERE forUser = ? AND entityId = ? AND type = ?";
     $stmt = $mysqli->prepare($query);
 
@@ -366,7 +392,8 @@ function notify(string $type, int $forUser, int $entityId, mysqli $mysqli) {
     }
 }
 
-function fetchNotifications(int $num, $forUser, $mysqli) {
+function fetchNotifications(int $num, $forUser, $mysqli)
+{
     $query = "SELECT type, forUser, entityId, read, time FROM notifications WHERE forUser = ? ORDER BY time DESC LIMIT ?";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_params("ii", $forUser, $num);
@@ -378,7 +405,8 @@ function fetchNotifications(int $num, $forUser, $mysqli) {
 /* Check if there are any new notifications for the user
  *
  */
-function getNotificationsForUser($userId, $lastNotificationId, mysqli $mysqli) {
+function getNotificationsForUser($userId, $lastNotificationId, mysqli $mysqli)
+{
     $query = "SELECT * FROM notifications WHERE forUser = ? AND notificationId > ?";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param('ii', $userId, $lastNotificationId);
@@ -400,7 +428,8 @@ function getNotificationsForUser($userId, $lastNotificationId, mysqli $mysqli) {
  * post information when querying notifications table.
  * using the commentID as EntityId.
  */
-function fetchPostInfoFromCommentId($commentId, mysqli $mysqli) {
+function fetchPostInfoFromCommentId($commentId, mysqli $mysqli)
+{
     $query = "SELECT p.* 
                 FROM comments c JOIN posts p ON (c.postId = p.postId)
                 WHERE commentId = ?;";
@@ -415,7 +444,8 @@ function fetchPostInfoFromCommentId($commentId, mysqli $mysqli) {
  * post information when querying notifications table,
  * using the likeId as EntityId.
  */
-function fetchPostInfoFromLike($likeId, $mysqli) {
+function fetchPostInfoFromLike($likeId, $mysqli)
+{
     $query = "SELECT * 
                 FROM likes l JOIN posts p ON (l.postId = p.postId)
                 WHERE likeId = ?;";
@@ -426,7 +456,8 @@ function fetchPostInfoFromLike($likeId, $mysqli) {
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
-function getLikeDetails($likeId, mysqli $mysqli) {
+function getLikeDetails($likeId, mysqli $mysqli)
+{
     $stmt  = $mysqli->prepare("SELECT * FROM likes WHERE likeId = ?");
     $stmt->bind_param("i", $likeId);
     $stmt->execute();
@@ -437,7 +468,8 @@ function getLikeDetails($likeId, mysqli $mysqli) {
 // che ti ha seguito. Si implementa la funzione quando è pronto il 
 // file php per visualizzare il profilo di un utente.
 
-function getCommentFromCommentId($commentId, mysqli $mysqli) {
+function getCommentFromCommentId($commentId, mysqli $mysqli)
+{
     $query = "SELECT postId, author, date, content FROM comments where commentId = ?;";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("i", $commentId);
@@ -446,27 +478,27 @@ function getCommentFromCommentId($commentId, mysqli $mysqli) {
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
-function checkUserSession($mysqli) : bool {
-  if (isset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['login_string'])) {
-    $user_id = $_SESSION['user_id'];
-    $login_string = $_SESSION['login_string'];
-    $username = $_SESSION['username'];
+function checkUserSession($mysqli): bool
+{
+    if (isset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['login_string'])) {
+        $user_id = $_SESSION['user_id'];
+        $login_string = $_SESSION['login_string'];
+        $username = $_SESSION['username'];
 
-    if ($stmt = $mysqli->prepare("SELECT username, password FROM users WHERE usrId=?")) {
-      $stmt->bind_param("i", $user_id);
-      $stmt->execute();
-      $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+        if ($stmt = $mysqli->prepare("SELECT username, password FROM users WHERE usrId=?")) {
+            $stmt->bind_param("i", $user_id);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
 
-      $password = $result["password"];
-      $db_username = $result["username"];
+            $password = $result["password"];
+            $db_username = $result["username"];
 
-      $login_check_string = $_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'].$password;
+            $login_check_string = $_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT'] . $password;
 
-      if ($login_string == $login_check_string && $username == $db_username) {
-        return true;
-      }
+            if ($login_string == $login_check_string && $username == $db_username) {
+                return true;
+            }
+        }
     }
-  }
-  return false;
+    return false;
 }
-?>
