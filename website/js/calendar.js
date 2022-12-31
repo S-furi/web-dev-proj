@@ -1,7 +1,7 @@
 function fetchEvents() {
     return axios.get("api/api-post.php?action=1")
         .then(res => {
-            if ( res.data.length > 0 ) {
+            if (res.data.length > 0) {
                 res.data
                     .forEach(event => {
                         event.eventDate = new Date(event.eventDate);
@@ -20,9 +20,9 @@ function getCurrentMonthEvents() {
 function showEventsBrief(value) {
     const selectedDate = new Date(currentYear, currentMonth, value);
     const selecteedEvents = getCurrentMonthEvents()
-            .filter(t => t.eventDate.getDate() == selectedDate.getDate()
-                    && t.eventDate.getMonth() == selectedDate.getMonth()
-                    && t.eventDate.getFullYear() == selectedDate.getFullYear());
+        .filter(t => t.eventDate.getDate() == selectedDate.getDate()
+            && t.eventDate.getMonth() == selectedDate.getMonth()
+            && t.eventDate.getFullYear() == selectedDate.getFullYear());
 
 
     modal.style.display = "block";
@@ -90,7 +90,7 @@ function handleMonthChange(event) {
 
 function isSpecialDay(day, busyDays) {
     const classList = [];
-    if (compareDays(day, new Date())) { 
+    if (compareDays(day, new Date())) {
         classList.push("active");
     } else if (busyDays.filter(t => compareDays(day, t)).length !== 0) {
         classList.push("busy");
@@ -99,9 +99,9 @@ function isSpecialDay(day, busyDays) {
 }
 
 function compareDays(day, comparisonDate) {
-    return (day == comparisonDate.getDate() 
-            && currentMonth == comparisonDate.getMonth() 
-            && currentYear == comparisonDate.getFullYear());
+    return (day == comparisonDate.getDate()
+        && currentMonth == comparisonDate.getMonth()
+        && currentYear == comparisonDate.getFullYear());
 }
 
 function insertCalendar() {
