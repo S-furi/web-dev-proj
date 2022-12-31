@@ -18,18 +18,19 @@ function getCurrentMonthEvents() {
 
 function showEventsBrief(value) {
     const selectedDate = new Date(currentYear, currentMonth, value);
-    const selecteedEvents = getCurrentMonthEvents()
+    const selectedEvents = getCurrentMonthEvents()
         .filter(t => t.eventDate.getDate() == selectedDate.getDate()
             && t.eventDate.getMonth() == selectedDate.getMonth()
             && t.eventDate.getFullYear() == selectedDate.getFullYear());
 
     modal.style.display = "block";
-    selecteedEvents.forEach(t => insertEventInView(t));
+    selectedEvents.forEach(t => insertEventInView(t));
 }
 
 function insertEventInView(event) {
     const container = document.querySelector(".modal .events-of-day");
-    container.innerHTML += `<li>"${event.title}", il ${event.eventDate}</li>`
+    const ref = `post.php?usrId=${event.usrId}&postId=${event.postId}`;
+    container.innerHTML += `<li><a href="${ref}" >"<strong>${event.title}</strong>", il ${event.eventDate.toLocaleDateString('it-IT')}</a></li>`
 }
 
 function renderCalendar() {
@@ -196,8 +197,8 @@ document.querySelectorAll(".left .popup-calendar-wrapper .icons span").forEach(i
 });
 
 // find the modal and set the listeners for exit it
-const modal = document.querySelector(".modal");
-const span = document.querySelector(".modal span");
+const modal = document.querySelector("#calendar-events-modal");
+const span = document.querySelector("#calendar-events-modal span");
 setModalListeners();
 
 // finally, render the calendar and fill all the events
