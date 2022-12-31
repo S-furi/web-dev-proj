@@ -7,4 +7,8 @@ define("UPLOAD_POST_DIR", "../img/posts/");
 
 sec_session_start();
 
+if (!checkUserSession($mysqli)) {
+    header("Location: login.php");
+}
+
 ?>
