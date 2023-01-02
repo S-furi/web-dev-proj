@@ -60,8 +60,8 @@ function getSuggestedUser($usrId, $mysqli)
 
 function getUserFromFragments($queryFragment, $mysqli)
 {
+    // removing special chars
     $condition = preg_replace('/[^A-Za-z0-9\- ]/', '', $queryFragment);
-    // % sign are SQL wildcards
     $condition = '%' . $condition . '%';
 
     $query = "

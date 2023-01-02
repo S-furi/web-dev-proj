@@ -1,10 +1,17 @@
 <?php
+require_once("db_posts.php");
 
 /**
  * This file containts methods and utility function for retrieving and 
  * inserting informations about notifications.
  */
 
+/**
+ * Notify the specified user of the actions (type) occurred.
+ *
+ * If the notification is already present in DB, mark it as unread
+ * and restore the notification date time.
+ */
 function notify(string $type, int $forUser, int $entityId, mysqli $mysqli)
 {
     $query = "SELECT notificationId FROM notifications WHERE forUser = ? AND entityId = ? AND type = ?";
@@ -60,9 +67,8 @@ function getNotificationsForUser($userId, $lastNotificationId, mysqli $mysqli)
             $notifications[] = $row;
         }
         return $notifications;
-    } else {
-        return null;
     }
+    return null;
 }
 
 ?>

@@ -1,10 +1,15 @@
 <?php
+require_once("db_events.php");
+require_once("db_notifications.php");
 
 /**
  * This file containts functions for retrieving information from database
  * about posts, comments and likes.
  */
 
+/**
+ * Creates a post from given arguments.
+ */
 function createPost($usr_id, $title, $caption, $image, $location, $event_date, $mysqli): bool
 {
     $query = "insert into posts (usrId, title, caption, image, location, creationDate, eventDate, likes) VALUES (?, ?, ?, ?, ?, NOW(), ?, 0)";
@@ -154,12 +159,12 @@ function addComment($postId, $usrId, $content, $mysqli)
 
 function updateLikes($postId, $usrId, $mysqli)
 {
-    $insert_like_query = "INSERT INTO likes (usrId, postId) VALUES (?, ?)";
-    $stmt = $mysqli->prepare($insert_like_query);
+    $insertLikeQuery = "INSERT INTO likes (usrId, postId) VALUES (?, ?)";
+    $stmt = $mysqli->prepare($insertLikeQuery);
     $stmt->bind_param("ii", $usrId, $postId);
     if ($stmt->execute()) {
-        $update_likes_query = "UPDATE posts SET likes = likes + 1 WHERE postId = ?";
-        $stmt = $mysqli->prepare($update_likes_query);
+        $updateLikesQuery = "UPDATE posts SET likes = likes + 1 WHERE postId = ?";
+        $stmt = $mysqli->prepare($updateLikesQuery);
         $stmt->bind_param("i", $postId);
         return $stmt->execute();
     }
@@ -170,9 +175,8 @@ function registerLikeAction($usrId, $postId, mysqli $mysqli)
 {
     if (hasAlreadyLikedPost($usrId, $postId, $mysqli)) {
         return removeLike($usrId, $postId, $mysqli);
-    } else {
-        return addLike($usrId, $postId, $mysqli);
     }
+    return addLike($usrId, $postId, $mysqli);
 }
 
 function addLike($usrId, $postId, mysqli $mysqli)
@@ -191,6 +195,17 @@ function addLike($usrId, $postId, mysqli $mysqli)
     return false;
 }
 
+/**
+ * Removes a like from the given post.
+ *
+ * NOTE: the user who has permissions for DELETE, may lead
+ * to security issues. In this case, the user has DELETE permissions 
+ * only on the table `likes`. For the sake of semplicity, we will
+ * not make security improvements on the DB, but we still try to protect
+ * against unwanted deletions thanks to prepared stamtens.
+ *
+ * @return bool: true if the like is succesfully removed
+ */
 function removeLike($usrId, $postId, mysqli $mysqli)
 {
     $deleteLikeQuery = "DELETE FROM likes WHERE usrId = ? AND postId = ?";
