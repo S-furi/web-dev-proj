@@ -93,11 +93,9 @@ function dateDiff(date1, date2) {
     return diffInDays + ' giorni fa';
 }
 
-
 function showNotificationCenter() {
     notificationsModal.style.display = "block";
 }
-
 
 function setModalListeners() {
     notificationsModal.addEventListener("keydown", function(event) {
@@ -112,7 +110,6 @@ function setModalListeners() {
 }
 
 setModalListeners();
-
 
 // Start the long polling process
 poll();
