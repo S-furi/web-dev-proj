@@ -154,7 +154,11 @@ function addComment($postId, $usrId, $content, $mysqli)
     $stmt->bind_param("iiss", $postId, $usrId, $date, $content);
 
     $stmt->execute();
-    return $stmt->affected_rows > 0;
+
+    $commentId = mysqli_insert_id($mysqli);
+    $forUser = getPostFromPostId($postId, $mysqli)["usrId"];
+
+    return $stmt->affected_rows > 0 && notifyComment($forUser, $commentId, $mysqli);
 }
 
 function updateLikes($postId, $usrId, $mysqli)

@@ -40,6 +40,10 @@ function notifyLike($postId, $likeId, mysqli $mysqli)
     return notify("like", $forUser, $likeId, $mysqli);
 }
 
+function notifyComment($forUser, $commentId, mysqli $mysqli) {
+    return notify("comment", $forUser, $commentId, $mysqli);
+}
+
 function fetchNotifications(int $num, $forUser, $mysqli)
 {
     $query = "SELECT type, forUser, entityId, read, time FROM notifications WHERE forUser = ? ORDER BY time DESC LIMIT ?";
@@ -55,7 +59,7 @@ function fetchNotifications(int $num, $forUser, $mysqli)
  */
 function getNotificationsForUser($userId, $lastNotificationId, mysqli $mysqli)
 {
-    $query = "SELECT * FROM notifications WHERE forUser = ? AND notificationId > ?";
+    $query = "SELECT * FROM notifications WHERE forUser = ? AND notificationId > ? AND NOT notifications.read";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param('ii', $userId, $lastNotificationId);
     $stmt->execute();
