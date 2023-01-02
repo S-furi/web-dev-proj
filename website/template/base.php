@@ -128,6 +128,12 @@
             </ul>
         </div>
     </div>
+    <div id="notifications-modal" class="modal" tabindex="-1">
+        <div class="modal-content">
+            <span id="closeBtn" class="material-symbols-outlined" tabindex="0" title="Chiudi">close</span>
+            <ul class="notifications"></ul>
+        </div>
+    </div>
     <?php
     if (isset($templateParams["js"])) :
         foreach ($templateParams["js"] as $script) :
