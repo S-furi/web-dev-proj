@@ -1,17 +1,17 @@
 <?php
 require_once("api-bootstrap.php");
 
-function getNotificationsInfoForComments(array $notification, $mysqli) {
+function getNotificationInfoForComment(array $notification, $mysqli) {
     $commentInfo = getCommentFromCommentId($notification["entityId"], $mysqli);
     $postInfo = fetchPostInfoFromCommentId($notification["entityId"], $mysqli);
 
-    $reference = "post.php?usrId=" . $postInfo["usrId"] . "&postId" . $postInfo["postId"];
+    $reference = "post.php?usrId=" . $postInfo["usrId"] . "&postId=" . $postInfo["postId"];
     $fromUser = $commentInfo["author"];
     $msg = "ha commentato il tuo post";
 
     return [
         "type" => $notification["type"],
-        "fromUser" => $fromUser,
+        "fromUser" => getUser($fromUser, $mysqli),
         "msg" => $msg,
         "reference" => $reference,
         "read" => $notification["read"],
@@ -23,18 +23,23 @@ function getNotificationInfoForLike(array $notification, $mysqli) {
     $likeInfo = getLikeDetails($notification["entityId"], $mysqli);
     $postInfo = fetchPostInfoFromLike($notification["entityId"], $mysqli);
 
-    $reference = "post.php?usrId=" . $postInfo["usrId"] . "&postId" . $postInfo["postId"];
-    $fromUser = $likeInfo["usrId"];
-    $msg = "ha messo mi piace al tuo post";
+    if (count($postInfo) > 0 && count($postInfo)) {
+        $postInfo = $postInfo[0];
+        $likeInfo = $likeInfo[0];
 
-    return [
-        "type" => $notification["type"],
-        "fromUser" => $fromUser,
-        "msg" => $msg,
-        "reference" => $reference,
-        "read" => $notification["read"],
-        "datetime" => $notification["time"],
-    ];
+        $reference = "post.php?usrId=" . $postInfo["usrId"] . "&postId=" . $postInfo["postId"];
+        $fromUser = $likeInfo["usrId"];
+        $msg = "ha messo mi piace al tuo post";
+
+        return [
+            "type" => $notification["type"],
+            "fromUser" => getUser($fromUser, $mysqli),
+            "msg" => $msg,
+            "reference" => $reference,
+            "read" => $notification["read"],
+            "datetime" => $notification["time"],
+        ];
+    }
 }
 
 function getNotificationInfoForFollow(array $notification, $mysqli) {
@@ -45,7 +50,7 @@ function getNotificationInfoForFollow(array $notification, $mysqli) {
 
     return [
         "type" => $notification["type"],
-        "fromUser" => $fromUser,
+        "fromUser" => getUser($fromUser, $mysqli),
         "msg" => $msg,
         "reference" => $reference,
         "read" => $notification["read"],
@@ -70,6 +75,10 @@ function getNotificationsInfo(array $notifications, $mysqli) {
             $result[] = $notificationInfoFunction($notification, $mysqli);
         }
     }
+
+    $result = array_filter($result, function ($k) {
+        return $k != null;
+    });
 
     return $result;
 }
