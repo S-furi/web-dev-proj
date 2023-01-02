@@ -9,7 +9,6 @@ function postComment(usrId, postId) {
     axios.post(`api/api-comment.php?usrId=${usrId}&postId=${postId}&content=${text}`)
     .then(res => {
       if (res.data['ok']) {
-        console.log('inserito');
         location.reload();
       } else {
         console.log('errore nel\'inserimento');
