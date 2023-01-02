@@ -19,6 +19,14 @@
     text-align: center;
 }
 
+.middle #popup {
+    display: none;
+    background-color: #fefefe;
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
 /* Infobox at the bottom of the map diplaying informations about OSM */
 .middle div.olControlAttribution, div.olControlScaleLine {
     font-family: Verdana;
