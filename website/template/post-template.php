@@ -26,8 +26,8 @@
                 <p><?php echo $post['caption']; ?></p>
                 <p class="likes-n">Mi Piace: <?php echo $post['likes'] ?></p>
                 <div class="interaction-buttons">
-                  <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
-                      class="material-symbols-outlined">favorite</span></label>
+                <label for="like-btn"><button type="button" name="like button" id="like-btn" onclick="likePost(<?php echo $postId ?>, <?php echo $usrId ?>, this)">
+                        <span class="material-symbols-outlined like-btn">favorite</span></button></label>
                   <label for="join-btn"><input type="button" name="join event button" id="join-btn"
                     class="btn btn-primary" value="Partecipa" /></label>
                 </div>

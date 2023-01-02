@@ -42,8 +42,8 @@
                 <p><?php echo $post['caption']; ?></p>
                 <p class="likes-n">Mi Piace: <?php echo $post['likes']; ?></p>
                 <div class="profile-interaction-buttons">
-                    <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
-                        class="material-symbols-outlined">favorite</span></label>
+                <label for="like-btn"><button type="button" name="like button" id="like-btn" onclick="likePost(<?php echo $post["postId"] ?>, <?php echo $_SESSION["user_id"] ?>, this)"><span
+                        class="material-symbols-outlined like-btn">favorite</span></button></label>
                     <a href="post.php?usrId=<?php echo $post['usrId']; ?>&postId=<?php echo $post['postId']; ?>#comment-text-area" target="_self">
                       <input type="button" name="comment button" id="comment-btn" />
                       <span class="material-symbols-outlined">comment</span>
