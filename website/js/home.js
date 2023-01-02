@@ -53,7 +53,7 @@ function checkLikedPosts(target, postId=null) {
 }
 
 function searchUser(searchFragment) {
-    // queries the database if only 3 letters are provided
+    // queries the database if at least 3 letters are provided
     if (searchFragment.length > 2) {
         // selecting the html ul tag
         const searchResultsList = document.querySelector("header .dropdown.search-result .dropdown-content");
