@@ -85,7 +85,7 @@ function fetchPostInfoFromCommentId($commentId, mysqli $mysqli)
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("i", $commentId);
     $stmt->execute();
-    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
 }
 
 /** Method used in the notification center for retrieving 
@@ -95,7 +95,7 @@ function fetchPostInfoFromCommentId($commentId, mysqli $mysqli)
 function fetchPostInfoFromLike($likeId, $mysqli)
 {
     $query = "SELECT * 
-                FROM likes l JOIN posts p ON (l.postId = p.postId)
+                FROM likes JOIN posts ON (likes.postId = posts.postId)
                 WHERE likeId = ?;";
 
     $stmt = $mysqli->prepare($query);
@@ -131,7 +131,7 @@ function getCommentFromCommentId($commentId, mysqli $mysqli)
     $stmt->bind_param("i", $commentId);
 
     $stmt->execute();
-    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
 }
 
 function getLikeDetails($likeId, mysqli $mysqli)
