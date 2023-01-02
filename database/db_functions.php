@@ -15,7 +15,14 @@ function sec_session_start()
     $httponly = true; // js can't access to sess-id
     ini_set("session.use_only_cookies", 1); // force session to use cookies only
     $cookie_params = session_get_cookie_params();
-    session_set_cookie_params($cookie_params['lifetime'], $cookie_params['path'], $cookie_params['domain'], $secure, $httponly);
+    session_set_cookie_params(array(
+        'lifetime' => $cookie_params['lifetime'],
+        'path' => $cookie_params['path'],
+        'domain' => $cookie_params['domain'],
+        'secure' => $secure,
+        'httponly' => $httponly,
+        'samesite' => 'lax',
+    ));
     session_name($session_name);
     session_start();
     session_regenerate_id(); // regenerate the session and delete the one created before
