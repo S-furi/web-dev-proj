@@ -32,6 +32,11 @@
     background-color: var(--light-grey);
     border-radius: 1rem;
     padding: 0.5rem 1rem;
+    width: 60%;
+}
+
+.middle ul li input[type="datetime-local"] {
+    text-align: center;
 }
 
 .middle ul li textarea {
@@ -45,12 +50,17 @@
 
 .middle form .location-search {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: right;
+    width: 60%;
+}
+
+.middle form .location-search input {
+    width: 85%;
 }
 
 .middle form .location-search button {
     margin-left: 0.2rem;
+    padding: 0.5rem 1rem;
 }
 
 .middle form .location-search button:disabled {
