@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../styles/calendar.css" />
     <link rel="stylesheet" href="../styles/like-transitions.css" />
+    <link rel="stylesheet" href="../styles/map-style.css" />
+    <!-- OpenLayers default map style -->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css">
     <title>Brogram - Home</title>
 </head>
 
@@ -64,8 +67,10 @@
                         <h2>Explore</h2>
                     </li>
                     <li class="menu-item">
-                        <span class="material-symbols-outlined">radar</span>
-                        <h2>Radar</h2>
+                        <a href="map.php">
+                            <span class="material-symbols-outlined">radar</span>
+                            <h2>Radar</h2>
+                        </a>
                     </li>
                     <li class="menu-item">
                         <span class="material-symbols-outlined">mail</span>

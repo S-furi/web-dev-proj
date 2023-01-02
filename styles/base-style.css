@@ -250,13 +250,15 @@ header .dropdown>.notification-badge {
     border-radius: var(--card-border-radius);
 }
 
-.left .sidebar .menu-item {
+.left .sidebar .menu-item,
+.left .sidebar .menu-item a {
     display: flex;
     align-items: center;
     height: 3rem;
     cursor: pointer;
     transition: all 300ms ease;
     position: relative;
+    color: var(--color-primary);
 }
 
 .left .sidebar .menu-item:hover {

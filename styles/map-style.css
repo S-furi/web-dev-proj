@@ -1,0 +1,27 @@
+.middle .city-form {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.middle div#mapdiv {
+    margin-top: 1rem!important;
+}
+
+.middle .city-form {
+    padding-top: 1rem;
+}
+
+.middle #location-search {
+    font-size: 1rem;
+    border-bottom: 1px solid var(--color-primary);
+    text-align: center;
+}
+
+/* Infobox at the bottom of the map diplaying informations about OSM */
+.middle div.olControlAttribution, div.olControlScaleLine {
+    font-family: Verdana;
+    font-size: 0.5rem;
+    bottom: 0.1rem;
+}
