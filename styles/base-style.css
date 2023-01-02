@@ -613,6 +613,36 @@ header .dropdown>.notification-badge {
     text-decoration: underline;
 }
 
+
+.modal#notifications-modal .modal-content {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal .notifications li a {
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row;
+    align-items: flex-start;
+    margin-top: 1rem;
+    padding: 1rem 1rem;
+    overflow: hidden;
+    background-color: #fefefe;
+    border-radius: var(--card-border-radius);
+    transition: .2s ease-in;
+}
+
+.modal .notifications li * {
+    margin: 0 1rem;
+}
+
+.modal .notifications li .profile-picture {
+    width: 1.5rem;
+}
+
+.modal .notifications li a:hover {
+    box-shadow: 0 0 5px var(--color-primary), 0 0 25px var(--color-primary), 0 0 50px var(--color-primary), 0 0 200px var(--color-primary);
+}
+
 /* animation for suggestion disappear once clicked follow btn*/
 .disappearing-card {
     animation: hideCard .5s forwards;
