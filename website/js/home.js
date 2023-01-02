@@ -37,8 +37,10 @@ function likePost(postId, userId, target) {
         }).catch(err => console.log(err));
 }
 
-function checkLikedPosts(target) {
-    const postId = target.id.split("-")[1];
+function checkLikedPosts(target, postId=null) {
+    if (postId === null) {
+        postId = target.id.split("-")[1];
+    }
     const formData = new FormData();
     formData.append("postId", postId);
 
