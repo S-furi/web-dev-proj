@@ -53,8 +53,6 @@ function displayNotification(forUser) {
                 for (const i in res.data) {
                     const n = res.data[i];
 
-                    console.log(n);
-
                     modalContent.innerHTML +=
                     `<li>
                         <a href="${n["reference"]}">
