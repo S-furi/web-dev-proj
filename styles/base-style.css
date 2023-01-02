@@ -295,6 +295,7 @@ header .dropdown>.notification-badge {
 
 .left .sidebar .menu-item:first-child.active {
     border-top-left-radius: var(--card-border-radius);
+    border-top-right-radius: var(--card-border-radius);
     overflow: hidden;
 }
 
