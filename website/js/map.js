@@ -33,6 +33,8 @@ function generateMap(lon, lat) {
         ]
     });
 
+    handlePopup(map);
+
     let lonLat = ol.proj.transform([Number.parseFloat(lon), Number.parseFloat(lat)], 'EPSG:4326', map.getView().getProjection());
 
     let zoom = 11;
@@ -68,6 +70,46 @@ function generateMap(lon, lat) {
     });
 }
 
+function handlePopup(map) {
+    const container = document.getElementById('popup');
+    const content = document.getElementById('popup-content');
+    const closer = document.getElementById('popup-closer');
+
+    const overlay = new ol.Overlay({
+        element: container,
+        autoPan: true,
+        autoPanAnimation: {
+            duration: 250
+        }
+    });
+    map.addOverlay(overlay);
+
+    closer.onclick = () => {
+        overlay.setPosition(undefined);
+        closer.blur();
+        return false;
+    }
+
+    map.on('singleclick', (event)  => {
+        const features = map.getFeaturesAtPixel(event.pixel);
+        let foundMarker = false;
+        features.forEach(feature => {
+            // Check if the feature is a marker
+            if (feature instanceof ol.Feature && feature.getStyle() instanceof ol.style.Style) {
+                foundMarker = true;
+            }
+        });
+        if (foundMarker) {
+            const coordinate = event.coordinate;
+            container.style.display= "block";
+            content.innerHTML = '<b>Hello world!</b><br />I am a popup.';
+            overlay.setPosition(coordinate);
+        } else {
+            overlay.setPosition(undefined);
+            closer.blur();
+        }
+    });
+}
 
 function drawCenteredCircle(map) {
     // Calculate the center and radius of the circle
