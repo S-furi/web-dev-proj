@@ -164,9 +164,11 @@ function setModalListeners() {
     };
 
     window.onclick = function(event) {
-        if (event.target == modal) {
-            document.querySelector(".modal .events-of-day").innerHTML = "";
-            modal.style.display = "none";
+        if (event.target.classList.contains("modal")) {
+            event.target.style.display = "none";
+            if (event.target == modal) {
+                document.querySelector(".modal .events-of-day").innerHTML = "";
+            }
         }
     };
 }
