@@ -21,4 +21,6 @@ function postComment(usrId, postId) {
 const postId = window.location.href.split("&")[1].replace("postId=","");
 disableAlreadyParticipating( document.querySelector(".post .interaction-buttons input#join-btn"), postId );
 
+checkLikedPosts(document.querySelector(".interaction-buttons button#like-btn"), postId);
+
 
