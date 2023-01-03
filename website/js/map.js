@@ -63,7 +63,7 @@ function generateMap(lon, lat, locations) {
     map.addLayer(vectorLayer);
 
     vectorLayer.getSource().getFeatures().forEach(feature => {
-        feature.on('click', function () {
+        feature.on('click', function() {
             console.log('Feature clicked');
         });
     });
@@ -83,11 +83,11 @@ function getNearestLocations(lon, lat) {
 
     const locations = axios.post("api/api-locations.php?action=1", formData)
         .then(res => res.data)
-        .catch( () => []);
+        .catch(() => []);
     return locations;
 }
 
-function getMarker(lon, lat, map, icon="marker.png") {
+function getMarker(lon, lat, map, icon = "marker.png") {
     const lonLat = ol.proj.transform([Number.parseFloat(lon), Number.parseFloat(lat)], 'EPSG:4326', map.getView().getProjection());
 
     const marker = new ol.Feature(new ol.geom.Point(lonLat));
@@ -134,10 +134,10 @@ function handlePopup(map) {
         return false;
     }
 
-    map.on('singleclick', (event)  => {
+    map.on('singleclick', (event) => {
         const features = map.getFeaturesAtPixel(event.pixel);
 
-        if (features === null)  {
+        if (features === null) {
             overlay.setPosition(undefined);
             container.classList.remove("show");
             closer.blur();
