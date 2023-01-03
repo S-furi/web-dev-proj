@@ -45,6 +45,37 @@ function getLocation($location, mysqli $mysqli)
     return $res[0];
 }
 
+/**
+ * Returns all locations informations and the postId 
+ * of nearest event date associated with that location.
+ */
+function getLocations(mysqli $mysqli) {
+    $query = "SELECT l.*, (
+                  SELECT p.postId
+                  FROM posts p
+                  WHERE p.locationId = l.locationId
+                  AND p.eventDate > NOW()
+                  ORDER BY ABS(DATEDIFF(NOW(), p.eventDate)) ASC
+                  LIMIT 1
+                ) AS post
+            FROM locations l";
+
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+
+    $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+    if (count($res) > 0) {
+        // removing results with NULL in `post` column
+        $res = array_filter($res, function($arr) {
+            return $arr["post"] != null;
+        });
+
+        return $res;
+    }
+    return null;
+}
+
 function getLocationFromLocationId($locationId, mysqli $mysqli)
 {
     $stmt = $mysqli->prepare("SELECT * FROM locations WHERE locationId = ?");
