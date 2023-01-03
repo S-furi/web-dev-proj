@@ -23,6 +23,7 @@ function generateMap(lon, lat, locations) {
     disableButton();
 
     if (document.querySelector(".middle div>div.ol-viewport") != null) {
+        insertPopupElement();
         document.querySelector(".middle div>div.ol-viewport").remove();
     }
 
@@ -100,6 +101,17 @@ function getMarker(lon, lat, map, icon="marker.png") {
     }));
 
     return marker;
+}
+
+function insertPopupElement() {
+    const map = document.getElementById("mapdiv");
+
+    const popup = `<div id="popup" class="ol-popup">
+                <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                <div id="popup-content"></div>
+            </div>`;
+
+    map.insertAdjacentHTML('afterend', popup);
 }
 
 function handlePopup(map) {
