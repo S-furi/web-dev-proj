@@ -83,7 +83,7 @@ function getNearestLocations(lon, lat) {
 
     const locations = axios.post("api/api-locations.php?action=1", formData)
         .then(res => res.data)
-        .catch(err => console.log(err));
+        .catch( () => []);
     return locations;
 }
 
