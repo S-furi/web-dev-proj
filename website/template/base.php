@@ -59,8 +59,10 @@
                 </section>
                 <ul class="sidebar">
                     <li class="menu-item <?php if (isset($templateParams["active-home"])) echo $templateParams["active-home"] ?>">
+                    <a href="index.php">
                         <span class="material-symbols-outlined">Home</span>
                         <h2>Home</h2>
+                    </a>
                     </li>
                     <li class="menu-item <?php if (isset($templateParams["active-explore"])) echo $templateParams["active-explore"] ?>">
                         <span class="material-symbols-outlined">Explore</span>
