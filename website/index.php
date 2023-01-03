@@ -3,8 +3,8 @@ require_once("bootstrap.php");
 
 $templateParams["Titolo"] = "Brogram - Home";
 
-// TODOS
 $templateParams["template_name"] = "timeline.php";
+$templateParams["active-home"] = "active";
 $templateParams["posts"]= getFriendsPosts($_SESSION["user_id"], $mysqli);
 
 

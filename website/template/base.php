@@ -58,21 +58,21 @@
                     </div>
                 </section>
                 <ul class="sidebar">
-                    <li class="menu-item">
+                    <li class="menu-item <?php if (isset($templateParams["active-home"])) echo $templateParams["active-home"] ?>">
                         <span class="material-symbols-outlined">Home</span>
                         <h2>Home</h2>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item <?php if (isset($templateParams["active-explore"])) echo $templateParams["active-explore"] ?>">
                         <span class="material-symbols-outlined">Explore</span>
                         <h2>Explore</h2>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item <?php if (isset($templateParams["active-radar"])) echo $templateParams["active-radar"] ?>">
                         <a href="map.php">
                             <span class="material-symbols-outlined">radar</span>
                             <h2>Radar</h2>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item <?php if (isset($templateParams["active-messagges"])) echo $templateParams["active-messagges"] ?>">
                         <span class="material-symbols-outlined">mail</span>
                         <h2>Messaggi</h2>
                     </li>
