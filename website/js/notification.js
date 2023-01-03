@@ -23,20 +23,22 @@ function poll() {
         .then(response => {
             // If the request returns new notifications, update the lastNotificationId variable and display the notifications
             const notifications = response.data;
-            notificationBadge.forEach(badge => badge.innerText = notifications.length < 10 ? notifications.length : "9+");
 
             if (notifications.length > 0) {
+                notificationBadge.forEach(t => t.style.display = "block");
+                notificationBadge.forEach(badge => badge.innerText = notifications.length < 10 ? notifications.length : "9+");
+
                 lastNotificationId = notifications[notifications.length - 1].id;
                 displayNotification(notifications[0]['forUser']);
             } else {
+                notificationBadge.forEach(t => t.style.display = "none");
                 modalContent.innerHTML = `<li>Nessuna nuova notifica...</li>`
             }
 
             // Make another request
             // poll();
         }).catch(error => {
-            console.log(error);
-            if (error.response.status == 204) {
+            if (error.code = "ECONNABORTED" || error.response.status == 204) {
                 // If the request returns no new notifications, wait for a specified period of time before making another request
                 setTimeout(poll, 5000);
             }
