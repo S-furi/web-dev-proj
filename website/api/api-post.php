@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 
 // action = 0 means that a new post has to be inserted
 if (isset($_GET["action"]) && $_GET["action"] == 0){
-    if(isset($_POST["title"], $_POST["description"], $_POST['location'], $_POST['event-datetime']) && $_FILES["photo"]["error"] == 0) {
+    if(isset($_POST["title"], $_POST["description"], $_POST['location-id'], $_POST['event-datetime']) && $_FILES["photo"]["error"] == 0) {
         $user_id = $_SESSION["user_id"];
         $title = $_POST["title"];
         $photo = $_FILES["photo"];
@@ -16,7 +16,7 @@ if (isset($_GET["action"]) && $_GET["action"] == 0){
 
         if ($err != 0) {
             $caption= $_POST["description"];
-            $location = $_POST["location"];
+            $location = $_POST["location-id"];
             $event_datetime = $_POST["event-datetime"];
 
             if (createPost($user_id, $title, $caption, $imgPath, $location, $event_datetime, $mysqli)) {

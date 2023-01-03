@@ -19,15 +19,39 @@ function locationValidation() {
             .then(res => res.json())
             .then(res => {
                 if(res.length > 0) {
+                    registerLocation(res);
                     resultField.innerText = "done";
                 } else {
                     resultField.innerText = "cancel";
                 }
-            }).catch(() => resultField.innerText = "cancel");
+            }).catch((err) => {
+                console.log(err)
+                resultField.innerText = "cancel" } );
 
         document.querySelector(".main form .location-search button").disabled = true;
         setTimeout(restoreResearch, 6000);
     }
+}
+
+function registerLocation(locationInfo) {
+    locationInfo = locationInfo[0];
+    const params = {
+        'name': locationInfo["display_name"].split(",")[0],
+        'lon': locationInfo['lon'],
+        'lat': locationInfo['lat'],
+    }
+
+    const formData = new FormData();
+    for (const key in params) {
+        formData.append(key, params[key]);
+    }
+
+    axios.post("api/api-locations.php", formData)
+        .then(res => {
+            // injecting the locationId for inserting it's value on posts table
+            document.querySelector(`.main input[name="location-id"]`)
+                .value = res.data["location"]["locationId"];
+        }).catch(err => console.log(err));
 }
 
 function restoreResearch() {

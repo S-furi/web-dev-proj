@@ -3,7 +3,7 @@ require_once("api-bootstrap.php");
 
 function getNotificationInfoForComment(array $notification, $mysqli) {
     $commentInfo = getCommentFromCommentId($notification["entityId"], $mysqli);
-    $postInfo = fetchPostInfoFromCommentId($notification["entityId"], $mysqli);
+    $postInfo = fetchPostInfoFromCommentId($notification["entityId"], $mysqli)[0];
 
     $reference = "post.php?usrId=" . $postInfo["usrId"] . "&postId=" . $postInfo["postId"];
     $fromUser = $commentInfo["author"];

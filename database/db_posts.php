@@ -10,36 +10,103 @@ require_once("db_notifications.php");
 /**
  * Creates a post from given arguments.
  */
-function createPost($usr_id, $title, $caption, $image, $location, $event_date, $mysqli): bool
+function createPost($usr_id, $title, $caption, $image, $locationId, $event_date, $mysqli): bool
 {
-    $query = "insert into posts (usrId, title, caption, image, location, creationDate, eventDate, likes) VALUES (?, ?, ?, ?, ?, NOW(), ?, 0)";
+    $query = "insert into posts (usrId, title, caption, image, locationId, creationDate, eventDate, likes) VALUES (?, ?, ?, ?, ?, NOW(), ?, 0)";
     $event_date = date("Y-m-d H:i:s", strtotime($event_date));
     $stmt = $mysqli->prepare($query);
-    $stmt->bind_param("isssss", $usr_id, $title, $caption, $image, $location, $event_date);
+    $stmt->bind_param("isssss", $usr_id, $title, $caption, $image, $locationId, $event_date);
 
     if ($stmt->execute()) {
         return createEvent($usr_id, mysqli_insert_id($mysqli), $mysqli);
     }
 }
 
+/**
+ * Retrieves locationId from the given locations parameters.
+ *
+ * Note: the location paramenter is an associative array of 
+ * the form $location["name"], $location["lon"], $location["lat"].
+ *
+ * @return locationInformations, or null if no locations are found
+ */
+function getLocation($location, mysqli $mysqli)
+{
+    $query = "SELECT * FROM locations WHERE locations.name = ? AND locations.lon = ? AND locations.lat = ?";
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("sss", $location["name"], $location["lon"], $location["lat"]);
+    $stmt->execute();
+
+    $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+    if (count($res) == 0) {
+        return null;
+    }
+    return $res[0];
+}
+
+function getLocationFromLocationId($locationId, mysqli $mysqli)
+{
+    $stmt = $mysqli->prepare("SELECT * FROM locations WHERE locationId = ?");
+    $stmt->bind_param("i", $locationId);
+    $stmt->execute();
+
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+}
+
+/**
+ * Register the given location if it's not already present in db.
+ *
+ * @return locationId of the given location, -1 if an error occurs
+ */
+function registerLocation($location, mysqli $mysqli)
+{
+    // if the location is already in db, return true;
+    $dbLocation= getLocation($location, $mysqli); 
+    if ($dbLocation!= null) {
+        return $dbLocation["locationId"];
+    }
+
+    // otherwise, insert the new location in db
+    $query = "INSERT INTO locations (name, lon, lat) VALUES (?, ?, ?)";
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("sss", $location["name"], $location["lon"], $location["lat"]);
+    if ($stmt->execute()) {
+        $locationId = mysqli_insert_id($mysqli);
+        return $locationId;
+    }
+    return -1;
+}
+
 function getPosts($usrId, $mysqli)
 {
-    $query = "SELECT usrId, postId, caption, image, location, title, eventDate, likes FROM posts WHERE usrId=? ORDER BY creationDate DESC";
+    $query = "SELECT usrId, postId, caption, image, locationId, title, eventDate, likes FROM posts WHERE usrId=? ORDER BY creationDate DESC";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("i", $usrId);
 
     $stmt->execute();
-    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+    for ($i = 0; $i < count($res); $i++) {
+        $res[$i]["location"] = getLocationFromLocationId($res[$i]["locationId"], $mysqli)["name"];
+    }
+    return $res;
 }
 
 function getPostFromId($usrId, $postId, $mysqli)
 {
-    $query = "SELECT caption, image, location, title, eventDate, likes FROM posts WHERE usrId=? AND postId=?";
+    $query = "SELECT caption, image, locationId, title, eventDate, likes FROM posts WHERE usrId=? AND postId=?";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("ii", $usrId, $postId);
 
     $stmt->execute();
-    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+    $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+    if ($res > 0) {
+        $res = $res[0];
+        $res["location"] = getLocationFromLocationId($res["locationId"], $mysqli)["name"];
+    }
+    return $res;
 }
 
 function getPostFromPostId($postId, mysqli $mysqli)
@@ -48,7 +115,13 @@ function getPostFromPostId($postId, mysqli $mysqli)
     $stmt->bind_param("i", $postId);
 
     $stmt->execute();
-    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+    $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+    if ($res > 0) {
+        $res = $res[0];
+        $res["location"] = getLocationFromLocationId($res["locationId"], $mysqli)["name"];
+    }
+    return $res;
 }
 
 /**
@@ -69,7 +142,12 @@ function getFriendsPosts($usrId, $mysqli)
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("i", $usrId);
     $stmt->execute();
-    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+    for ($i = 0; $i < count($res); $i++) {
+        $res[$i]["location"] = getLocationFromLocationId($res[$i]["locationId"], $mysqli)["name"];
+    }
+    return $res;
 }
 
 /* method used in the notification center for retrieving 
@@ -85,7 +163,12 @@ function fetchPostInfoFromCommentId($commentId, mysqli $mysqli)
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("i", $commentId);
     $stmt->execute();
-    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+    $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+    for ($i = 0; $i < count($res); $i++) {
+        $res[$i]["location"] = getLocationFromLocationId($res[$i]["locationId"], $mysqli)["name"];
+    }
+    return $res;
 }
 
 /** Method used in the notification center for retrieving 
@@ -101,7 +184,12 @@ function fetchPostInfoFromLike($likeId, $mysqli)
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("i", $likeId);
     $stmt->execute();
-    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+    for ($i = 0; $i < count($res); $i++) {
+        $res[$i]["location"] = getLocationFromLocationId($res[$i]["locationId"], $mysqli)["name"];
+    }
+    return $res;
 }
 
 function getComments($postId, $mysqli)

@@ -70,6 +70,19 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
+-- Table `brogram`.`locations`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `brogram`.`locations` (
+    `locationId` INT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(45) NOT NULL,
+    `lon` VARCHAR(45) NOT NULL,
+    `lat` VARCHAR(45) NOT NULL,
+    PRIMARY KEY (`locationId`),
+    UNIQUE INDEX `name_UNIQUE` (`name` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `brogram`.`posts`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `brogram`.`posts` (
@@ -78,20 +91,26 @@ CREATE TABLE IF NOT EXISTS `brogram`.`posts` (
   `title` VARCHAR(50) NOT NULL,
   `caption` VARCHAR(255) NOT NULL,
   `image` VARCHAR(45) NOT NULL,
-  `location` VARCHAR(45) NOT NULL,
+  `locationId` INT NULL DEFAULT NULL,
   `creationDate` DATETIME NOT NULL DEFAULT NOW(),
   `eventDate` DATETIME NOT NULL,
   `likes` INT NOT NULL,
   PRIMARY KEY (`postId`),
   INDEX `fk_posts_users1_idx` (`usrId` ASC),
+  INDEX `fk_posts_locations1_idx` (`locationId` ASC),
   CONSTRAINT `fk_posts_users1`
     FOREIGN KEY (`usrId`)
     REFERENCES `brogram`.`users` (`usrId`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_posts_locations1`
+    FOREIGN KEY (`locationId`)
+    REFERENCES `brogram`.`locations` (`locationId`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4;
-
 
 -- -----------------------------------------------------
 -- Table `brogram`.`comments`
