@@ -75,7 +75,7 @@ function getNearestLocations(lon, lat) {
         "lat": lat,
     };
 
-    const radius = 10000; // 10 km
+    const radius = 10; // 10 km
 
     const formData = new FormData();
     formData.append("center", JSON.stringify(center));
