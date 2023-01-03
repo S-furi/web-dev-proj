@@ -13,11 +13,13 @@ function osmSearch() {
 
     fetch(url)
         .then(res => res.json())
-        .then(res => generateMap(res[0]["lon"], res[0]["lat"]))
-        .catch(err => console.log(err));
+        .then(res => getNearestLocations(res[0]["lon"], res[0]["lat"])
+            .then(locations => generateMap(res[0]["lon"], res[0]["lat"], locations))
+            .catch(err => console.log(err))
+        ).catch(err => console.log(err));
 }
 
-function generateMap(lon, lat) {
+function generateMap(lon, lat, locations) {
     disableButton();
 
     if (document.querySelector(".middle div>div.ol-viewport") != null) {
@@ -35,15 +37,16 @@ function generateMap(lon, lat) {
 
     handlePopup(map);
 
-
     let zoom = 11;
 
     const lonLat = ol.proj.transform([Number.parseFloat(lon), Number.parseFloat(lat)], 'EPSG:4326', map.getView().getProjection());
 
-    const currentPositionMarker = getMarker(lon, lat, map);
-    const bruxellesMarker = getMarker(4.35247, 50.84673, map);
+    const currentPositionMarker = getMarker(lon, lat, map, "my_location.png");
 
-    const markers = [currentPositionMarker, bruxellesMarker]
+    const markers = [currentPositionMarker]
+
+    locations.forEach(l => markers.push(getMarker(l['lon'], l['lat'], map)));
+
 
     let vectorSource = new ol.source.Vector({
         // foreach marker that are being created, add them i this list
@@ -65,7 +68,25 @@ function generateMap(lon, lat) {
     });
 }
 
-function getMarker(lon, lat, map) {
+function getNearestLocations(lon, lat) {
+    const center = {
+        "lon": lon,
+        "lat": lat,
+    };
+
+    const radius = 10000; // 10 km
+
+    const formData = new FormData();
+    formData.append("center", JSON.stringify(center));
+    formData.append("radius", radius);
+
+    const locations = axios.post("api/api-locations.php?action=1", formData)
+        .then(res => res.data)
+        .catch(err => console.log(err));
+    return locations;
+}
+
+function getMarker(lon, lat, map, icon="marker.png") {
     const lonLat = ol.proj.transform([Number.parseFloat(lon), Number.parseFloat(lat)], 'EPSG:4326', map.getView().getProjection());
 
     const marker = new ol.Feature(new ol.geom.Point(lonLat));
@@ -74,7 +95,7 @@ function getMarker(lon, lat, map) {
             anchor: [0.5, 1],
             anchorXUnits: 'fraction',
             anchorYUnits: 'fraction',
-            src: 'img/marker.png'
+            src: 'img/' + icon,
         }))
     }));
 
@@ -132,12 +153,11 @@ function handlePopup(map) {
 }
 
 function drawCenteredCircle(map) {
-    // Calculate the center and radius of the circle
-    let center = map.getView().getCenter();
-    let radius = 10000;
+    const center = map.getView().getCenter();
+    const radius = 20000;
 
     // Create a list of points for the circular LinearRing
-    let points = [];
+    const points = [];
     for (let i = 0; i < 360; i++) {
         let angle = i * Math.PI / 180;
         let x = center[0] + radius * Math.cos(angle);
@@ -145,25 +165,25 @@ function drawCenteredCircle(map) {
         points.push([x, y]);
     }
 
-    // Create a LinearRing with the points
-    let linearRing = new ol.geom.LinearRing(points);
+    const linearRing = new ol.geom.LinearRing(points);
 
-    // Create a Polygon with the LinearRing as the outer ring
-    let polygon = new ol.geom.Polygon([linearRing.getCoordinates()]);
+    const polygon = new ol.geom.Polygon([linearRing.getCoordinates()]);
 
-    // Create a feature with the Polygon as the geometry
-    let feature = new ol.Feature(polygon);
+    const feature = new ol.Feature(polygon);
+
 
     // Create a vector layer to hold the circle
-    let vectorLayer = new ol.layer.Vector({
+    const vectorLayer = new ol.layer.Vector({
         source: new ol.source.Vector({
             features: [feature]
         }),
         name: 'Circle Layer'
     });
 
-    // Add the vector layer to the map
     map.addLayer(vectorLayer);
+
+    const circleExtent = feature.getGeometry().getExtent();
+    map.getView().fit(circleExtent, map.getSize());
 }
 
 function disableButton() {
@@ -171,33 +191,4 @@ function disableButton() {
     setTimeout(() => document.querySelector(".middle #search-button").disabled = false, 6000);
 
 }
-
-// // Define the center and radius of the circle
-// let center = [longitude, latitude];
-// let radius = 5000; // 5km in meters
-
-// // Convert the radius to degrees
-// let radiusInDegrees = radius / 111325;
-
-// // Create a list of points for the circular LinearRing
-// let points = [];
-// for (let i = 0; i < 360; i++) {
-//     let angle = i * Math.PI / 180;
-//     let x = center[0] + radiusInDegrees * Math.cos(angle);
-//     let y = center[1] + radiusInDegrees * Math.sin(angle);
-//     points.push([x, y]);
-// }
-
-// // Create a Polygon with the points
-// let polygon = new ol.geom.Polygon([points]);
-
-// // Check whether a point is inside the circle
-// let point = [longitude, latitude];
-// let isInside = polygon.containsCoordinate(point);
-
-// if (isInside) {
-//     console.log("The point is inside the circle");
-// } else {
-//     console.log("The point is outside the circle");
-// }
 
