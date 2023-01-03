@@ -35,24 +35,19 @@ function generateMap(lon, lat) {
 
     handlePopup(map);
 
-    let lonLat = ol.proj.transform([Number.parseFloat(lon), Number.parseFloat(lat)], 'EPSG:4326', map.getView().getProjection());
 
     let zoom = 11;
 
-    // current position
-    let currentPositionMarker = new ol.Feature(new ol.geom.Point(lonLat));
-    currentPositionMarker.setStyle(new ol.style.Style({
-        image: new ol.style.Icon(/** @type {olx.style.IconOptions} */({
-            anchor: [0.5, 1],
-            anchorXUnits: 'fraction',
-            anchorYUnits: 'fraction',
-            src: 'img/marker.png'
-        }))
-    }));
+    const lonLat = ol.proj.transform([Number.parseFloat(lon), Number.parseFloat(lat)], 'EPSG:4326', map.getView().getProjection());
+
+    const currentPositionMarker = getMarker(lon, lat, map);
+    const bruxellesMarker = getMarker(4.35247, 50.84673, map);
+
+    const markers = [currentPositionMarker, bruxellesMarker]
 
     let vectorSource = new ol.source.Vector({
         // foreach marker that are being created, add them i this list
-        features: [currentPositionMarker]
+        features: markers
     });
     let vectorLayer = new ol.layer.Vector({
         source: vectorSource
@@ -68,6 +63,22 @@ function generateMap(lon, lat) {
             console.log('Feature clicked');
         });
     });
+}
+
+function getMarker(lon, lat, map) {
+    const lonLat = ol.proj.transform([Number.parseFloat(lon), Number.parseFloat(lat)], 'EPSG:4326', map.getView().getProjection());
+
+    const marker = new ol.Feature(new ol.geom.Point(lonLat));
+    marker.setStyle(new ol.style.Style({
+        image: new ol.style.Icon(/** @type {olx.style.IconOptions} */({
+            anchor: [0.5, 1],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'fraction',
+            src: 'img/marker.png'
+        }))
+    }));
+
+    return marker;
 }
 
 function handlePopup(map) {
@@ -94,6 +105,9 @@ function handlePopup(map) {
         const features = map.getFeaturesAtPixel(event.pixel);
 
         if (features === null)  {
+            overlay.setPosition(undefined);
+            container.classList.remove("show");
+            closer.blur();
             return;
         }
 
@@ -106,11 +120,12 @@ function handlePopup(map) {
         });
         if (foundMarker) {
             const coordinate = event.coordinate;
-            container.classList.toggle("show");
+            container.classList.add("show");
             content.innerHTML = '<b>Hello world!</b><br />I am a popup.';
             overlay.setPosition(coordinate);
         } else {
             overlay.setPosition(undefined);
+            container.classList.remove("show");
             closer.blur();
         }
     });
