@@ -92,6 +92,11 @@ function handlePopup(map) {
 
     map.on('singleclick', (event)  => {
         const features = map.getFeaturesAtPixel(event.pixel);
+
+        if (features === null)  {
+            return;
+        }
+
         let foundMarker = false;
         features.forEach(feature => {
             // Check if the feature is a marker
@@ -101,7 +106,7 @@ function handlePopup(map) {
         });
         if (foundMarker) {
             const coordinate = event.coordinate;
-            container.style.display= "block";
+            container.classList.toggle("show");
             content.innerHTML = '<b>Hello world!</b><br />I am a popup.';
             overlay.setPosition(coordinate);
         } else {
