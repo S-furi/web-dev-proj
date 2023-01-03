@@ -46,7 +46,7 @@ function registerLocation(locationInfo) {
         formData.append(key, params[key]);
     }
 
-    axios.post("api/api-locations.php", formData)
+    axios.post("api/api-locations.php?action=0", formData)
         .then(res => {
             // injecting the locationId for inserting it's value on posts table
             document.querySelector(`.main input[name="location-id"]`)
