@@ -345,7 +345,13 @@ header .dropdown>.notification-badge {
 
 .middle .timeline .post h3 {
     font-size: large;
-    font-size: 1.5rem;
+    font-size: 1.5rem;    
+    transition: transform 0.5s ease-in-out;
+    transform: scale(1);
+}
+
+.middle .timeline .post h3:hover {
+    text-decoration: underline;
 }
 
 .middle .timeline .post-head .usr-info {
@@ -354,10 +360,19 @@ header .dropdown>.notification-badge {
     gap: 1rem;
 }
 
-.middle .timeline .post-head .profile-picture {
-    width: 2rem;
+.middle .timeline .post-head .usr-info .usertag:hover {
+  text-decoration: underline;
 }
 
+.middle .timeline .post-head .profile-picture {
+    width: 2rem;
+    box-shadow: 0 0 0 transparent;
+    transition: box-shadow 0.5s;
+}
+
+.middle .timeline .post-head .profile-picture:hover {
+  box-shadow: 0 0 5px var(--color-primary), 0 0 25px var(--color-primary), 0 0 50px var(--color-primary), 0 0 200px var(--color-primary);
+}
 .middle .timeline .post-body {
     display: flex;
     flex-flow: column;
@@ -429,6 +444,14 @@ header .dropdown>.notification-badge {
 .middle .timeline .info-tag {
     font-weight: bold;
     margin-right: 0.2rem;
+    transition: transform 0.5s ease-in-out, margin 0.5s ease-in-out;
+    transform: scale(1);
+}
+
+.middle .timeline .info-tag:hover {
+  text-decoration: underline;
+  transform: scale(1.2);
+  margin: 0 20px;
 }
 
 .middle .timeline .follow-info a {
@@ -539,6 +562,14 @@ header .dropdown>.notification-badge {
     display: flex;
     align-items: flex-start;
     margin-bottom: 0.5rem;
+}
+
+.middle .timeline .comment-head a {
+  color: var(--color-primary);
+}
+
+.middle .timeline .comment-head a:hover {
+  text-decoration: underline;
 }
 
 .middle .timeline .comment-head img {
@@ -664,10 +695,21 @@ header .dropdown>.notification-badge {
   flex-flow: row;
 }
 
+.modal .userinfo .profile-picture {
+    width: 2.7rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
 .modal .user-name {
   display: flex;
   flex-flow: column;
   align-items: flex-start;
+}
+
+.modal .user-name h3:hover {
+  text-decoration: underline;
 }
 
 /* animation for suggestion disappear once clicked follow btn*/
@@ -713,6 +755,23 @@ header .dropdown>.notification-badge {
         align-items: center;
         column-gap: 1rem;
         width: 100%;
+    }
+
+    .main .container .left .profile a {
+        color: var(--color-primary);
+    }
+
+    .main .container .left .profile .profile-picture:hover {
+        box-shadow: 0 0 0 transparent;
+        transition: box-shadow 0.5s;
+    }
+
+    .main .container .left .profile .profile-picture:hover {
+        box-shadow: 0 0 5px var(--color-primary), 0 0 25px var(--color-primary), 0 0 50px var(--color-primary), 0 0 200px var(--color-primary);
+    }
+    
+    .main .container .left .profile .handle .user-name:hover {
+      text-decoration: underline;
     }
 
     /* show right panel */

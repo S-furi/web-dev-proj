@@ -225,7 +225,7 @@ function fetchPostInfoFromLike($likeId, $mysqli)
 
 function getComments($postId, $mysqli)
 {
-    $query = "SELECT c.content, u.username, u.firstName, u.lastName FROM comments c INNER JOIN users u ON c.author = u.usrId WHERE c.postID=? ORDER BY date DESC";
+    $query = "SELECT c.content, u.username, u.usrId, u.firstName, u.lastName FROM comments c INNER JOIN users u ON c.author = u.usrId WHERE c.postID=? ORDER BY date DESC";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("i", $postId);
 

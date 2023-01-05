@@ -1,7 +1,7 @@
           <section class="timeline">
             <article class="post">
               <div class="post-head">
-                <h3><?php echo $post['title'] ?></h3>
+                <a href="#"><h3><?php echo $post['title'] ?></h3></a>
                 <div class="usr-info">
                   <a href="user-profile.php?usrId=<?php echo $usrId; ?>">
                   <img src="img/no-profile-pic.png" alt="post author profile picture" class="profile-picture">
@@ -39,7 +39,11 @@
                 <div class="comment-head">
                     <img src="img/no-profile-pic.png" alt="to do dynamic in php" />
                     <div class="comment-head-info">
-                        <h3 class="comment-author"><?php echo $comment['firstName']; ?> <?php echo $comment['lastName']; ?></h3>
+                        <?php if ($comment['usrId'] == $_SESSION['user_id']): ?>
+                          <a href="personal-profile.php"><h3 class="comment-author"><?php echo $comment['firstName']; ?> <?php echo $comment['lastName']; ?></h3></a>
+                        <?php else: ?>
+                          <a href="user-profile.php?usrId=<?php echo $comment['usrId']; ?>"><h3 class="comment-author"><?php echo $comment['firstName']; ?> <?php echo $comment['lastName']; ?></h3></a>
+                        <?php endif; ?>
                         <p>@<?php echo $comment['username']; ?></p>
                     </div>
                 </div>

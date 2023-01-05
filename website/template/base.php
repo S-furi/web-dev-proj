@@ -51,9 +51,9 @@
             <div class="left">
                 <!-- Section should need a heading -->
                 <section class="profile">
-                    <img src="img/no-profile-pic.png" alt="user profile picture" class="profile-picture" />
+                    <a href="personal-profile.php"><img src="img/no-profile-pic.png" alt="user profile picture" class="profile-picture" /></a>
                     <div class="handle">
-                        <p class="user-name"><?php echo $templateParams['user']['firstName'] . " " . $templateParams['user']['lastName']; ?></p>
+                        <a href="personal-profile.php"><p class="user-name"><?php echo $templateParams['user']['firstName'] . " " . $templateParams['user']['lastName']; ?></p></a>
                         <p class="usertag">@<?php echo $templateParams['user']['username']; ?></p>
                     </div>
                 </section>
