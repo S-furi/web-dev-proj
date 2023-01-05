@@ -16,6 +16,7 @@ function followUser(user, followed, target = null) {
                     setTimeout(() => document.querySelector(".right li.user-suggestion.usr-" + followed).remove(), 500);
                 } else {
                     target.disabled = true;
+                    location.reload();
                 }
             } else {
                 // temporary
