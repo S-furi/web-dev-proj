@@ -17,9 +17,9 @@ function createInfoBox(user, followers, following) {
               <div class="profile-infobox-body">
                 <p class="profile-descr">Descrizione</p>
                 <div class="follow-info">
-                  <a href="#" onclick="showFollowingUsers(${user['usrId']})"><p class="info-tag">Seguaci: </p></a>
+                  <a href="#" onclick="showFollowingUsers(${user['usrId']}, ${user['usrId']})"><p class="info-tag">Seguaci: </p></a>
                   <p class="followers-data">${followers}</p>
-                  <a href="#" onclick="showFollowedUsers(${user['usrId']})"><p class="info-tag">Seguiti: </p></a>
+                  <a href="#" onclick="showFollowedUsers(${user['usrId']}, ${user['usrId']})"><p class="info-tag">Seguiti: </p></a>
                   <p>${following}</p>
                 </div>
               </div>

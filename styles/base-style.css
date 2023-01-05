@@ -650,6 +650,19 @@ header .dropdown>.notification-badge {
     box-shadow: 0 0 5px var(--color-primary), 0 0 25px var(--color-primary), 0 0 50px var(--color-primary), 0 0 200px var(--color-primary);
 }
 
+.modal .userinfo {
+  margin: 1rem 0;
+  gap: 1rem;
+  display: flex;
+  flex-flow: row;
+}
+
+.modal .user-name {
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+}
+
 /* animation for suggestion disappear once clicked follow btn*/
 .disappearing-card {
     animation: hideCard .5s forwards;

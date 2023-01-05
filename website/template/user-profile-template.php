@@ -15,43 +15,52 @@
               <div class="profile-infobox-body">
                 <p class="profile-descr">Descrizione</p>
                 <div class="follow-info">
-                  <a href="#" onclick="showFollowingUsers(<?php echo $_GET['usrId']; ?>)"><p class="info-tag">Seguaci: </p></a>
+                  <a href="#" onclick="showFollowingUsers(<?php echo $_GET['usrId']; ?>, <?php echo $_SESSION['user_id']; ?>)"><p class="info-tag">Seguaci: </p></a>
                   <p class="followers-data"><?php echo $followers_n; ?></p>
-                  <a href="#" onclick="showFollowedUsers(<?php echo $_GET['usrId']; ?>)"><p class="info-tag">Seguiti: </p></a>
+                  <a href="#" onclick="showFollowedUsers(<?php echo $_GET['usrId']; ?>, <?php echo $_SESSION['user_id']; ?>)"><p class="info-tag">Seguiti: </p></a>
                   <p><?php echo $following_n; ?></p>
                 </div>
               </div>
             </div>
-            <?php foreach ($posts as $post): ?>
-            <?php $eventDate = date("d-m-Y H:i", strtotime($post['eventDate'])); ?>
-            <article class="post">
-              <div class="post-head">
-                <a href="post.php?usrId=<?php echo $post['usrId']; ?>&postId=<?php echo $post['postId']; ?>"><h3><?php echo $post['title']; ?></h3></a>
-              </div>
-              <div class="post-body">
-                <div class="date-location">
-                  <div class="date-location-item">
-                    <p class="info-tag">Data:</p>
-                    <p><?php echo $eventDate; ?></p>
+            <?php if (!empty($posts)): ?>
+              <?php foreach ($posts as $post): ?>
+              <?php $eventDate = date("d-m-Y H:i", strtotime($post['eventDate'])); ?>
+              <article class="post">
+                <div class="post-head">
+                  <a href="post.php?usrId=<?php echo $post['usrId']; ?>&postId=<?php echo $post['postId']; ?>"><h3><?php echo $post['title']; ?></h3></a>
+                </div>
+                <div class="post-body">
+                  <div class="date-location">
+                    <div class="date-location-item">
+                      <p class="info-tag">Data:</p>
+                      <p><?php echo $eventDate; ?></p>
+                    </div>
+                    <div class="date-location-item">
+                      <p class="info-tag">Luogo:</p>
+                      <p><?php echo $post['location']; ?></p>
+                    </div>
                   </div>
-                  <div class="date-location-item">
-                    <p class="info-tag">Luogo:</p>
-                    <p><?php echo $post['location']; ?></p>
+                  <p><?php echo $post['caption']; ?></p>
+                  <p class="likes-n">Mi Piace: <?php echo $post['likes']; ?></p>
+                  <div class="profile-interaction-buttons">
+                  <label for="like-btn"><button type="button" name="like button" id="like-btn" onclick="likePost(<?php echo $post["postId"] ?>, <?php echo $_SESSION["user_id"] ?>, this)"><span
+                          class="material-symbols-outlined like-btn">favorite</span></button></label>
+                      <a href="post.php?usrId=<?php echo $post['usrId']; ?>&postId=<?php echo $post['postId']; ?>#comment-text-area" target="_self">
+                        <input type="button" name="comment button" id="comment-btn" />
+                        <span class="material-symbols-outlined">comment</span>
+                      </a>
                   </div>
                 </div>
-                <p><?php echo $post['caption']; ?></p>
-                <p class="likes-n">Mi Piace: <?php echo $post['likes']; ?></p>
-                <div class="profile-interaction-buttons">
-                <label for="like-btn"><button type="button" name="like button" id="like-btn" onclick="likePost(<?php echo $post["postId"] ?>, <?php echo $_SESSION["user_id"] ?>, this)"><span
-                        class="material-symbols-outlined like-btn">favorite</span></button></label>
-                    <a href="post.php?usrId=<?php echo $post['usrId']; ?>&postId=<?php echo $post['postId']; ?>#comment-text-area" target="_self">
-                      <input type="button" name="comment button" id="comment-btn" />
-                      <span class="material-symbols-outlined">comment</span>
-                    </a>
+              </article>
+              <?php endforeach; ?>
+            <?php else: ?>
+              <article class="post">
+                <div class="post-not-present">
+                  <p>Nessun post caricato!</p>
                 </div>
-              </div>
-            </article>
-            <?php endforeach; ?>
+              </article>
+            <?php endif; ?>
+            
 
             <div id="modal" class="modal">
               <div class="modal-content">
