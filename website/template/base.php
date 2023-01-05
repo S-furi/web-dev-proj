@@ -112,7 +112,7 @@
                                         <!-- to add in DB an image reference -->
                                         <img src="img/no-profile-pic.png" alt="suggested account profile picture" class="profile-picture">
                                         <div class="user-name">
-                                            <h3><?php echo $sugg_user["firstName"] . " " . $sugg_user["lastName"]; ?></h3>
+                                            <a href="user-profile.php?usrId=<?php echo $sugg_user['usrId']; ?>"><h3><?php echo $sugg_user["firstName"] . " " . $sugg_user["lastName"]; ?></h3>
                                             <p class="usertag">@<?php echo $sugg_user["username"]; ?></p>
                                         </div>
                                     </div>
