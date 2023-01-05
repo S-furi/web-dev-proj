@@ -81,6 +81,11 @@ img {
     color: white;
 }
 
+.btn-secondary {
+  background-color: var(--color-light);
+  color: black;
+}
+
 .text-bold {
     font-weight: 500;
 }
@@ -426,8 +431,9 @@ header .dropdown>.notification-badge {
     margin-right: 0.2rem;
 }
 
-.middle .timeline .follow-info a:visited {
-  color: var(--color-primary);
+.middle .timeline .follow-info a {
+    text-decoration: none;
+    color: var(--color-primary);
 }
 
 .middle .timeline .post-body .profile-interaction-buttons {
@@ -517,6 +523,7 @@ header .dropdown>.notification-badge {
     min-width: 3rem;
     min-height: 3rem;
     color: white;
+    cursor: pointer;
 }
 
 .middle .timeline .comment {
@@ -753,6 +760,10 @@ header .dropdown>.notification-badge {
         gap: 1rem;
         display: flex;
         flex-flow: row;
+    }
+    
+    .right ul li .userinfo .user-name a {
+      color: var(--color-primary);
     }
 
     .right ul li .btn {

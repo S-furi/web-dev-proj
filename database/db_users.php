@@ -131,4 +131,13 @@ function getFollowersNum($userId, $mysqli)
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]['follow_num'];
 }
 
+function checkFollow($userId, $friendId, $mysqli)
+{
+    $stmt = $mysqli->prepare("SELECT COUNT(*) as follow_num FROM followers WHERE usrId = ? AND friendId = ?");
+    $stmt->bind_param("ii", $userId, $friendId);
+    $stmt->execute();
+    
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]['follow_num'] > 0;
+}
+
 ?>
