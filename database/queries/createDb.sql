@@ -216,6 +216,22 @@ CREATE TABLE IF NOT EXISTS `brogram`.`participations` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `brogram`.`user_profile`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `brogram`.`user_profile` (
+  `users_usrId` INT(11) NOT NULL,
+  `bio` VARCHAR(255) NOT NULL DEFAULT '',
+  `profileImg` VARCHAR(45) NOT NULL DEFAULT 'no-profile-pic.png',
+  PRIMARY KEY (`users_usrId`),
+  CONSTRAINT `fk_user_profile_users1`
+    FOREIGN KEY (`users_usrId`)
+    REFERENCES `brogram`.`users` (`usrId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
 -- Creating a user that is capable of making only SELECT, INSERT and UPDATE
 -- operations, so that no one is able to delete the DB except the administrator.
 CREATE USER IF NOT EXISTS 'sec_user'@'localhost' IDENTIFIED BY 'eKcGZr59zAa2BEWU';
