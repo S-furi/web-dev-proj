@@ -1,28 +1,3 @@
-// function show(following, res) {
-//   if (res.data['ok']) {
-//     const modal = document.getElementById("modal");
-//     const modalContent = document.querySelector(".modal .modal-content");
-//     const followedUsers = following ? res.data['following'] : res.data['followed'];
-
-//     modalContent.innerHTML = "";
-//     const list = document.createElement("ul");
-//     list.className = following ? "following-users-list" : "followed-users-list";
-//     followedUsers.forEach(user => {
-//       const item = document.createElement("li");
-//       const link = document.createElement("a");
-//       link.href = `user-profile.php?usrId=${user.usrId}`;
-//       link.textContent = user.username;
-//       item.appendChild(link);
-//       list.appendChild(item);
-//     });
-
-//     modalContent.appendChild(list);
-//     modal.style.display = "block";
-//   } else {
-//     console.log('errore nella visualizzazione');
-//   }
-// }
-
 function show(following, res, sessionId) {
   if (res.data['ok']) {
     const modal = document.getElementById("modal");
