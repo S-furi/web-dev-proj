@@ -17,9 +17,9 @@ function createInfoBox(user, followers, following) {
               <div class="profile-infobox-body">
                 <p class="profile-descr">Descrizione</p>
                 <div class="follow-info">
-                  <p class="info-tag">Seguaci: </p>
+                  <a href="#" onclick="showFollowingUsers(${user['usrId']})"><p class="info-tag">Seguaci: </p></a>
                   <p class="followers-data">${followers}</p>
-                  <p class="info-tag">Seguiti: </p>
+                  <a href="#" onclick="showFollowedUsers(${user['usrId']})"><p class="info-tag">Seguiti: </p></a>
                   <p>${following}</p>
                 </div>
               </div>
@@ -82,6 +82,14 @@ function generatePosts(posts) {
       `;
       result += form;
     }
+
+    let modal = `
+            <div id="modal" class="modal">
+              <div class="modal-content">
+              </div>
+            </div>
+    `;
+    result += modal;
 
     return result;
 }

@@ -426,6 +426,10 @@ header .dropdown>.notification-badge {
     margin-right: 0.2rem;
 }
 
+.middle .timeline .follow-info a:visited {
+  color: var(--color-primary);
+}
+
 .middle .timeline .post-body .profile-interaction-buttons {
     display: flex;
     flex-flow: row;

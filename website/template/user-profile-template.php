@@ -15,9 +15,9 @@
               <div class="profile-infobox-body">
                 <p class="profile-descr">Descrizione</p>
                 <div class="follow-info">
-                  <p class="info-tag">Seguaci: </p>
+                  <a href="#" onclick="showFollowingUsers(<?php echo $_GET['usrId']; ?>)"><p class="info-tag">Seguaci: </p></a>
                   <p class="followers-data"><?php echo $followers_n; ?></p>
-                  <p class="info-tag">Seguiti: </p>
+                  <a href="#" onclick="showFollowedUsers(<?php echo $_GET['usrId']; ?>)"><p class="info-tag">Seguiti: </p></a>
                   <p><?php echo $following_n; ?></p>
                 </div>
               </div>
@@ -52,4 +52,10 @@
               </div>
             </article>
             <?php endforeach; ?>
+
+            <div id="modal" class="modal">
+              <div class="modal-content">
+              </div>
+            </div>
+
         </section>

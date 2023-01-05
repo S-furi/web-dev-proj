@@ -103,6 +103,15 @@ function getFollowedUsers($user, $mysqli)
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
+function getFollowingUsers($user, $mysqli)
+{
+    $stmt = $mysqli->prepare("SELECT usrId FROM followers WHERE friendId = ?");
+    $stmt->bind_param("i", $user);
+    $stmt->execute();
+
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
 function getFollowingNum($userId, $mysqli)
 {
     $stmt = $mysqli->prepare("SELECT COUNT(*) as follow_num FROM followers WHERE usrId = ?");

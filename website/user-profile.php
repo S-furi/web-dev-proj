@@ -9,6 +9,8 @@ $following_n = getFollowingNum($user['usrId'], $mysqli);
 $templateParams['Titolo'] = "Brogram - Profilo " . $templateParams['user']['username'];
 $templateParams['template_name'] = "user-profile-template.php";
 
+array_push($templateParams["js"], "js/profile.js");
+
 require("template/base.php");
 
 
