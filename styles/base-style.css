@@ -166,6 +166,7 @@ header .dropdown-content a {
     padding: 1rem 1.1rem;
     text-decoration: none;
     display: block;
+    cursor: pointer;
 }
 
 header .dropdown-content a:hover {
