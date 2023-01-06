@@ -58,7 +58,7 @@ function generatePosts(posts) {
                   </div>
                 </div>
                 <p>${posts[i]['caption']}</p>
-                <p class="likes-n">Mi Piace: ${posts[i]['likes']}</p>
+                <a href="#" onclick="showLikeUsers(${posts[i]['postId']}, ${posts[i]['usrId']})"><p class="likes-n">Mi Piace: ${posts[i]['likes']}</p></a>
                 <div class="profile-interaction-buttons">
                     <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
                         class="material-symbols-outlined">favorite</span></label>

@@ -24,7 +24,7 @@
                 </div>   
                 <img src="img/posts/<?php echo $post['image']; ?>" alt="" />
                 <p><?php echo $post['caption']; ?></p>
-                <p class="likes-n">Mi Piace: <?php echo $post['likes'] ?></p>
+                <a href="#" onclick="showLikeUsers(<?php echo $postId; ?>, <?php echo $_SESSION['user_id']; ?>)"><p class="likes-n">Mi Piace: <?php echo $post['likes']; ?></p></a>
                 <div class="interaction-buttons">
                 <label for="post-<?php echo $postId ?>-like-btn"><button type="button" name="like button" id="post-<?php echo $postId ?>-like-btn" onclick="likePost(<?php echo $postId ?>, <?php echo $_SESSION["user_id"]?>, this)">
                         <span class="material-symbols-outlined like-btn">favorite</span></button></label>

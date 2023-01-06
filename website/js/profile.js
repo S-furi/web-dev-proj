@@ -1,29 +1,20 @@
-function show(following, res, sessionId) {
-  if (res.data['ok']) {
-    const modal = document.getElementById("modal");
-    const modalContent = document.querySelector(".modal .modal-content");
-    const followedUsers = following ? res.data['following'] : res.data['followed'];
-
-    modalContent.innerHTML = "";
-    const list = document.createElement("ul");
-    list.className = following ? "following-users-list" : "followed-users-list";
-    
-    followedUsers.forEach(user => {
+function generateList(users, imgSrc, list, sessionId) {
+    users.forEach(user => {
       const item = document.createElement("li");
-      // crea un elemento div con la classe userinfo
+      // create a div element with class userinfo
       const userInfo = document.createElement("div");
       userInfo.className = "userinfo";
-      // crea un elemento img per l'immagine del profilo dell'utente
+      // create an img element for the user's profile picture
       const img = document.createElement("img");
-      img.src = "img/no-profile-pic.png";
+      img.src = imgSrc;
       img.alt = "suggested account profile picture";
       img.className = "profile-picture";
       userInfo.appendChild(img);
-      // crea un elemento div per il nome e il tag dell'utente
+      // create a div element for the user's name and tag
       const userName = document.createElement("div");
       userName.className = "user-name";
       
-      // crea un elemento a con il nome dell'utente
+      // create an a element with the user's name
       const a = document.createElement("a");
       if (user.usrId == sessionId) {
         a.href = `personal-profile.php`;
@@ -31,14 +22,14 @@ function show(following, res, sessionId) {
         a.href = `user-profile.php?usrId=${user.usrId}`;
       }
 
-      // crea un elemento h3 con il nome dell'utente
+      // create an h3 element with the username
       const h3 = document.createElement("h3");
       h3.textContent = user.firstName + " " + user.lastName;
       a.appendChild(h3);
 
       userName.appendChild(a);
 
-      // crea un elemento p con il tag dell'utente
+      // create a p element with the user tag
       const p = document.createElement("p");
       p.className = "usertag";
       p.textContent = `@${user.username}`;
@@ -48,6 +39,20 @@ function show(following, res, sessionId) {
       item.appendChild(userInfo);
       list.appendChild(item);
     });
+}
+
+function showLikes(res, sessionId) {
+  debugger;
+  if (res.data['ok']) {
+    const modal = document.getElementById("modal");
+    const modalContent = document.querySelector(".modal .modal-content");
+    const likeUsers = res.data['likes'];
+
+    modalContent.innerHTML = "";
+    const list = document.createElement("ul");
+    list.className = "likes-list";
+    
+    generateList(likeUsers, "img/no-profile-pic.png", list, sessionId);
     
     modalContent.appendChild(list);
     modal.style.display = "block";
@@ -55,18 +60,43 @@ function show(following, res, sessionId) {
     console.log('errore nella visualizzazione');
   }
 }
+
+function showFollow(following, res, sessionId) {
+  if (res.data['ok']) {
+    const modal = document.getElementById("modal");
+    const modalContent = document.querySelector(".modal .modal-content");
+    const followUsers = following ? res.data['following'] : res.data['followed'];
+
+    modalContent.innerHTML = "";
+    const list = document.createElement("ul");
+    list.className = following ? "following-users-list" : "followed-users-list";
     
+    generateList(followUsers, "img/no-profile-pic.png", list, sessionId);
+    
+    modalContent.appendChild(list);
+    modal.style.display = "block";
+  } else {
+    console.log('errore nella visualizzazione');
+  }
+}
+ 
+function showLikeUsers(postId, sessionId) {
+  axios.post(`api/api-profile.php?postId=${postId}&azione=2`)
+    .then(res => {
+      showLikes(res, sessionId);
+    });
+}
           
 function showFollowedUsers(usrId, sessionId) {
   axios.post(`api/api-profile.php?usrId=${usrId}&azione=0`)
     .then(res => {
-      show(false, res, sessionId);  
+      showFollow(false, res, sessionId);  
     });
 }
 
 function showFollowingUsers(usrId, sessionId) {
   axios.post(`api/api-profile.php?usrId=${usrId}&azione=1`)
     .then(res => {
-      show(true, res, sessionId);  
+      showFollow(true, res, sessionId);  
     });
 }

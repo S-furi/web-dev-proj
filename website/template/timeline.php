@@ -28,7 +28,7 @@
                               </div>
                               <img src="<?php echo str_replace(' ', '%20', $post["image"]) ?>" alt="" />
                               <p><?php echo $post["caption"] ?></p>
-                              <p class="likes-n">Mi Piace: <?php echo $post["likes"] ?></p>
+                              <a href="#" onclick="showLikeUsers(<?php echo $post['postId']; ?>, <?php echo $_SESSION['user_id']; ?>)"><p class="likes-n">Mi Piace: <?php echo $post['likes']; ?></p></a>
                               <div class="interaction-buttons">
                                   <div class="like-comment-div">
                               <label for="post-<?php echo $post["postId"] ?>-like-btn"><button type="button" value="like" name="like button" id="post-<?php echo $post["postId"] ?>-like-btn" onclick="likePost(<?php echo $post["postId"] ?>, <?php echo $_SESSION["user_id"] ?>, this)"><span class="material-symbols-outlined like-btn">favorite</span></button></label>
@@ -43,4 +43,10 @@
                       </article>
                   <?php endforeach; ?>
               <?php endif; ?>
+            
+            <div id="modal" class="modal">
+              <div class="modal-content">
+              </div>
+            </div>
+
           </section>

@@ -261,6 +261,17 @@ function getLikeDetails($likeId, mysqli $mysqli)
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
+function getUserLikeDetails($postId, mysqli $mysqli) {
+  $stmt = $mysqli->prepare("SELECT u.firstName, u.lastName, u.usrId, u.username
+                            FROM likes l
+                            JOIN users u ON l.usrId = u.usrId
+                            WHERE l.postId = ?
+                            ");
+  $stmt->bind_param("i", $postId);
+  $stmt->execute();
+  return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
 // TODO funzione come sopra ma per arrivare alla pagina dell'utente
 // che ti ha seguito. Si implementa la funzione quando è pronto il 
 // file php per visualizzare il profilo di un utente.

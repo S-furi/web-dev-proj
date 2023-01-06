@@ -45,7 +45,7 @@
                     </div>
                   </div>
                   <p><?php echo $post['caption']; ?></p>
-                  <p class="likes-n">Mi Piace: <?php echo $post['likes']; ?></p>
+                  <a href="#" onclick="showLikeUsers(<?php echo $post['postId']; ?>, <?php echo $_SESSION['user_id']; ?>)"><p class="likes-n">Mi Piace: <?php echo $post['likes']; ?></p></a>
                   <div class="profile-interaction-buttons">
                   <label for="like-btn"><button type="button" name="like button" id="like-btn" onclick="likePost(<?php echo $post["postId"] ?>, <?php echo $_SESSION["user_id"] ?>, this)"><span
                           class="material-symbols-outlined like-btn">favorite</span></button></label>
@@ -65,7 +65,6 @@
               </article>
             <?php endif; ?>
             
-
             <div id="modal" class="modal">
               <div class="modal-content">
               </div>

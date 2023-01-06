@@ -7,7 +7,7 @@ $templateParams["template_name"] = "timeline.php";
 $templateParams["active-home"] = "active";
 $templateParams["posts"]= getFriendsPosts($_SESSION["user_id"], $mysqli);
 
-
+array_push($templateParams["js"], "js/profile.js");
 
 // fixing images path
 for($i = 0; $i < count($templateParams["posts"]); $i++) {
