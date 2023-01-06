@@ -444,14 +444,10 @@ header .dropdown>.notification-badge {
 .middle .timeline .info-tag {
     font-weight: bold;
     margin-right: 0.2rem;
-    transition: transform 0.5s ease-in-out, margin 0.5s ease-in-out;
-    transform: scale(1);
 }
 
 .middle .timeline .info-tag:hover {
   text-decoration: underline;
-  transform: scale(1.2);
-  margin: 0 20px;
 }
 
 .middle .timeline .follow-info a {
@@ -823,6 +819,10 @@ header .dropdown>.notification-badge {
     
     .right ul li .userinfo .user-name a {
       color: var(--color-primary);
+    }
+
+    .right ul li .userinfo .user-name a:hover {
+      text-decoration: underline;
     }
 
     .right ul li .btn {
