@@ -86,4 +86,20 @@ if ($_GET["action"] == 0){
     } else {
         header("HTTP/1.1 204 No Content");
     }
+
+// action = 4: delete the post with the provided postId
+} else if ($_GET["action"] == 4) {
+  if (isset($_POST["postId"])) {
+    $response["postDeleted"] = false;
+    
+    if (deletePost($postId, $mysqli)) {
+      $response["[postDeleted]"] = true;
+    }
+
+    header("Content-Type: application/json");
+    echo json_encode($response);
+    return;
+  } else {
+    header("HTTP/1.1 204 No Content");
+  }
 }
