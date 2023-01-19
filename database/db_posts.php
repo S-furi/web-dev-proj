@@ -364,4 +364,11 @@ function hasAlreadyLikedPost($usrId, $postId, mysqli $mysqli)
     return count($res) > 0;
 }
 
+function deletePost($postId, mysqli $mysqli): bool {
+  $stmt = $mysqli->prepare("DELETE FROM posts WHERE postId = ?");
+  $stmt->bind_param("i", $postId);
+
+  return $stmt->execute();
+}
+
 ?>
