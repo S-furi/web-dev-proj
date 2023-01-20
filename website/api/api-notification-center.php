@@ -91,10 +91,20 @@ if (isset($_POST['usrId'])) {
     $numNotifications = 10;
 
     $notifications = getNotificationsInfo(fetchNotifications($numNotifications, $forUser, $mysqli), $mysqli);
+    header('Content-Type: application/json');
+    echo json_encode($notifications);
+    // need to add error handling and error msg passing
 }
 
-header('Content-Type: application/json');
-echo json_encode($notifications);
-// need to add error handling and error msg passing
+if (isset($_POST['notificationId'])) {
+  // mark the provided notification as read if it's not
 
+  $result['ok'] = false;
+  if (markReadNotification($_POST['notificationId'], $mysqli)) {
+    $result['ok'] = true;
+  }
+
+  header("Content-Type application/json");
+  echo json_encode($result);
+}
 ?>
