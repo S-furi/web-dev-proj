@@ -29,10 +29,10 @@ function poll() {
                 notificationBadge.forEach(badge => badge.innerText = notifications.length < 10 ? notifications.length : "9+");
 
                 lastNotificationId = notifications[notifications.length - 1].notificationId;
-                displayNotification(notifications[0]['forUser']);
+                // re fetch notifications if only new ones are detected
+                displayNotification();
             } else {
                 notificationBadge.forEach(t => t.style.display = "none");
-                modalContent.innerHTML = `<li>Nessuna nuova notifica...</li>`
             }
 
             // Make another request
@@ -47,25 +47,26 @@ function poll() {
 }
 
 
-function displayNotification(forUser) {
-    const formData = new FormData();
-    formData.append("usrId", forUser);
-
-    axios.post("api/api-notification-center.php", formData)
+function displayNotification() {
+    axios.post("api/api-notification-center.php?action=1")
         .then(res => {
             if (res.data !== null) {
-                for (const i in res.data) {
-                    const n = res.data[i];
+                if (res.data.length == 0) {
+                    modalContent.innerHTML = `<li>Nessuna nuova notifica...</li>`
+                } else {
+                    for (const i in res.data) {
+                        const n = res.data[i];
 
-                    modalContent.innerHTML +=
-                    `<li>
-                        <a onclick='redirectToNotificationSource("${n["reference"]}", ${n['notificationId']})'>
-                        <span class="material-symbols-outlined">${notificationsIcons[n['type']]}</span>
-                        <img src="img/no-profile-pic.png" alt="" class="profile-picture" />
-                        <p class="usertag">@${n['fromUser']['username']}</p>
-                        <p> ${n['msg']} </p>
-                        </a>
-                    </li>`
+                        modalContent.innerHTML +=
+                        `<li>
+                            <a ${n['read'] ? `class="read"` : ""} onclick='redirectToNotificationSource("${n["reference"]}", ${n['notificationId']})'>
+                            <span class="material-symbols-outlined">${notificationsIcons[n['type']]}</span>
+                            <img src="img/no-profile-pic.png" alt="" class="profile-picture" />
+                            <p class="usertag">@${n['fromUser']['username']}</p>
+                            <p> ${n['msg']} </p>
+                            </a>
+                        </li>`
+                    }
                 }
             }
         }).catch(err => console.log(err));
@@ -79,20 +80,16 @@ function markReadNotification(notificationId) {
   const formData = new FormData();
   formData.append('notificationId', notificationId);
 
-  return axios.post('api/api-notification-center.php', formData)
+  return axios.post('api/api-notification-center.php?action=2', formData)
     .then(res => {
-      console.log(res.data)
-      if (res.ok) {
-        // notification has been read
-      } else {
+      if (!res.ok) {
         // something failed
         console.log(res.data)
       }
-
     }).catch(err => console.log(err));
 }
 
-// used for retrieving the string "*some* minutes/hours/days"
+// used for retrieving the string "*some* minutes/hours/days ago"
 function dateDiff(date1, date2) {
     // Calculate the difference in milliseconds
     const diffInMilliseconds = Math.abs(date1.getTime() - date2.getTime());
@@ -139,4 +136,5 @@ setModalListeners();
 
 // Start the long polling process
 poll();
+displayNotification();
 
