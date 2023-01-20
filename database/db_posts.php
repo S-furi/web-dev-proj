@@ -148,7 +148,7 @@ function getPostFromPostId($postId, mysqli $mysqli)
     $stmt->execute();
     $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-    if ($res > 0) {
+    if (count($res) > 0) {
         $res = $res[0];
         $res["location"] = getLocationFromLocationId($res["locationId"], $mysqli)["name"];
     }
