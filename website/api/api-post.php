@@ -8,8 +8,20 @@ if (!isset($_GET["action"])) {
   header("HTTP/1.1 204 No Content");
 }
 
+if ($_GET["action"] == "fetch") {
+  if (isset($_POST['postId'])) {
+    $result = getPostFromPostId($_POST['postId'], $mysqli);
+
+    if (count($result) == 0) {
+      header("HTTP/1.1 204 No Content");
+      return;
+    }
+
+    header("Content-Type: application/json");
+    echo json_encode($result);
+  }
 // action = 0 means that a new post has to be inserted
-if ($_GET["action"] == 0){
+} elseif ($_GET["action"] == 0){
     if(isset($_POST["title"], $_POST["description"], $_POST['location-id'], $_POST['event-datetime']) && $_FILES["photo"]["error"] == 0) {
         $user_id = $_SESSION["user_id"];
         $title = $_POST["title"];
