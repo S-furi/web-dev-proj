@@ -1,3 +1,44 @@
 # Web Developement Project - University of Bologna A.D. 2022
 
-**BROGRAM**
+# **BROGRAM**
+- [ ] Spiegare meglio il funzionamento di tutto
+
+## Introduction
+This project simulates a social media platform, where the purpose is to create Events and make people around the world participate to them.
+An event is created through a post, where other users can like or comment it.
+Users can follow each others, and by doing this, the follower can see in his timeline all the events that will be created by the followed user.
+Users can also send messages to each other.
+
+## Basic Functionalities
+### Login and Registration
+It is possibile to register to *Brogram* with an **unique username** and a a **unique email** per user. First/Last names are also required, as well as a password that will be safely stored in the local database.
+Once a User is registered, it's possible to login with the provided email (not the username) and the choosen password. Once the login is done
+the homepage is shown
+
+### Timelines
+There are *two* homes:
+- **Home** (house icon) where it is possible to see al posts of followed users only
+- **Explore** (compass icon) where are shown posts from people that the user might be interested in
+
+To select one of the two, the left sidebar makes it easy to access them.
+
+### Post Creation Editor
+The green button on the bottom of the left sidebar, makes you create a new post.
+Every field of the post is required, expecially the location field has to be checked before submitting the form (with button `check` next to it). A tick will be shown if the location is valid, a cross otehrwise. See the [radar](#radar) section for more information on how location search works.
+
+Once the post is submitted for creation, the output of the operation will be seen onscreen above the post creation title.
+
+Note: Image size has to be be under 500Kb.
+
+### Radar
+Every event has a location associated. It's possibile for a user to visualize a map of the events around the searched area.
+In the search box, it is possibile to specify:
+- A city name
+- A town name (e.g. Macerone, Cesenatico)
+- An address
+- A shop
+
+Under the hood, [Nominatim](https://nominatim.org/) and [OpenLayers](https://openlayers.org/) are being used for coordinates/locations search and the map displaying. 
+
+Note: it's possibile to use the location search every 5/6 seconds for avoiding sending too many requests to OL and Nominatim (the same rules is being applied in the radar section)
+
