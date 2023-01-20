@@ -28,7 +28,7 @@ function poll() {
                 notificationBadge.forEach(t => t.style.display = "block");
                 notificationBadge.forEach(badge => badge.innerText = notifications.length < 10 ? notifications.length : "9+");
 
-                lastNotificationId = notifications[notifications.length - 1].id;
+                lastNotificationId = notifications[notifications.length - 1].notificationId;
                 displayNotification(notifications[0]['forUser']);
             } else {
                 notificationBadge.forEach(t => t.style.display = "none");
@@ -39,11 +39,13 @@ function poll() {
             // poll();
         }).catch(error => {
             if (error.code = "ECONNABORTED" || error.response.status == 204) {
-                // If the request returns no new notifications, wait for a specified period of time before making another request
+                // If the request returns no new notifications, wait for a specified 
+                // period of time before making another request
                 setTimeout(poll, 5000);
             }
         });
 }
+
 
 function displayNotification(forUser) {
     const formData = new FormData();
@@ -57,7 +59,7 @@ function displayNotification(forUser) {
 
                     modalContent.innerHTML +=
                     `<li>
-                        <a href="${n["reference"]}">
+                        <a onclick='redirectToNotificationSource("${n["reference"]}", ${n['notificationId']})'>
                         <span class="material-symbols-outlined">${notificationsIcons[n['type']]}</span>
                         <img src="img/no-profile-pic.png" alt="" class="profile-picture" />
                         <p class="usertag">@${n['fromUser']['username']}</p>
@@ -69,6 +71,28 @@ function displayNotification(forUser) {
         }).catch(err => console.log(err));
 }
 
+function redirectToNotificationSource(reference, notificationId) {
+  markReadNotification(notificationId).then(() => window.location.href = reference);
+}
+
+function markReadNotification(notificationId) {
+  const formData = new FormData();
+  formData.append('notificationId', notificationId);
+
+  return axios.post('api/api-notification-center.php', formData)
+    .then(res => {
+      console.log(res.data)
+      if (res.ok) {
+        // notification has been read
+      } else {
+        // something failed
+        console.log(res.data)
+      }
+
+    }).catch(err => console.log(err));
+}
+
+// used for retrieving the string "*some* minutes/hours/days"
 function dateDiff(date1, date2) {
     // Calculate the difference in milliseconds
     const diffInMilliseconds = Math.abs(date1.getTime() - date2.getTime());
