@@ -11,6 +11,12 @@ if (!checkUserSession($mysqli)) {
 }
 
 $templateParams["user"] = getUser(intval($_SESSION['user_id']), $mysqli);
+if (checkUserInfoExists($_SESSION['user_id'], $mysqli)) {
+  $templateParams["userInfo"] = getUserInfo($_SESSION['user_id'], $mysqli);
+  $templateParams["userInfo"]['profileImg'] = 'img/posts/' . $templateParams["userInfo"]['profileImg'];
+} else {
+  $templateParams["userInfo"] = array('bio' => '', 'profileImg' => 'img/no-profile-pic.png');
+}
 $templateParams["suggested_users"] = getSuggestedUser($_SESSION["user_id"], $mysqli);
 
 $templateParams["js"] = array("https://unpkg.com/axios/dist/axios.min.js", "js/home.js", "js/notification.js", "js/calendar.js");

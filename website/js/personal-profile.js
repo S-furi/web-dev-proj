@@ -1,21 +1,21 @@
-function createInfoBox(user, followers, following) {
+function createInfoBox(user, userInfo, followers, following) {
     let form = ` 
         <section class="timeline">
             <div class="profile-infobox">
               <div class="profile-infobox-head">
                 <div class="profile-usr-info">
-                  <img src="img/no-profile-pic.png" alt="post author profile picture" class="big-profile-picture">
+                  <img src="${userInfo['profileImg']}" alt="post author profile picture" class="big-profile-picture">
                   <div class="nametags">
                     <h3>${user["firstName"]} ${user["lastName"]}</h3>
                     <p class="usertag">@${user["username"]}</p>
                   </div>
                 </div>
                 <label for="modify-btn"><input type="button" name="modify button" id="modify-btn"
-                  class="btn btn-secondary" value="Modifica Profilo" /></label>
-                <span class="material-symbols-outlined" id="manage_accounts">manage_accounts</span>
+                  class="btn btn-secondary" value="Modifica Profilo" onClick="parent.location='edit-profile.php'" /></label>
+                <a href='edit-profile.php'><span class="material-symbols-outlined" id="manage_accounts">manage_accounts</span></a>
               </div>
               <div class="profile-infobox-body">
-                <p class="profile-descr">Descrizione</p>
+                <p class="profile-descr">${userInfo['bio']}</p>
                 <div class="follow-info">
                   <a href="#" onclick="showFollowingUsers(${user['usrId']}, ${user['usrId']})"><p class="info-tag">Seguaci: </p></a>
                   <p class="followers-data">${followers}</p>
@@ -96,7 +96,7 @@ function generatePosts(posts) {
 
 axios.get('api/api-personal-profile.php?azione=1')
   .then(response => {
-    const infoBox = createInfoBox(response.data[0], response.data[1], response.data[2]);
+    const infoBox = createInfoBox(response.data[0], response.data[1], response.data[2], response.data[3]);
     const timeline = document.querySelector("main .middle");
     timeline.innerHTML = infoBox;
   })
