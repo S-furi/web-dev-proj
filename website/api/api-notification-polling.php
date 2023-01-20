@@ -21,6 +21,18 @@ if (isset($_POST['lastNotificationId'])) {
         sleep(5);
         header("HTTP/1.1 204 No Content");
     }
+} elseif (isset($_POST['usrId'], $_POST['lastNotificationId'])) {
+  // the provided notificiation has to be marked as read if it's not
+  $usrId = $_POST['usrId'];
+  $notificationId = $_POST['notificationId'];
+
+  $result['ok'] = false;
+  if (markReadNotification($notificationId, $mysqli)) {
+    $result['ok'] = true;
+  }
+
+  header("Content-Type application/json");
+  echo json_encode($result);
 }
 
 ?>
