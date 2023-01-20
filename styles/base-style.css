@@ -672,6 +672,9 @@ header .dropdown>.notification-badge {
     border-radius: var(--card-border-radius);
     transition: .2s ease-in;
 }
+.modal .notifications li a.read {
+  background-color: #c8c8c8;
+}
 
 .modal .notifications li * {
     margin: 0 1rem;

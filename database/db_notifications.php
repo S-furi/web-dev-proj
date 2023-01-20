@@ -46,7 +46,11 @@ function notifyComment($forUser, $commentId, mysqli $mysqli) {
 
 function fetchNotifications(int $num, $forUser, $mysqli)
 {
-    $query = "SELECT notificationId, type, forUser, entityId, notifications.read, time FROM notifications WHERE forUser = ? ORDER BY time DESC LIMIT ?";
+  $query = "SELECT notificationId, type, forUser, entityId, notifications.read, time 
+            FROM notifications 
+            WHERE forUser = ? 
+            ORDER BY notifications.read, time DESC LIMIT ?";
+
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("ii", $forUser, $num);
 
