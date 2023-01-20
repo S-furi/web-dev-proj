@@ -10,6 +10,7 @@ function getNotificationInfoForComment(array $notification, $mysqli) {
     $msg = "ha commentato il tuo post";
 
     return [
+        "notificationId" => $notification["notificationId"],
         "type" => $notification["type"],
         "fromUser" => getUser($fromUser, $mysqli),
         "msg" => $msg,
@@ -32,6 +33,7 @@ function getNotificationInfoForLike(array $notification, $mysqli) {
         $msg = "ha messo mi piace al tuo post";
 
         return [
+            "notificationId" => $notification["notificationId"],
             "type" => $notification["type"],
             "fromUser" => getUser($fromUser, $mysqli),
             "msg" => $msg,
@@ -49,6 +51,7 @@ function getNotificationInfoForFollow(array $notification, $mysqli) {
     $msg = "ha iniziato a seguirti";
 
     return [
+        "notificationId" => $notification["notificationId"],
         "type" => $notification["type"],
         "fromUser" => getUser($fromUser, $mysqli),
         "msg" => $msg,
