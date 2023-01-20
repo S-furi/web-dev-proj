@@ -75,4 +75,13 @@ function getNotificationsForUser($userId, $lastNotificationId, mysqli $mysqli)
     return null;
 }
 
+function markReadNotification($notificationId, mysqli $mysqli) {
+  $query = "UPDATE `notifications` SET `read` = '1' WHERE `notifications`.`notificationId` = ?";
+  $stmt = $mysqli->prepare($query);
+
+  $stmt->bind_param("i", $notificationId);
+
+  return $stmt->execute();
+}
+
 ?>
