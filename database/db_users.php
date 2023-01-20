@@ -26,6 +26,32 @@ function insertNewUser($email, $username,  $password, $first_name, $last_name, $
     return true;
 }
 
+function insertNewUserInfo($usrId, $bio, $propic, $mysqli) {
+  $query = "INSERT INTO user_profile (users_usrId, bio, profileImg) VALUES (?, ?, ?)";
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("iss", $usrId, $bio, $propic);
+
+  try {
+      $stmt->execute();
+  } catch (\Throwable $th) {
+      return false;
+  }
+  return true;
+}
+
+function updateProfileInfo($usrId, $bio, $propic, $mysqli) {
+  $query = "UPDATE user_profile SET bio=?, profileImg=? WHERE users_usrId=?";
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("ssi", $bio, $propic, $usrId);
+
+  try {
+      $stmt->execute();
+  } catch (\Throwable $th) {
+      return false;
+  }
+  return true;
+}
+
 function getUser($usrId, $mysqli)
 {
     $query = "SELECT usrId, email, username, firstName, lastName FROM users WHERE usrId=?";
@@ -34,6 +60,24 @@ function getUser($usrId, $mysqli)
 
     $stmt->execute();
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+}
+
+function getUserInfo($usrId, $mysqli) {
+  $query = "SELECT bio, profileImg FROM user_profile WHERE users_usrId = ?";
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("i", $usrId);
+
+  $stmt->execute();
+  return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+}
+
+function checkUserInfoExists($usrId, $mysqli) {
+  $query = "SELECT COUNT(1) FROM user_profile WHERE users_usrId = ?";
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("i", $usrId);
+
+  $stmt->execute();
+  return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]['COUNT(1)'];
 }
 
 /**

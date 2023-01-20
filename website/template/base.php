@@ -33,7 +33,7 @@
             <div class="dropdown">
                 <!-- When ready in DB, put this in php statement -->
                 <span class="notification-badge"></span>
-                <img src="img/no-profile-pic.png" alt="user profile picture" class="profile-picture dropbtn" />
+                <img src="<?php echo $templateParams['userInfo']['profileImg']?>" alt="user profile picture" class="profile-picture dropbtn" />
                 <ul class="dropdown-content">
                     <li><a href="personal-profile.php">Profilo</a></li>
                     <li><a href="logout.php">Logout</a></li>
@@ -51,7 +51,7 @@
             <div class="left">
                 <!-- Section should need a heading -->
                 <section class="profile">
-                    <a href="personal-profile.php"><img src="img/no-profile-pic.png" alt="user profile picture" class="profile-picture" /></a>
+                    <a href="personal-profile.php"><img src="<?php echo $templateParams['userInfo']['profileImg']?>" alt="user profile picture" class="profile-picture" /></a>
                     <div class="handle">
                         <a href="personal-profile.php"><p class="user-name"><?php echo $templateParams['user']['firstName'] . " " . $templateParams['user']['lastName']; ?></p></a>
                         <p class="usertag">@<?php echo $templateParams['user']['username']; ?></p>

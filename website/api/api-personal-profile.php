@@ -15,9 +15,15 @@ if ($_GET['azione'] == 0) {
   echo json_encode($posts);
 } elseif ($_GET['azione'] == 1) {
   $user = getUser($_SESSION['user_id'], $mysqli);
+  if (checkUserInfoExists($_SESSION['user_id'], $mysqli)) {
+    $userInfo = getUserInfo($_SESSION['user_id'], $mysqli);
+    $userInfo['profileImg'] = 'img/posts/' . $userInfo['profileImg'];
+  } else {
+    $userInfo = array('bio' => '', 'profileImg' => 'img/no-profile-pic.png');
+  }
   $followers_n = getFollowersNum($user['usrId'], $mysqli);
   $following_n = getFollowingNum($user['usrId'], $mysqli);
-  $data = array($user, $followers_n, $following_n); 
+  $data = array($user, $userInfo, $followers_n, $following_n); 
   header("Content-Type: application/json");
   echo json_encode($data);
 }
