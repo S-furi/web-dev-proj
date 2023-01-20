@@ -32,6 +32,16 @@
   animation: fadeIn 0.5s;
 }
 
+#popup-content a {
+  text-decoration: none;
+  color: var(--color-primary);
+}
+
+#popup-content a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
