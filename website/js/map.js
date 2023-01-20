@@ -140,28 +140,81 @@ function handlePopup(map) {
     if (features === null) {
       overlay.setPosition(undefined);
       container.classList.remove("show");
+      content.innerHTML = "";
       closer.blur();
       return;
     }
 
     let foundMarker = false;
+    let lonlat = [0,0];
     features.forEach(feature => {
       // Check if the feature is a marker
       if (feature instanceof ol.Feature && feature.getStyle() instanceof ol.style.Style) {
         foundMarker = true;
+        lonlat = ol.proj.transform(feature.getGeometry().getCoordinates(),'EPSG:3857', 'EPSG:4326');
       }
     });
     if (foundMarker) {
-      const coordinate = event.coordinate;
-      container.classList.add("show");
-      content.innerHTML = '<b>Hello world!</b><br />I am a popup.';
-      overlay.setPosition(coordinate);
+      content.innerHTML = "";
+      fillPopupEvent(content, lonlat)
+        .then(() => {
+          const coordinate = event.coordinate;
+          container.classList.add("show");
+          overlay.setPosition(coordinate);
+        }).catch(err =>console.log(err))
     } else {
       overlay.setPosition(undefined);
       container.classList.remove("show");
       closer.blur();
     }
   });
+}
+
+function fillPopupEvent(popoupContainer, lonlat) {
+  // make lat rounded to the 6th decimal
+  const approx = 1000000;
+  // Using EPSILON due to float precision arithmetic
+  lonlat[1] = Math.round((lonlat[1] + Number.EPSILON) * approx) / approx;
+  // make a db request for events in give lonlat
+  const center = {
+    "lon": lonlat[0],
+    "lat": lonlat[1],
+  };
+
+  const radius = 1 / approx;
+
+  const formData = new FormData();
+  formData.append("center", JSON.stringify(center));
+  formData.append('radius', radius);
+
+  return axios.post("api/api-locations.php?action=1", formData)
+    .then(res => {
+      if (res.data.length > 0) {
+        const postId = res.data[0].post;
+        fetchEvent(postId)
+          .then(res => insertPopupContent(res, popoupContainer))
+          .catch(() => []);
+      }
+    }).catch(() => []);
+}
+
+function fetchEvent(postId) {
+  const formData = new FormData();
+  formData.append("postId", postId);
+
+  return axios.post("api/api-post.php?action=fetch", formData)
+    .then(res => res.data)
+    .catch(() => []);
+}
+  
+function insertPopupContent(post, popoupContainer) {
+  if (post != []) {
+    const reference = `post.php?usrId=${post['usrId']}&postId=${post['postId']}`
+    popoupContainer.innerHTML = `<a href="${reference}"><b>${post['title']}</b></a>`
+    return popoupContainer;
+  } else {
+    return [];
+  }
 }
 
 function drawCenteredCircle(map) {
