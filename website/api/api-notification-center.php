@@ -86,8 +86,12 @@ function getNotificationsInfo(array $notifications, $mysqli) {
     return $result;
 }
 
-if (isset($_POST['usrId'])) {
-    $forUser = $_POST['usrId'];
+if (!isset($_GET['action'])) {
+  header('HTTP/1.1 204 No Content');
+}
+
+if ($_GET['action'] == 1) {
+    $forUser = $_SESSION["user_id"];
     $numNotifications = 10;
 
     $notifications = getNotificationsInfo(fetchNotifications($numNotifications, $forUser, $mysqli), $mysqli);
@@ -96,7 +100,7 @@ if (isset($_POST['usrId'])) {
     // need to add error handling and error msg passing
 }
 
-if (isset($_POST['notificationId'])) {
+if ($_GET['action'] == 2) {
   // mark the provided notification as read if it's not
 
   $result['ok'] = false;
