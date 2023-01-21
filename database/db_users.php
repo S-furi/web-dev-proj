@@ -68,7 +68,7 @@ function getUserInfo($usrId, $mysqli) {
   $stmt->bind_param("i", $usrId);
 
   $stmt->execute();
-  return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
+  return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
 function checkUserInfoExists($usrId, $mysqli) {

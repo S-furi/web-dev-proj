@@ -17,7 +17,7 @@ if ($_GET['azione'] == 0) {
   $user = getUser($_SESSION['user_id'], $mysqli);
   if (checkUserInfoExists($_SESSION['user_id'], $mysqli)) {
     $userInfo = getUserInfo($_SESSION['user_id'], $mysqli);
-    $userInfo['profileImg'] = 'img/posts/' . $userInfo['profileImg'];
+    $userInfo[0]['profileImg'] = 'img/posts/' . $userInfo['profileImg'];
   } else {
     $userInfo = array('bio' => '', 'profileImg' => 'img/no-profile-pic.png');
   }
