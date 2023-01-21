@@ -12,6 +12,13 @@ function getUsersList($usrId, $mysqli, $action) {
     foreach ($list as $row) {
       $userId = ($action == 1) ? $row['usrId'] : $row['friendId'];
       $user = getUser($userId, $mysqli);
+      
+      if (checkUserInfoExists($userId, $mysqli)) {
+        $user['profileImg'] =  'img/' . $user['username'] . "/propic/" . getUserInfo($userId, $mysqli)[0]['profileImg'];
+      } else {
+        $user['profileImg'] = 'img/no-profile-pic.png';
+      }
+
       array_push($result[($action == 0) ? 'followed' : 'following'], $user);
     }
   }
@@ -37,6 +44,14 @@ function getUserLikes($postId, $mysqli, $action) {
   if ($action == 2) {
     $postId = $_GET['postId'];
     $list = getUserLikeDetails($postId, $mysqli);
+    foreach ($list as &$user) {
+      if (checkUserInfoExists($user['usrId'], $mysqli)) {
+        $userInfo = getUserInfo($user['usrId'], $mysqli);
+        $user['profileImg'] = 'img/' . $user['username'] . "/propic/" . $userInfo[0]['profileImg'];
+      } else {
+        $user['profileImg'] = 'img/no-profile-pic.png';
+      }
+    }
     $result['likes'] = $list;
     $result['ok'] = true;
     return $result;
