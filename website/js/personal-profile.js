@@ -96,7 +96,6 @@ function generatePosts(posts) {
 
 axios.get('api/api-personal-profile.php?azione=1')
   .then(response => {
-    debugger;
     const infoBox = createInfoBox(response.data[0], response.data[1], response.data[2], response.data[3]);
     const timeline = document.querySelector("main .middle");
     timeline.innerHTML = infoBox;
