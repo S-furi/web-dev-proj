@@ -13,5 +13,7 @@ for($i = 0; $i < count($templateParams["posts"]); $i++) {
     $templateParams["posts"][$i]["eventDate"]= date("d-m-Y H:i", strtotime($templateParams["posts"][$i]['eventDate']));
 }
 
+array_push($templateParams["js"], "js/profile.js");
+
 require("template/base.php");
 ?>
