@@ -19,7 +19,7 @@ if ($_GET['azione'] == 0) {
     $userInfo = getUserInfo($_SESSION['user_id'], $mysqli);
     $userInfo[0]['profileImg'] = 'img/' . $user['username'] . "/propic/" . $userInfo[0]['profileImg'];
   } else {
-    $userInfo = array('bio' => '', 'profileImg' => 'img/no-profile-pic.png');
+    $userInfo[0] = array('bio' => '', 'profileImg' => 'img/no-profile-pic.png');
   }
   $followers_n = getFollowersNum($user['usrId'], $mysqli);
   $following_n = getFollowingNum($user['usrId'], $mysqli);
