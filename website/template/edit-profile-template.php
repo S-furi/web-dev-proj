@@ -14,7 +14,6 @@ if (isset($_POST['bio']) && $_FILES['propic']['error'] == 0) {
   $propic = $_FILES['propic'];
   $username = getUser($usrId, $mysqli)['username'];
   $propic_dir = IMG_DIR . $username . "/propic/";
-  var_dump($propic_dir);
 
   if (!is_dir($propic_dir)) {
     mkdir($propic_dir, 0777, true);
