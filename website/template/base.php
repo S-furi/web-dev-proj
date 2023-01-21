@@ -65,8 +65,10 @@
                     </a>
                     </li>
                     <li class="menu-item <?php if (isset($templateParams["active-explore"])) echo $templateParams["active-explore"] ?>">
+                      <a href="discover.php">
                         <span class="material-symbols-outlined">Explore</span>
                         <h2>Explore</h2>
+                      </a>
                     </li>
                     <li class="menu-item <?php if (isset($templateParams["active-radar"])) echo $templateParams["active-radar"] ?>">
                         <a href="map.php">
