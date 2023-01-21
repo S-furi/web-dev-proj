@@ -12,8 +12,15 @@ if (isset($_POST['bio']) && $_FILES['propic']['error'] == 0) {
   $usrId = $_SESSION['user_id'];
   $bio = $_POST['bio'];
   $propic = $_FILES['propic'];
+  $username = getUser($usrId, $mysqli)['username'];
+  $propic_dir = IMG_DIR . $username . "/propic/";
+  var_dump($propic_dir);
 
-  list($err, $imgPath) = uploadImage(UPLOAD_POST_DIR, $propic);
+  if (!is_dir($propic_dir)) {
+    mkdir($propic_dir, 0777, true);
+  }
+
+  list($err, $imgPath) = uploadImage($propic_dir, $propic);
 
   if ($err != 0) {
     if (checkUserInfoExists($usrId, $mysqli) == 1) {
@@ -21,7 +28,7 @@ if (isset($_POST['bio']) && $_FILES['propic']['error'] == 0) {
         $error = "C'è stato un errore nell'aggiornamento del profilo, si prega di riprovare più tardi.";
       }
     } else {
-      if (insertNewUserInfo($usrId, $bio, $imgPath, $mysqli)) {
+      if (!insertNewUserInfo($usrId, $bio, $imgPath, $mysqli)) {
         $error = "C'è stato un errore nell'inserimento del profilo, si prega di riprovare più tardi.";
       }
     }
