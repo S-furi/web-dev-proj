@@ -1,20 +1,16 @@
-function generateList(users, imgSrc, list, sessionId) {
+function generateList(users, list, sessionId) {
     users.forEach(user => {
       const item = document.createElement("li");
-      // create a div element with class userinfo
       const userInfo = document.createElement("div");
       userInfo.className = "userinfo";
-      // create an img element for the user's profile picture
       const img = document.createElement("img");
-      img.src = imgSrc;
+      img.src = user.profileImg;
       img.alt = "suggested account profile picture";
       img.className = "profile-picture";
       userInfo.appendChild(img);
-      // create a div element for the user's name and tag
       const userName = document.createElement("div");
       userName.className = "user-name";
       
-      // create an a element with the user's name
       const a = document.createElement("a");
       if (user.usrId == sessionId) {
         a.href = `personal-profile.php`;
@@ -22,14 +18,12 @@ function generateList(users, imgSrc, list, sessionId) {
         a.href = `user-profile.php?usrId=${user.usrId}`;
       }
 
-      // create an h3 element with the username
       const h3 = document.createElement("h3");
       h3.textContent = user.firstName + " " + user.lastName;
       a.appendChild(h3);
 
       userName.appendChild(a);
 
-      // create a p element with the user tag
       const p = document.createElement("p");
       p.className = "usertag";
       p.textContent = `@${user.username}`;
@@ -42,7 +36,6 @@ function generateList(users, imgSrc, list, sessionId) {
 }
 
 function showLikes(res, sessionId) {
-  debugger;
   if (res.data['ok']) {
     const modal = document.getElementById("modal");
     const modalContent = document.querySelector(".modal .modal-content");
@@ -52,7 +45,7 @@ function showLikes(res, sessionId) {
     const list = document.createElement("ul");
     list.className = "likes-list";
     
-    generateList(likeUsers, "img/no-profile-pic.png", list, sessionId);
+    generateList(likeUsers, list, sessionId);
     
     modalContent.appendChild(list);
     modal.style.display = "block";
@@ -71,7 +64,7 @@ function showFollow(following, res, sessionId) {
     const list = document.createElement("ul");
     list.className = following ? "following-users-list" : "followed-users-list";
     
-    generateList(followUsers, "img/no-profile-pic.png", list, sessionId);
+    generateList(followUsers, list, sessionId);
     
     modalContent.appendChild(list);
     modal.style.display = "block";
