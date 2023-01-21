@@ -529,6 +529,7 @@ header .dropdown>.notification-badge {
     min-width: 3rem;
     min-height: 3rem;
     color: black;
+    cursor: pointer;
 }
 
 .middle .timeline .profile-infobox-head #person_add {

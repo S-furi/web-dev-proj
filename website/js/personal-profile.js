@@ -12,7 +12,7 @@ function createInfoBox(user, userInfo, followers, following) {
                 </div>
                 <label for="modify-btn"><input type="button" name="modify button" id="modify-btn"
                   class="btn btn-secondary" value="Modifica Profilo" onClick="parent.location='edit-profile.php'" /></label>
-                <a href='edit-profile.php'><span class="material-symbols-outlined" id="manage_accounts">manage_accounts</span></a>
+                <span class="material-symbols-outlined" id="manage_accounts" onclick="parent.location='edit-profile.php'">manage_accounts</span>
               </div>
               <div class="profile-infobox-body">
                 <p class="profile-descr">${userInfo['bio']}</p>
