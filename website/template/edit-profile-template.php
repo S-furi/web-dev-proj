@@ -30,7 +30,6 @@ if (isset($_POST['bio']) && $_FILES['propic']['error'] == 0) {
         foreach ($files as $file) {
           if (basename($file) !== $imgPath) {
             unlink($file);
-            echo "eliminato " . $file . " perchè diverso da " . $propic['name'];
           }
         }
       }
