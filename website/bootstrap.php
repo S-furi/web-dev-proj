@@ -13,7 +13,7 @@ if (!checkUserSession($mysqli)) {
 $templateParams["user"] = getUser(intval($_SESSION['user_id']), $mysqli);
 if (checkUserInfoExists($_SESSION['user_id'], $mysqli)) {
   $templateParams["userInfo"] = getUserInfo($_SESSION['user_id'], $mysqli);
-  $templateParams["userInfo"]['profileImg'] = 'img/posts/' . $templateParams["userInfo"]['profileImg'];
+  $templateParams["userInfo"][0]['profileImg'] = 'img/posts/' . $templateParams["userInfo"]['profileImg'];
 } else {
   $templateParams["userInfo"] = array('bio' => '', 'profileImg' => 'img/no-profile-pic.png');
 }

@@ -3,7 +3,7 @@ $userInfo = getUserInfo($_SESSION['user_id'], $mysqli);
 if (empty($userInfo)) {
   $bio = "";
 } else {
-  $bio = $userInfo['bio'];
+  $bio = $userInfo[0]['bio'];
 }
 
 if (isset($_POST['bio']) && $_FILES['propic']['error'] == 0) {
@@ -46,7 +46,5 @@ if (isset($_POST['bio']) && $_FILES['propic']['error'] == 0) {
             </ul>
           <input type="button" name="cancel-button" value="Annulla" class="btn" onclick="window.location.href='index.php'" />
           <input type="button" name="creation-button" value="Modifica" class="btn btn-primary" onclick="form.submit()"/>
-          <input type="hidden" name="location-id" />
         </form> 
-        <!-- <script src="js/post-creation.js"></script> -->
     </div>
