@@ -17,7 +17,7 @@ if (isset($_POST['bio']) && $_FILES['propic']['error'] == 0) {
 
   if (!is_dir($propic_dir)) {
     mkdir($propic_dir, 0777, true);
-  }
+  } 
 
   list($err, $imgPath) = uploadImage($propic_dir, $propic);
 
@@ -28,7 +28,7 @@ if (isset($_POST['bio']) && $_FILES['propic']['error'] == 0) {
       } else {
         $files = glob($propic_dir . '/*');
         foreach ($files as $file) {
-          if (basename($file) !== $propic['name']) {
+          if (basename($file) !== $imgPath) {
             unlink($file);
             echo "eliminato " . $file . " perchè diverso da " . $propic['name'];
           }
