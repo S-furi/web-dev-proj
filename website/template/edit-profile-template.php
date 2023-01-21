@@ -12,7 +12,6 @@ if (isset($_POST['bio']) && $_FILES['propic']['error'] == 0) {
   $usrId = $_SESSION['user_id'];
   $bio = $_POST['bio'];
   $propic = $_FILES['propic'];
-  // var_dump($propic);
   $username = getUser($usrId, $mysqli)['username'];
   $propic_dir = IMG_DIR . $username . "/propic/";
 
