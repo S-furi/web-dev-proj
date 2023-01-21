@@ -1,6 +1,15 @@
           <section class="timeline">
               <?php if (isset($templateParams["posts"])) : ?>
                   <?php foreach ($templateParams["posts"] as $post) : ?>
+                  <?php
+                  $user = getUser($post['usrId'], $mysqli);
+                  if (checkUserInfoExists($post['usrId'], $mysqli)) {
+                    $userInfo = getUserInfo($post['usrId'], $mysqli);
+                    $userInfo[0]['profileImg'] = 'img/' . $user['username'] . "/propic/" . $userInfo[0]['profileImg'];
+                  } else {
+                    $userInfo[0] = array('bio' => '', 'profileImg' => 'img/no-profile-pic.png');
+                  }                  
+                  ?>
                       <article class="post">
                           <div class="post-head">
                               <a href="post.php?usrId=<?php echo $post["usrId"] ?>&postId=<?php echo $post["postId"] ?>">
@@ -8,7 +17,7 @@
                               </a>
                               <div class="usr-info">
                                   <a href="user-profile.php?usrId=<?php echo $post['usrId']; ?>">
-                                      <img src="img/no-profile-pic.png" alt="post author profile picture" class="profile-picture">
+                                      <img src="<?php echo $userInfo[0]['profileImg']; ?>" alt="post author profile picture" class="profile-picture">
                                   </a>
                                   <a href="user-profile.php?usrId=<?php echo $post['usrId']; ?>">
                                       <p class="usertag">@<?php echo $post["author"] ?></p>

@@ -4,7 +4,7 @@
                 <a href="#"><h3><?php echo $post['title'] ?></h3></a>
                 <div class="usr-info">
                   <a href="user-profile.php?usrId=<?php echo $usrId; ?>">
-                  <img src="img/no-profile-pic.png" alt="post author profile picture" class="profile-picture">
+                  <img src="<?php echo $userInfo[0]['profileImg']; ?>" alt="post author profile picture" class="profile-picture">
                   </a>
                   <a href="user-profile.php?usrId=<?php echo $usrId; ?>">
                   <p class="usertag">@<?php echo $user['username']; ?></p>

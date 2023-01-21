@@ -4,7 +4,7 @@
             <div class="profile-infobox">
               <div class="profile-infobox-head">
                 <div class="profile-usr-info">
-                  <img src="img/no-profile-pic.png" alt="post author profile picture" class="big-profile-picture">
+                  <img src="<?php echo $userInfo[0]['profileImg']; ?>" alt="post author profile picture" class="big-profile-picture">
                   <div class="nametags">
                     <h3><?php echo $user["firstName"]; ?> <?php echo $user["lastName"]; ?></h3>
                     <p class="usertag">@<?php echo $user["username"]; ?></p>
@@ -17,7 +17,7 @@
                 <?php endif; ?>
               </div>
               <div class="profile-infobox-body">
-                <p class="profile-descr">Descrizione</p>
+                <p class="profile-descr"><?php echo $userInfo[0]['bio']; ?></p>
                 <div class="follow-info">
                   <a href="#" onclick="showFollowingUsers(<?php echo $_GET['usrId']; ?>, <?php echo $_SESSION['user_id']; ?>)"><p class="info-tag">Seguaci: </p></a>
                   <p class="followers-data"><?php echo $followers_n; ?></p>

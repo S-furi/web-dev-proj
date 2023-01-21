@@ -10,6 +10,14 @@ $post = getPostFromId($usrId, $postId, $mysqli);
 $user = getUser($usrId, $mysqli);
 $comments = getComments($postId, $mysqli);
 
+
+if (checkUserInfoExists($usrId, $mysqli)) {
+  $userInfo = getUserInfo($usrId, $mysqli);
+  $userInfo[0]['profileImg'] = 'img/' . $user['username'] . "/propic/" . $userInfo[0]['profileImg'];
+} else {
+  $userInfo[0] = array('bio' => '', 'profileImg' => 'img/no-profile-pic.png');
+}
+
 $date = date("d-m-Y H:i", strtotime($post['eventDate']));
 
 array_push($templateParams["js"], "js/post.js");
