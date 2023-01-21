@@ -16,7 +16,7 @@ if (checkUserInfoExists($_SESSION['user_id'], $mysqli)) {
   $templateParams["userInfo"] = getUserInfo($_SESSION['user_id'], $mysqli);
   $templateParams["userInfo"][0]['profileImg'] = 'img/' . $templateParams['user']['username'] . "/propic/" . $templateParams["userInfo"][0]['profileImg'];
 } else {
-  $templateParams["userInfo"] = array('bio' => '', 'profileImg' => 'img/no-profile-pic.png');
+  $templateParams["userInfo"][0] = array('bio' => '', 'profileImg' => 'img/no-profile-pic.png');
 }
 $templateParams["suggested_users"] = getSuggestedUser($_SESSION["user_id"], $mysqli);
 
