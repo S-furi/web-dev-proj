@@ -181,6 +181,29 @@ function getFriendsPosts($usrId, $mysqli)
     return $res;
 }
 
+function getDiscoverPosts($usrId, $mysqli) {
+  $query = "SELECT p.*, u.username as author FROM posts p
+    JOIN users u ON p.usrId = u.usrId
+    WHERE p.usrId IN (SELECT f.friendId FROM followers f WHERE f.usrId = ? AND p.eventDate >= NOW()) AND p.usrId != ?
+    UNION 
+    SELECT p.*, u.username as author FROM posts p
+    JOIN followers f1 ON p.usrId = f1.friendId
+    JOIN followers f2 ON f1.usrId = f2.friendId
+    JOIN users u ON p.usrId = u.usrId
+    WHERE f2.usrId = ? AND p.usrId != ? AND p.eventDate >= NOW();";
+  
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("iiii", $usrId, $usrId, $usrId, $usrId);
+  $stmt->execute();
+  $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+  for ($i = 0; $i < count($res); $i++) {
+      $res[$i]["location"] = getLocationFromLocationId($res[$i]["locationId"], $mysqli)["name"];
+  }
+  return $res;
+  
+}
+
 /* method used in the notification center for retrieving 
  * post information when querying notifications table.
  * using the commentID as EntityId.
