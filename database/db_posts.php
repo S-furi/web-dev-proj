@@ -402,7 +402,7 @@ function getPostFromEventId($eventId, mysqli $mysqli) {
 
   $stmt->bind_param("i", $eventId);
   $stmt->execute();
-  $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+  $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0];
 
   if (count($res) > 0) {
     return getPostFromPostId($res['postId'], $mysqli);
