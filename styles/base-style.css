@@ -660,7 +660,7 @@ header .dropdown>.notification-badge {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-.modal#notifications-modal .modal-head {
+.modal .modal-head {
   display: flex;
   flex-flow: row;
   align-items: center;
@@ -670,6 +670,7 @@ header .dropdown>.notification-badge {
   padding: var(--card-padding);
   border-radius: var(--card-border-radius);
   overflow: hidden;
+  margin-bottom: 2rem;
 }
 
 .modal .notifications li a {
