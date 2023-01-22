@@ -97,12 +97,8 @@ function getSuggestedUser($usrId, $mysqli)
   $suggUsers = getFriendSFriends($usrId, $suggestionNum, $mysqli);
 
   if (count($suggUsers) < $suggestionNum) {
-    array_merge(
-      $suggUsers,
-      getRandomUsers($usrId, $suggestionNum - count($suggUsers), $mysqli)
-    );
-  } else {
-    array_slice($suggUsers, 0, $suggestionNum, true);
+    $randomUsers = getRandomUsers($usrId, $suggestionNum - count($suggUsers), $mysqli);
+    $suggUsers = array_merge($suggUsers, $randomUsers);
   }
 
   return $suggUsers;
