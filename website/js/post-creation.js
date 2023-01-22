@@ -59,12 +59,16 @@ function restoreResearch() {
     document.querySelector(".main form .location-search button").disabled = false;
 }
 
-const textArea = document.getElementById("description");
-
-textArea.addEventListener("keydown", (event) => {
-  if (textArea.value.length >= 255 && event.code !== "Backspace") {
+function inputCharLimitCheck(element, event, limit) {
+  if (element.value.length >= limit && event.code !== "Backspace") {
     event.preventDefault();
   }
-})
+}
+
+const textArea = document.getElementById("description");
+const title = document.getElementById("title");
+
+textArea.addEventListener("keydown", (event) => inputCharLimitCheck(textArea, event, 255));
+title.addEventListener("keydown", (event) => inputCharLimitCheck(title, event, 50));
 
 
