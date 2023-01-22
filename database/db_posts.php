@@ -20,7 +20,17 @@ function createPost($usr_id, $title, $caption, $image, $locationId, $event_date,
     try {
       $stmt->execute();
     } catch (mysqli_sql_exception $th) {
-      return array(false, $th->getMessage());
+
+      $err = $stmt->error;
+      preg_match("/'(.*?)'/", $err, $matches);
+
+      if (count($matches) > 0 && $matches[1] == "image") {
+        // an error with image occurred
+        $msg = "Nome immagine troppo lungo";
+        return array(false, $msg);
+      } else {
+        return array(false, $err);
+      }
     }
     return array(createEvent($usr_id, mysqli_insert_id($mysqli), $mysqli), "");
 }
