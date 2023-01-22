@@ -13,6 +13,7 @@ function getNotificationInfoForComment(array $notification, $mysqli) {
         "notificationId" => $notification["notificationId"],
         "type" => $notification["type"],
         "fromUser" => getUser($fromUser, $mysqli),
+        "fromUserInfo" => array('bio' => '', 'profileImg' => 'img/no-profile-pic.png'),
         "msg" => $msg,
         "reference" => $reference,
         "read" => $notification["read"],
@@ -36,6 +37,7 @@ function getNotificationInfoForLike(array $notification, $mysqli) {
             "notificationId" => $notification["notificationId"],
             "type" => $notification["type"],
             "fromUser" => getUser($fromUser, $mysqli),
+            "fromUserInfo" => array('bio' => '', 'profileImg' => 'img/no-profile-pic.png'),
             "msg" => $msg,
             "reference" => $reference,
             "read" => $notification["read"],
@@ -54,6 +56,7 @@ function getNotificationInfoForFollow(array $notification, $mysqli) {
         "notificationId" => $notification["notificationId"],
         "type" => $notification["type"],
         "fromUser" => getUser($fromUser, $mysqli),
+        "fromUserInfo" => array('bio' => '', 'profileImg' => 'img/no-profile-pic.png'),
         "msg" => $msg,
         "reference" => $reference,
         "read" => $notification["read"],
@@ -77,6 +80,7 @@ function getNotificationInfoForParticipation(array $notification, $mysqli) {
       "notificationId" => $notification["notificationId"],
       "type" => $notification["type"],
       "fromUser" => getUser($participation['usrId'], $mysqli),
+      "fromUserInfo" => array('bio' => '', 'profileImg' => 'img/no-profile-pic.png'),
       "msg" => $msg,
       "reference" => $reference,
       "read" => $notification["read"],
@@ -100,12 +104,22 @@ function getNotificationsInfo(array $notifications, $mysqli) {
         if (isset($notificationInfoFunctions[$type])) {
             $notificationInfoFunction = $notificationInfoFunctions[$type];
             $result[] = $notificationInfoFunction($notification, $mysqli);
+
         }
     }
 
     $result = array_filter($result, function ($k) {
         return $k != null;
     });
+    
+    foreach ($result as &$res) {
+      if (checkUserInfoExists($res['fromUser']['usrId'], $mysqli)) {
+        $usrInfo = getUserInfo($res['fromUser']['usrId'], $mysqli)[0];
+        $res['fromUserInfo']['profileImg'] = 'img/' . $res['fromUser']['username'] . "/propic/" . $usrInfo['profileImg'];
+      } else {
+        $res['fromUserInfo']['profileImg'] = 'img/no-profile-pic.png';
+      }
+    }
 
     return $result;
 }

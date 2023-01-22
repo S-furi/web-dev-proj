@@ -63,7 +63,7 @@ function displayNotification() {
               `<li>
                             <a ${n['read'] ? `class="read"` : ""} onclick='redirectToNotificationSource("${n["reference"]}", ${n['notificationId']})'>
                             <span class="material-symbols-outlined">${notificationsIcons[n['type']]}</span>
-                            <img src="img/no-profile-pic.png" alt="" class="profile-picture" />
+                            <img src="${n['fromUserInfo']['profileImg']}" alt="" class="profile-picture" />
                             <p class="usertag">@${n['fromUser']['username']}</p>
                             <p> ${n['msg']} </p>
                             </a>
