@@ -656,16 +656,28 @@ header .dropdown>.notification-badge {
     text-decoration: underline;
 }
 
-
 .modal#notifications-modal .modal-content {
     background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal#notifications-modal .modal-head {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 2rem;
+  background-color: white;
+  padding: var(--card-padding);
+  border-radius: var(--card-border-radius);
+  overflow: hidden;
 }
 
 .modal .notifications li a {
     box-sizing: border-box;
     display: flex;
     flex-flow: row;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     margin-top: 1rem;
     padding: 1rem 1rem;
     overflow: hidden;
@@ -673,6 +685,15 @@ header .dropdown>.notification-badge {
     border-radius: var(--card-border-radius);
     transition: .2s ease-in;
 }
+
+.modal .notifications li a img {
+  display: none;
+}
+
+.modal .notifications p:not(.usertag) {
+  display: none;
+}
+
 .modal .notifications li a.read {
   background-color: #c8c8c8;
 }
@@ -875,5 +896,13 @@ header .dropdown>.notification-badge {
     .middle .timeline .profile-infobox-head #modify-btn,
     .middle .timeline .profile-infobox-head #follow-btn {
         display: flex;
+    }
+
+    .modal .notifications li a img {
+      display: flex;
+    }
+
+    .modal .notifications p:not(.usertag) {
+      display: flex;
     }
 }
