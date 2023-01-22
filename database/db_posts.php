@@ -298,10 +298,6 @@ function getUserLikeDetails($postId, mysqli $mysqli) {
   return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
-// TODO funzione come sopra ma per arrivare alla pagina dell'utente
-// che ti ha seguito. Si implementa la funzione quando è pronto il 
-// file php per visualizzare il profilo di un utente.
-
 function addComment($postId, $usrId, $content, $mysqli)
 {
     $query = "INSERT INTO comments (postId, author, date, content) VALUES (?, ?, ?, ?)";
