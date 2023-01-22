@@ -34,10 +34,12 @@ if ($_GET["action"] == "fetch") {
             $location = $_POST["location-id"];
             $event_datetime = $_POST["event-datetime"];
 
-            if (createPost($user_id, $title, $caption, $imgPath, $location, $event_datetime, $mysqli)) {
+            list($resut, $message) = createPost($user_id, $title, $caption, $imgPath, $location, $event_datetime, $mysqli);
+
+            if ($result) {
                 $msg = "Post creato con successo!";
             } else {
-                $msg = "Impossibile creare post...";
+                $msg = $message;
             }
         } else {
             $msg = $imgPath;
