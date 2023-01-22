@@ -199,9 +199,11 @@ ENGINE = InnoDB;
 -- Table `brogram`.`participations`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `brogram`.`participations` (
+  `participationId` INT NOT NULL AUTO_INCREMENT,
   `usrId` INT(11) NOT NULL,
   `eventId` INT NOT NULL,
-  PRIMARY KEY (`usrId`, `eventId`),
+  PRIMARY KEY (`participationId`),
+  INDEX `fk_participations_users1_idx` (`usrId` ASC),
   INDEX `fk_participations_events1_idx` (`eventId` ASC),
   CONSTRAINT `fk_participations_users1`
     FOREIGN KEY (`usrId`)
