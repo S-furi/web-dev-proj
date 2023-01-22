@@ -58,3 +58,13 @@ function registerLocation(locationInfo) {
 function restoreResearch() {
     document.querySelector(".main form .location-search button").disabled = false;
 }
+
+const textArea = document.getElementById("description");
+
+textArea.addEventListener("keydown", (event) => {
+  if (textArea.value.length >= 255 && event.code !== "Backspace") {
+    event.preventDefault();
+  }
+})
+
+
