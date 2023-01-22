@@ -36,9 +36,13 @@ function insertParticipantFromPostId($usrId, $postId, mysqli $mysqli)
 
     $stmt->bind_param("ii", $usrId, $eventId);
 
-    return $stmt->execute() 
-      && incrementParticipants($eventId, $mysqli)
-      && notify("participation", $postAuthor, $eventId, $mysqli);
+    if (!$stmt->execute()) {
+      return false;
+    }
+    $participationId = mysqli_insert_id($mysqli);
+
+    return incrementParticipants($eventId, $mysqli)
+      && notify("participation", $postAuthor, $participationId, $mysqli);
 }
 
 function isUserParticipating($usrId, $postId, mysqli $mysqli)
