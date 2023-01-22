@@ -26,20 +26,6 @@ function getUsersList($usrId, $mysqli, $action) {
   return $result;
 }
 
-// function getUsersList($usrId, $mysqli, $action) {
-//   $result['ok'] = false;
-//   if ($action == 0) {
-//     $usrId = $_GET['usrId'];
-//     $list = getFollowedUsers($usrId, $mysqli);
-//     $resultKey = 'followed';
-//     $userIdKey = 'friendId';
-//   } elseif ($action == 1) {
-//     $usrId = $_GET['usrId'];
-//     $list = getFollowingUsers($usrId, $mysqli);
-//     $resultKey = 'following';
-//     $userIdKey = 'usrId';
-//   } 
-
 function getUserLikes($postId, $mysqli, $action) {
   if ($action == 2) {
     $postId = $_GET['postId'];
@@ -57,19 +43,6 @@ function getUserLikes($postId, $mysqli, $action) {
     return $result;
   }
 }
-
-//   if ($list) {
-//     $result['ok'] = true;
-//     $result[$resultKey] = [];
-//     foreach ($list as $row) {
-//       $userId = $row[$userIdKey];
-//       $user = getUser($userId, $mysqli);
-//       array_push($result[$resultKey], $user);
-//     }
-//   }
-
-//   return $result;
-// }
 
 if ($_GET['azione'] == 0 || $_GET['azione'] == 1) {
   $result = getUsersList($_GET['usrId'], $mysqli, $_GET['azione']);
