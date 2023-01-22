@@ -108,10 +108,19 @@
                         if (isset($templateParams["suggested_users"])) :
                             foreach ($templateParams["suggested_users"] as $sugg_user) :
                         ?>
+                        <?php 
+                        if (checkUserInfoExists($sugg_user['usrId'], $mysqli)) {
+                          $usrInfo = getUserInfo($sugg_user['usrId'], $mysqli)[0];
+                          $usrInfo['profileImg'] = 'img/' . $sugg_user['username'] . "/propic/" . $usrInfo['profileImg'];
+                        } else {
+                          $usrInfo['profileImg'] = 'img/no-profile-pic.png';
+                        }
+                        
+                        ?>
                                 <li class="user-suggestion <?php echo "usr-" . $sugg_user['usrId'] ?>">
                                     <div class="userinfo">
                                         <!-- to add in DB an image reference -->
-                                        <img src="<?php echo $templateParams['userInfo'][0]['profileImg']?>" alt="suggested account profile picture" class="profile-picture">
+                                        <img src="<?php echo $usrInfo['profileImg']; ?>" alt="suggested account profile picture" class="profile-picture">
                                         <div class="user-name">
                                             <a href="user-profile.php?usrId=<?php echo $sugg_user['usrId']; ?>"><h3><?php echo $sugg_user["firstName"] . " " . $sugg_user["lastName"]; ?></h3></a>
                                             <p class="usertag">@<?php echo $sugg_user["username"]; ?></p>
