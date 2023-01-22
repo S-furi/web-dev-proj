@@ -11,6 +11,7 @@ const notificationsIcons = {
   'like': 'favorite',
   'comment': 'comment',
   'follow': 'person_add',
+  'participation': 'event_available',
 }
 
 // Make a long polling request to the server
