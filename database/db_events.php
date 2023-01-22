@@ -74,4 +74,12 @@ function getAllEventsDetails($usrId, mysqli $mysqli)
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
+function getParticipation($participationId, mysqli $mysqli) {
+  $query = "SELECT * FROM participations WHERE participationId = ? LIMIT 1";
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("i", $participationId);
+  $stmt->execute();
+  return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
 ?>
