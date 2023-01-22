@@ -61,12 +61,30 @@ function getNotificationInfoForFollow(array $notification, $mysqli) {
     ];
 }
 
+function getNotificationInfoForParticipation(array $notification, $mysqli) {
+  $participation = getParticipation($notification["entityId"], $mysqli);
+  $postInfo = getPostFromEventId($participation["eventId"], $mysqli);
+  
+  $reference = "post.php?usrId=" . $postInfo["usrId"] . "&postId=" . $postInfo["postId"];
+  $msg = " parteciperà al tuo evento";
+  return [
+      "notificationId" => $notification["notificationId"],
+      "type" => $notification["type"],
+      "fromUser" => getUser($participation['usrId'], $mysqli),
+      "msg" => $msg,
+      "reference" => $reference,
+      "read" => $notification["read"],
+      "datetime" => $notification["time"],
+  ];
+}
+
 function getNotificationsInfo(array $notifications, $mysqli) {
     $result = [];
     $notificationInfoFunctions = [
         'comment' => 'getNotificationInfoForComment',
         'like' => 'getNotificationInfoForLike',
         'follow' => 'getNotificationInfoForFollow',
+        'participation' => 'getNotificationInfoForParticipation',
         // Add other types here
     ];
 
