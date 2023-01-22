@@ -62,7 +62,13 @@ function getNotificationInfoForFollow(array $notification, $mysqli) {
 }
 
 function getNotificationInfoForParticipation(array $notification, $mysqli) {
-  $participation = getParticipation($notification["entityId"], $mysqli)[0];
+  $participation = getParticipation($notification["entityId"], $mysqli);
+
+  if (!count($participation) > 0) {
+    return;
+  }
+
+  $participation = $participation[0];
   $postInfo = getPostFromEventId($participation["eventId"], $mysqli);
   
   $reference = "post.php?usrId=" . $postInfo["usrId"] . "&postId=" . $postInfo["postId"];
