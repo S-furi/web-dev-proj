@@ -36,11 +36,11 @@
                 <img src="<?php echo $templateParams['userInfo'][0]['profileImg']?>" alt="user profile picture" class="profile-picture dropbtn" />
                 <ul class="dropdown-content">
                     <li><a href="personal-profile.php">Profilo</a></li>
-                    <li><a href="logout.php">Logout</a></li>
                     <li>
                         <span class="notification-badge"></span>
                         <a onclick="showNotificationCenter()">Notifiche</a>
                     </li>
+                    <li><a href="logout.php">Logout</a></li>
                 </ul>
             </div>
         </div>
