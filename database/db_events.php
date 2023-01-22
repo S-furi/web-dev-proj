@@ -29,11 +29,16 @@ function incrementParticipants($eventId, $mysqli)
 
 function insertParticipantFromPostId($usrId, $postId, mysqli $mysqli)
 {
-    $query = "INSERT INTO participations VALUES (?, ?);";
+    $query = "INSERT INTO participations (usrId, eventId) VALUES (?, ?);";
     $stmt = $mysqli->prepare($query);
     $eventId = getEventFromPost($postId, $mysqli)["eventId"];
+    $postAuthor = getPostFromPostId($postId, $mysqli)["usrId"];
+
     $stmt->bind_param("ii", $usrId, $eventId);
-    return $stmt->execute() && incrementParticipants($eventId, $mysqli);
+
+    return $stmt->execute() 
+      && incrementParticipants($eventId, $mysqli)
+      && notify("participation", $postAuthor, $eventId, $mysqli);
 }
 
 function isUserParticipating($usrId, $postId, mysqli $mysqli)
