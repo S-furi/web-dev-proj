@@ -100,8 +100,11 @@ function getSelectedText(event) {
     clearResultList();
 }
 
-function participateToEvent(target) {
-    const postId = target.id.split("-")[1];
+function participateToEvent(target, postId=null) {
+    if (postId === null) {
+      postId = target.id.split("-")[1];
+    }
+
     const formData = new FormData();
     formData.append("postId", postId);
 
