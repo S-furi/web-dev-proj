@@ -36,6 +36,7 @@ function locationValidation() {
 function registerLocation(locationInfo) {
     locationInfo = locationInfo[0];
     const params = {
+        // in some cases, the displayed name is 
         'name': locationInfo["display_name"].split(",")[0],
         'lon': locationInfo['lon'],
         'lat': locationInfo['lat'],
@@ -57,4 +58,3 @@ function registerLocation(locationInfo) {
 function restoreResearch() {
     document.querySelector(".main form .location-search button").disabled = false;
 }
-
