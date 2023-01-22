@@ -31,7 +31,6 @@
                 </ul>
             </div>
             <div class="dropdown">
-                <!-- When ready in DB, put this in php statement -->
                 <span class="notification-badge"></span>
                 <img src="<?php echo $templateParams['userInfo'][0]['profileImg']?>" alt="user profile picture" class="profile-picture dropbtn" />
                 <ul class="dropdown-content">
