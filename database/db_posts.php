@@ -396,6 +396,20 @@ function hasAlreadyLikedPost($usrId, $postId, mysqli $mysqli)
     return count($res) > 0;
 }
 
+function getPostFromEventId($eventId, mysqli $mysqli) {
+  $query = "SELECT * FROM events WHERE eventId = ?";
+  $stmt = $mysqli->prepare($query);
+
+  $stmt->bind_param("i", $eventId);
+  $stmt->execute();
+  $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+  if (count($res) > 0) {
+    return getPostFromPostId($res['postId'], $mysqli);
+  }
+  return []; 
+}
+
 function deletePost($postId, mysqli $mysqli): bool {
   $stmt = $mysqli->prepare("DELETE FROM posts WHERE postId = ?");
   $stmt->bind_param("i", $postId);
