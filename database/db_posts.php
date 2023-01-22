@@ -10,16 +10,19 @@ require_once("db_notifications.php");
 /**
  * Creates a post from given arguments.
  */
-function createPost($usr_id, $title, $caption, $image, $locationId, $event_date, $mysqli): bool
+function createPost($usr_id, $title, $caption, $image, $locationId, $event_date, $mysqli)
 {
     $query = "insert into posts (usrId, title, caption, image, locationId, creationDate, eventDate, likes) VALUES (?, ?, ?, ?, ?, NOW(), ?, 0)";
     $event_date = date("Y-m-d H:i:s", strtotime($event_date));
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("isssss", $usr_id, $title, $caption, $image, $locationId, $event_date);
 
-    if ($stmt->execute()) {
-        return createEvent($usr_id, mysqli_insert_id($mysqli), $mysqli);
+    try {
+      $stmt->execute();
+    } catch (mysqli_sql_exception $th) {
+      return array(false, $th->getMessage());
     }
+    return array(createEvent($usr_id, mysqli_insert_id($mysqli), $mysqli), "");
 }
 
 /**
