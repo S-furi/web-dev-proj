@@ -131,7 +131,10 @@
     </div>
     <div id="calendar-events-modal" class="modal" tabindex="-1">
         <div class="modal-content">
-            <span id="closeBtn" class="material-symbols-outlined" tabindex="0" title="Chiudi">close</span>
+            <div class="modal-head">
+              <p class="title">Eventi della giornata</p>
+              <span id="closeBtn" class="material-symbols-outlined" tabindex="0" title="Chiudi">close</span>
+            </div>
             <ul class="events-of-day">
             </ul>
         </div>
