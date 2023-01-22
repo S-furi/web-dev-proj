@@ -54,6 +54,7 @@ function displayNotification() {
         if (res.data.length == 0) {
           modalContent.innerHTML = `<li>Nessuna nuova notifica...</li>`
         } else {
+          modalContent.innerHTML = "";
           for (const i in res.data) {
             const n = res.data[i];
 
