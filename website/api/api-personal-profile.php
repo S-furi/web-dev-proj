@@ -11,10 +11,8 @@ if (!checkUserSession($mysqli)) {
 
 if ($_GET['azione'] == 0) {
   $posts = getPosts($_SESSION['user_id'], $mysqli);
-  $pid = $_SESSION['user_id'];
-  $data = array('posts' => $posts, 'pid' => $pid);
   header("Content-Type: application/json");
-  echo json_encode($data);
+  echo json_encode($posts);
 } elseif ($_GET['azione'] == 1) {
   $user = getUser($_SESSION['user_id'], $mysqli);
   if (checkUserInfoExists($_SESSION['user_id'], $mysqli)) {
