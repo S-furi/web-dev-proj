@@ -35,12 +35,7 @@ if ($_GET["action"] == "fetch") {
             $event_datetime = $_POST["event-datetime"];
 
             list($resut, $message) = createPost($user_id, $title, $caption, $imgPath, $location, $event_datetime, $mysqli);
-
-            if ($result) {
-                $msg = "Post creato con successo!";
-            } else {
-                $msg = $message;
-            }
+            $msg = $message;
         } else {
             $msg = $imgPath;
         }
