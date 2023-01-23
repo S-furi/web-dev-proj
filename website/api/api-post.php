@@ -24,10 +24,16 @@ if ($_GET["action"] == "fetch") {
 } elseif ($_GET["action"] == 0){
     if(isset($_POST["title"], $_POST["description"], $_POST['location-id'], $_POST['event-datetime']) && $_FILES["photo"]["error"] == 0) {
         $user_id = $_SESSION["user_id"];
+        $username = getUser($user_id, $mysqli)['username'];
         $title = $_POST["title"];
         $photo = $_FILES["photo"];
+        
+        $upload_post_dir = '../img/' . $username . "/posts/";
+        if (!is_dir($upload_post_dir)) {
+          mkdir($upload_post_dir, 0777, true);
+        } 
 
-        list($err, $imgPath) = uploadImage(UPLOAD_POST_DIR, $photo);
+        list($err, $imgPath) = uploadImage($upload_post_dir, $photo);
 
         if ($err != 0) {
             $caption= $_POST["description"];
