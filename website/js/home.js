@@ -131,13 +131,37 @@ function participateToEvent(target, postId=null) {
     axios.post("api/api-events.php?action=0", formData)
         .then(res => {
             if (res.data["ok"]) {
-                target.classList.add("disappearing-card");
-                setTimeout(() => {
-                    target.parentNode.remove()
-                    target.remove();
-                }, 500);
+              target = target.parentNode;
+              target.setAttribute("for", `post-${postId}-leave-btn`);
+
+              target.innerHTML = 
+              `<button type="button" name="leave event button" id="post-${postId}-leave-btn" style="background-color: var(--color-secondary)"
+                class="btn btn-primary" onclick="leaveEvent(this)">Non Partecipare</button>`;
             }
         }).catch(err => console.log(err));
+}
+
+function leaveEvent(target, postId=null) {
+  if (postId === null) {
+      postId = target.id.split("-")[1];
+  }
+
+  const formData = new FormData();
+  formData.append("postId", postId);
+
+  axios.post("api/api-events.php?action=2", formData)
+    .then(res => {
+            target = target.parentNode
+            target.setAttribute("for", `post-${postId}-leave-btn`)
+              target.innerHTML = 
+            `<button type="button" name="join event button" id="post-${postId}-join-btn"
+              class="btn btn-primary" onclick="participateToEvent(this)">Partecipa</button>`;
+
+    })  .catch(err => {
+      if (err.status == "No Content") {
+        console.log("Unkwon function were requested to server");
+      }
+    })
 }
 
 function disableAlreadyParticipating(target, postId = null) {
@@ -150,8 +174,12 @@ function disableAlreadyParticipating(target, postId = null) {
     axios.post("api/api-events.php?action=1", formData)
         .then(res => {
             if (res.data["isParticipating"]) {
-                target.parentNode.remove()
-                target.remove();
+              target = target.parentNode
+              target.setAttribute("for", `post-${postId}-leave-btn`)
+                target.innerHTML = 
+              `<button type="button" name="leave event button" id="post-${postId}-leave-btn" style="background-color: var(--color-secondary)"
+                class="btn btn-primary" onclick="leaveEvent(this)">Non Partecipare</button>`;
+
             }
         }).catch(err => console.log(err));
 }
