@@ -501,6 +501,36 @@ header .dropdown>.notification-badge {
     font-size: 1rem;
 }
 
+.middle .timeline .edit-profile-msg {
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.middle .timeline .edit-profile-msg p {
+    font-size: 1rem;
+}
+
+.middle .timeline .edit-profile-msg .modify-text {
+    color: var(--color-secondary);
+    margin: 0 1rem;
+}
+
+.middle .timeline .edit-profile-msg .modify-text:hover {
+    text-decoration: underline;
+}
+
+.middle .timeline .edit-profile-msg span {
+    color: var(--color-secondary);
+    margin: 0 1rem;
+    cursor: pointer;
+}
+
+.middle .timeline .edit-profile-msg span:hover {
+    text-decoration: underline;
+}
+
 .middle .timeline .post-body .likes-n {
     margin-top: 1rem;
     color: var(--color-light);
