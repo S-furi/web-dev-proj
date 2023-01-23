@@ -410,10 +410,13 @@ function getPostFromEventId($eventId, mysqli $mysqli) {
   return []; 
 }
 
-function deletePost($postId, mysqli $mysqli): bool {
-  $stmt = $mysqli->prepare("DELETE FROM posts WHERE postId = ?");
-  $stmt->bind_param("i", $postId);
+function deletePost($postId, mysqli $mysqli) {
+  deletePostNotifications($postId, $mysqli);
 
+  // on cascade, every dependecy of the provided post will be deleted
+  $query = "DELETE FROM posts WHERE postId = ?";
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("i", $postId);
   return $stmt->execute();
 }
 
