@@ -5,7 +5,7 @@
                   $user = getUser($post['usrId'], $mysqli);
                   if (checkUserInfoExists($post['usrId'], $mysqli)) {
                     $userInfo = getUserInfo($post['usrId'], $mysqli);
-                    $userInfo[0]['profileImg'] = 'img/' . $user['username'] . "/propic/" . $userInfo[0]['profileImg'];
+                    $userInfo[0]['profileImg'] = IMG_DIR . $user['username'] . "/propic/" . $userInfo[0]['profileImg'];
                   } else {
                     $userInfo[0] = array('bio' => '', 'profileImg' => 'img/no-profile-pic.png');
                   }                  
