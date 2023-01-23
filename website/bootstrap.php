@@ -2,7 +2,6 @@
 require_once('../database/db_connect.php');
 require_once('../database/db_functions.php');
 
-define("UPLOAD_POST_DIR", "../website/img/posts/");
 define("IMG_DIR", "../website/img/");
 
 sec_session_start();
