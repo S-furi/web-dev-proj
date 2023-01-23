@@ -14,6 +14,10 @@
                   <label for="follow-btn"><button type="button" name="follow button" id="follow-btn"
                       class="btn btn-primary" onclick="followUser(<?php echo $_SESSION['user_id']; ?>, <?php echo $user['usrId'] ?>, this)">Segui</button></label>
                   <span class="material-symbols-outlined" id="person_add" onclick="followUser(<?php echo $_SESSION['user_id']; ?>, <?php echo $user['usrId'] ?>, this)">person_add</span>
+                <?php else: ?>
+                  <label for="unfollow-btn"><button style="background-color: var(--color-secondary);" type="button" name="unfollow button" id="unfollow-btn"
+                      class="btn btn-primary" onclick="unfollowUser(<?php echo $_SESSION['user_id']; ?>, <?php echo $user['usrId'] ?>, this)">Unfollow</button></label>
+                  <span class="material-symbols-outlined" style="background-color: var(--color-secondary);" id="person_off" onclick="unfollowUser(<?php echo $_SESSION['user_id']; ?>, <?php echo $user['usrId'] ?>, this)">person_off</span>
                 <?php endif; ?>
               </div>
               <div class="profile-infobox-body">

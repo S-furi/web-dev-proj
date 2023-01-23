@@ -555,7 +555,8 @@ header .dropdown>.notification-badge {
 }
 
 .middle .timeline .profile-infobox-head #modify-btn,
-.middle .timeline .profile-infobox-head #follow-btn {
+.middle .timeline .profile-infobox-head #follow-btn,
+.middle .timeline .profile-infobox-head #unfollow-btn {
     display: none;
 }
 
@@ -574,7 +575,7 @@ header .dropdown>.notification-badge {
     cursor: pointer;
 }
 
-.middle .timeline .profile-infobox-head #person_add {
+.middle .timeline .profile-infobox-head span {
     display: flex;
     font-size: 2rem;
     background-color: var(--color-primary);
@@ -928,12 +929,13 @@ header .dropdown>.notification-badge {
         display: none;
     }
 
-    .middle .timeline .profile-infobox-head #person_add {
+    .middle .timeline .profile-infobox-head span {
         display: none;
     }
 
     .middle .timeline .profile-infobox-head #modify-btn,
-    .middle .timeline .profile-infobox-head #follow-btn {
+    .middle .timeline .profile-infobox-head #follow-btn,
+    .middle .timeline .profile-infobox-head #unfollow-btn {
         display: flex;
     }
 
