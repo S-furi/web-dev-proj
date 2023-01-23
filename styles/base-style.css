@@ -148,7 +148,7 @@ header .dropdown {
     display: inline-block;
 }
 
-header .dropdown-content {
+.dropdown-content {
     display: none;
     position: absolute;
     right: 0;
@@ -161,7 +161,7 @@ header .dropdown-content {
     padding: var(--search-padding);
 }
 
-header .dropdown-content a {
+.dropdown-content a {
     color: black;
     padding: 1rem 1.1rem;
     text-decoration: none;
@@ -169,13 +169,13 @@ header .dropdown-content a {
     cursor: pointer;
 }
 
-header .dropdown-content a:hover {
+.dropdown-content a:hover {
     background-color: #ddd;
     border-radius: 1rem;
     transition: all 300ms ease;
 }
 
-header .dropdown:hover .dropdown-content {
+.dropdown:hover .dropdown-content {
     display: block;
 }
 
@@ -905,5 +905,9 @@ header .dropdown>.notification-badge {
 
     .modal .notifications p:not(.usertag) {
       display: flex;
+    }
+
+    .dropdown.actions-dropdown .dropdown-content {
+      right: inherit;
     }
 }

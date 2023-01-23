@@ -45,6 +45,13 @@ function generatePosts(posts) {
             <article class="post">
               <div class="post-head">
                 <a href="post.php?usrId=${posts[i]['usrId']}&postId=${posts[i]['postId']}"><h3>${posts[i]['title']}</h3></a>
+                <div class="dropdown actions-dropdown">
+                  <span class="material-symbols-outlined pop-options" >more_vert</span>
+                  <ul class="dropdown-content">
+                    <li><a href="#">Modifica</a></li>
+                    <li><a style="color: var(--color-secondary)" href="#">Elimina</a></li>
+                  </ul>
+                </div>
               </div>
               <div class="post-body">
                 <div class="date-location">
