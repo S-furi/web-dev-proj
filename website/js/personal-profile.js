@@ -29,7 +29,7 @@ function createInfoBox(user, userInfo, followers, following) {
     return form;
 }
 
-function generatePosts(posts) {
+function generatePosts(posts, pid) {
     let result = "";
 
     if(posts.length > 0) {
@@ -67,8 +67,8 @@ function generatePosts(posts) {
                 <p>${posts[i]['caption']}</p>
                 <a href="#" onclick="showLikeUsers(${posts[i]['postId']}, ${posts[i]['usrId']})"><p class="likes-n">Mi Piace: ${posts[i]['likes']}</p></a>
                 <div class="profile-interaction-buttons">
-                    <label for="like-btn"><input type="button" name="like button" id="like-btn" /><span
-                        class="material-symbols-outlined">favorite</span></label>
+                    <label for="post-${posts[i]['postId']}-like-btn"><button type="button" name="like button" id="post-${posts[i]['postId']}-like-btn" onclick="likePost(${posts[i]['postId']}, ${pid}, this)">
+                            <span class="material-symbols-outlined like-btn">favorite</span></button></label>
                     <a href="post.php?usrId=${posts[i]['usrId']}&postId=${posts[i]['postId']}#comment-text-area" target="_self">
                       <input type="button" name="comment button" id="comment-btn" />
                       <span class="material-symbols-outlined">comment</span>
@@ -137,7 +137,7 @@ axios.get('api/api-personal-profile.php?azione=1')
   .then( () => {
     axios.get('api/api-personal-profile.php?azione=0')
       .then(response => {
-          const posts = generatePosts(response.data);
+          const posts = generatePosts(response.data['posts'], response.data['pid']);
           const timeline = document.querySelector("main .middle .timeline");
           timeline.innerHTML += posts;
           handleDropDown();
