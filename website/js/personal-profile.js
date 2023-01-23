@@ -102,13 +102,17 @@ function generatePosts(posts) {
 }
 
 function handleDropDown() {
-  const dropdown = document.querySelector(".dropdown.actions-dropdown");
+  const dropdown = document.querySelectorAll(".dropdown.actions-dropdown");
 
   if (typeof(dropdown) != 'undefined' && dropdown != null) {
-    dropdown.addEventListener('click', () => {
-      document.querySelector(".dropdown.actions-dropdown .dropdown-content").classList.toggle("inactive");
-      document.querySelector(".dropdown.actions-dropdown .dropdown-content").classList.toggle("active");
-    })
+    dropdown.forEach(t => t.addEventListener('click', (event) => {
+      const content = event.target.nextElementSibling;
+      if (content === null) {
+        return;
+      }
+      content.classList.toggle("inactive");
+      content.classList.toggle("active");
+    }))
   }
 }
 
