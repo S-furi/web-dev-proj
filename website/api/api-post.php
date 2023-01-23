@@ -107,11 +107,17 @@ if ($_GET["action"] == "fetch") {
   if (isset($_POST["postId"])) {
     $response["postDeleted"] = false;
     $postId = $_POST["postId"];
+
+    $post = getPostFromPostId($postId, $mysqli);
+    $username = getUser($_SESSION["user_id"], $mysqli)['username'];
+
+    list($res, $msg) = deleteImg(POST_IMG_DIR. $username . "/posts/". $post["image"]);
+
+    $response["msg"] = $msg;
     
-    if (deletePost($postId, $mysqli)) {
+    if ($res && deletePost($postId, $mysqli)) {
       $response["postDeleted"] = true;
     }
-
     header("Content-Type: application/json");
     echo json_encode($response);
     return;
