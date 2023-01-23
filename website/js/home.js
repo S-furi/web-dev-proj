@@ -7,6 +7,7 @@ function followUser(user, followed, target = null) {
     // action 2 registers a new following
     axios.post("api/api-users.php?action=2", formData)
         .then(res => {
+            console.log(res.data)
             if (res.data["ok"]) {
                 // if target isn't specified, it means we are in the sidebar
                 // otherwise we the button is the one conained in the user profile
@@ -15,7 +16,7 @@ function followUser(user, followed, target = null) {
                     document.querySelector(".right li.user-suggestion.usr-" + followed + " input").value = "✔️";
                     setTimeout(() => document.querySelector(".right li.user-suggestion.usr-" + followed).remove(), 500);
                 } else {
-                    target.disabled = true;
+                    // target.disabled = true;
                     location.reload();
                 }
             } else {
@@ -23,6 +24,21 @@ function followUser(user, followed, target = null) {
                 alert("Qualcosa è andato storto");
             }
         });
+}
+
+function unfollowUser(user, followed) {
+  const formData = new FormData();
+
+  formData.append("user", user);
+  formData.append("followed", followed);
+
+  axios.post("api/api-users.php?action=3", formData)
+    .then(res => {
+      console.log(res.data);
+      if (res.data.ok) {
+        location.reload();
+      }
+    })
 }
 
 function likePost(postId, userId, target) {
