@@ -105,9 +105,10 @@ if ($_GET["action"] == "fetch") {
 } else if ($_GET["action"] == 4) {
   if (isset($_POST["postId"])) {
     $response["postDeleted"] = false;
+    $postId = $_POST["postId"];
     
     if (deletePost($postId, $mysqli)) {
-      $response["[postDeleted]"] = true;
+      $response["postDeleted"] = true;
     }
 
     header("Content-Type: application/json");
