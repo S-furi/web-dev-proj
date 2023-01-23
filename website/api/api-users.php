@@ -3,6 +3,7 @@ require_once("../../database/db_connect.php");
 require_once("../../database/db_functions.php");
 
 $result["ok"] = false;
+sec_session_start();
 
 if (isset($_GET["action"])){
     // action 1 is autocompletion search for users
@@ -11,6 +12,7 @@ if (isset($_GET["action"])){
         if (count($users) > 0) {
             $result["ok"] = true;
             $result["users"] = $users;
+            $result["pid"] = $_SESSION['user_id'];
         }
     // action 2 handles follow of followed by user
     } else if ($_GET["action"] == 2 && isset($_POST["user"], $_POST["followed"])) {

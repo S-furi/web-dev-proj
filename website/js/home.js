@@ -94,7 +94,11 @@ function getSelectedText(event) {
         .then(res => {
             if (res.data['ok']) {
                 console.log(res.data["users"][0]["usrId"]);
-                window.location.href = "user-profile.php?usrId=" + res.data["users"][0]["usrId"];
+                if (res.data['pid'] == res.data['users'][0]['usrId']) {
+                  window.location.href = "personal-profile.php";
+                } else {
+                  window.location.href = "user-profile.php?usrId=" + res.data["users"][0]["usrId"];
+                }
             }
         });
     clearResultList();
