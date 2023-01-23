@@ -16,6 +16,14 @@ if (isset($_GET["action"]) && $_GET["action"] == 0) {
         $usrId = $_SESSION["user_id"];
         $result["isParticipating"] = isUserParticipating($usrId, $postId, $mysqli);
     }
+// action: 2 removes a participant from an event
+} elseif (isset($_GET["action"]) && $_GET["action"] == 2) {
+  $result["ok"] = false;
+  if (isset($_POST["postId"])) {
+      $postId = $_POST["postId"];
+      $usrId = $_SESSION["user_id"];
+      $result["ok"] = deleteParticipation($usrId, $postId, $mysqli);
+  }
 } else {
     header("HTTP/1.1 204 No Content");
 }
