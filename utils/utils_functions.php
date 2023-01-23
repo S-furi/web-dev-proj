@@ -45,4 +45,12 @@ function uploadImage($path, $image) {
     return array($result, $msg);
 }
 
+function deleteImg($imgPath) {
+  if (file_exists($imgPath) && is_writable($imgPath)) {
+    $res = unlink($imgPath);
+    return array($res, $res ? "Unlink Ha avuto successo" : "Unlink fallito");
+  }
+  return array(false, "File '". $imgPath ."'non esistente o non readeable");
+}
+
 ?>
