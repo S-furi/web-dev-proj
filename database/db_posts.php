@@ -32,7 +32,7 @@ function createPost($usr_id, $title, $caption, $image, $locationId, $event_date,
         return array(false, $err);
       }
     }
-    return array(createEvent($usr_id, mysqli_insert_id($mysqli), $mysqli), "");
+    return array(createEvent($usr_id, mysqli_insert_id($mysqli), $mysqli), "Post creato con successo!");
 }
 
 /**
