@@ -18,7 +18,7 @@ function handleSignupAttempt() {
               axios.post("api/api-login.php", data)
                 .then(res => {
                   if (res.data['ok']) {
-                    window.location.href = 'edit-profile.php';
+                    window.location.href = 'personal-profile.php';
                   } else {
                     displayMessage("signup", res.data['msg']);
                   }
