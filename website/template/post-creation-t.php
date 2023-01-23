@@ -20,7 +20,7 @@
                     </div>
               </li>
               <li>
-                  <label for="event-datetime">Data e Ora dell'Evento</label><input type="datetime-local" name="event-datetime" id="event-datetime" required />
+              <label for="event-datetime">Data e Ora dell'Evento</label><input type="datetime-local" min="<?php echo date('Y-m-d\TH:i') ?>" name="event-datetime" id="event-datetime" required />
               </li> 
             </ul>
           <input type="button" name="cancel-button" value="Annulla" class="btn" onclick="window.location.href='index.php'" />
