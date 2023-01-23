@@ -5,6 +5,8 @@
  * for retrieving information from database.
  */
 
+require_once("db_notifications.php");
+
 function insertNewUser($email, $username,  $password, $first_name, $last_name, $mysqli): bool
 {
   // We are using password_hash() because it's safe and simple to use.
@@ -204,7 +206,6 @@ function getFollowingNum($userId, $mysqli)
   return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]['follow_num'];
 }
 
-
 function getFollowersNum($userId, $mysqli)
 {
   $stmt = $mysqli->prepare("SELECT COUNT(*) as follow_num FROM followers WHERE friendId = ?");
@@ -222,3 +223,14 @@ function checkFollow($userId, $friendId, $mysqli)
 
   return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]['follow_num'] > 0;
 }
+
+function unfollow($userId, $followedId, mysqli $mysqli)
+{
+  $query = "DELETE FROM followers WHERE usrId = ? AND friendId = ?";
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("ii", $userId, $followedId);
+
+  return $stmt->execute() && deleteFollowNotification($userId, $followedId, $mysqli);
+}
+
+?>
