@@ -14,6 +14,15 @@ function handleSignupAttempt() {
                 }
                 console.log(res);
                 displayMessage("signup", res.data['msg']);
+            }).then( () => {
+              axios.post("api/api-login.php", data)
+                .then(res => {
+                  if (res.data['ok']) {
+                    window.location.href = 'edit-profile.php';
+                  } else {
+                    displayMessage("signup", res.data['msg']);
+                  }
+                });
             });
     } else {
         displayMessage("signup", "Riempi tutti i campi");
