@@ -83,12 +83,39 @@ function getAllEventsDetails($usrId, mysqli $mysqli)
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
-function getParticipation($participationId, mysqli $mysqli) {
+function getParticipation($participationId, mysqli $mysqli) 
+{
   $query = "SELECT * FROM participations WHERE participationId = ? LIMIT 1";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("i", $participationId);
   $stmt->execute();
   return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
+function deleteParticipation($usrId, $postId, mysqli $mysqli) 
+{
+  $query = "SELECT * FROM events WHERE postId = ?";
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("i", $postId);
+  $stmt->execute();
+  $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+  if (count($res) > 0) {
+    $query = "DELETE FROM participations WHERE eventId = ? AND usrId = ?";
+    $eventId = $res[0]['eventId'];
+    $stmt = $mysqli->prepare("ii", $eventId, $usrId);
+    if (!$stmt->execute()) {
+      return false;
+    }
+    $participationId = mysqli_insert_id($mysqli);
+  } else {
+    return false;
+  }
+  $query = "UPDATE events SET participants = participants - 1 WHERE eventId = ?";
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("i", $eventId);
+
+  return $stmt->execute() && deleteNotification("participation", $participationId, $mysqli);
 }
 
 ?>
