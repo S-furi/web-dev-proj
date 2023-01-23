@@ -184,15 +184,11 @@ header .dropdown {
     transition: all 300ms ease;
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown-content.active {
     display: block;
 }
 
-header .dropdown.search-result .dropdown-content.active {
-    display: block;
-}
-
-header .dropdown.search-result .dropdown-content.inactive {
+.dropdown-content.inactive {
     display: none;
 }
 

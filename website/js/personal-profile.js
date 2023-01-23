@@ -47,7 +47,7 @@ function generatePosts(posts) {
                 <a href="post.php?usrId=${posts[i]['usrId']}&postId=${posts[i]['postId']}"><h3>${posts[i]['title']}</h3></a>
                 <div class="dropdown actions-dropdown">
                   <span class="material-symbols-outlined pop-options" >more_vert</span>
-                  <ul class="dropdown-content">
+                  <ul class="dropdown-content inactive">
                     <li><a href="#">Modifica</a></li>
                     <li><a style="color: var(--color-secondary)" href="#">Elimina</a></li>
                   </ul>
@@ -101,6 +101,13 @@ function generatePosts(posts) {
     return result;
 }
 
+function handleDropDown() {
+  document.querySelector(".dropdown.actions-dropdown").addEventListener('click', () => {
+    document.querySelector(".dropdown.actions-dropdown .dropdown-content").classList.toggle("inactive");
+    document.querySelector(".dropdown.actions-dropdown .dropdown-content").classList.toggle("active");
+  })
+}
+
 axios.get('api/api-personal-profile.php?azione=1')
   .then(response => {
     const infoBox = createInfoBox(response.data[0], response.data[1], response.data[2], response.data[3]);
@@ -113,6 +120,7 @@ axios.get('api/api-personal-profile.php?azione=1')
           const posts = generatePosts(response.data);
           const timeline = document.querySelector("main .middle .timeline");
           timeline.innerHTML += posts;
+          handleDropDown();
       })
       .catch(error => {
         console.log(error);
