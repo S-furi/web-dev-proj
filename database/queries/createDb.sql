@@ -239,6 +239,11 @@ ENGINE = InnoDB;
 CREATE USER IF NOT EXISTS 'sec_user'@'localhost' IDENTIFIED BY 'eKcGZr59zAa2BEWU';
 GRANT SELECT, INSERT, UPDATE ON `brogram`.* TO 'sec_user'@'localhost';
 GRANT DELETE ON `brogram`.`likes` TO 'sec_user'@'localhost';
+GRANT DELETE ON `brogram`.`posts` TO 'sec_user'@'localhost';
+GRANT DELETE ON `brogram`.`events` TO 'sec_user'@'localhost';
+GRANT DELETE ON `brogram`.`comments` TO 'sec_user'@'localhost';
+GRANT DELETE ON `brogram`.`participations` TO 'sec_user'@'localhost';
+GRANT DELETE ON `brogram`.`notifications` TO 'sec_user'@'localhost';
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
