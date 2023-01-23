@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `brogram`.`comments` (
   CONSTRAINT `fk_comments_posts1`
     FOREIGN KEY (`postId`)
     REFERENCES `brogram`.`posts` (`postId`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_comments_users1`
     FOREIGN KEY (`author`)
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `brogram`.`likes` (
   CONSTRAINT `fk_likes_posts1`
     FOREIGN KEY (`postId`)
     REFERENCES `brogram`.`posts` (`postId`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `brogram`.`events` (
   CONSTRAINT `fk_events_posts2`
     FOREIGN KEY (`postId`)
     REFERENCES `brogram`.`posts` (`postId`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -213,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `brogram`.`participations` (
   CONSTRAINT `fk_participations_events1`
     FOREIGN KEY (`eventId`)
     REFERENCES `brogram`.`events` (`eventId`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
