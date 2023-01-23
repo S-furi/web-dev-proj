@@ -8,6 +8,48 @@ $templateParams["suggested_users"] = getSuggestedUser($_SESSION["user_id"], $mys
 $templateParams["template_name"] = "edit-profile-template.php";
 $templateParams["mysqli"] = $mysqli;
 
-require("template/base.php");
+$error = "";
 
+$userInfo = getUserInfo($_SESSION['user_id'], $mysqli);
+if (empty($userInfo)) {
+  $bio = "";
+} else {
+  $bio = $userInfo[0]['bio'];
+}
+
+if (isset($_POST['bio']) && $_FILES['propic']['error'] == 0) {
+  $usrId = $_SESSION['user_id'];
+  $bio = $_POST['bio'];
+  $propic = $_FILES['propic'];
+  $username = getUser($usrId, $mysqli)['username'];
+  $propic_dir = IMG_DIR . $username . "/propic/";
+
+  if (!is_dir($propic_dir)) {
+    mkdir($propic_dir, 0777, true);
+  } 
+
+  list($err, $imgPath) = uploadImage($propic_dir, $propic);
+
+  if ($err != 0) {
+    if (checkUserInfoExists($usrId, $mysqli) == 1) {
+      if (!updateProfileInfo($usrId, $bio, $imgPath, $mysqli)) {
+        $error = "C'è stato un errore nell'aggiornamento del profilo, si prega di riprovare più tardi.";
+      } else {
+        $files = glob($propic_dir . '/*');
+        foreach ($files as $file) {
+          if (basename($file) !== $imgPath) {
+            unlink($file);
+          }
+        }
+        header("Location: index.php");
+      }
+    } else {
+      if (!insertNewUserInfo($usrId, $bio, $imgPath, $mysqli)) {
+        $error = "C'è stato un errore nell'inserimento del profilo, si prega di riprovare più tardi.";
+      }
+    }
+  }
+}
+
+require("template/base.php");
 ?>
