@@ -49,7 +49,7 @@ function generatePosts(posts) {
                   <span class="material-symbols-outlined pop-options" >more_vert</span>
                   <ul class="dropdown-content inactive">
                     <li><a href="#">Modifica</a></li>
-                    <li><a style="color: var(--color-secondary)" href="#">Elimina</a></li>
+                    <li><a style="color: var(--color-secondary)" onclick="deletePost(${posts[i]['postId']})">Elimina</a></li>
                   </ul>
                 </div>
               </div>
@@ -102,10 +102,26 @@ function generatePosts(posts) {
 }
 
 function handleDropDown() {
-  document.querySelector(".dropdown.actions-dropdown").addEventListener('click', () => {
-    document.querySelector(".dropdown.actions-dropdown .dropdown-content").classList.toggle("inactive");
-    document.querySelector(".dropdown.actions-dropdown .dropdown-content").classList.toggle("active");
-  })
+  const dropdown = document.querySelector(".dropdown.actions-dropdown");
+
+  if (typeof(dropdown) != 'undefined' && dropdown != null) {
+    dropdown.addEventListener('click', () => {
+      document.querySelector(".dropdown.actions-dropdown .dropdown-content").classList.toggle("inactive");
+      document.querySelector(".dropdown.actions-dropdown .dropdown-content").classList.toggle("active");
+    })
+  }
+}
+
+function deletePost(postId) {
+  const formData = new FormData();
+  formData.append('postId', postId);
+
+  axios.post("api/api-post.php?action=4", formData)
+    .then(res => {
+      if (res.data.postDeleted) {
+        window.location.reload();
+      }
+    })
 }
 
 axios.get('api/api-personal-profile.php?azione=1')
