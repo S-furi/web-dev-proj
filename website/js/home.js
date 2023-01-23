@@ -184,4 +184,9 @@ menuItemSelectedEffect();
 
 document.querySelectorAll(".left>.btn").forEach(btn => btn.addEventListener('click', showForm));
 
+document.querySelector(".dropdown.usr-actions").addEventListener('click', () => {
+  document.querySelector(".dropdown.usr-actions .dropdown-content").classList.toggle("inactive");
+  document.querySelector(".dropdown.usr-actions .dropdown-content").classList.toggle("active");
+})
+
 

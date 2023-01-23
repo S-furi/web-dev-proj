@@ -148,6 +148,15 @@ header .dropdown {
     display: inline-block;
 }
 
+.dropdown:not(.search-result) {
+  cursor: pointer;
+}
+
+.dropdown.usr-actions:hover {
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+}
+
 .dropdown-content {
     display: none;
     position: absolute;
