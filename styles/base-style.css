@@ -119,7 +119,7 @@ header .container {
 }
 
 header .search-bar {
-    background: var(--color-light);
+    background: var(--color-light-gray);
     border-radius: var(--border-radius);
     padding: var(--search-padding);
     display: flex;
@@ -142,7 +142,7 @@ header .search-bar input[type="search"] {
 }
 
 header .search-bar input[type="search"]::placeholder {
-    color: var(--color-light);
+    color: var(--color-dark-gray);
 }
 
 header .dropdown {
