@@ -4,6 +4,13 @@ require_once('api-bootstrap.php');
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+// Super simple function that determine if the 
+// current user can delete the selected post
+function userCanDelete($postId, $usrId, mysqli $mysqli) {
+  $author = getPostFromPostId($postId, $mysqli)['usrId'];
+  return $author == $usrId;
+}
+
 if (!isset($_GET["action"])) {
   header("HTTP/1.1 204 No Content");
 }
