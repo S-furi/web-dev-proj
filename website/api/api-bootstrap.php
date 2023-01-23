@@ -5,6 +5,6 @@ require_once('../../utils/utils_functions.php');
 
 sec_session_start();
 
-define("UPLOAD_POST_DIR", "../img/posts/");
+define("POST_IMG_DIR", "../img/");
 
 ?>
