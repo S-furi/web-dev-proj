@@ -24,7 +24,7 @@
               </li> 
             </ul>
           <input type="button" name="cancel-button" value="Annulla" class="btn" onclick="window.location.href='index.php'" />
-          <input type="button" name="creation-button" value="Crea" class="btn btn-primary" onclick="form.submit()"/>
+          <input type="submit" name="creation-button" value="Crea" class="btn btn-primary" onclick="form.submit()"/>
           <input type="hidden" name="location-id" />
         </form> 
         <script src="js/post-creation.js"></script>
