@@ -75,10 +75,6 @@
                             <h2>Radar</h2>
                         </a>
                     </li>
-                    <li class="menu-item <?php if (isset($templateParams["active-messagges"])) echo $templateParams["active-messagges"] ?>">
-                        <span class="material-symbols-outlined">mail</span>
-                        <h2>Messaggi</h2>
-                    </li>
                 </ul>
                 <!-- End of Sidebar -->
                 <div id="create-post-xl" class="btn btn-primary medium-btn">Crea Post</div>
