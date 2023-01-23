@@ -44,9 +44,19 @@ function showLikes(res, sessionId) {
     modalContent.innerHTML = "";
     const list = document.createElement("ul");
     list.className = "likes-list";
+
+    const modalHead = document.createElement("div");
+    modalHead.className = "modal-head";
+
+    const title = document.createElement("p");
+    title.className = "title";
+    title.textContent = "Mi Piace";
+
+    modalHead.appendChild(title);
     
     generateList(likeUsers, list, sessionId);
     
+    modalContent.appendChild(modalHead);
     modalContent.appendChild(list);
     modal.style.display = "block";
   } else {
@@ -56,16 +66,27 @@ function showLikes(res, sessionId) {
 
 function showFollow(following, res, sessionId) {
   if (res.data['ok']) {
-    const modal = document.getElementById("modal");
+    const modal = document.getElementById('modal');
     const modalContent = document.querySelector(".modal .modal-content");
     const followUsers = following ? res.data['following'] : res.data['followed'];
 
     modalContent.innerHTML = "";
+
+    const modalHead = document.createElement("div");
+    modalHead.className = "modal-head";
+
+    const title = document.createElement("p");
+    title.className = "title";
+    title.textContent = following ? "Seguaci" : "Seguiti";
+
+    modalHead.appendChild(title);
+
     const list = document.createElement("ul");
     list.className = following ? "following-users-list" : "followed-users-list";
     
     generateList(followUsers, list, sessionId);
     
+    modalContent.appendChild(modalHead);
     modalContent.appendChild(list);
     modal.style.display = "block";
   } else {
