@@ -41,7 +41,7 @@ if (isset($_POST['bio']) && $_FILES['propic']['error'] == 0) {
             unlink($file);
           }
         }
-        header("Location: index.php");
+        header("Location: personal-profile.php");
       }
     } else {
       if (!insertNewUserInfo($usrId, $bio, $imgPath, $mysqli)) {
