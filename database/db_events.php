@@ -103,7 +103,8 @@ function deleteParticipation($usrId, $postId, mysqli $mysqli)
   if (count($res) > 0) {
     $query = "DELETE FROM participations WHERE eventId = ? AND usrId = ?";
     $eventId = $res[0]['eventId'];
-    $stmt = $mysqli->prepare("ii", $eventId, $usrId);
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("ii", $eventId, $usrId);
     if (!$stmt->execute()) {
       return false;
     }
