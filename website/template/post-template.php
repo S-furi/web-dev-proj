@@ -22,7 +22,7 @@
                     <p><?php echo $post['location']; ?></p>
                   </div>
                 </div>   
-                <img src="img/posts/<?php echo $post['image']; ?>" alt="" />
+                <img src="img/<?php echo $user['username'] ?>/posts/<?php echo $post['image']; ?>" alt="" />
                 <p><?php echo $post['caption']; ?></p>
                 <a href="#" onclick="showLikeUsers(<?php echo $postId; ?>, <?php echo $_SESSION['user_id']; ?>)"><p class="likes-n">Mi Piace: <?php echo $post['likes']; ?></p></a>
                 <div class="interaction-buttons">
