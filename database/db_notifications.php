@@ -27,11 +27,41 @@ function notify(string $type, int $forUser, int $entityId, mysqli $mysqli)
         $stmt->bind_param("iis", $forUser, $entityId, $type);
         return $stmt->execute();
     } else {
+        if ($type != "follow" && checkSelfNotification($type, $forUser, $entityId, $mysqli)) {
+          return true;
+        }
         $query = "INSERT INTO notifications (type, forUser, entityId) VALUES (?, ?, ?)";
         $stmt = $mysqli->prepare($query);
         $stmt->bind_param("sii", $type, $forUser, $entityId);
         return $stmt->execute();
     }
+}
+
+function checkSelfNotification(string $type, int $forUser, int $entityId, mysqli $mysqli) {
+  switch ($type) {
+    case 'comment':
+      $query = "SELECT * FROM comments WHERE commentId = ?";
+      return checkNotificationEquality($query, "author", $forUser, $entityId, $mysqli);
+    case 'like':
+      $query = "SELECT * FROM likes WHERE likeId = ?";
+      return checkNotificationEquality($query, "usrId", $forUser, $entityId, $mysqli);
+    case 'participation':
+      $query = "SELECT * FROM participations WHERE participationId = ?";
+      return checkNotificationEquality($query, "usrId", $forUser, $entityId, $mysqli);
+  }
+}
+
+function checkNotificationEquality(string $query, string $authorColName, string $forUser, string $entityId, mysqli $mysqli) {
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("i", $entityId);
+  $stmt->execute();
+  $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+  if (count($res) != 0) {
+    $usrId = $res[0][$authorColName];
+    return $forUser == $usrId;
+  }
+  return false;
 }
 
 function notifyLike($postId, $likeId, mysqli $mysqli)
