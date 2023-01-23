@@ -35,9 +35,17 @@
             </article>
 
             <?php foreach ($comments as $comment): ?>
+            <?php 
+            if (checkUserInfoExists($comment['usrId'], $mysqli)) {
+              $profileImg = getUserInfo($comment['usrId'], $mysqli)[0]['profileImg'];
+              $profileImg = IMG_DIR . $comment['username'] . "/propic/" . $profileImg;
+            } else {
+              $profileImg = 'img/no-profile-pic.png';
+            }
+            ?>
             <article class="comment">
                 <div class="comment-head">
-                    <img src="img/no-profile-pic.png" alt="to do dynamic in php" />
+                    <img src="<?php echo $profileImg; ?>" alt="profile pic" />
                     <div class="comment-head-info">
                         <?php if ($comment['usrId'] == $_SESSION['user_id']): ?>
                           <a href="personal-profile.php"><h3 class="comment-author"><?php echo $comment['firstName']; ?> <?php echo $comment['lastName']; ?></h3></a>
