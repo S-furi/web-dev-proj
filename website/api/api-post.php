@@ -4,6 +4,13 @@ require_once('api-bootstrap.php');
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+// Super simple function that determine if the 
+// current user can delete the selected post
+function userCanDelete($postId, $usrId, mysqli $mysqli) {
+  $author = getPostFromPostId($postId, $mysqli)['usrId'];
+  return $author == $usrId;
+}
+
 if (!isset($_GET["action"])) {
   header("HTTP/1.1 204 No Content");
 }
@@ -108,16 +115,19 @@ if ($_GET["action"] == "fetch") {
     $response["postDeleted"] = false;
     $postId = $_POST["postId"];
 
-    $post = getPostFromPostId($postId, $mysqli);
-    $username = getUser($_SESSION["user_id"], $mysqli)['username'];
+    if (userCanDelete($postId, $_SESSION['user_id'], $mysqli)) {
+      $post = getPostFromPostId($postId, $mysqli);
+      $username = getUser($_SESSION["user_id"], $mysqli)['username'];
 
-    list($res, $msg) = deleteImg(POST_IMG_DIR. $username . "/posts/". $post["image"]);
+      list($res, $msg) = deleteImg(POST_IMG_DIR. $username . "/posts/". $post["image"]);
 
-    $response["msg"] = $msg;
-    
-    if ($res && deletePost($postId, $mysqli)) {
-      $response["postDeleted"] = true;
+      $response["msg"] = $msg;
+      
+      if ($res && deletePost($postId, $mysqli)) {
+        $response["postDeleted"] = true;
+      }
     }
+
     header("Content-Type: application/json");
     echo json_encode($response);
     return;
