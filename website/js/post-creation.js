@@ -1,4 +1,7 @@
 const resultField = document.querySelector(".main form .location-search>span");
+const locationBtn = document.querySelector(".main form .location-search button");
+const form = document.querySelector(".main form");
+let locationCheck = false;
 
 function locationValidation() {
     const value = document.querySelector(".main form input#location").value;
@@ -21,6 +24,8 @@ function locationValidation() {
                 if(res.length > 0) {
                     registerLocation(res);
                     resultField.innerText = "done";
+                    document.querySelector(".main form input#location").setCustomValidity("");
+                    locationCheck = true;
                 } else {
                     resultField.innerText = "cancel";
                 }
@@ -28,7 +33,7 @@ function locationValidation() {
                 console.log(err)
                 resultField.innerText = "cancel" } );
 
-        document.querySelector(".main form .location-search button").disabled = true;
+        locationBtn.disabled = true;
         setTimeout(restoreResearch, 6000);
     }
 }
@@ -56,7 +61,7 @@ function registerLocation(locationInfo) {
 }
 
 function restoreResearch() {
-    document.querySelector(".main form .location-search button").disabled = false;
+    locationBtn.disabled = false;
 }
 
 function inputCharLimitCheck(element, event, limit) {
@@ -64,6 +69,15 @@ function inputCharLimitCheck(element, event, limit) {
     event.preventDefault();
   }
 }
+
+form.addEventListener('submit', (event) => {
+  if (!locationCheck) {
+    event.preventDefault();
+    document.querySelector(".main form input#location").setCustomValidity("È necessario inserire una location valida prima di creare il post");
+  } else {
+    return true;
+  }
+})
 
 const textArea = document.getElementById("description");
 const title = document.getElementById("title");
