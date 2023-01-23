@@ -17,18 +17,26 @@ if (empty($userInfo)) {
   $bio = $userInfo[0]['bio'];
 }
 
-if (isset($_POST['bio']) && $_FILES['propic']['error'] == 0) {
+if (isset($_POST['bio']) && ($_FILES['propic']['error'] == 0 || $_FILES['propic']['error'] == UPLOAD_ERR_NO_FILE)) {
   $usrId = $_SESSION['user_id'];
   $bio = $_POST['bio'];
-  $propic = $_FILES['propic'];
   $username = getUser($usrId, $mysqli)['username'];
   $propic_dir = IMG_DIR . $username . "/propic/";
+  if ($_FILES['propic']['error'] == 0) {
+    $propic = $_FILES['propic'];
+    list($err, $imgPath) = uploadImage($propic_dir, $propic);
+  } else {
+    if (checkUserInfoExists($_SESSION['user_id'], $mysqli)) {
+      $imgPath = getUserInfo($_SESSION['user_id'], $mysqli)[0]['profileImg'];
+    } else {
+      $imgPath = 'img/no-profile-pic.png';
+    }
+    $err = 1;
+  }
 
   if (!is_dir($propic_dir)) {
     mkdir($propic_dir, 0777, true);
   } 
-
-  list($err, $imgPath) = uploadImage($propic_dir, $propic);
 
   if ($err != 0) {
     if (checkUserInfoExists($usrId, $mysqli) == 1) {

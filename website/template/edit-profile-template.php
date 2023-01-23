@@ -4,7 +4,7 @@
         <form action="edit-profile.php" method="post" enctype="multipart/form-data">
             <ul>
               <li>
-                  <label for="propic">Immagine profilo</label><input type="file" name="propic" id="propic" required />
+                  <label for="propic">Immagine profilo</label><input type="file" name="propic" id="propic" />
               </li>
               <li>
                   <label for="bio">Biografia</label><textarea name="bio" id="bio" required><?php echo $bio; ?></textarea>
