@@ -8,8 +8,9 @@
     --color-gray: hsl(0, 0%, 90%);
     --color-dark-gray: rgb(155, 155, 155);
     --color-white: white;
-    --color-light: lightgrey;
-
+    --color-light: rgb(168, 168, 168);
+    --color-light-gray: hsl(0, 0%, 90%);
+    
     --btn-padding: 0.6rem 2rem;
     --search-padding: 0.6rem 1rem;
     --border-radius: 2rem;
@@ -276,7 +277,7 @@ header .dropdown>.notification-badge {
 }
 
 .left .sidebar .menu-item:hover {
-    background-color: var(--color-light);
+    background-color: var(--color-light-gray);
 }
 
 .left .sidebar span {
@@ -292,7 +293,7 @@ header .dropdown>.notification-badge {
 }
 
 .left .sidebar .active {
-    background: var(--color-gray);
+    background: var(--color-light-gray);
 }
 
 .left .sidebar .active span,
@@ -309,14 +310,17 @@ header .dropdown>.notification-badge {
     background: var(--color-primary);
 }
 
-.left .sidebar .menu-item:first-child.active {
+.left .sidebar .menu-item:first-child.active, 
+.sidebar .menu-item:first-child:hover {
     border-top-left-radius: var(--card-border-radius);
     border-top-right-radius: var(--card-border-radius);
     overflow: hidden;
 }
 
-.left .sidebar .menu-item:last-child.active {
+.left .sidebar .menu-item:last-child.active,
+.left .sidebar .menu-item:last-child {
     border-bottom-left-radius: var(--card-border-radius);
+    border-bottom-right-radius: var(--card-border-radius);
     overflow: hidden;
 }
 
