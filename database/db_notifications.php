@@ -88,4 +88,88 @@ function markReadNotification($notificationId, mysqli $mysqli) {
   return $stmt->execute();
 }
 
+function deletePostNotifications($postId, mysqli $mysqli) {
+  // delete the associated comments notifications
+  deleteCommentNotificationsFromPost($postId, $mysqli);
+  // delete the associated likes notifications
+  deleteLikeNotificationsFromPost($postId, $mysqli);
+  // delete the associated events/participations notifications
+  deleteEventNotificationsFromPost($postId, $mysqli);
+}
+
+function deleteCommentNotificationsFromPost($postId, mysqli $mysqli): bool {
+  $stmt = $mysqli->prepare("SELECT * FROM comments WHERE postId = ?");
+  $stmt->bind_param("i", $postId);
+  $stmt->execute();
+
+  $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+  if (count($res) == 0) {
+    return false;
+  }
+
+  for ($i = 0; $i < count($res); $i++) {
+    deleteNotification("comment", $res[$i]["commentId"], $mysqli);
+  }
+
+  return true;
+}
+
+function deleteLikeNotificationsFromPost($postId, mysqli $mysqli): bool {
+  $stmt = $mysqli->prepare("SELECT * FROM likes WHERE postId = ?");
+  $stmt->bind_param("i", $postId);
+  $stmt->execute();
+
+  $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+  if (count($res) == 0) {
+    return false;
+  }
+
+  for ($i = 0; $i < count($res); $i++) {
+    deleteNotification("like", $res[$i]["likeId"], $mysqli);
+  }
+
+  return true;
+}
+
+function deleteEventNotificationsFromPost($postId, mysqli $mysqli) {
+  // find the event
+  $query = "SELECT * FROM events WHERE postId = ?";
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("i", $postId);
+
+  $stmt->execute();
+  $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+  if (count($res) > 0) {
+    // find all the particiaptions associated with that event
+    $eventId = $res[0]["eventId"];
+    $query = "SLECT * FROM participations WHERE eventId = ?";
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("i", $eventId);
+
+    $stmt->execute();
+    $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+    if (count($res) == 0) {
+      return false;
+    }
+
+    for ($i = 0; $i < count($res); $i++) {
+      deleteNotification("participation", $res[$i]["participationId"], $mysqli);
+    }
+    return true;
+  }
+  return false;
+}
+
+function deleteNotification($type, $entityId, mysqli $mysqli) {
+  $query = "DELETE FROM notifications WHERE type = " . $type . " AND entityId = ?";
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("i", $entityId);
+
+  return $stmt->execute();
+}
+
 ?>
