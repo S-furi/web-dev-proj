@@ -5,7 +5,8 @@
     --bg-color: hsl(252, 5%, 85%);
     --color-primary: cadetBlue;
     --color-secondary: #9b363b;
-    --color-gray: hsl(252, 15%, 65%);
+    --color-gray: hsl(0, 0%, 90%);
+    --color-dark-gray: rgb(155, 155, 155);
     --color-white: white;
     --color-light: lightgrey;
 
@@ -91,7 +92,7 @@ img {
 }
 
 .usertag {
-    color: var(--color-gray);
+    color: var(--color-dark-gray);
 }
 
 /* NAVBAR */
@@ -140,7 +141,7 @@ header .search-bar input[type="search"] {
 }
 
 header .search-bar input[type="search"]::placeholder {
-    color: var(--color-gray);
+    color: var(--color-light);
 }
 
 header .dropdown {
@@ -280,7 +281,7 @@ header .dropdown>.notification-badge {
 
 .left .sidebar span {
     font-size: 2rem;
-    color: var(--color-gray);
+    color: var(--color-light);
     margin-left: 0.7rem;
     margin-right: 0.7rem;
     position: relative;
@@ -291,7 +292,7 @@ header .dropdown>.notification-badge {
 }
 
 .left .sidebar .active {
-    background: var(--color-light);
+    background: var(--color-gray);
 }
 
 .left .sidebar .active span,
@@ -498,13 +499,13 @@ header .dropdown>.notification-badge {
 
 .middle .timeline .post-body .likes-n {
     margin-top: 1rem;
-    color: var(--color-gray);
+    color: var(--color-light);
 }
 
 .middle .timeline .post-body .date-location {
     /* margin: -0.5rem 0 0; */
     opacity: 70%;
-    color: var(--color-gray);
+    color: var(--color-light);
     display: flex;
     justify-content: start;
     flex-direction: column;
@@ -585,7 +586,7 @@ header .dropdown>.notification-badge {
 }
 
 .middle .timeline .comment-head p {
-    color: var(--color-gray);
+    color: var(--color-light);
 }
 
 .middle .timeline .comment-form {
@@ -759,7 +760,7 @@ header .dropdown>.notification-badge {
 }
 
 .btn:disabled {
-    background-color: var(--color-gray);
+    background-color: var(--color-light);
     cursor: auto;
 }
 
@@ -774,7 +775,7 @@ header .dropdown>.notification-badge {
     }
 
     .main .container {
-        grid-template-columns: 13rem auto 17rem;
+        grid-template-columns: 14rem auto 17rem;
     }
 
     .main .container .left .profile {
