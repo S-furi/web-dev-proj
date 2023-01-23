@@ -23,6 +23,18 @@ if (isset($_GET["action"])){
             notify("follow", $followed, $user, $mysqli);
             $result["ok"] = true;
         }
+    // action 3 handles unufollowing
+    } elseif ($_GET["action"] == 3 && isset($_POST["user"], $_POST["followed"])) {
+        $user = $_POST["user"];
+        $followed = $_POST["followed"];
+
+        $result["ok"] = false;
+
+        if ($user == $_SESSION["user_id"]) {
+          if (unfollow($user, $followed, $mysqli)) {
+            $result['ok'] = true;
+          }
+        }
     }
 }
 

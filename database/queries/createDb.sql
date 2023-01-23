@@ -244,6 +244,7 @@ GRANT DELETE ON `brogram`.`events` TO 'sec_user'@'localhost';
 GRANT DELETE ON `brogram`.`comments` TO 'sec_user'@'localhost';
 GRANT DELETE ON `brogram`.`participations` TO 'sec_user'@'l]ocalhost';
 GRANT DELETE ON `brogram`.`notifications` TO 'sec_user'@'localhost';
+GRANT DELETE ON `brogram`.`followers` TO 'sec_user'@'localhost';
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

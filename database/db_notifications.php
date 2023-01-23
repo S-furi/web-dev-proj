@@ -22,7 +22,7 @@ function notify(string $type, int $forUser, int $entityId, mysqli $mysqli)
     $stmt->store_result();
 
     if ($stmt->num_rows() > 0) {
-        $query = "UPDATE notifications SET read = 0, time = NOW() WHERE forUser = ? AND entityId = ? AND type = ?";
+        $query = "UPDATE notifications SET notifications.read = 0, time = NOW() WHERE forUser = ? AND entityId = ? AND type = ?";
         $stmt = $mysqli->prepare($query);
         $stmt->bind_param("iis", $forUser, $entityId, $type);
         return $stmt->execute();
@@ -192,6 +192,16 @@ function deleteEventNotificationsFromPost($postId, mysqli $mysqli) {
     return true;
   }
   return false;
+}
+
+function deleteFollowNotification($entityId, $forUser, mysqli $mysqli) {
+  $type = "follow";
+
+  $query = "DELETE FROM notifications WHERE type = 'follow' AND entityId = ? AND forUser = ?";
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("ii", $entityId, $forUser);
+
+  return $stmt->execute();
 }
 
 function deleteNotification($type, $entityId, mysqli $mysqli) {
