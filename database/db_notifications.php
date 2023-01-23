@@ -194,6 +194,16 @@ function deleteEventNotificationsFromPost($postId, mysqli $mysqli) {
   return false;
 }
 
+function deleteFollowNotification($entityId, $forUser, mysqli $mysqli) {
+  $type = "follow";
+
+  $query = "DELETE FROM notifications WHERE type = 'follow' AND entityId = ? AND forUser = ?";
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("ii", $entityId, $forUser);
+
+  return $stmt->execute();
+}
+
 function deleteNotification($type, $entityId, mysqli $mysqli) {
   $query = "DELETE FROM notifications WHERE type = '" . $type . "' AND entityId = ?";
   $stmt = $mysqli->prepare($query);
