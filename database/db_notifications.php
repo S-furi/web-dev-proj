@@ -145,7 +145,7 @@ function deleteEventNotificationsFromPost($postId, mysqli $mysqli) {
   if (count($res) > 0) {
     // find all the particiaptions associated with that event
     $eventId = $res[0]["eventId"];
-    $query = "SLECT * FROM participations WHERE eventId = ?";
+    $query = "SELECT * FROM participations WHERE eventId = ?";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("i", $eventId);
 
@@ -165,7 +165,7 @@ function deleteEventNotificationsFromPost($postId, mysqli $mysqli) {
 }
 
 function deleteNotification($type, $entityId, mysqli $mysqli) {
-  $query = "DELETE FROM notifications WHERE type = " . $type . " AND entityId = ?";
+  $query = "DELETE FROM notifications WHERE type = '" . $type . "' AND entityId = ?";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("i", $entityId);
 
