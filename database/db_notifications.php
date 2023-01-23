@@ -22,7 +22,7 @@ function notify(string $type, int $forUser, int $entityId, mysqli $mysqli)
     $stmt->store_result();
 
     if ($stmt->num_rows() > 0) {
-        $query = "UPDATE notifications SET read = 0, time = NOW() WHERE forUser = ? AND entityId = ? AND type = ?";
+        $query = "UPDATE notifications SET notifications.read = 0, time = NOW() WHERE forUser = ? AND entityId = ? AND type = ?";
         $stmt = $mysqli->prepare($query);
         $stmt->bind_param("iis", $forUser, $entityId, $type);
         return $stmt->execute();
