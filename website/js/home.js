@@ -151,7 +151,12 @@ function leaveEvent(target, postId=null) {
 
   axios.post("api/api-events.php?action=2", formData)
     .then(res => {
-      console.log(res.data)
+            target = target.parentNode
+            target.setAttribute("for", `post-${postId}-leave-btn`)
+              target.innerHTML = 
+            `<button type="button" name="join event button" id="post-${postId}-join-btn"
+              class="btn btn-primary" onclick="participateToEvent(this)">Partecipa</button>`;
+
     })  .catch(err => {
       if (err.status == "No Content") {
         console.log("Unkwon function were requested to server");
@@ -169,7 +174,6 @@ function disableAlreadyParticipating(target, postId = null) {
     axios.post("api/api-events.php?action=1", formData)
         .then(res => {
             if (res.data["isParticipating"]) {
-              console.log(target)
               target = target.parentNode
               target.setAttribute("for", `post-${postId}-leave-btn`)
                 target.innerHTML = 
