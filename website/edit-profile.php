@@ -10,6 +10,12 @@ $templateParams["mysqli"] = $mysqli;
 
 $error = "";
 
+$propic_dir = IMG_DIR . $templateParams['user']['username'] . "/propic/";
+if (!is_dir($propic_dir)) {
+  mkdir($propic_dir, 0777, true);
+  header("Refresh:0");
+} 
+
 $userInfo = getUserInfo($_SESSION['user_id'], $mysqli);
 if (empty($userInfo)) {
   $bio = "";
@@ -20,8 +26,6 @@ if (empty($userInfo)) {
 if (isset($_POST['bio']) && ($_FILES['propic']['error'] == 0 || $_FILES['propic']['error'] == UPLOAD_ERR_NO_FILE)) {
   $usrId = $_SESSION['user_id'];
   $bio = $_POST['bio'];
-  $username = getUser($usrId, $mysqli)['username'];
-  $propic_dir = IMG_DIR . $username . "/propic/";
   if ($_FILES['propic']['error'] == 0) {
     $propic = $_FILES['propic'];
     list($err, $imgPath) = uploadImage($propic_dir, $propic);
@@ -29,14 +33,10 @@ if (isset($_POST['bio']) && ($_FILES['propic']['error'] == 0 || $_FILES['propic'
     if (checkUserInfoExists($_SESSION['user_id'], $mysqli)) {
       $imgPath = getUserInfo($_SESSION['user_id'], $mysqli)[0]['profileImg'];
     } else {
-      $imgPath = 'img/no-profile-pic.png';
+      $imgPath = '../../no-profile-pic.png';
     }
     $err = 1;
   }
-
-  if (!is_dir($propic_dir)) {
-    mkdir($propic_dir, 0777, true);
-  } 
 
   if ($err != 0) {
     if (checkUserInfoExists($usrId, $mysqli) == 1) {
@@ -50,14 +50,21 @@ if (isset($_POST['bio']) && ($_FILES['propic']['error'] == 0 || $_FILES['propic'
           }
         }
         header("Location: personal-profile.php");
+        exit();
       }
     } else {
       if (!insertNewUserInfo($usrId, $bio, $imgPath, $mysqli)) {
         $error = "C'è stato un errore nell'inserimento del profilo, si prega di riprovare più tardi.";
+        header("Location: personal-profile.php");
+        exit();
       }
     }
   }
+  header("Location: personal-profile.php");
+  exit();
 }
+
+ob_end_flush();
 
 require("template/base.php");
 ?>

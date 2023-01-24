@@ -84,7 +84,7 @@ img {
 }
 
 .btn-secondary {
-  background-color: var(--color-light);
+  background-color: var(--color-light-gray);
   color: black;
 }
 
@@ -563,7 +563,7 @@ header .dropdown>.notification-badge {
 .middle .timeline .profile-infobox-head #manage_accounts {
     display: flex;
     font-size: 2rem;
-    background-color: var(--color-light);
+    background-color: var(--color-light-gray);
     border-radius: 50%;
     width: 3rem;
     height: 3rem;

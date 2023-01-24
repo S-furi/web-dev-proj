@@ -80,14 +80,6 @@ function generatePosts(posts) {
     } else {
       let form = `
             <article class="post">
-              <div class="edit-profile-msg">
-                <p>Per modificare immagine profilo e biografia cliccare su</p>
-                <a href=edit-profile.php><p class="modify-text">Modifica Profilo</p></a>
-                <p>o</p>
-                <span class="material-symbols-outlined" id="manage_accounts" onclick="parent.location='edit-profile.php'">manage_accounts</span>
-              </div>
-            </article>
-            <article class="post">
               <div class="post-not-present">
                 <p>Nessun post caricato!</p>
               </div>
