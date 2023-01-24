@@ -101,14 +101,21 @@ function deleteParticipation($usrId, $postId, mysqli $mysqli)
   $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
   if (count($res) > 0) {
-    $query = "DELETE FROM participations WHERE eventId = ? AND usrId = ?";
+    $query = "SELECT * FROM participations WHERE eventId = ? AND usrId = ?";
     $eventId = $res[0]['eventId'];
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("ii", $eventId, $usrId);
     if (!$stmt->execute()) {
       return false;
     }
-    $participationId = mysqli_insert_id($mysqli);
+    $participationId = $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["participationId"];
+
+    $query = "DELETE FROM participations WHERE eventId = ? AND usrId = ?";
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("ii", $eventId, $usrId);
+    if (!$stmt->execute()) {
+      return false;
+    }
   } else {
     return false;
   }
