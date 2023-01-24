@@ -537,11 +537,17 @@ header .dropdown>.notification-badge {
     text-decoration: underline;
 }
 
-.middle .timeline .post-body .likes-n {
+.middle .timeline .post-body .post-stats {
     margin-top: 1rem;
-    color: var(--color-light);
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    margin-right: 2rem;
 }
 
+.middle .timeline .post-body .post-stats a {
+    color: var(--color-light);
+}
 .middle .timeline .post-body .date-location {
     /* margin: -0.5rem 0 0; */
     opacity: 70%;
