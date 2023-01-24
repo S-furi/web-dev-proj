@@ -173,6 +173,11 @@ function disableAlreadyParticipating(target, postId = null) {
 
     axios.post("api/api-events.php?action=1", formData)
         .then(res => {
+            if (res.data["isUserAuthor"]) {
+              target.parentNode.remove();
+              target.remove();
+              return
+            }
             if (res.data["isParticipating"]) {
               target = target.parentNode
               target.setAttribute("for", `post-${postId}-leave-btn`)
