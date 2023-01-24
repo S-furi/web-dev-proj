@@ -39,7 +39,7 @@
                               <p><?php echo $post["caption"] ?></p>
                               <div class="post-stats">
                                 <a href="#" onclick="showLikeUsers(<?php echo $post['postId']; ?>, <?php echo $_SESSION['user_id']; ?>)"><p class="likes-n">Mi Piace: <?php echo $post['likes']; ?></p></a>
-                                <p>Partecipanti: <?php echo $post['participants']; ?></p>
+                                <a href="#" onclick="showParticipantsUsers(<?php echo $post['postId']; ?>, <?php echo $_SESSION['user_id']; ?>)"><p>Partecipanti: <?php echo $post['participants']; ?></p></a>
                               </div>
                               <div class="interaction-buttons">
                                   <div class="like-comment-div">

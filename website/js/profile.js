@@ -93,6 +93,43 @@ function showFollow(following, res, sessionId) {
     console.log('errore nella visualizzazione');
   }
 }
+
+function showParticipants(res, sessionId) {
+  if (res.data['ok']) {
+    const modal = document.getElementById('modal');
+    const modalContent = document.querySelector(".modal .modal-content");
+    const participants = res.data['participants'];
+
+    modalContent.innerHTML = "";
+
+    const modalHead = document.createElement("div");
+    modalHead.className = "modal-head";
+
+    const title = document.createElement("p");
+    title.className = "title";
+    title.textContent = "Partecipanti";
+
+    modalHead.appendChild(title);
+
+    const list = document.createElement("ul");
+    list.className = "participants-users-list";
+
+    generateList(participants, list, sessionId);
+
+    modalContent.appendChild(modalHead);
+    modalContent.appendChild(list);
+    modal.style.display = "block";
+  } else {
+    console.log('errore nella visualzzazione del modale');
+  }
+}
+
+function showParticipantsUsers(postId, sessionId) {
+  axios.post(`api/api-profile.php?postId=${postId}&azione=3`)
+    .then(res => {
+      showParticipants(res, sessionId);
+    });
+}
  
 function showLikeUsers(postId, sessionId) {
   axios.post(`api/api-profile.php?postId=${postId}&azione=2`)
