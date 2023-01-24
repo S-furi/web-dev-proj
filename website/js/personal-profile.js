@@ -71,7 +71,6 @@ function generatePosts(posts) {
                 </div>
                 <div class="profile-interaction-buttons">
                     <a href="post.php?usrId=${posts[i]['usrId']}&postId=${posts[i]['postId']}#comment-text-area" target="_self">
-                      <input type="button" name="comment button" id="comment-btn" />
                       <span class="material-symbols-outlined">comment</span>
                     </a>
                 </div>
