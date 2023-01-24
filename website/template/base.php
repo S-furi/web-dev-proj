@@ -57,23 +57,17 @@
                     </div>
                 </section>
                 <ul class="sidebar">
-                    <li class="menu-item <?php if (isset($templateParams["active-home"])) echo $templateParams["active-home"] ?>">
-                    <a href="index.php">
-                        <span class="material-symbols-outlined">Home</span>
-                        <h2>Home</h2>
-                    </a>
+                    <li class="menu-item <?php if (isset($templateParams["active-home"])) echo $templateParams["active-home"] ?>" onclick="window.location.href='index.php'">
+                      <span class="material-symbols-outlined">Home</span>
+                      <h2>Home</h2>
                     </li>
-                    <li class="menu-item <?php if (isset($templateParams["active-explore"])) echo $templateParams["active-explore"] ?>">
-                      <a href="discover.php">
-                        <span class="material-symbols-outlined">Explore</span>
-                        <h2>Explore</h2>
-                      </a>
+                    <li class="menu-item <?php if (isset($templateParams["active-explore"])) echo $templateParams["active-explore"] ?>" onclick="window.location.href='discover.php'">
+                      <span class="material-symbols-outlined">Explore</span>
+                      <h2>Explore</h2>
                     </li>
-                    <li class="menu-item <?php if (isset($templateParams["active-radar"])) echo $templateParams["active-radar"] ?>">
-                        <a href="map.php">
-                            <span class="material-symbols-outlined">radar</span>
-                            <h2>Radar</h2>
-                        </a>
+                    <li class="menu-item <?php if (isset($templateParams["active-radar"])) echo $templateParams["active-radar"] ?>" onclick="window.location.href='map.php'">
+                      <span class="material-symbols-outlined">radar</span>
+                      <h2>Radar</h2>
                     </li>
                 </ul>
                 <!-- End of Sidebar -->
