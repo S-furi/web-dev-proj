@@ -61,8 +61,8 @@ function appendToBody(postsElements) {
     timelineBody.innerHTML = content;
 }
 
-function renderHome() {
-  axios.get("api/api-timeline.php", { params: { action: "home" } })
+function render(action) {
+  axios.get("api/api-timeline.php", { params: { action: action } })
     .then(res => {
       const usrId = res.data['usrId'];
       let postsElements = "";
@@ -75,19 +75,5 @@ function renderHome() {
     }).then(() => window.dispatchEvent(new Event("timelineFill")));
 }
 
-function renderDiscover() {
-  axios.get("api/api-timeline.php", { params: { action: "discover" } })
-    .then(res => {
-      const usrId = res.data['usrId'];
-      let postsElements = "";
-      res.data['posts'].forEach(post => {
-        postsElements += getPostEntity(post, usrId);
-      })
-
-      appendToBody(postsElements);
-
-    }).then(() => window.dispatchEvent(new Event("timelineFill")));
-}
-
-window.location.href.includes("index.php") ? renderHome() : renderDiscover()
+window.location.href.includes("index.php") ? render("home") : render("discover");
 
