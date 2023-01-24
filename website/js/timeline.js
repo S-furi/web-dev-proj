@@ -52,28 +52,77 @@ const timelineBody = document.querySelector("main .middle");
 function appendToBody(postsElements) {
     let content = `<section class="timeline">`
     content += postsElements;
-    content += `
-              <div id="modal" class="modal">
-                <div class="modal-content"></div>
-              </div>
-            </section>`;
+    content += `</section>
+                <div id="modal" class="modal">
+                  <div class="modal-content"></div>
+                </div>`;
 
     timelineBody.innerHTML = content;
 }
 
-function render(action) {
-  axios.get("api/api-timeline.php", { params: { action: action } })
+function getPosts(action, offset, limit) {
+  return axios.get("api/api-timeline.php", { params: { action: action } })
     .then(res => {
-      const usrId = res.data['usrId'];
+      if (offset === null && limit === null){ 
+        return res.data 
+      }
+      
+      const result = {
+        "usrId": res.data['usrId'],
+        "posts": res.data['posts'].slice(offset, limit + offset),
+      }
+
+      return result;
+    }).catch(err => {
+      if (err.code == 204) {
+        // no posts are found
+      }
+    });
+}
+
+function render(action) {
+  getPosts(action, postsOffset, postsLimit)
+    .then(res => {
+      const usrId = res['usrId'];
       let postsElements = "";
-      res.data['posts'].forEach(post => {
+      res['posts'].forEach(post => {
         postsElements += getPostEntity(post, usrId);
       })
 
       appendToBody(postsElements);
+      postsOffset += postsLimit;
 
-    }).then(() => window.dispatchEvent(new Event("timelineFill")));
+    }).then(() => window.dispatchEvent(new Event("timelineFill")))
+    .catch(err => {
+      if (err.code == 204) {
+        // no posts are found
+      }
+    });
 }
 
-window.location.href.includes("index.php") ? render("home") : render("discover");
+function loadMorePosts() {
+  const timeline = document.querySelector("section.timeline");
+  getPosts(action, postsOffset, postsLimit)
+    .then(res => {
+      const usrId = res['usrId'];
+      let newPosts = ""
+      res['posts'].forEach(post => {
+        newPosts += getPostEntity(post, usrId);
+      });
 
+      timeline.innerHTML += newPosts;
+    })
+}
+
+let postsOffset = 0;
+const postsLimit = 5;
+
+window.addEventListener("scroll", () => {
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    loadMorePosts();
+    postsOffset += postsLimit;
+  }
+})
+
+const action = window.location.href.includes("index.php") ? "home" : "discover";
+render(action);
