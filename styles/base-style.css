@@ -734,7 +734,7 @@ header .dropdown>.notification-badge {
   display: none;
 }
 
-.modal .notifications p:not(.usertag) {
+.modal .notifications p.msg {
   display: none;
 }
 
@@ -743,11 +743,17 @@ header .dropdown>.notification-badge {
 }
 
 .modal .notifications li * {
-    margin: 0 1rem;
+    margin: 0 3%;
+}
+
+.modal .notifications li p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal .notifications li .profile-picture {
-    width: 1.5rem;
+    margin: 0 1rem;
 }
 
 .modal .notifications li a:hover {
