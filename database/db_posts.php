@@ -215,6 +215,7 @@ function getDiscoverPosts($usrId, $mysqli) {
 
   for ($i = 0; $i < count($res); $i++) {
       $res[$i]["location"] = getLocationFromLocationId($res[$i]["locationId"], $mysqli)["name"];
+      $res[$i]["participants"] = getParticipants($res[$i]["postId"], $mysqli);
   }
   return $res;
   
