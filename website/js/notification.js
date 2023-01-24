@@ -62,10 +62,11 @@ function displayNotification() {
             modalContent.innerHTML +=
               `<li>
                             <a ${n['read'] ? `class="read"` : ""} onclick='redirectToNotificationSource("${n["reference"]}", ${n['notificationId']})'>
+                            <p>${dateDiff(new Date(), new Date(n['datetime']))}<p>
                             <span class="material-symbols-outlined">${notificationsIcons[n['type']]}</span>
                             <img src="${n['fromUserInfo']['profileImg']}" alt="" class="profile-picture" />
                             <p class="usertag">@${n['fromUser']['username']}</p>
-                            <p> ${n['msg']} </p>
+                            <p class="msg"> ${n['msg']} </p>
                             </a>
                         </li>`
           }
@@ -93,29 +94,29 @@ function markReadNotification(notificationId) {
 
 // used for retrieving the string "*some* minutes/hours/days ago"
 function dateDiff(date1, date2) {
-  // Calculate the difference in milliseconds
+  // fix server date saving (1 hour earlier)
+  date2.setHours(date2.getHours() + 1);
   const diffInMilliseconds = Math.abs(date1.getTime() - date2.getTime());
-  // Calculate the number of minutes that have passed
-  const diffInMinutes = Math.floor(diffInMilliseconds / 1000 / 60);
-  // If the difference is less than 59 minutes, return the number of minutes that have passed
+  const diffInMinutes = Math.floor(diffInMilliseconds / (1000*60));
+
+
   if (diffInMinutes < 59) {
-    return diffInMinutes + ' minuti fa';
-  }
-  // Otherwise, calculate the number of hours that have passed
-  const diffInHours = Math.floor(diffInMinutes / 60);
-  // If the difference is less than 24 hours, return the number of hours that have passed
-  if (diffInHours < 24) {
-    return diffInHours + ' ore fa';
-  }
-  // Otherwise, calculate the number of days that have passed and return the result
-  const diffInDays = Math.floor(diffInHours / 24);
-  // If the difference is less than 7 days, return the number of weeks that have passed
-  if (diffInDays >= 7) {
-    return Math.floor(diffInDays / 7) + ' settimane fa'
+    return diffInMinutes + 'm';
   }
 
-  // Otherwise, return the number of days
-  return diffInDays + ' giorni fa';
+  const diffInHours = Math.floor(diffInMinutes / 60);
+
+  if (diffInHours < 24) {
+    return diffInHours + 'h';
+  }
+
+  const diffInDays = Math.floor(diffInHours / 24);
+
+  if (diffInDays >= 7) {
+    return Math.floor(diffInDays / 7) + 'w'
+  }
+
+  return diffInDays + 'd';
 }
 
 function showNotificationCenter() {
