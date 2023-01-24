@@ -7,7 +7,6 @@ function followUser(user, followed, target = null) {
     // action 2 registers a new following
     axios.post("api/api-users.php?action=2", formData)
         .then(res => {
-            console.log(res.data)
             if (res.data["ok"]) {
                 // if target isn't specified, it means we are in the sidebar
                 // otherwise we the button is the one conained in the user profile
