@@ -49,7 +49,7 @@ function getPostEntity(post, userId) {
 
 const timelineBody = document.querySelector("main .middle");
 
-function renderTimeline() {
+function renderHome() {
   axios.get("api/api-timeline.php", { params: { action: "home" } })
     .then(res => {
       let content = "";
@@ -70,5 +70,5 @@ function renderTimeline() {
     }).then(() => window.dispatchEvent(new Event("timelineFill")));
 }
 
-renderTimeline();
+renderHome();
 
