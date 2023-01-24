@@ -52,7 +52,6 @@
                   <a href="#" onclick="showLikeUsers(<?php echo $post['postId']; ?>, <?php echo $_SESSION['user_id']; ?>)"><p class="likes-n">Mi Piace: <?php echo $post['likes']; ?></p></a>
                   <div class="profile-interaction-buttons">
                       <a href="post.php?usrId=<?php echo $post['usrId']; ?>&postId=<?php echo $post['postId']; ?>#comment-text-area" target="_self">
-                        <input type="button" name="comment button" id="comment-btn" />
                         <span class="material-symbols-outlined">comment</span>
                       </a>
                   </div>
