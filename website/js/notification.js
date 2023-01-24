@@ -37,7 +37,7 @@ function poll() {
       }
 
       // Make another request
-      // poll();
+      poll();
     }).catch(error => {
       if (error.code = "ECONNABORTED" || error.response.status == 204) {
         // If the request returns no new notifications, wait for a specified 
@@ -72,7 +72,13 @@ function displayNotification() {
           }
         }
       }
-    }).catch(err => console.log(err));
+    }).catch(error => {
+      if (error.code = "ECONNABORTED" || error.response.status == 204) {
+        // If the request returns no new notifications, wait for a specified 
+        // period of time before making another request
+        setTimeout(poll, 5000);
+      }
+    });
 }
 
 function redirectToNotificationSource(reference, notificationId) {

@@ -11,7 +11,7 @@ if (isset($_POST['lastNotificationId'])) {
     $userId = (int)$_SESSION['user_id'];
 
     // Fetch the notifications for the user
-    $notifications = getNotificationsForUser($userId, $lastNotificationId, $mysqli);
+    $notifications = getNotificationsForUser($userId, $mysqli);
     if ($notifications !== null) {
         // If there are new notifications, return them to the client
         header('Content-Type: application/json');

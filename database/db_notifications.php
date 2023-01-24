@@ -91,11 +91,11 @@ function fetchNotifications(int $num, $forUser, $mysqli)
 /* Check if there are any new notifications for the user
  *
  */
-function getNotificationsForUser($userId, $lastNotificationId, mysqli $mysqli)
+function getNotificationsForUser($userId, mysqli $mysqli)
 {
-    $query = "SELECT * FROM notifications WHERE forUser = ? AND notificationId > ? AND NOT notifications.read";
+    $query = "SELECT * FROM notifications WHERE forUser = ? AND NOT notifications.read";
     $stmt = $mysqli->prepare($query);
-    $stmt->bind_param('ii', $userId, $lastNotificationId);
+    $stmt->bind_param('i', $userId);
     $stmt->execute();
     $result = $stmt->get_result();
     if ($result->num_rows > 0) {
