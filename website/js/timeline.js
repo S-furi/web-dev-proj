@@ -75,5 +75,19 @@ function renderHome() {
     }).then(() => window.dispatchEvent(new Event("timelineFill")));
 }
 
-renderHome();
+function renderDiscover() {
+  axios.get("api/api-timeline.php", { params: { action: "discover" } })
+    .then(res => {
+      const usrId = res.data['usrId'];
+      let postsElements = "";
+      res.data['posts'].forEach(post => {
+        postsElements += getPostEntity(post, usrId);
+      })
+
+      appendToBody(postsElements);
+
+    }).then(() => window.dispatchEvent(new Event("timelineFill")));
+}
+
+window.location.href.includes("index.php") ? renderHome() : renderDiscover()
 
