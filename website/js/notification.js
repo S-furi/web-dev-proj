@@ -107,6 +107,9 @@ function dateDiff(date1, date2) {
 
 
   if (diffInMinutes < 59) {
+    if (diffInMinutes == 0) {
+      return "ora";
+    }
     return diffInMinutes + 'm';
   }
 
