@@ -50,24 +50,23 @@ function getPostEntity(post, userId) {
 const timelineBody = document.querySelector("main .middle");
 
 function renderTimeline() {
-    const posts = axios.get("api/api-timeline.php")
+  axios.get("api/api-timeline.php")
     .then(res => {
-    // console.log(res.data);
-    let content = "";
-    const usrId = res.data['usrId'];
-    content = `<section class="timeline">`
+      let content = "";
+      const usrId = res.data['usrId'];
+      content = `<section class="timeline">`
 
-    res.data['posts'].forEach(post => {
+      res.data['posts'].forEach(post => {
         content += getPostEntity(post, usrId);
-    })
+      })
 
-    content += `
+      content += `
                 <div id="modal" class="modal">
-                    <div class="modal-content"></div>
+                  <div class="modal-content"></div>
                 </div>
-            </section>`;
+              </section>`;
 
-    timelineBody.innerHTML = content;
+      timelineBody.innerHTML = content;
     }).then(() => window.dispatchEvent(new Event("timelineFill")));
 }
 
