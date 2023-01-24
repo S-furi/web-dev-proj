@@ -23,7 +23,7 @@ if ($_GET["action"] == "home"){
   $result["usrId"] = $_SESSION["user_id"];
   $posts = getFriendsPosts($_SESSION['user_id'], $mysqli);
 
-  // fixing images path
+  // fixing images path, eventDate and filling authors informations
   for($i = 0; $i < count($posts); $i++) {
     $username = getUser($posts[$i]['usrId'], $mysqli)['username'];
     $posts[$i]["image"] = IMG_DIR.$username.'/posts/'.$posts[$i]["image"];
@@ -32,8 +32,21 @@ if ($_GET["action"] == "home"){
   }
 
   $result["posts"] = $posts;
+
 } elseif ($_GET["action"] == "discover") {
-  // TODO
+  $result["usrId"] = $_SESSION["user_id"];
+  $posts = getDiscoverPosts($_SESSION['user_id'], $mysqli);
+
+  // fixing images path, eventDate and filling authors informations
+  for($i = 0; $i < count($posts); $i++) {
+    $username = getUser($posts[$i]['usrId'], $mysqli)['username'];
+    $posts[$i]["image"] = IMG_DIR.$username.'/posts/'.$posts[$i]["image"];
+    $posts[$i]["eventDate"] = date("d-m-Y H:i", strtotime($posts[$i]['eventDate']));
+    $posts[$i]["userInfo"] = retrieveUsrInfo($posts[$i], $mysqli);
+  }
+
+  $result["posts"] = $posts;
+
 } else {
   header("HTTP/1.1 204 No Content");
 }
