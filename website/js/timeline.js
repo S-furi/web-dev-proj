@@ -31,7 +31,7 @@ function getPostEntity(post, userId) {
                     <p>${post['caption']}</p>
                     <div class="post-stats">
                       <a href="#" onclick="showLikeUsers(${post['postId']}, ${userId})"><p class="likes-n">Mi Piace: ${post['likes']}</p></a>
-                      <p>Partecipanti: ${post['participants']}</p>
+                      <a href="#" onclick="showParticipantsUsers(${post['postId']}, ${userId})"><p>Partecipanti: ${post['participants']}</p></a>
                     </div>
                     <div class="interaction-buttons">
                         <div class="like-comment-div">
