@@ -378,6 +378,17 @@ function addLike($usrId, $postId, mysqli $mysqli)
  */
 function removeLike($usrId, $postId, mysqli $mysqli)
 {
+    $stmt = $mysqli->prepare("SELECT * FROM likes WHERE usrId = ? AND postId = ?");
+    $stmt->bind_param("ii", $usrId, $postId);
+    $stmt->execute();
+    $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+    if (count($res) == 0) {
+      return false;
+    }
+
+    $likeId = $res[0]["likeId"];
+
     $deleteLikeQuery = "DELETE FROM likes WHERE usrId = ? AND postId = ?";
     $decrementPostLikesQuery = "UPDATE posts SET posts.likes = posts.likes - 1 WHERE postId = ?;";
 
@@ -386,7 +397,7 @@ function removeLike($usrId, $postId, mysqli $mysqli)
     if ($stmt->execute()) {
         $stmt = $mysqli->prepare($decrementPostLikesQuery);
         $stmt->bind_param("i", $postId);
-        return $stmt->execute();
+        return $stmt->execute() && deleteNotification('like', $likeId, $mysqli);
     }
     return false;
 }
