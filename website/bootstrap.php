@@ -19,6 +19,10 @@ if (checkUserInfoExists($_SESSION['user_id'], $mysqli)) {
 }
 $templateParams["suggested_users"] = getSuggestedUser($_SESSION["user_id"], $mysqli);
 
-$templateParams["js"] = array("https://unpkg.com/axios/dist/axios.min.js", "js/home.js", "js/notification.js", "js/calendar.js");
+$templateParams["js"] = array("https://unpkg.com/axios/dist/axios.min.js",
+                              "js/home.js", 
+                              "js/notification.js", 
+                              "js/calendar.js", 
+                              "js/profile.js");
 
 ?>

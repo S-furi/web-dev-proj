@@ -225,20 +225,33 @@ function renderLikeAnimation(target) {
     target.firstElementChild.classList.toggle("is-expanded");
 }
 
-document.querySelectorAll(`.post .interaction-buttons button[name="join event button"]`)
-    .forEach(btn => disableAlreadyParticipating(btn));
+function renderButtons() {
+    document.querySelectorAll(`.post .interaction-buttons button[name="join event button"]`)
+        .forEach(btn => disableAlreadyParticipating(btn));
 
-document.querySelectorAll(`.post .interaction-buttons button[name="like button"]`)
-    .forEach(btn => checkLikedPosts(btn));
+    document.querySelectorAll(`.post .interaction-buttons button[name="like button"]`)
+        .forEach(btn => checkLikedPosts(btn));
 
-// selected effect on left menu item
-menuItemSelectedEffect();
+    // selected effect on left menu item
+    menuItemSelectedEffect();
 
-document.querySelectorAll(".left>.btn").forEach(btn => btn.addEventListener('click', showForm));
+    document.querySelectorAll(".left>.btn").forEach(btn => btn.addEventListener('click', showForm));
+}
 
-document.querySelector(".dropdown.usr-actions").addEventListener('click', () => {
-  document.querySelector(".dropdown.usr-actions .dropdown-content").classList.toggle("inactive");
-  document.querySelector(".dropdown.usr-actions .dropdown-content").classList.toggle("active");
-})
+function activateDropDowns() {
+    document.querySelector(".dropdown.usr-actions").addEventListener('click', () => {
+        document.querySelector(".dropdown.usr-actions .dropdown-content").classList.toggle("inactive");
+        document.querySelector(".dropdown.usr-actions .dropdown-content").classList.toggle("active");
+    })    
+}
 
+if (typeof timelineLoading !== 'undefined') { 
+    window.addEventListener("timelineFill", () => {
+        renderButtons();
+        activateDropDowns();
+    })
+} else {
+    renderButtons();
+    activateDropDowns();
+}
 
