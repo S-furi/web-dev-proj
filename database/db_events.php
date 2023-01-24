@@ -47,12 +47,17 @@ function insertParticipantFromPostId($usrId, $postId, mysqli $mysqli)
 
 function getParticipants($postId, mysqli $mysqli)
 {
-  $eventId = getEventFromPost($postId, $mysqli);
+  $eventId = getEventFromPost($postId, $mysqli)["eventId"];
   $query = "SELECT * FROM events WHERE eventId = ?";
   $stmt = $mysqli->prepare($query);
   $stmt->bind_param("i", $eventId);
   $stmt->execute();
-  return $stmt->get_result()->fetch_all(MYSQLI_ASSOC)[0]["participants"];
+  $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+  if (count($res) > 0) {
+    return $res[0]["participants"];
+  }
+  return 0;
 }
 
 function isUserParticipating($usrId, $postId, mysqli $mysqli)

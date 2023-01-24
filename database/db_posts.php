@@ -133,6 +133,7 @@ function getPosts($usrId, $mysqli)
 
     for ($i = 0; $i < count($res); $i++) {
         $res[$i]["location"] = getLocationFromLocationId($res[$i]["locationId"], $mysqli)["name"];
+        $res[$i]["participants"] = getParticipants($res[$i]["postId"], $mysqli);
     }
     return $res;
 }
@@ -149,6 +150,7 @@ function getPostFromId($usrId, $postId, $mysqli)
     if ($res > 0) {
         $res = $res[0];
         $res["location"] = getLocationFromLocationId($res["locationId"], $mysqli)["name"];
+        $res["participants"] = getParticipants($postId, $mysqli);
     }
     return $res;
 }
@@ -190,6 +192,7 @@ function getFriendsPosts($usrId, $mysqli)
 
     for ($i = 0; $i < count($res); $i++) {
         $res[$i]["location"] = getLocationFromLocationId($res[$i]["locationId"], $mysqli)["name"];
+        $res[$i]["participants"] = getParticipants($res[$i]["postId"], $mysqli);
     }
     return $res;
 }
