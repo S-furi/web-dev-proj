@@ -37,7 +37,7 @@ function poll() {
       }
 
       // Make another request
-      poll();
+      setTimeout(poll, 5000);
     }).catch(error => {
       if (error.code = "ECONNABORTED" || error.response.status == 204) {
         // If the request returns no new notifications, wait for a specified 
