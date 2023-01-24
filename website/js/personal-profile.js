@@ -65,7 +65,10 @@ function generatePosts(posts) {
                   </div>
                 </div>
                 <p>${posts[i]['caption']}</p>
-                <a href="#" onclick="showLikeUsers(${posts[i]['postId']}, ${posts[i]['usrId']})"><p class="likes-n">Mi Piace: ${posts[i]['likes']}</p></a>
+                <div class="post-stats">
+                  <a href="#" onclick="showLikeUsers(${posts[i]['postId']}, ${posts[i]['usrId']})"><p class="likes-n">Mi Piace: ${posts[i]['likes']}</p></a>
+                  <p>Partecipanti: ${posts[i]['participants']}</p>
+                </div>
                 <div class="profile-interaction-buttons">
                     <a href="post.php?usrId=${posts[i]['usrId']}&postId=${posts[i]['postId']}#comment-text-area" target="_self">
                       <span class="material-symbols-outlined">comment</span>

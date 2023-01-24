@@ -64,6 +64,12 @@ img {
     width: 100%;
 }
 
+button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
 .btn {
     display: inline-block;
     padding: var(--btn-padding);
@@ -531,9 +537,20 @@ header .dropdown>.notification-badge {
     text-decoration: underline;
 }
 
-.middle .timeline .post-body .likes-n {
+.middle .timeline .post-body .post-stats {
     margin-top: 1rem;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    margin-right: 2rem;
+}
+
+.middle .timeline .post-body .post-stats a {
     color: var(--color-light);
+}
+
+.middle .timeline .post-body .post-stats a:hover {
+  text-decoration: underline;
 }
 
 .middle .timeline .post-body .date-location {

@@ -37,10 +37,13 @@
                               </div>
                               <img src="<?php echo str_replace(' ', '%20', $post["image"]) ?>" alt="" />
                               <p><?php echo $post["caption"] ?></p>
-                              <a href="#" onclick="showLikeUsers(<?php echo $post['postId']; ?>, <?php echo $_SESSION['user_id']; ?>)"><p class="likes-n">Mi Piace: <?php echo $post['likes']; ?></p></a>
+                              <div class="post-stats">
+                                <a href="#" onclick="showLikeUsers(<?php echo $post['postId']; ?>, <?php echo $_SESSION['user_id']; ?>)"><p class="likes-n">Mi Piace: <?php echo $post['likes']; ?></p></a>
+                                <p>Partecipanti: <?php echo $post['participants']; ?></p>
+                              </div>
                               <div class="interaction-buttons">
                                   <div class="like-comment-div">
-                              <label for="post-<?php echo $post["postId"] ?>-like-btn"><button type="button" value="like" name="like button" id="post-<?php echo $post["postId"] ?>-like-btn" onclick="likePost(<?php echo $post["postId"] ?>, <?php echo $_SESSION["user_id"] ?>, this)"><span class="material-symbols-outlined like-btn">favorite</span></button></label>
+                                      <label for="post-<?php echo $post["postId"] ?>-like-btn"><button type="button" value="like" name="like button" id="post-<?php echo $post["postId"] ?>-like-btn" onclick="likePost(<?php echo $post["postId"] ?>, <?php echo $_SESSION["user_id"] ?>, this)"><span class="material-symbols-outlined like-btn">favorite</span></button></label>
                                       <a href="post.php?usrId=<?php echo $post['usrId']; ?>&postId=<?php echo $post['postId']; ?>#comment-text-area" target="_self">
                                           <span class="material-symbols-outlined">comment</span>
                                       </a>

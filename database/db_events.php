@@ -45,6 +45,34 @@ function insertParticipantFromPostId($usrId, $postId, mysqli $mysqli)
       && notify("participation", $postAuthor, $participationId, $mysqli);
 }
 
+function getParticipants($postId, mysqli $mysqli)
+{
+  $eventId = getEventFromPost($postId, $mysqli)["eventId"];
+  $query = "SELECT * FROM events WHERE eventId = ?";
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("i", $eventId);
+  $stmt->execute();
+  $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+  if (count($res) > 0) {
+    return $res[0]["participants"];
+  }
+  return 0;
+}
+
+function getUsersParticipating($postId, mysqli $mysqli) {
+  $eventId = getEventFromPost($postId, $mysqli)["eventId"];
+  $query = "SELECT *
+              FROM users join participations
+              ON (users.usrId = participations.usrId)
+              WHERE participations.eventId = ?";
+  
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("i", $eventId);
+  $stmt->execute();
+  return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
 function isUserParticipating($usrId, $postId, mysqli $mysqli)
 {
     $query = "SELECT * FROM participations WHERE usrId = ? AND eventId = ?;";

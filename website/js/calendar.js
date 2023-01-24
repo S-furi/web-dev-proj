@@ -70,9 +70,6 @@ function renderCalendar() {
 
     document.querySelector(".right .current-date").innerHTML = `${months[currentMonth]} ${currentYear}`
     document.querySelector(".right .days").innerHTML = htmlDayTag;
-
-    document.querySelector(".left .current-date").innerHTML = `${months[currentMonth]} ${currentYear}`
-    document.querySelector(".left .days").innerHTML = htmlDayTag;
 }
 
 function handleMonthChange(event) {
@@ -128,26 +125,6 @@ function insertCalendar() {
             </div>`;
 
     document.querySelector(".right .calendar-wrapper").innerHTML = wrapperContent;
-    document.querySelector(".left #popup-cal").innerHTML = wrapperContent;
-}
-
-
-function showPopupCalendar() {
-    document.querySelector(".left #popup-cal").classList.toggle("show");
-    switchPopupIcon();
-}
-
-
-function switchPopupIcon() {
-    const calBtn = document.querySelector(".left .popup-calendar-wrapper .calendar-btn");
-
-    if (calBtn.classList.contains("toggle-on")) {
-        calBtn.classList.remove("toggle-on");
-        calBtn.innerHTML = closeIcon;
-    } else {
-        calBtn.classList.add("toggle-on");
-        calBtn.innerHTML = calIcon;
-    }
 }
 
 function setModalListeners() {
@@ -173,10 +150,6 @@ function setModalListeners() {
     };
 }
 
-// Google icons for calendar toggle btn
-const closeIcon = `<span class="material-symbols-outlined">close</span>`;
-const calIcon = `<span class="material-symbols-outlined">calendar_month</span>`;
-
 // they'll be modified if prev or next icons are clicked
 let date = new Date();
 let currentMonth = date.getMonth();
@@ -191,10 +164,6 @@ insertCalendar();
 
 // make the chevrons change months
 document.querySelectorAll(".right .calendar-wrapper .icons span").forEach(icon => {
-    icon.addEventListener('click', event => handleMonthChange(event));
-});
-
-document.querySelectorAll(".left .popup-calendar-wrapper .icons span").forEach(icon => {
     icon.addEventListener('click', event => handleMonthChange(event));
 });
 
