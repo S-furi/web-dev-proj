@@ -548,6 +548,11 @@ header .dropdown>.notification-badge {
 .middle .timeline .post-body .post-stats a {
     color: var(--color-light);
 }
+
+.middle .timeline .post-body .post-stats a:hover {
+  text-decoration: underline;
+}
+
 .middle .timeline .post-body .date-location {
     /* margin: -0.5rem 0 0; */
     opacity: 70%;
