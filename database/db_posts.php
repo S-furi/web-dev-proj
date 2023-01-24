@@ -410,6 +410,15 @@ function getPostFromEventId($eventId, mysqli $mysqli) {
   return []; 
 }
 
+function isUserPostAuthor($postId, $usrId, mysqli $mysqli) {
+  $query = "SELECT * FROM posts WHERE postId = ? AND usrId = ?";
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("ii", $postId, $usrId);
+  $stmt->execute();
+  $stmt->store_result();
+  return $stmt->num_rows() > 0;
+}
+
 function deletePost($postId, mysqli $mysqli) {
   deletePostNotifications($postId, $mysqli);
 
