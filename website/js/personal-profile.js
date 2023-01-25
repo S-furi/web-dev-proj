@@ -163,7 +163,6 @@ axios.get('api/api-personal-profile.php?azione=1')
           const followersLink = document.querySelectorAll(".followers-link");
           followersLink.forEach(e => {
             e.addEventListener("click", () => {
-              debugger;
               const followersData = e.nextElementSibling;
               if (parseInt(followersData.innerHTML) > 0) {
                 showFollowingUsers(e.dataset.usrId, e.dataset.sessionId);
