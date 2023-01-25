@@ -53,10 +53,11 @@ function showLikes(res, sessionId) {
       modal.style.display = "none";
     });
     closeBtn.className = 'material-symbols-outlined';
+    closeBtn.classList.add('closeBtn');
     closeBtn.tabIndex = '0';
     closeBtn.title = 'Chiudi';
     closeBtn.textContent = 'close';
-    closeBtn.id = 'closeBtn';
+    closeBtn.id = 'likes-closeBtn';
 
     const title = document.createElement("p");
     title.className = "title";
@@ -91,10 +92,11 @@ function showFollow(following, res, sessionId) {
       modal.style.display = "none";
     });
     closeBtn.className = 'material-symbols-outlined';
+    closeBtn.classList.add('closeBtn');
     closeBtn.tabIndex = '0';
     closeBtn.title = 'Chiudi';
     closeBtn.textContent = 'close';
-    closeBtn.id = 'closeBtn';
+    closeBtn.id = 'followers-closeBtn';
 
     const title = document.createElement("p");
     title.className = "title";
@@ -132,10 +134,11 @@ function showParticipants(res, sessionId) {
       modal.style.display = "none";
     });
     closeBtn.className = 'material-symbols-outlined';
+    closeBtn.classList.add('closeBtn');
     closeBtn.tabIndex = '0';
     closeBtn.title = 'Chiudi';
     closeBtn.textContent = 'close';
-    closeBtn.id = 'closeBtn';
+    closeBtn.id = 'participants-closeBtn';
 
     const title = document.createElement("p");
     title.className = "title";

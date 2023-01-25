@@ -57,7 +57,7 @@ function renderCalendar() {
         const classList = isSpecialDay(i, currentMonthEvents.map(t => t.eventDate));
         let itemClasses = classList.length === 0 ? "" : (classList.length == 1 ? ` class="${classList[0]}"` : ` class="${classList[0]} ${classList[1]}"`);
         if (classList.includes("busy")) {
-            htmlDayTag += `<li${itemClasses}><button id="events-btn" onclick="showEventsBrief(this.innerHTML)" >${i}</button></li>`;
+            htmlDayTag += `<li${itemClasses}><button id="events-btn-${i}" onclick="showEventsBrief(this.innerHTML)" >${i}</button></li>`;
             continue;
         }
         htmlDayTag += `<li${itemClasses}>${i}</li>`;

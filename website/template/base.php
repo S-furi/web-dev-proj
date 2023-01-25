@@ -32,7 +32,7 @@
             </div>
             <div class="dropdown usr-actions">
                 <span class="notification-badge"></span>
-                <img src="<?php echo $templateParams['userInfo'][0]['profileImg']?>" alt="user profile picture" class="profile-picture dropbtn" />
+                <img src="<?php echo preg_replace("/\s/","%20", $templateParams['userInfo'][0]['profileImg']) ?>" alt="user profile picture" class="profile-picture dropbtn" />
                 <ul class="dropdown-content inactive">
                     <li><a href="personal-profile.php">Profilo</a></li>
                     <li>
@@ -128,7 +128,7 @@
         <div class="modal-content">
             <div class="modal-head">
               <p class="title">Eventi della giornata</p>
-              <span id="closeBtn" class="material-symbols-outlined" tabindex="0" title="Chiudi">close</span>
+              <span id="calendar-closeBtn" class="material-symbols-outlined closeBtn" tabindex="0" title="Chiudi">close</span>
             </div>
             <ul class="events-of-day">
             </ul>
@@ -138,7 +138,7 @@
         <div class="modal-content">
             <div class="modal-head">
               <p class="title">Centro Notifiche</p>
-              <span id="closeBtn" class="material-symbols-outlined" tabindex="0" title="Chiudi">close</span>
+              <span id="notifications-closeBtn" class="material-symbols-outlined closeBtn" tabindex="0" title="Chiudi">close</span>
             </div>
             <ul class="notifications"></ul>
         </div>
