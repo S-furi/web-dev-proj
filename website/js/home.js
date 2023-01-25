@@ -135,7 +135,7 @@ function participateToEvent(target, postId=null) {
 
               target.innerHTML = 
               `<button type="button" name="leave event button" id="post-${postId}-leave-btn" style="background-color: var(--color-secondary)"
-                class="btn btn-primary" onclick="leaveEvent(this)">Non Partecipare</button>`;
+                class="btn btn-primary" onclick="leaveEvent(this)">Abbandona</button>`;
             }
         }).catch(err => console.log(err));
 }
@@ -182,7 +182,7 @@ function disableAlreadyParticipating(target, postId = null) {
               target.setAttribute("for", `post-${postId}-leave-btn`)
                 target.innerHTML = 
               `<button type="button" name="leave event button" id="post-${postId}-leave-btn" style="background-color: var(--color-secondary)"
-                class="btn btn-primary" onclick="leaveEvent(this)">Non Partecipare</button>`;
+                class="btn btn-primary" onclick="leaveEvent(this)">Abbandona</button>`;
 
             }
         }).catch(err => console.log(err));
