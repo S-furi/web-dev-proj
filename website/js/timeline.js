@@ -28,7 +28,7 @@ function getPostEntity(post, userId) {
                         </div>
                     </div>
                     <img src="${post['image'].replace(/\s/g,'%20')}" alt="" />
-                    <p>${post['caption']}</p>
+                    <p class="caption">${post['caption']}</p>
                     <div class="post-stats">
                       <a href="#" onclick="showLikeUsers(${post['postId']}, ${userId})"><p class="likes-n">Mi Piace: ${post['likes']}</p></a>
                       <a href="#" onclick="showParticipantsUsers(${post['postId']}, ${userId})"><p>Partecipanti: ${post['participants']}</p></a>

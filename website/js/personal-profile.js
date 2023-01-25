@@ -65,7 +65,7 @@ function generatePosts(posts) {
                     <p>${posts[i]['location']}</p>
                   </div>
                 </div>
-                <p>${posts[i]['caption']}</p>
+                <p class="caption">${posts[i]['caption']}</p>
                 <div class="post-stats">
                   <span data-post-id="${posts[i]['postId']}" data-session-id="${posts[i]['sessionId']}" class="likesLink" >Mi Piace: ${posts[i]['likes']}</span>
                   <span data-post-id="${posts[i]['postId']}" data-session-id="${posts[i]['sessionId']}" class="participantsLink" >Partecipanti: ${posts[i]['participants']}</span>

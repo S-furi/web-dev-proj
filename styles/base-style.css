@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
 
 :root {
-    --text-color-dark: cadetBlue;
+    --text-color: rgb(40, 40, 40);
+    --text-color-dark: cadetblue;
     --bg-color: hsl(252, 5%, 85%);
     --color-primary: cadetBlue;
     --color-secondary: #9b363b;
@@ -399,6 +400,10 @@ header .dropdown>.notification-badge {
     justify-content: space-around;
 }
 
+.middle .timeline .post-body p.caption {
+  color: var(--text-color);
+}
+
 .middle .timeline .post-body img {
     border-radius: var(--card-border-radius);
     max-width: 100%;
@@ -447,6 +452,7 @@ header .dropdown>.notification-badge {
 }
 
 .middle .timeline .profile-infobox .profile-infobox-body .profile-descr {
+    color: var(--text-color);
     font-size: 1rem;
     margin: 1rem 0;
 }
@@ -669,6 +675,10 @@ header .dropdown>.notification-badge {
     flex: 1;
     margin-right: 1rem;
     resize: none;
+}
+
+.middle .timeline p.comment-body {
+  color: var(--text-color);
 }
 
 /* RIGHT: displayed only on big screens */

@@ -24,7 +24,7 @@
                   </div>
                 </div>   
                 <img src="img/<?php echo $user['username'] ?>/posts/<?php echo $post['image']; ?>" alt="" />
-                <p><?php echo $post['caption']; ?></p>
+                <p class="caption"><?php echo $post['caption']; ?></p>
                 <div class="post-stats">
                   <span data-post-id="<?php echo $postId; ?>" data-session-id="<?php echo $_SESSION['user_id']; ?>" class="likesLink" >Mi Piace: <?php echo $post['likes']; ?></span>
                   <span data-post-id="<?php echo $postId; ?>" data-session-id="<?php echo $_SESSION['user_id']; ?>" class="participantsLink" >Partecipanti: <?php echo $post['participants']; ?></span>

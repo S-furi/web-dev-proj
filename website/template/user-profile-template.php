@@ -48,7 +48,7 @@
                       <p><?php echo $post['location']; ?></p>
                     </div>
                   </div>
-                  <p><?php echo $post['caption']; ?></p>
+                  <p class="caption"><?php echo $post['caption']; ?></p>
                   <div class="post-stats">
                     <span data-post-id="<?php echo $post['postId']; ?>" data-session-id="<?php echo $_SESSION['user_id']; ?>" class="likesLink" >Mi Piace: <?php echo $post['likes']; ?></span>
                     <span data-post-id="<?php echo $post['postId']; ?>" data-session-id="<?php echo $_SESSION['user_id']; ?>" class="participantsLink" >Partecipanti: <?php echo $post['participants']; ?></span>
