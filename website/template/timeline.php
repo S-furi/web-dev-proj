@@ -1,4 +1,4 @@
-          <section class="timeline">
+          <div class="timeline">
               <?php if (isset($templateParams["posts"])) : ?>
                   <?php foreach ($templateParams["posts"] as $post) : ?>
                   <?php
@@ -60,4 +60,4 @@
               </div>
             </div>
 
-          </section>
+                </div>
