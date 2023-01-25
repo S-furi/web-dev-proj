@@ -37,7 +37,6 @@ function getPostEntity(post, userId) {
                         <div class="like-comment-div">
                             <label for="post-${post['postId']}-like-btn"><button type="button" value="like" name="like button" id="post-${post['postId']}-like-btn" onclick="likePost(${post['postId']}, ${userId}, this)"><span class="material-symbols-outlined like-btn">favorite</span></button></label>
                             <a href="post.php?usrId=${post['usrId']}&postId=${post['postId']}#comment-text-area" target="_self">
-                                <input type="button" name="comment button" id="comment-btn" />
                                 <span class="material-symbols-outlined">comment</span>
                             </a>
                         </div>
