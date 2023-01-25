@@ -49,9 +49,9 @@ function getPostEntity(post, userId) {
 const timelineBody = document.querySelector("main .middle");
 
 function appendToBody(postsElements) {
-    let content = `<section class="timeline">`
+    let content = `<div class="timeline">`
     content += postsElements;
-    content += `</section>
+    content += `</div>
                 <div id="modal" class="modal">
                   <div class="modal-content"></div>
                 </div>`;
