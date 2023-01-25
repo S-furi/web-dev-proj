@@ -48,11 +48,22 @@ function showLikes(res, sessionId) {
     const modalHead = document.createElement("div");
     modalHead.className = "modal-head";
 
+    const closeBtn = document.createElement('span');
+    closeBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+    closeBtn.className = 'material-symbols-outlined';
+    closeBtn.tabIndex = '0';
+    closeBtn.title = 'Chiudi';
+    closeBtn.textContent = 'close';
+    closeBtn.id = 'closeBtn';
+
     const title = document.createElement("p");
     title.className = "title";
     title.textContent = "Mi Piace";
 
     modalHead.appendChild(title);
+    modalHead.appendChild(closeBtn);
     
     generateList(likeUsers, list, sessionId);
     
@@ -75,11 +86,22 @@ function showFollow(following, res, sessionId) {
     const modalHead = document.createElement("div");
     modalHead.className = "modal-head";
 
+    const closeBtn = document.createElement('span');
+    closeBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+    closeBtn.className = 'material-symbols-outlined';
+    closeBtn.tabIndex = '0';
+    closeBtn.title = 'Chiudi';
+    closeBtn.textContent = 'close';
+    closeBtn.id = 'closeBtn';
+
     const title = document.createElement("p");
     title.className = "title";
     title.textContent = following ? "Seguaci" : "Seguiti";
 
     modalHead.appendChild(title);
+    modalHead.appendChild(closeBtn);
 
     const list = document.createElement("ul");
     list.className = following ? "following-users-list" : "followed-users-list";
@@ -104,12 +126,23 @@ function showParticipants(res, sessionId) {
 
     const modalHead = document.createElement("div");
     modalHead.className = "modal-head";
+    
+    const closeBtn = document.createElement('span');
+    closeBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+    closeBtn.className = 'material-symbols-outlined';
+    closeBtn.tabIndex = '0';
+    closeBtn.title = 'Chiudi';
+    closeBtn.textContent = 'close';
+    closeBtn.id = 'closeBtn';
 
     const title = document.createElement("p");
     title.className = "title";
     title.textContent = "Partecipanti";
 
     modalHead.appendChild(title);
+    modalHead.appendChild(closeBtn);
 
     const list = document.createElement("ul");
     list.className = "participants-users-list";
