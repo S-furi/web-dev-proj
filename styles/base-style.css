@@ -341,9 +341,6 @@ header .dropdown>.notification-badge {
 }
 
 /* MIDDLE */
-.middle .timeline {
-  margin-top: -2rem;
-}
 
 .middle .timeline .post {
     background: var(--color-white);
@@ -959,7 +956,7 @@ header .dropdown>.notification-badge {
     }
 
     .middle .timeline .profile-infobox {
-        margin-top: 1rem;
+        margin-top: -1rem;
     }
 
     .middle .timeline .profile-infobox-head #manage_accounts {
