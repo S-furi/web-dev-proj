@@ -32,7 +32,7 @@
             </div>
             <div class="dropdown usr-actions">
                 <span class="notification-badge"></span>
-                <img src="<?php echo $templateParams['userInfo'][0]['profileImg']?>" alt="user profile picture" class="profile-picture dropbtn" />
+                <img src="<?php echo preg_replace("/\s/","%20", $templateParams['userInfo'][0]['profileImg']) ?>" alt="user profile picture" class="profile-picture dropbtn" />
                 <ul class="dropdown-content inactive">
                     <li><a href="personal-profile.php">Profilo</a></li>
                     <li>
