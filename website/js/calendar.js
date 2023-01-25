@@ -8,7 +8,7 @@ function fetchEvents() {
                         events.push(event);
                     });
             }
-        }).catch(err => console.log(err));
+        }).catch(_ => { return } );
 }
 
 function getCurrentMonthEvents() {
