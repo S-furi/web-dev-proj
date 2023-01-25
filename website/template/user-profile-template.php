@@ -1,6 +1,6 @@
 <?php $is_following = checkFollow($_SESSION['user_id'], $user['usrId'], $mysqli); ?>
 
-        <section class="timeline">
+        <div class="timeline">
             <div class="profile-infobox">
               <div class="profile-infobox-head">
                 <div class="profile-usr-info">
@@ -74,4 +74,4 @@
               </div>
             </div>
 
-        </section>
+</div>
