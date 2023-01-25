@@ -151,3 +151,10 @@ function showFollowingUsers(usrId, sessionId) {
       showFollow(true, res, sessionId);  
     });
 }
+
+const participantsLink = document.querySelectorAll(".participantsLink");
+participantsLink.forEach(e => {
+  e.addEventListener("click", () => {
+    showParticipantsUsers(e.dataset.postId, e.dataset.sessionId);
+  });
+});

@@ -67,7 +67,7 @@ function generatePosts(posts) {
                 <p>${posts[i]['caption']}</p>
                 <div class="post-stats">
                   <a href="#" onclick="showLikeUsers(${posts[i]['postId']}, ${posts[i]['usrId']})"><p class="likes-n">Mi Piace: ${posts[i]['likes']}</p></a>
-                  <p>Partecipanti: ${posts[i]['participants']}</p>
+                  <span data-post-id="${posts[i]['postId']}" data-session-id="${posts[i]['sessionId']}" class="participantsLink" ><p>Partecipanti: ${posts[i]['participants']}</p></span>
                 </div>
                 <div class="profile-interaction-buttons">
                     <a href="post.php?usrId=${posts[i]['usrId']}&postId=${posts[i]['postId']}#comment-text-area" target="_self">

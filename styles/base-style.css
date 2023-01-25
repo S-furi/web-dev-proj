@@ -491,6 +491,11 @@ header .dropdown>.notification-badge {
     margin-right: 0.4rem;
 }
 
+.middle .timeline .post .participantsLink {
+  cursor: pointer;
+  color: var(--color-light);
+}
+
 .middle .timeline .post-body .profile-interaction-buttons a {
     text-decoration: none;
     color: var(--color-primary);
