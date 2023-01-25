@@ -22,7 +22,6 @@ $templateParams["suggested_users"] = getSuggestedUser($_SESSION["user_id"], $mys
 $templateParams["js"] = array("https://unpkg.com/axios/dist/axios.min.js",
                               "js/home.js", 
                               "js/notification.js", 
-                              "js/calendar.js", 
-                              "js/profile.js");
+                              "js/calendar.js");
 
 ?>
