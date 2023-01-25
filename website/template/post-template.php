@@ -25,8 +25,8 @@
                 <img src="img/<?php echo $user['username'] ?>/posts/<?php echo $post['image']; ?>" alt="" />
                 <p><?php echo $post['caption']; ?></p>
                 <div class="post-stats">
-                  <span data-post-id="<?php echo $postId; ?>" data-session-id="<?php echo $_SESSION['user_id']; ?>" class="likesLink" ><p>Mi Piace: <?php echo $post['likes']; ?></p></span>
-                  <span data-post-id="<?php echo $postId; ?>" data-session-id="<?php echo $_SESSION['user_id']; ?>" class="participantsLink" ><p>Partecipanti: <?php echo $post['participants']; ?></p></span>
+                  <span data-post-id="<?php echo $postId; ?>" data-session-id="<?php echo $_SESSION['user_id']; ?>" class="likesLink" >Mi Piace: <?php echo $post['likes']; ?></span>
+                  <span data-post-id="<?php echo $postId; ?>" data-session-id="<?php echo $_SESSION['user_id']; ?>" class="participantsLink" >Partecipanti: <?php echo $post['participants']; ?></span>
                 </div>
                 <div class="interaction-buttons">
                 <label for="post-<?php echo $postId ?>-like-btn"><button type="button" name="like button" id="post-<?php echo $postId ?>-like-btn" onclick="likePost(<?php echo $postId ?>, <?php echo $_SESSION['user_id']; ?>, this)">

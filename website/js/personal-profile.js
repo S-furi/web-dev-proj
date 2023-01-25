@@ -17,9 +17,9 @@ function createInfoBox(user, userInfo, followers, following) {
               <div class="profile-infobox-body">
                 <p class="profile-descr">${userInfo['bio']}</p>
                 <div class="follow-info">
-                  <span data-usr-id="${user['usrId']}" data-session-id="${user['usrId']}" class="info-tag followers-link" ><p>Seguaci: </p></span>
+                  <span data-usr-id="${user['usrId']}" data-session-id="${user['usrId']}" class="info-tag followers-link" >Seguaci: </span>
                   <p class="followers-data">${followers}</p>
-                  <span data-usr-id="${user['usrId']}" data-session-id="${user['usrId']}" class="info-tag following-link" ><p>Seguiti: </p></span>
+                  <span data-usr-id="${user['usrId']}" data-session-id="${user['usrId']}" class="info-tag following-link" >Seguiti: </span>
                   <p>${following}</p>
                 </div>
               </div>
@@ -67,8 +67,8 @@ function generatePosts(posts) {
                 </div>
                 <p>${posts[i]['caption']}</p>
                 <div class="post-stats">
-                  <span data-post-id="${posts[i]['postId']}" data-session-id="${posts[i]['sessionId']}" class="likesLink" ><p>Mi Piace: ${posts[i]['likes']}</p></span>
-                  <span data-post-id="${posts[i]['postId']}" data-session-id="${posts[i]['sessionId']}" class="participantsLink" ><p>Partecipanti: ${posts[i]['participants']}</p></span>
+                  <span data-post-id="${posts[i]['postId']}" data-session-id="${posts[i]['sessionId']}" class="likesLink" >Mi Piace: ${posts[i]['likes']}</span>
+                  <span data-post-id="${posts[i]['postId']}" data-session-id="${posts[i]['sessionId']}" class="participantsLink" >Partecipanti: ${posts[i]['participants']}</span>
                 </div>
                 <div class="profile-interaction-buttons">
                     <a href="post.php?usrId=${posts[i]['usrId']}&postId=${posts[i]['postId']}#comment-text-area" target="_self">
@@ -163,7 +163,6 @@ axios.get('api/api-personal-profile.php?azione=1')
           const followersLink = document.querySelectorAll(".followers-link");
           followersLink.forEach(e => {
             e.addEventListener("click", () => {
-              debugger;
               const followersData = e.nextElementSibling;
               if (parseInt(followersData.innerHTML) > 0) {
                 showFollowingUsers(e.dataset.usrId, e.dataset.sessionId);
