@@ -9,7 +9,7 @@ function getPostEntity(post, userId) {
                     </a>
                     <div class="usr-info">
                         <a href="user-profile.php?usrId=${post['usrId']}">
-                            <img src="${post['userInfo']['profileImg']}" alt="post author profile picture" class="profile-picture">
+                            <img src="${post['userInfo']['profileImg'].replace('/\s+/', '%20')}" alt="post author profile picture" class="profile-picture">
                         </a>
                         <a href="user-profile.php?usrId=${post['usrId']}">
                             <p class="usertag">@${post['author']}</p>

@@ -50,7 +50,7 @@
             <div class="left">
                 <!-- Section should need a heading -->
                 <section class="profile">
-                    <a href="personal-profile.php"><img src="<?php echo $templateParams['userInfo'][0]['profileImg']?>" alt="user profile picture" class="profile-picture" /></a>
+                    <a href="personal-profile.php"><img src="<?php echo preg_replace("/\s/","%20", $templateParams['userInfo'][0]['profileImg']) ?>" alt="user profile picture" class="profile-picture" /></a>
                     <div class="handle">
                         <a href="personal-profile.php"><p class="user-name"><?php echo $templateParams['user']['firstName'] . " " . $templateParams['user']['lastName']; ?></p></a>
                         <p class="usertag">@<?php echo $templateParams['user']['username']; ?></p>
@@ -105,8 +105,7 @@
                         ?>
                                 <li class="user-suggestion <?php echo "usr-" . $sugg_user['usrId'] ?>">
                                     <div class="userinfo">
-                                        <!-- to add in DB an image reference -->
-                                        <img src="<?php echo $usrInfo['profileImg']; ?>" alt="suggested account profile picture" class="profile-picture">
+                                        <img src="<?php echo preg_replace("/\s+/", '%20', $usrInfo['profileImg']); ?>" alt="suggested account profile picture" class="profile-picture">
                                         <div class="user-name">
                                             <a href="user-profile.php?usrId=<?php echo $sugg_user['usrId']; ?>"><h3><?php echo $sugg_user["firstName"] . " " . $sugg_user["lastName"]; ?></h3></a>
                                             <p class="usertag">@<?php echo $sugg_user["username"]; ?></p>

@@ -64,7 +64,7 @@ function displayNotification() {
                             <a ${n['read'] ? `class="read"` : ""} onclick='redirectToNotificationSource("${n["reference"]}", ${n['notificationId']})'>
                             <p>${dateDiff(new Date(), new Date(n['datetime']))}<p>
                             <span class="material-symbols-outlined">${notificationsIcons[n['type']]}</span>
-                            <img src="${n['fromUserInfo']['profileImg']}" alt="" class="profile-picture" />
+                            <img src="${n['fromUserInfo']['profileImg'].replace('/\s+/', '%20')}" alt="" class="profile-picture" />
                             <p class="usertag">@${n['fromUser']['username']}</p>
                             <p class="msg"> ${n['msg']} </p>
                             </a>
