@@ -8,7 +8,15 @@ function fetchEvents() {
                         events.push(event);
                     });
             }
-        }).catch(_ => { return } );
+        }).catch(error => {
+            if (typeof error.code  === 'undefined') {
+                console.log(error);
+            }
+            if (error.code = "ECONNABORTED" || error.response.status == 204) {
+                // out of synch request from server
+                return;
+            }
+        } );
 }
 
 function getCurrentMonthEvents() {
