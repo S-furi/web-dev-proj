@@ -465,6 +465,10 @@ header .dropdown>.notification-badge {
     margin-right: 0.2rem;
 }
 
+.middle .timeline .following-link, .middle .timeline .followers-link {
+  cursor: pointer;
+}
+
 .middle .timeline .info-tag:hover {
   text-decoration: underline;
 }
@@ -489,6 +493,11 @@ header .dropdown>.notification-badge {
 
 .middle .timeline .post-body .like-comment-div label {
     margin-right: 0.4rem;
+}
+
+.middle .timeline .post .participantsLink, .middle .timeline .post .likesLink {
+  cursor: pointer;
+  color: var(--color-light);
 }
 
 .middle .timeline .post-body .profile-interaction-buttons a {
@@ -774,7 +783,8 @@ header .dropdown>.notification-badge {
 }
 
 .modal .notifications li a:hover {
-    box-shadow: 0 0 5px var(--color-primary), 0 0 25px var(--color-primary), 0 0 50px var(--color-primary), 0 0 200px var(--color-primary);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.5s;
 }
 
 .modal .userinfo {

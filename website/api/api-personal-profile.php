@@ -11,6 +11,9 @@ if (!checkUserSession($mysqli)) {
 
 if ($_GET['azione'] == 0) {
   $posts = getPosts($_SESSION['user_id'], $mysqli);
+  foreach ($posts as &$post) {
+    $post['sessionId'] = $_SESSION['user_id'];
+  }
   header("Content-Type: application/json");
   echo json_encode($posts);
 } elseif ($_GET['azione'] == 1) {

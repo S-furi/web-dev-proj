@@ -17,9 +17,9 @@ function createInfoBox(user, userInfo, followers, following) {
               <div class="profile-infobox-body">
                 <p class="profile-descr">${userInfo['bio']}</p>
                 <div class="follow-info">
-                  <a href="#" onclick="showFollowingUsers(${user['usrId']}, ${user['usrId']})"><p class="info-tag">Seguaci: </p></a>
+                  <span data-usr-id="${user['usrId']}" data-session-id="${user['usrId']}" class="info-tag followers-link" ><p>Seguaci: </p></span>
                   <p class="followers-data">${followers}</p>
-                  <a href="#" onclick="showFollowedUsers(${user['usrId']}, ${user['usrId']})"><p class="info-tag">Seguiti: </p></a>
+                  <span data-usr-id="${user['usrId']}" data-session-id="${user['usrId']}" class="info-tag following-link" ><p>Seguiti: </p></span>
                   <p>${following}</p>
                 </div>
               </div>
@@ -41,6 +41,7 @@ function generatePosts(posts) {
             hour: 'numeric',
             minute: 'numeric',
           });
+          
         let form = `
             <article class="post">
               <div class="post-head">
@@ -66,8 +67,8 @@ function generatePosts(posts) {
                 </div>
                 <p>${posts[i]['caption']}</p>
                 <div class="post-stats">
-                  <a href="#" onclick="showLikeUsers(${posts[i]['postId']}, ${posts[i]['usrId']})"><p class="likes-n">Mi Piace: ${posts[i]['likes']}</p></a>
-                  <p>Partecipanti: ${posts[i]['participants']}</p>
+                  <span data-post-id="${posts[i]['postId']}" data-session-id="${posts[i]['sessionId']}" class="likesLink" ><p>Mi Piace: ${posts[i]['likes']}</p></span>
+                  <span data-post-id="${posts[i]['postId']}" data-session-id="${posts[i]['sessionId']}" class="participantsLink" ><p>Partecipanti: ${posts[i]['participants']}</p></span>
                 </div>
                 <div class="profile-interaction-buttons">
                     <a href="post.php?usrId=${posts[i]['usrId']}&postId=${posts[i]['postId']}#comment-text-area" target="_self">
@@ -133,6 +134,7 @@ axios.get('api/api-personal-profile.php?azione=1')
     const infoBox = createInfoBox(response.data[0], response.data[1], response.data[2], response.data[3]);
     const timeline = document.querySelector("main .middle");
     timeline.innerHTML = infoBox;
+
   })
   .then( () => {
     axios.get('api/api-personal-profile.php?azione=0')
@@ -141,6 +143,43 @@ axios.get('api/api-personal-profile.php?azione=1')
           const timeline = document.querySelector("main .middle .timeline");
           timeline.innerHTML += posts;
           handleDropDown();
+          
+          const participantsLink = document.querySelectorAll(".participantsLink");
+          participantsLink.forEach(e => {
+            e.addEventListener("click", () => {
+              showParticipantsUsers(e.dataset.postId, e.dataset.sessionId);
+            });
+          });
+          
+          const likesLink = document.querySelectorAll(".likesLink");
+          likesLink.forEach(e => {
+            e.addEventListener("click", () => {
+              if (parseInt(e.innerHTML.split(':')[1]) > 0) {
+                showLikeUsers(e.dataset.postId, e.dataset.sessionId);
+              }
+            });
+          });
+
+          const followersLink = document.querySelectorAll(".followers-link");
+          followersLink.forEach(e => {
+            e.addEventListener("click", () => {
+              debugger;
+              const followersData = e.nextElementSibling;
+              if (parseInt(followersData.innerHTML) > 0) {
+                showFollowingUsers(e.dataset.usrId, e.dataset.sessionId);
+              }
+            });
+          });
+
+          const followingLink = document.querySelectorAll(".following-link");
+          followingLink.forEach(e => {
+            e.addEventListener("click", () => {
+              const followingData = e.nextElementSibling;
+              if (parseInt(followingData.innerHTML) > 0) {
+                showFollowedUsers(e.dataset.usrId, e.dataset.sessionId);
+              }
+            });
+          });
       })
       .catch(error => {
         console.log(error);
