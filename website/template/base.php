@@ -49,13 +49,13 @@
             <!-- Left Panel -->
             <div class="left">
                 <!-- Section should need a heading -->
-                <section class="profile">
+                <div class="profile">
                     <a href="personal-profile.php"><img src="<?php echo $templateParams['userInfo'][0]['profileImg']?>" alt="user profile picture" class="profile-picture" /></a>
                     <div class="handle">
                         <a href="personal-profile.php"><p class="user-name"><?php echo $templateParams['user']['firstName'] . " " . $templateParams['user']['lastName']; ?></p></a>
                         <p class="usertag">@<?php echo $templateParams['user']['username']; ?></p>
                     </div>
-                </section>
+</div>
                 <ul class="sidebar">
                     <li class="menu-item <?php if (isset($templateParams["active-home"])) echo $templateParams["active-home"] ?>" onclick="window.location.href='index.php'">
                       <span class="material-symbols-outlined">Home</span>
