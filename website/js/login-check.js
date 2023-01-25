@@ -38,7 +38,6 @@ function handleLoginAttempt() {
         axios.post("api/api-login.php", data)
             .then(res => {
                 if (res.data['ok']) {
-                    // better doing this server side
                     document.location.href = "index.php";
                 } else {
                     displayMessage("login", res.data['msg']);
