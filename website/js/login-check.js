@@ -48,7 +48,6 @@ function handleLoginAttempt() {
     }
 }
 
-// Worst way to do it in vanilla javascript
 function clearAllFields() {
     document.querySelectorAll(`section.signup input[type="text"]`).forEach(t => t.value = "");
     document.querySelector(`section.signup input[type="email"]`).value = "";
