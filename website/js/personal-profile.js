@@ -41,6 +41,7 @@ function generatePosts(posts) {
             hour: 'numeric',
             minute: 'numeric',
           });
+          
         let form = `
             <article class="post">
               <div class="post-head">
@@ -141,6 +142,14 @@ axios.get('api/api-personal-profile.php?azione=1')
           const timeline = document.querySelector("main .middle .timeline");
           timeline.innerHTML += posts;
           handleDropDown();
+          
+          const participantsLink = document.querySelectorAll(".participantsLink");
+          participantsLink.forEach(e => {
+            e.addEventListener("click", () => {
+              showParticipantsUsers(e.dataset.postId, e.dataset.sessionId);
+            });
+          });
+          
       })
       .catch(error => {
         console.log(error);

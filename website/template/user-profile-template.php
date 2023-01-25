@@ -49,7 +49,10 @@
                     </div>
                   </div>
                   <p><?php echo $post['caption']; ?></p>
-                  <a href="#" onclick="showLikeUsers(<?php echo $post['postId']; ?>, <?php echo $_SESSION['user_id']; ?>)"><p class="likes-n">Mi Piace: <?php echo $post['likes']; ?></p></a>
+                  <div class="post-stats">
+                    <a href="#" onclick="showLikeUsers(<?php echo $post['postId']; ?>, <?php echo $_SESSION['user_id']; ?>)"><p class="likes-n">Mi Piace: <?php echo $post['likes']; ?></p></a>
+                    <span data-post-id="<?php echo $post['postId']; ?>" data-session-id="<?php echo $_SESSION['user_id']; ?>" class="participantsLink" ><p>Partecipanti: <?php echo $post['participants']; ?></p></span>
+                  </div>
                   <div class="profile-interaction-buttons">
                       <a href="post.php?usrId=<?php echo $post['usrId']; ?>&postId=<?php echo $post['postId']; ?>#comment-text-area" target="_self">
                         <span class="material-symbols-outlined">comment</span>
