@@ -93,17 +93,15 @@ function render(action) {
       postsOffset += postsLimit;
 
     }).then(() => window.dispatchEvent(new Event("timelineFill")))
-    .catch(err => {
-      if (err.code == 204) {
-        // no posts are found
-      }
-    });
 }
 
 function loadMorePosts() {
   const timeline = document.querySelector("section.timeline");
   getPosts(action, postsOffset, postsLimit)
     .then(res => {
+      if (res['posts'].length <= postsOffset) {
+        return;
+      }
       const usrId = res['usrId'];
       let newPosts = ""
       res['posts'].forEach(post => {
