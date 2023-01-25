@@ -57,11 +57,11 @@ function generatePosts(posts) {
               <div class="post-body">
                 <div class="date-location">
                   <div class="date-location-item">
-                    <p class="info-tag">Data:</p>
+                    <p class="nc-info-tag">Data:</p>
                     <p>${eventDate}</p>
                   </div>
                   <div class="date-location-item">
-                    <p class="info-tag">Luogo:</p>
+                    <p class="nc-info-tag">Luogo:</p>
                     <p>${posts[i]['location']}</p>
                   </div>
                 </div>

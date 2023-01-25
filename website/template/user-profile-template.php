@@ -40,11 +40,11 @@
                 <div class="post-body">
                   <div class="date-location">
                     <div class="date-location-item">
-                      <p class="info-tag">Data:</p>
+                      <p class="nc-info-tag">Data:</p>
                       <p><?php echo $eventDate; ?></p>
                     </div>
                     <div class="date-location-item">
-                      <p class="info-tag">Luogo:</p>
+                      <p class="nc-info-tag">Luogo:</p>
                       <p><?php echo $post['location']; ?></p>
                     </div>
                   </div>
