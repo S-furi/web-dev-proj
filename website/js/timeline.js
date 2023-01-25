@@ -95,7 +95,7 @@ function render(action) {
 }
 
 function loadMorePosts() {
-  const timeline = document.querySelector("section.timeline");
+  const timeline = document.querySelector("div.timeline");
   getPosts(action, postsOffset, postsLimit)
     .then(res => {
       if (res['posts'] == 0) {
