@@ -341,6 +341,10 @@ header .dropdown>.notification-badge {
 }
 
 /* MIDDLE */
+.middle .timeline {
+  margin-top: -2rem;
+}
+
 .middle .timeline .post {
     background: var(--color-white);
     border-radius: var(--card-border-radius);
