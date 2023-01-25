@@ -23,9 +23,9 @@
               <div class="profile-infobox-body">
                 <p class="profile-descr"><?php echo $userInfo[0]['bio']; ?></p>
                 <div class="follow-info">
-                  <a href="#" onclick="showFollowingUsers(<?php echo $_GET['usrId']; ?>, <?php echo $_SESSION['user_id']; ?>)"><p class="info-tag">Seguaci: </p></a>
+                  <span data-usr-id="<?php echo $_GET['usrId']; ?>" data-session-id="<?php echo $_SESSION['user_id']; ?>" class="info-tag followers-link" ><p>Seguaci: </p></span>
                   <p class="followers-data"><?php echo $followers_n; ?></p>
-                  <a href="#" onclick="showFollowedUsers(<?php echo $_GET['usrId']; ?>, <?php echo $_SESSION['user_id']; ?>)"><p class="info-tag">Seguiti: </p></a>
+                  <span data-usr-id="<?php echo $_GET['usrId']; ?>" data-session-id="<?php echo $_SESSION['user_id']; ?>" class="info-tag following-link" ><p>Seguiti: </p></span>
                   <p><?php echo $following_n; ?></p>
                 </div>
               </div>
@@ -50,7 +50,7 @@
                   </div>
                   <p><?php echo $post['caption']; ?></p>
                   <div class="post-stats">
-                    <a href="#" onclick="showLikeUsers(<?php echo $post['postId']; ?>, <?php echo $_SESSION['user_id']; ?>)"><p class="likes-n">Mi Piace: <?php echo $post['likes']; ?></p></a>
+                    <span data-post-id="<?php echo $post['postId']; ?>" data-session-id="<?php echo $_SESSION['user_id']; ?>" class="likesLink" ><p>Mi Piace: <?php echo $post['likes']; ?></p></span>
                     <span data-post-id="<?php echo $post['postId']; ?>" data-session-id="<?php echo $_SESSION['user_id']; ?>" class="participantsLink" ><p>Partecipanti: <?php echo $post['participants']; ?></p></span>
                   </div>
                   <div class="profile-interaction-buttons">

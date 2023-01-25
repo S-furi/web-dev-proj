@@ -465,6 +465,10 @@ header .dropdown>.notification-badge {
     margin-right: 0.2rem;
 }
 
+.middle .timeline .following-link, .middle .timeline .followers-link {
+  cursor: pointer;
+}
+
 .middle .timeline .info-tag:hover {
   text-decoration: underline;
 }
@@ -491,7 +495,7 @@ header .dropdown>.notification-badge {
     margin-right: 0.4rem;
 }
 
-.middle .timeline .post .participantsLink {
+.middle .timeline .post .participantsLink, .middle .timeline .post .likesLink {
   cursor: pointer;
   color: var(--color-light);
 }

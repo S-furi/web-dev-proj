@@ -158,3 +158,32 @@ participantsLink.forEach(e => {
     showParticipantsUsers(e.dataset.postId, e.dataset.sessionId);
   });
 });
+
+const likesLink = document.querySelectorAll(".likesLink");
+likesLink.forEach(e => {
+  e.addEventListener("click", () => {
+    if (parseInt(e.innerHTML.split(':')[1]) > 0) {
+      showLikeUsers(e.dataset.postId, e.dataset.sessionId);
+    }
+  });
+});
+
+const followersLink = document.querySelectorAll(".followers-link");
+followersLink.forEach(e => {
+  e.addEventListener("click", () => {
+    const followersData = e.nextElementSibling;
+    if (parseInt(followersData.innerHTML) > 0) {
+      showFollowingUsers(e.dataset.usrId, e.dataset.sessionId);
+    }
+  });
+});
+
+const followingLink = document.querySelectorAll(".following-link");
+followingLink.forEach(e => {
+  e.addEventListener("click", () => {
+    const followingData = e.nextElementSibling;
+    if (parseInt(followingData.innerHTML) > 0) {
+      showFollowedUsers(e.dataset.usrId, e.dataset.sessionId);
+    }
+  });
+});
