@@ -99,9 +99,6 @@ function loadMorePosts() {
   const timeline = document.querySelector("section.timeline");
   getPosts(action, postsOffset, postsLimit)
     .then(res => {
-      if (res['posts'].length <= postsOffset) {
-        return;
-      }
       const usrId = res['usrId'];
       let newPosts = ""
       res['posts'].forEach(post => {
@@ -109,14 +106,17 @@ function loadMorePosts() {
       });
 
       timeline.innerHTML += newPosts;
+      activeLoading = false;
     })
 }
 
 let postsOffset = 0;
 const postsLimit = 5;
+let activeLoading = false;
 
 window.addEventListener("scroll", () => {
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+  if (!activeLoading && window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    activeLoading = true;
     loadMorePosts();
     postsOffset += postsLimit;
   }
