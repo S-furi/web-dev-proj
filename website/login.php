@@ -23,9 +23,9 @@
                         required /></label>
                 <label for="username"><input type="text" name="username" id="username" placeholder="Username"
                         required /></label>
-                <label for="email"><input type="email" name="email" id="email" placeholder="Email"
+                <label for="login-email"><input type="email" name="email" id="login-email" placeholder="Email"
                         required /></label>
-                <label for="password"><input type="password" name="password" id="password" placeholder="Password"
+                <label for="login-password"><input type="password" name="password" id="login-password" placeholder="Password"
                         required /></label>
                 <input type="button" value="Registrati" id="signup-btn">
             </form>
@@ -35,9 +35,9 @@
                 <label for="checkbox" aria-hidden="true">Login</label>
                 <!-- Paragraph for error msgs -->
                 <p></p>
-                <label for="email"><input type="email" name="email" id="email" placeholder="Email"
+                <label for="signup-email"><input type="email" name="email" id="signup-email" placeholder="Email"
                         required /></label>
-                <label for="password"><input type="password" name="password" id="password" placeholder="Password"
+                <label for="signup-password"><input type="password" name="password" id="signup-password" placeholder="Password"
                         required /></label>
                <input type="button" value="Accedi" id="login-btn" />
             </form>

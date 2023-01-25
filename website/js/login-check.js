@@ -38,7 +38,6 @@ function handleLoginAttempt() {
         axios.post("api/api-login.php", data)
             .then(res => {
                 if (res.data['ok']) {
-                    // better doing this server side
                     document.location.href = "index.php";
                 } else {
                     displayMessage("login", res.data['msg']);
@@ -49,7 +48,6 @@ function handleLoginAttempt() {
     }
 }
 
-// Worst way to do it in vanilla javascript
 function clearAllFields() {
     document.querySelectorAll(`section.signup input[type="text"]`).forEach(t => t.value = "");
     document.querySelector(`section.signup input[type="email"]`).value = "";

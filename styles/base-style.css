@@ -461,7 +461,7 @@ header .dropdown>.notification-badge {
 }
 
 
-.middle .timeline .info-tag {
+.middle .timeline .info-tag, .middle .timeline .nc-info-tag {
     font-weight: bold;
     margin-right: 0.2rem;
 }
