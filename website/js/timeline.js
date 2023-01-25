@@ -99,6 +99,9 @@ function loadMorePosts() {
   const timeline = document.querySelector("section.timeline");
   getPosts(action, postsOffset, postsLimit)
     .then(res => {
+      if (res['posts'] == 0) {
+        return;
+      }
       const usrId = res['usrId'];
       let newPosts = ""
       res['posts'].forEach(post => {
