@@ -6,7 +6,7 @@ $templateParams["template_name"] = "post-template.php";
 
 $postId = $_GET['postId'];
 $usrId = $_GET['usrId'];
-$post = getPostFromId($usrId, $postId, $mysqli);
+$post = getPostFromPostId($postId, $mysqli);
 $user = getUser($usrId, $mysqli);
 $comments = getComments($postId, $mysqli);
 

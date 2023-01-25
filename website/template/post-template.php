@@ -3,12 +3,13 @@
               <div class="post-head">
                 <a href="#"><h3><?php echo $post['title'] ?></h3></a>
                 <div class="usr-info">
-                  <a href="user-profile.php?usrId=<?php echo $usrId; ?>">
-                  <img src="<?php echo $userInfo[0]['profileImg']; ?>" alt="post author profile picture" class="profile-picture">
-                  </a>
-                  <a href="user-profile.php?usrId=<?php echo $usrId; ?>">
-                  <p class="usertag">@<?php echo $user['username']; ?></p>
-                  </a>
+                  <?php if ($post['usrId'] == $_SESSION['user_id']): ?>
+                    <a href="personal-profile.php"><img src="<?php echo $userInfo[0]['profileImg']; ?>" alt="post author profile picture" class="profile-picture"></a>
+                    <a href="personal-profile.php"><p class="usertag">@<?php echo $user['username']; ?></p></a>
+                  <?php else: ?>
+                    <a href="user-profile.php?usrId=<?php echo $post['usrId']; ?>"><img src="<?php echo $userInfo[0]['profileImg']; ?>" alt="post author profile picture" class="profile-picture"></a>
+                    <a href="user-profile.php?usrId=<?php echo $post['usrId']; ?>"><p class="usertag">@<?php echo $user['username']; ?></p></a>
+                  <?php endif; ?>
                 </div>
               </div>
               <div class="post-body">

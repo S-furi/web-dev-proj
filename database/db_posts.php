@@ -166,6 +166,7 @@ function getPostFromPostId($postId, mysqli $mysqli)
     if (count($res) > 0) {
         $res = $res[0];
         $res["location"] = getLocationFromLocationId($res["locationId"], $mysqli)["name"];
+        $res["participants"] = getParticipants($postId, $mysqli);
     }
     return $res;
 }
