@@ -109,8 +109,24 @@ function loadMorePosts() {
       });
 
       timeline.innerHTML += newPosts;
+
+      res['posts'].forEach(post => {
+        reCheckLikes(post['postId']);
+        reCheckParticipation(post['postId']);
+      })
+        
       activeLoading = false;
     })
+}
+
+function reCheckLikes(postId) {
+  const target = document.querySelector(`button#post-${postId}-like-btn`);
+  checkLikedPosts(target, postId);
+}
+
+function reCheckParticipation(postId) {
+  const target = document.querySelector(`button#post-${postId}-join-btn`);
+  disableAlreadyParticipating(target, postId);
 }
 
 let postsOffset = 0;
