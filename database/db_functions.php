@@ -41,7 +41,7 @@ function login($email, $password, $mysqli)
 
         $data = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         if (count($data) == 0) {
-            return false;
+            return "Nome utente o password errati";
         }
 
         $username = $data[0]['username'];
@@ -49,12 +49,13 @@ function login($email, $password, $mysqli)
         $db_password = $data[0]['password'];
 
         if (checkBrute($user_id, $mysqli)) {
-            return false;
+            return "Limite tentativi massimo superato, si prega di riprovare più tardi";
         }
 
         if (!password_verify($password, $db_password)) {
             $now = time();
-            $mysqli->query("INSERT INTO login_attempts (user_id, time) VALUES ('$user_id', '$now')");
+            $mysqli->query("INSERT INTO login_attempts (usrId, time) VALUES ('$user_id', '$now')");
+            return "Nome utente o password errati";
         }
         // correct password inserted
 

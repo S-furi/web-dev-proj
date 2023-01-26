@@ -1,13 +1,17 @@
 <?php
 require_once("api-bootstrap.php");
 
+ini_set("display_errors", 1);
+error_reporting(E_ALL);
+
 $response['ok'] = false;
 
 if (isset($_POST['email'], $_POST['password'])) {
-  if (login($_POST['email'], $_POST['password'], $mysqli)) {
+  $msg = login($_POST['email'], $_POST['password'], $mysqli);
+  if ($msg === true) {
     $response['ok'] = true;
   } else {
-    $response['msg'] = "Nome Utente o Password errati";
+    $response['msg'] = $msg;
   }
 }
 
