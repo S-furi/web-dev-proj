@@ -19,6 +19,30 @@
     text-align: center;
 }
 
+.range-selector {
+  margin-top: 1rem;
+  display: flex;
+  flex-flow: column;
+  color: var(--text-color);
+  align-items: center;
+  justify-content: baseline;
+}
+
+.range {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-flow: row;
+}
+
+.range * {
+  margin-right: 1rem;
+}
+
+.range output {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
 .middle #popup {
     display: none;
     background-color: #fefefe;

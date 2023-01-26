@@ -75,7 +75,7 @@ function getNearestLocations(lon, lat) {
     "lat": lat,
   };
 
-  const radius = 10; // 10 km
+  const radius = document.querySelector(".range output").value; 
 
   const formData = new FormData();
   formData.append("center", JSON.stringify(center));
@@ -219,7 +219,7 @@ function insertPopupContent(post, popoupContainer) {
 
 function drawCenteredCircle(map) {
   const center = map.getView().getCenter();
-  const radius = 20000;
+  const radius = document.querySelector(".range output").value * 2 * 1000;
 
   // Create a list of points for the circular LinearRing
   const points = [];
