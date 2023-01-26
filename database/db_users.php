@@ -94,7 +94,7 @@ function checkUserInfoExists($usrId, $mysqli)
  */
 function getSuggestedUser($usrId, $mysqli)
 {
-  $suggestionNum = 5; // how many suggestions are fetched
+  $suggestionNum = 3; // how many suggestions are fetched
 
   $suggUsers = getFriendSFriends($usrId, $suggestionNum, $mysqli);
 
