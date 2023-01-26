@@ -848,7 +848,7 @@ header .dropdown>.notification-badge {
 }
 
 
-@media screen and (min-width:1200px) {
+@media screen and (min-width: 1000px) {
     .container {
         width: 90%;
     }
