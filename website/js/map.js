@@ -107,7 +107,7 @@ function insertPopupElement() {
   const map = document.getElementById("mapdiv");
 
   const popup = `<div id="popup" class="ol-popup">
-                <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                <a href="#" id="popup-closer" class="ol-popup-closer" title="popup-closer"></a>
                 <div id="popup-content"></div>
             </div>`;
 
