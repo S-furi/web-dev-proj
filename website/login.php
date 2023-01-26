@@ -12,7 +12,7 @@
 <body>
     <main>
         <input type="checkbox" id="checkbox" aria-hidden="true" />
-        <section class="signup">
+        <div class="signup">
             <form action="POST">
                 <label for="checkbox" aria-hidden="true">Registrati</label>
                 <!-- Paragraph for info msgs or errors-->
@@ -29,8 +29,8 @@
                         required /></label>
                 <input type="button" value="Registrati" id="signup-btn">
             </form>
-        </section>
-        <section class="login">
+          </div>
+        <div class="login">
             <form action="POST">
                 <label for="checkbox" aria-hidden="true">Login</label>
                 <!-- Paragraph for error msgs -->
@@ -41,7 +41,7 @@
                         required /></label>
                <input type="button" value="Accedi" id="login-btn" />
             </form>
-        </section>
+          </div>
     </main>
 <script src="js/login-check.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
