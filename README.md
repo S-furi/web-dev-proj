@@ -1,7 +1,6 @@
 # Web Developement Project - University of Bologna A.D. 2022
 
 # **BROGRAM**
-- [ ] Spiegare meglio il funzionamento di tutto
 
 ## Introduction
 This project simulates a social media platform, where the purpose is to create Events and make people around the world participate to them.
