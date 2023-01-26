@@ -19,11 +19,11 @@ function getPostEntity(post, userId) {
                 <div class="post-body">
                     <div class="date-location">
                         <div class="date-location-item">
-                            <p class="info-tag">Data:</p>
+                            <p class="nc-info-tag">Data:</p>
                             <p>${post['eventDate']}</p>
                         </div>
                         <div class="date-location-item">
-                            <p class="info-tag">Luogo:</p>
+                            <p class="nc-info-tag">Luogo:</p>
                             <p>${post['location']}</p>
                         </div>
                     </div>
