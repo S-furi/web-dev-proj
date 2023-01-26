@@ -49,7 +49,6 @@ function generatePosts(posts) {
                 <div class="dropdown actions-dropdown">
                   <span class="material-symbols-outlined pop-options" >more_vert</span>
                   <ul class="dropdown-content inactive">
-                    <li><a href="#">Modifica</a></li>
                     <li><a style="color: var(--color-secondary)" onclick="deletePost(${posts[i]['postId']})">Elimina</a></li>
                   </ul>
                 </div>
