@@ -32,7 +32,7 @@ input[type="checkbox"] {
     display: none;
 }
 
-section.signup {
+div.signup {
     position: relative;
     width: 100%;
     height: 100%;
@@ -55,7 +55,7 @@ input[type="text"], input[type="email"], input[type="password"] {
     background-color: #e0dede ;
     display: flex;
     justify-content: center;
-    margin: 0.2rem auto;
+    margin: 1rem auto;
     padding: 0.2rem;
     border: none;
     outline: none;
@@ -90,15 +90,15 @@ p {
     margin-bottom: 0rem;
 }
 
-section.signup p {
+div.signup p {
     color: var(--color-dark);
     font-weight: bold;
 }
-section.login p {
+div.login p {
     color: var(--color-light);
 }
 
-section.login {
+div.login {
     height: 20rem;
     padding: 0.5rem;
     background-color: var(--color-dark);
@@ -107,20 +107,20 @@ section.login {
     transition: .8s ease-in-out;
 }
 
-section.login label {
+div.login label {
     color: #fff;
     transform: scale(.6);
 }
 
-#checkbox:checked ~section.login {
+#checkbox:checked ~div.login {
     transform: translateY(-20rem);
 }
 
 
-#checkbox:checked ~section.login label {
+#checkbox:checked ~div.login label {
     transform: scale(1);
 }
 
-#checkbox:checked ~section.signup label {
+#checkbox:checked ~div.signup label {
     transform: scale(.6);
 }

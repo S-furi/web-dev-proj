@@ -17,16 +17,11 @@
                 <label for="checkbox" aria-hidden="true">Registrati</label>
                 <!-- Paragraph for info msgs or errors-->
                 <p></p>
-                <label for="first-name"><input type="text" name="first-name" id="first-name" placeholder="Nome"
-                        required /></label>
-                <label for="last-name"><input type="text" name="last-name" id="last-name" placeholder="Cognome"
-                        required /></label>
-                <label for="username"><input type="text" name="username" id="username" placeholder="Username"
-                        required /></label>
-                <label for="login-email"><input type="email" name="email" id="login-email" placeholder="Email"
-                        required /></label>
-                <label for="login-password"><input type="password" name="password" id="login-password" placeholder="Password"
-                        required /></label>
+                <input type="text" aria-label="Inserisci il tuo nome" name="first-name" id="first-name" placeholder="Nome" title="Inserisci il tuo nome" required />
+                <input type="text" aria-label="Inserisci il tuo cognome" name="last-name" id="last-name" placeholder="Cognome" title="Inserisci il tuo cognome" required />
+                <input type="text" aria-label="Inserisci il tuo username" name="username" id="username" placeholder="Username" title="Inserisci il tuo username" required />
+                <input type="email" aria-label="Inserisci la tua email" name="email" id="login-email" placeholder="Email" title="Inserisci la tua email" required />
+                <input type="password" aria-label="Inserisci la tua password" name="password" id="login-password" placeholder="Password" title="Inserisci la tua password" required />
                 <input type="button" value="Registrati" id="signup-btn">
             </form>
           </div>
@@ -35,10 +30,8 @@
                 <label for="checkbox" aria-hidden="true">Login</label>
                 <!-- Paragraph for error msgs -->
                 <p></p>
-                <label for="signup-email"><input type="email" name="email" id="signup-email" placeholder="Email"
-                        required /></label>
-                <label for="signup-password"><input type="password" name="password" id="signup-password" placeholder="Password"
-                        required /></label>
+                <input type="email" aria-label="Inserisci la tua email" name="email" id="signup-email" placeholder="Email" title="Inserisci la tua email" required />
+                <input type="password" aria-label="Inserisci la tua password" name="password" id="signup-password" placeholder="Password" title="Inserisci la tua password" required />
                <input type="button" value="Accedi" id="login-btn" />
             </form>
           </div>
