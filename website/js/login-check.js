@@ -1,8 +1,8 @@
-const signupBtn = document.querySelector("section.signup input#signup-btn ");
-const loginBtn =  document.querySelector("section.login input#login-btn");
+const signupBtn = document.querySelector("div.signup input#signup-btn ");
+const loginBtn =  document.querySelector("div.login input#login-btn");
 
 function handleSignupAttempt() {
-    const form = document.querySelector("section.signup form");
+    const form = document.querySelector("div.signup form");
 
     if (form.checkValidity()) {
         const data = new FormData(form);
@@ -30,7 +30,7 @@ function handleSignupAttempt() {
 }
 
 function handleLoginAttempt() {
-    const form = document.querySelector("section.login form");
+    const form = document.querySelector("div.login form");
 
     if (form.checkValidity()) {
         const data = new FormData(form);
@@ -49,13 +49,13 @@ function handleLoginAttempt() {
 }
 
 function clearAllFields() {
-    document.querySelectorAll(`section.signup input[type="text"]`).forEach(t => t.value = "");
-    document.querySelector(`section.signup input[type="email"]`).value = "";
-    document.querySelector(`section.signup input[type="password"]`).value = "";
+    document.querySelectorAll(`div.signup input[type="text"]`).forEach(t => t.value = "");
+    document.querySelector(`div.signup input[type="email"]`).value = "";
+    document.querySelector(`div.signup input[type="password"]`).value = "";
 }
 
 function displayMessage(section, message) {
-    document.querySelector(`section.${section} p`).innerText= message;
+    document.querySelector(`div.${section} p`).innerText= message;
 }
 
 signupBtn.addEventListener('click', handleSignupAttempt);
