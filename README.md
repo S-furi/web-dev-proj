@@ -6,7 +6,6 @@
 This project simulates a social media platform, where the purpose is to create Events and make people around the world participate to them.
 An event is created through a post, where other users can like or comment it.
 Users can follow each others, and by doing this, the follower can see in his timeline all the events that will be created by the followed user.
-Users can also send messages to each other.
 
 ## Instructions
 To start this site move the "web-dev-proj" folder inside the "htdocs" folder of XAMPP. Once this is done type in the address bar of the browser "localhost/web-dev-proj/website", which will redirect you to the login and signup page. Here you will have to sign up or log in. Once registered you will be redirected to the profile editing page where you can change your profile picture and bio.
