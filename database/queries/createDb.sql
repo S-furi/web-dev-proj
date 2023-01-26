@@ -57,14 +57,10 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- Table `brogram`.`login_attempts`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `brogram`.`login_attempts` (
+  `attemptId` INT(11) NOT NULL AUTO_INCREMENT, 
   `usrId` INT(11) NOT NULL,
   `time` VARCHAR(30) NOT NULL,
-  PRIMARY KEY (`usrId`),
-  CONSTRAINT `fk_login_attempts_users2`
-    FOREIGN KEY (`usrId`)
-    REFERENCES `brogram`.`users` (`usrId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`attemptId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
