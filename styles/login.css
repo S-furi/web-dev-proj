@@ -14,6 +14,7 @@ body {
     padding: 0;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     min-height: 100vh;
     font-family: 'Montserrat', sans-serif;
@@ -26,6 +27,15 @@ main {
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 5px 20px 50px #000;
+}
+
+body .login-title {
+  margin: 4rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3rem;
+  color: white;
+  font-weight: bold;
+  text-shadow: 5px 5px 5px #000000;
 }
 
 input[type="checkbox"] {
@@ -47,6 +57,7 @@ label {
     font-weight: bold;
     cursor: pointer;
     transition: 0.5s ease-in-out;
+    text-shadow: 5px 5px 5px #000000;
 }
 
 input[type="text"], input[type="email"], input[type="password"] {
@@ -79,8 +90,16 @@ input[type="button"] {
     cursor: pointer;
 }
 
+input[type="button"]#login-btn {
+    background-color: var(--color-hover);
+}
+
 input[type="button"]:hover {
     background: var(--color-hover);
+}
+
+input[type="button"]#login-btn:hover {
+    background-color: var(--color-light);
 }
 
 p {

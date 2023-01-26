@@ -10,6 +10,7 @@
 </head>
 
 <body>
+  <p class="login-title">Brogram</p>
     <main>
         <input type="checkbox" id="checkbox" aria-hidden="true" />
         <div class="signup">
