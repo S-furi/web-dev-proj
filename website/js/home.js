@@ -5,24 +5,20 @@ function followUser(user, followed, target = null) {
     formData.append("followed", followed);
 
     // action 2 registers a new following
-    axios.post("api/api-users.php?action=2", formData)
-        .then(res => {
-            if (res.data["ok"]) {
-                // if target isn't specified, it means we are in the sidebar
-                // otherwise we the button is the one conained in the user profile
-                if (target == null) {
-                    document.querySelector(".right li.user-suggestion.usr-" + followed).classList.add("disappearing-card");
-                    document.querySelector(".right li.user-suggestion.usr-" + followed + " input").value = "✔️";
-                    setTimeout(() => document.querySelector(".right li.user-suggestion.usr-" + followed).remove(), 500);
-                } else {
-                    // target.disabled = true;
-                    location.reload();
-                }
-            } else {
-                // temporary
-                alert("Qualcosa è andato storto");
-            }
-        });
+  axios.post("api/api-users.php?action=2", formData)
+    .then(res => {
+      if (res.data["ok"]) {
+        // if target isn't specified, it means we are in the sidebar
+        // otherwise we the button is the one conained in the user profile
+        if (target == null) {
+          document.querySelector(".right li.user-suggestion.usr-" + followed).classList.add("disappearing-card");
+          document.querySelector(".right li.user-suggestion.usr-" + followed + " input").value = "✔️";
+          setTimeout(() => document.querySelector(".right li.user-suggestion.usr-" + followed).remove(), 500);
+        } else {
+          location.reload();
+        }
+      }
+    });
 }
 
 function unfollowUser(user, followed) {
