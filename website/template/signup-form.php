@@ -1,9 +1,6 @@
         <form action="#" method="post" name="signup_form">
             <h2>Sign up</h2>
             <ul>
-                <!-- <li> -->
-                    <!-- <label for="profilepic">Profile Picture:</label><input type="file" id="profilepic"  me="profilepic" /> -->
-                <!-- </li> -->
                 <li>
                     <label for="first_name">Nome:</label><input type="text" name="first_name" id="first_name">
                 </li>

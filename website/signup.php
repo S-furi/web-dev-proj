@@ -16,7 +16,6 @@ if (isset($_POST['mail'], $_POST['password'], $_POST['username'], $_POST['first_
 
   if (insertNewUser($email,$username, $password, $first_name, $last_name, $mysqli)) {
     echo "utente inserito";
-    // REDIRECT SULLA HOME
   } else {
     echo "errore durante l'inserimento";
   }

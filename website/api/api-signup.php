@@ -14,11 +14,6 @@ if (isset($_POST['email'], $_POST['password'], $_POST['username'], $_POST['first
     if (insertNewUser($email,$username, $password, $first_name, $last_name, $mysqli)) {
       $response["msg"] = "Utente inserito correttamente!";
       $response["ok"] = true;
-      // $propic_dir = POST_IMG_DIR . $username . "/propic/";
-      // if (!is_dir($propic_dir)) {
-      //   mkdir($propic_dir, 0777, true);
-      // }  
-        // REDIRECT SULLA HOM
       } else {
           $response["msg"] = "Nome utente o email già in uso!";
   }
