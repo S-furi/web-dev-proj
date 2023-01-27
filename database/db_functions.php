@@ -59,15 +59,7 @@ function login($email, $password, $mysqli)
         }
         // correct password inserted
 
-        // user broser should be inserted crypted in 
-        // $_SESSION['login_string'] with psw;
-
-        // $user_browser = $_SERVER['HTTP_USER_AGENT'];
-
         // trying to avoid XSS attacks using htmlentities()
-        // used for replacing with HTML escape sequences
-        // insed of symbols like <, >, / or others simple ways
-        // to inject malicious code inside forms.
         $_SESSION['user_id'] = htmlentities($user_id);
         $_SESSION['username'] = htmlentities($username);
         $_SESSION['login_string'] = $_SERVER["REMOTE_ADDR"] . $_SERVER["HTTP_USER_AGENT"] . $db_password;
