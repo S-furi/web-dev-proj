@@ -79,3 +79,12 @@ A notification is sent to you if:
 By clicking on the profile image in the top right corner of the window, and by clicking on the notification sectiono, the notification center is displayed. Notifications with a white background are the unread ones (always on the top of the panel) and the grayish ones are the already read notifications. Here you can access the post / profile indicated in the notification.
 
 If the action that triggers a notification is deleted (someone leaved an event, unfollows you or un-like your post), the notification is deleted.
+
+---
+
+## Pros
+- Mobile First Approach
+- Responsive Design
+- Use of **AJAX**
+- Passwords encyption
+- Real time notification updates
