@@ -13,6 +13,8 @@ function postComment(usrId, postId) {
       } else {
         console.log('errore nel\'inserimento');
       }
+    }).catch(error => {
+      console.log(error);
     });
   }
 }

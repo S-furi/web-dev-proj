@@ -125,6 +125,8 @@ function deletePost(postId) {
       if (res.data.postDeleted) {
         window.location.reload();
       }
+    }).catch(error => {
+      console.log(error);
     })
 }
 

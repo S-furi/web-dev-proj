@@ -163,28 +163,36 @@ function showParticipants(res, sessionId) {
 function showParticipantsUsers(postId, sessionId) {
   axios.post(`api/api-profile.php?postId=${postId}&azione=3`)
     .then(res => {
-      showParticipants(res, sessionId);
+      showParticipants(res, sessionId).catch(error => {
+        console.log(error);
+      });
     });
 }
  
 function showLikeUsers(postId, sessionId) {
   axios.post(`api/api-profile.php?postId=${postId}&azione=2`)
     .then(res => {
-      showLikes(res, sessionId);
+      showLikes(res, sessionId).catch(error => {
+        console.log(error);
+      });
     });
 }
           
 function showFollowedUsers(usrId, sessionId) {
   axios.post(`api/api-profile.php?usrId=${usrId}&azione=0`)
     .then(res => {
-      showFollow(false, res, sessionId);  
+      showFollow(false, res, sessionId).catch(error => {
+        console.log(error);
+      });  
     });
 }
 
 function showFollowingUsers(usrId, sessionId) {
   axios.post(`api/api-profile.php?usrId=${usrId}&azione=1`)
     .then(res => {
-      showFollow(true, res, sessionId);  
+      showFollow(true, res, sessionId).catch(error => {
+        console.log(error);
+      });  
     });
 }
 
